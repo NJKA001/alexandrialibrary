@@ -304,6 +304,8 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Carly_Janine_Mazur);
             all.Add(Artist.Ben_Peek);
             all.Add(Artist.Pedro_Amato);
+            all.Add(Artist.Tey_Bartolome);
+            all.Add(Artist.Mark_Erwan_Tarrisse);
 
             //First Age
             all.Add(Artist.Unknown);
@@ -702,6 +704,7 @@ namespace HallOfBeorn.Models
         public static Artist Mariusz_Gandzel = new Artist { Name = "Mariusz Gandzel", URL = "http://greenboxx.deviantart.com" };
         public static Artist Mark_Behm = new Artist { Name = "Mark Behm", URL = "http://www.markbehm.com" };
         public static Artist Mark_Bulahao = new Artist { Name = "Mark Bulahao", URL = "http://markbulahao.deviantart.com" };
+        public static Artist Mark_Erwan_Tarrisse = new Artist { Name = "", URL = "http://marktarrisse.com" };
         public static Artist Mark_Poole = new Artist { Name = "Mark Poole", URL = "http://www.markpoole.net" };
         public static Artist Mark_Tarrisse = new Artist { Name = "Mark Tarrisse", URL = "http://marktarrisse.deviantart.com" };
         public static Artist Mark_Winters = new Artist { Name = "Mark Winters", URL = "http://markwinters.deviantart.com" };
@@ -766,6 +769,7 @@ namespace HallOfBeorn.Models
         public static Artist Suzanne_Helmigh = new Artist { Name = "Suzanne Helmigh", URL = "http://suzanne-helmigh.deviantart.com" };
         public static Artist Taufiq = new Artist { Name = "Taufiq", URL = "http://toviz.deviantart.com" };
         public static Artist Taylor_Ingvarsson = new Artist { Name = "Taylor Ingvarsson", URL = "http://www.artoftaylor.com" };
+        public static Artist Tey_Bartolome = new Artist { Name = "Tey Bartolome", URL = "http://artoftey.com" };
         public static Artist Tim_Tsang = new Artist { Name = "Tim Tsang", URL = "http://www.timtsang.com" };
         public static Artist Timo_Karhula = new Artist { Name = "Timo Karhula", URL = "http://tmza.deviantart.com" };
         public static Artist Titus_Lunter = new Artist { Name = "Titus Lunter", URL = "http://tituslunter.deviantart.com" };

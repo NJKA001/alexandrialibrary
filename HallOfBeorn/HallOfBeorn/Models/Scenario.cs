@@ -11,12 +11,18 @@ namespace HallOfBeorn.Models
         {
         }
 
+        private ScenarioCard campaignCard;
         private readonly List<ScenarioQuestCard> questCards = new List<ScenarioQuestCard>();
         private readonly List<ScenarioCard> scenarioCards = new List<ScenarioCard>();
 
         public int Number { get; set; }
         public string GroupName { get; set; }
         public string Title { get; set; }
+
+        public ScenarioCard CampaignCard
+        {
+            get { return campaignCard; }
+        }
 
         public IEnumerable<ScenarioQuestCard> QuestCards
         {
@@ -26,6 +32,11 @@ namespace HallOfBeorn.Models
         public IEnumerable<ScenarioCard> ScenarioCards
         {
             get { return scenarioCards.OrderBy(x => x.EncounterSet).ThenBy(x => x.Title).ToList(); }
+        }
+
+        public void SetCampaignCard(Card card)
+        {
+            campaignCard = new ScenarioCard(card);
         }
 
         public void AddQuestCard(Card card)

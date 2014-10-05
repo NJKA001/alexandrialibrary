@@ -11,6 +11,8 @@ namespace HallOfBeorn.Models
         {
             _scenario = scenario;
 
+            _campaignCard = _scenario.CampaignCard != null ? new ScenarioCardViewModel(_scenario.CampaignCard) : null;
+
             foreach (var questCard in scenario.QuestCards)
             {
                 _questCards.Add(new ScenarioQuestViewModel(questCard));
@@ -23,12 +25,14 @@ namespace HallOfBeorn.Models
         }
 
         private readonly Scenario _scenario;
+        private readonly ScenarioCardViewModel _campaignCard;
         private readonly List<ScenarioQuestViewModel> _questCards = new List<ScenarioQuestViewModel>();
         private readonly List<ScenarioCardViewModel> _scenarioCards = new List<ScenarioCardViewModel>();
 
         public string Title { get { return _scenario.Title; } }
         public string Link { get { return string.Format("/Cards/Scenarios/{0}", _scenario.Title.ToUrlSafeString()); } }
 
+        public ScenarioCardViewModel CampaignCard { get { return _campaignCard; } }
         public List<ScenarioQuestViewModel> QuestCards { get { return _questCards; } }
         public List<ScenarioCardViewModel> ScenarioCards { get { return _scenarioCards; } }
     }

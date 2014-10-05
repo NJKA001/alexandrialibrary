@@ -59,6 +59,8 @@ namespace HallOfBeorn.Services
 
             setNames.Add(cardSet.Name);
 
+            var campaignMap = new Dictionary<string, Card>();
+
             foreach (var card in cardSet.Cards)
             {
                 if (!string.IsNullOrEmpty(card.ScenarioTitle))
@@ -95,6 +97,10 @@ namespace HallOfBeorn.Services
                             scenarios[escapedTitle].AddQuestCard(card);
                         }
                     }
+                    else if (card.CardType == CardType.Campaign)
+                    {
+                        campaignMap.Add(escapedTitle, card);
+                    }
                 }
 
                 if (!string.IsNullOrEmpty(card.EncounterSet))
@@ -125,6 +131,17 @@ namespace HallOfBeorn.Services
                 if (card.VictoryPoints > 0 && !victoryPointValues.ContainsKey(card.VictoryPoints))
                 {
                     victoryPointValues.Add(card.VictoryPoints, string.Format("Victory {0}.", card.VictoryPoints));
+                }
+            }
+
+            if (campaignMap.Count > 0)
+            {
+                foreach (var campaignItem in campaignMap)
+                {
+                    if (scenarios.ContainsKey(campaignItem.Key))
+                    {
+                        scenarios[campaignItem.Key].SetCampaignCard(campaignItem.Value);
+                    }
                 }
             }
         }
