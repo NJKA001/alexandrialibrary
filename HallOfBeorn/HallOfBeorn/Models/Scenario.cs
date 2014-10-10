@@ -18,6 +18,8 @@ namespace HallOfBeorn.Models
         public int Number { get; set; }
         public string GroupName { get; set; }
         public string Title { get; set; }
+        public string ProductName { get; set; }
+        public string RulesUrl { get; set; }
 
         public ScenarioCard CampaignCard
         {

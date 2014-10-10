@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public TheWatcherInTheWaterProduct()
             : base("The Watcher in the Water", "MEC11", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/The_Watcher_in_the_Water_rulesheet.pdf";
+
             CardSets.Add(CardSet.TheWatcherInTheWater);
         }
     }

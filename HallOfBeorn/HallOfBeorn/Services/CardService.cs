@@ -46,11 +46,11 @@ namespace HallOfBeorn.Services
 
             foreach (var cardSet in product.CardSets)
             {
-                AddSet(cardSet);
+                AddSet(product, cardSet);
             }
         }
 
-        private void AddSet(CardSet cardSet)
+        private void AddSet(Product product, CardSet cardSet)
         {
             sets.Add(cardSet);
 
@@ -87,7 +87,7 @@ namespace HallOfBeorn.Services
                                 }
                             }
 
-                            var scenario = new Scenario { Title = scenarioTitle, GroupName = cycle, Number = scenarioNumber };
+                            var scenario = new Scenario { Title = scenarioTitle, GroupName = cycle, Number = scenarioNumber, RulesUrl = product.RulesUrl, ProductName = product.Name };
                             scenario.AddQuestCard(card);
 
                             scenarios.Add(escapedTitle, scenario);
@@ -242,15 +242,15 @@ namespace HallOfBeorn.Services
             var filters = new List<Func<Card, Category>>
             {
                 CreateCategoryFilter(@"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration),
-                CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource|add 1 resource to a Gondor or Noble", Category.Resource_Smoothing),
-                CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play", Category.Mustering),
+                CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource|add 1 resource to a Gondor or Noble|give attached hero a (Leadership|Tactics|Spirit|Lore)|gains a (Leadership|Tactics|Spirit|Lore)", Category.Resource_Smoothing),
+                CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play|put into play the revealed card for no cost", Category.Mustering),
                 CreateCategoryFilter(@"\+[\d]*[\s]Attack", Category.Attack_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Willpower", Category.Willpower_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Hit[\s]Point", Category.Hit_Point_Bonus),
                 CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card|look at the top 2 cards of your deck. Add 1 to your hand", Category.Card_Draw),
                 CreateCategoryFilter(@"search[\s].*your[\s]deck", Category.Card_Search),
-                CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck", Category.Player_Scrying, "encounter deck"),
+                CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck|the top card of your deck faceup|exchange a card in your hand with the top card of your deck", Category.Player_Scrying, "encounter deck"),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying),
                 CreateCategoryFilter("(enemy|enemies).*cannot attack", Category.Combat_Control),
                 CreateCategoryFilter(@"heal[\s].*damage", Category.Healing),
@@ -267,7 +267,7 @@ namespace HallOfBeorn.Services
                 CreateCategoryFilter(@"after[\s].*[\s]enters[\s]play", Category.Enters_Play),
                 CreateCategoryFilter(@"after[\s].*[\s]leaves[\s]play", Category.Leaves_Play),
                 CreateCategoryFilter(@"(after[\s]you[\s]play[\s].*[\s]from[\s]your[\s]hand|after you play)", Category.Played_From_Hand),
-                CreateCategoryFilter(@"attach 1 attachment card|an attachment of cost 3 or less and put it into play|you may attach that card facedown|to play Weapon and Armor attachments on", Category.Equipping)
+                CreateCategoryFilter(@"attach 1 attachment card|an attachment of cost 3 or less and put it into play|you may attach that card facedown|to play Weapon and Armor attachments on|put into play the revealed card for no cost", Category.Equipping)
             };
 
             foreach (var card in cards.Values.Where(x => IsCategorizable(x)))

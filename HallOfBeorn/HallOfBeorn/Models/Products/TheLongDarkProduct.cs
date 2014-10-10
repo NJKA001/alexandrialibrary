@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public TheLongDarkProduct()
             : base("The Long Dark", "MEC12", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/The_Long_Dark_rulesheet.pdf";
+
             CardSets.Add(CardSet.TheLongDark);
         }
     }

@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public RoadToRivendellProduct()
             : base("Road to Rivendell", "MEC10", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/Road-to-Rivendell-rulesheet.pdf";
+
             CardSets.Add(CardSet.RoadToRivendell);
         }
     }

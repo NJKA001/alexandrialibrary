@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public AJourneyToRhosgobelProduct()
             : base("A Journey to Rhosgobel", "MEC04", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/A-Journey-to-Rhosgobel-Rules.pdf";
+
             CardSets.Add(CardSet.AJourneyToRhosgobel);
         }
     }

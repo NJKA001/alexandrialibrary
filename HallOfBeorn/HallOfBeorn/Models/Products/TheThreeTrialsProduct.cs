@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public TheThreeTrialsProduct()
             : base("The Three Trials", "MEC27", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/the-three-trials-rulesheet.pdf";
+
             CardSets.Add(CardSet.TheThreeTrials);
         }
     }

@@ -42,14 +42,12 @@
         </div>
     }
 </div>
-@if (!string.IsNullOrEmpty(@Model.OppositeTitle))
-{
-    <h3>@Model.OppositeTitle</h3>
-}
+    @if (!string.IsNullOrEmpty(@Model.OppositeTitle))
+    {
+        <h3>@Model.OppositeTitle</h3>
+    }
     <div>
-        @*<table>
-            <tr>
-                <td style="vertical-align:top;">*@
+
                 <div style="float:left;margin-right:8px;">
                     @if (@Model.HasSecondImage)
                     {
@@ -63,8 +61,7 @@
                         <img src="@Model.ImagePath" style="max-width: 285px;max-height: 400px;"/>
                     }
                 </div>
-                @*</td>
-                <td style="vertical-align:top;">*@
+
                 <div style="display:inline-block;min-width:30px;min-height:300px;">
                     <div>
                         <table>
@@ -275,12 +272,12 @@
                                                     <span style="margin-right:-6px;">@token.Prefix</span>
                                                 }
                                                 
-                                                <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:-4px;margin-bottom:-2px;" />
+                                                <img src="@token.ImagePath" style="height:16px;margin-left:@token.LeftMargin;margin-right:-4px;margin-bottom:-2px;" />
                                                 @: @token.Suffix
                                             }
                                             else
                                             {
-                                                <img src="@token.ImagePath" style="height:16px;margin-left:2px;margin-right:2px;margin-bottom:-2px;" />
+                                                <img src="@token.ImagePath" style="height:16px;margin-left:@token.LeftMargin;margin-right:2px;margin-bottom:-2px;" />
                                             }
                                         }
                                         else
@@ -296,7 +293,6 @@
                             
                             @if (@Model.ShadowEffects.Count() > 0)
                             {
-                                @* <hr style="margin-left:24px;margin-right:24px;"/> *@
                                 <img src="/Images/ShadowDivider.png" style="display:block;margin-left:auto;margin-right:auto;width:285px;"/>
                                 <br />
                                 
@@ -383,6 +379,7 @@
                 <div>
                 @if (!string.IsNullOrEmpty(@Model.Artist))
                 {
+                    <div />
                     <span style="margin-left:5px;margin-right:-3px;">Illus.</span>
                     if (!string.IsNullOrEmpty(@Model.ArtistURL))
                     {
@@ -427,32 +424,21 @@
                 @if (@Model.HasCategories)
                 {
                     <br />
-                    <div style="font-weight:bold;margin-left:6px;margin-top:10px;">Categories</div>
+                    <div style="font-weight:bold;margin-left:6px;margin-top:10px;margin-bottom:4px;">Categories</div>
                     foreach (var category in @Model.Categories())
                     {
-                        <span style="display:inline-block;margin-left:8px;background-color:darkgray;color:ivory;"><a title='@string.Format("Category Search for {0}", @category.Key)' href="@category.Value">@category.Key</a></span>
+                        <span style="display:inline-block;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='@string.Format("Category Search for {0}", @category.Key)' href="@category.Value" style="text-decoration:none;">@category.Key</a></span>
                     }
                 }
-                @*
-                @if (!string.IsNullOrEmpty(@Model.Year))
-                {
-                    <span style="margin-left:5px;">©@Model.Year Middle-earth Enterprises ©@Model.Year FFG</span>
-                }
-                *@
                 </div>
-        <div>
+                <div>
                 <div>
                     <div style="margin-top:12px;margin-left:4px;margin-bottom:4px;"><a href="@Model.HallOfBeornBlogSearchUrl" target="_blank" title="Search Hall of Beorn for: @Model.Title">On Hall of Beorn Blog</a></div>
                     <div style="margin-left:4px;margin-bottom:4px;"><a href="@Model.TalesFromTheCardsBlogSearchUrl" target="_blank" title="Search Tales From the Cards for: @Model.Title">On Tales From The Cards</a></div>
                     <div style="margin-left:4px;margin-bottom:4px;"><a href="@Model.MasterOfLoreBlogSearchUrl" target="_blank" title="Search Master of Lore for: @Model.Title">On Master of Lore</a></div>
                 </div>
-                @*</td>
-                <td>*@
+
                 <div>
-                    @*
-                    <table>
-                        <tr>
-                            <td style="vertical-align:top;">*@
                             <div>
                                 @if (@Model.Decks.Count() > 0)
                                 {
@@ -466,9 +452,7 @@
                                     </div>
                                 }
                             </div>
-                            @*
-                            </td>
-                            <td style="vertical-align:top;">*@
+
                             <div>
                                 @if (@Model.RelatedCards.Count > 0)
                                 {
@@ -483,13 +467,7 @@
                                     </div>
                                 }
                             </div>
-                            @*
-                            </td>
-                        </tr>
-                    </table>*@
+
                 </div>
             </div>
-                @*</td>
-            </tr>
-        </table>*@
     </div>

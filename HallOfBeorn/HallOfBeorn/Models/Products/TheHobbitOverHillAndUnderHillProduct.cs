@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public TheHobbitOverHillAndUnderHillProduct()
             : base("The Hobbit: Over Hill and Under Hill", "MEC16", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/hobbit_over_hill_and_under_hill_rulesheet.pdf";
+
             CardSets.Add(CardSet.TheHobbitOverHillAndUnderHill);
         }
     }

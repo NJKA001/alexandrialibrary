@@ -88,7 +88,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
                 ResourceCost = 2,
-                Text = "Play only if each hero you control has the printed Tactics resource icon.Action: Until the end of the phase, if the current quest has no keyword it gains Battle.",
+                Text = "Play only if each hero you control has the printed Tactics resource icon.\r\nAction: Until the end of the phase, if the current quest has no keyword it gains Battle.",
                 Quantity = 3,
                 Number = 36,
                 Artist = Artist.Magali_Villeneuve

@@ -359,8 +359,8 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Quantity = 3,
                 ResourceCost = 2,
                 IsUnique = true,
-                Text = "Action: Exhaust Elrond and Vilya to reveal the top card of your deck. You can immediately play or put into play the revealed card for no cost, if able. Otherwise, move the revealed card to the bottom of your deck.",
-                Keywords = new List<string>() { "Attach to Elrond.", "He gains a Spirit resource icon." },
+                Text = "He gains a Spirit resource icon.\r\nAction: Exhaust Elrond and Vilya to reveal the top card of your deck. You can immediately play or put into play the revealed card for no cost, if able. Otherwise, move the revealed card to the bottom of your deck.",
+                Keywords = new List<string>() { "Attach to Elrond." },
                 Number = 137,
                 Artist = Artist.Sara_Biddle
             });

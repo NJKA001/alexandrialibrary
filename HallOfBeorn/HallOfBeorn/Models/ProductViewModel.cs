@@ -77,6 +77,11 @@ namespace HallOfBeorn.Models
             }
         }
 
+        public string RulesLink
+        {
+            get { return _product.RulesUrl; }
+        }
+
         public IEnumerable<ScenarioViewModel> Scenarios
         {
             get { return _scenarios; }

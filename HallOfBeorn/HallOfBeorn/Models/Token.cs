@@ -21,5 +21,27 @@ namespace HallOfBeorn.Models
 
         public bool HasSuffix { get { return !string.IsNullOrEmpty(Suffix); } }
         public string Suffix { get; set; }
+
+        public string LeftMargin
+        {
+            get
+            {
+                if (!IsIcon)
+                    return "0px";
+
+                switch (Text)
+                {
+                    case "Baggins":
+                    case "Fellowship":
+                    case "Leadership":
+                    case "Tactics":
+                    case "Spirit":
+                    case "Lore":
+                        return "1px";
+                    default:
+                        return "8px";
+                }
+            }
+        }
     }
 }

@@ -278,7 +278,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 3,
                 IsUnique = true,
-                Text = "Attached hero gains a Leadership resource icon.If attached hero is Aragorn, each character you control gets +1 Willpower.",
+                Text = "Attached hero gains a Leadership resource icon.\r\nIf attached hero is Aragorn, each character you control gets +1 Willpower.",
                 Keywords = new List<string>() { "Attach to a hero." },
                 Number = 55,
                 Artist = Artist.Sara_Biddle

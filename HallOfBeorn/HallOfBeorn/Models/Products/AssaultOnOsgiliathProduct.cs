@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public AssaultOnOsgiliathProduct()
             : base("Assault on Osgiliath", "MEC21", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/rulesheet-assault-on-osgiliath.pdf";
+
             CardSets.Add(CardSet.AssaultOnOsgiliath);
         }
     }

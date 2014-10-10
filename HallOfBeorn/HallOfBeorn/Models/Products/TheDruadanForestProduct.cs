@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public TheDruadanForestProduct()
             : base("The Drúadan Forest", "MEC19", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/MEC19-the-druadan-forest-rulesheet.pdf";
+
             CardSets.Add(CardSet.TheDruadanForest);
         }
     }

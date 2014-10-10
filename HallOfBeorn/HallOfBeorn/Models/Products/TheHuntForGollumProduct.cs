@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public TheHuntForGollumProduct()
             : base("The Hunt for Gollum", "MEC02", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/rulesheet-TheHuntForGollum.pdf";
+
             CardSets.Add(CardSet.TheHuntForGollum);
         }
     }

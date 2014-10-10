@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public TheBloodOfGondorProduct()
             : base("The Blood of Gondor", "MEC22", ImageType.Png)
         {
+            RulesUrl = "http://www.fantasyflightgames.com/ffg_content/lotr-lcg/support/rulesheets/rulesheet-the-blood-of-gondor.pdf";
+
             CardSets.Add(CardSet.TheBloodOfGondor);
         }
     }
