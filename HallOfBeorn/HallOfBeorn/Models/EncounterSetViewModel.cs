@@ -29,5 +29,10 @@ namespace HallOfBeorn.Models
                     return string.Empty;
             }
         }
+
+        public string Link
+        {
+            get { return string.Format("/Cards/Search?EncounterSet={0}", _encounterSet.Name.ToSearchString()); }
+        }
     }
 }

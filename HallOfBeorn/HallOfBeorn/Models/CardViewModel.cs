@@ -234,6 +234,16 @@ namespace HallOfBeorn.Models
             }
         }
 
+        public string EncounterSetLink
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(EncounterSet) ?
+                    string.Format("/Cards/Search?EncounterSet={0}", _card.EncounterSet.ToSearchString())
+                    : string.Empty;
+            }
+        }
+
         public string StageNumber
         {
             get { return _card.StageNumber > 0 ? _card.StageNumber.ToString() : string.Empty; }

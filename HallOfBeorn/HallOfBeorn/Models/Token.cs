@@ -39,7 +39,14 @@ namespace HallOfBeorn.Models
                     case "Lore":
                         return "1px";
                     default:
-                        return "8px";
+                        if (HasSuffix)
+                        {
+                            return "8px";
+                        }
+                        else
+                        {
+                            return "2px";
+                        }
                 }
             }
         }

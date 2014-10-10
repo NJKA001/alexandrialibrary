@@ -173,7 +173,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Traits = new List<string> { "Item.", "Pipe." },
                 Keywords = new List<string> { "Attach to an Istari character.", "Limit 1 per character." },
-                Text = "Action: Exhaust Wizard Pipe to exchange a card in your hand with the top card of your deck.",
+                Text = "Action: Exhaust Wizard ~Pipe to exchange a card in your hand with the top card of your deck.",
+                FlavorText = "...there was a long silence, broken only by the soft puffs of Gandalf's pipe, as he blew white smoke-rings out of the window. -The Fellowship of the Ring",
                 Number = 9,
                 Quantity = 3,
                 Artist = Artist.Tiziano_Baracchi

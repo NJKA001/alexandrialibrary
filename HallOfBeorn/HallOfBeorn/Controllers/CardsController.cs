@@ -182,7 +182,7 @@ namespace HallOfBeorn.Controllers
                 effect.Tokens.Add(token);
             }
 
-            if (text.Contains("lost the game") || text.Contains("lose the game") || text.Contains("win the game") || text.Contains("won the game") || text.Contains("end the game"))
+            if (text.Contains("lost the game") || text.Contains("lose the game") || text.Contains("win the game") || text.Contains("won the game") || text.Contains("end the game") || text.Contains("win this game"))
             {
                 if (!effect.Tokens[0].IsTrigger)
                 {
