@@ -259,13 +259,13 @@ namespace HallOfBeorn.Services
                 CreateCategoryFilter("ready.*(character|hero|ally|allies|him|her|them)", Category.Readying, "While Dain Ironfoot is ready"),
                 CreateCategoryFilter(@"(return.*discard[\s]pile.*hand|shuffle.*discard[\s]pile.*back)", Category.Recursion, "encounter discard pile"),
                 CreateCategoryFilter(@"deal[\s]([\d]|X)*[\s]damage|Deal damage to the attacking enemy|Excess damage dealt by this attack is assigned", Category.Direct_Damage),
-                CreateCategoryFilter(@"(look at|revealed|enters play).*encounter[\s]deck", Category.Encounter_Control),
+                CreateCategoryFilter(@"(look at|revealed|enters play|top of the).*encounter[\s]deck", Category.Encounter_Control),
                 CreateCategoryFilter(@"cancel.*shadow|shadow[\s]cards", Category.Shadow_Control), 
                 CreateCategoryFilter(@"(reduce|lower).*(your|player).*threat", Category.Threat_Control, "your threat is lower"),
                 CreateCategoryFilter(@"((enemy|enemies).*staging[\s]area.*attack|attacker.*against.*enemy not engaged with you|Any character may choose attached enemy as the target of an attack)", Category.Staging_Area_Attack),
                 CreateCategoryFilter("(choose (an enemy|a location).*(staging area|not engaged with you))|add.*each enemy's engagement cost|each enemy.*gets.*engagement cost", Category.Staging_Area_Control),
                 CreateCategoryFilter(@"after[\s].*[\s]enters[\s]play", Category.Enters_Play),
-                CreateCategoryFilter(@"after[\s].*[\s]leaves[\s]play", Category.Leaves_Play),
+                CreateCategoryFilter(@"after[\s].*[\s]leaves[\s]play", Category.Leaves_Play, "After attached location leaves play"),
                 CreateCategoryFilter(@"(after[\s]you[\s]play[\s].*[\s]from[\s]your[\s]hand|after you play)", Category.Played_From_Hand),
                 CreateCategoryFilter(@"attach 1 attachment card|an attachment of cost 3 or less and put it into play|you may attach that card facedown|to play Weapon and Armor attachments on|put into play the revealed card for no cost", Category.Equipping)
             };
