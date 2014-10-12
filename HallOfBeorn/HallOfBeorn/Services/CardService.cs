@@ -967,51 +967,92 @@ namespace HallOfBeorn.Services
             return cards.Values.ToList();
         }
 
+        private Func<Card, bool> NegateFilter(Func<Card, bool> predicate)
+        {
+            return (card) => { return !predicate(card); };
+        }
+
+        private List<Card> FilterByByte(string typeName, string value, List<Card> results, bool negate)
+        {
+            var tokens = value.SplitOnComma();
+
+            var bytes = new List<byte>();
+
+            foreach (var token in tokens)
+            {
+                var item = (byte)0;
+                if (byte.TryParse(token, out item))
+                {
+                    bytes.Add(item);
+                }
+            }
+
+            Func<Card, bool> predicate = null;
+
+            switch (typeName)
+            {
+                case "rcost":
+                    predicate = (card) => { return bytes.Any(x => card.ResourceCost.HasValue && card.ResourceCost.Value == x); };
+                    break;
+                case "tcost":
+                    predicate = (card) => { return bytes.Any(x => card.ThreatCost.HasValue && card.ThreatCost.Value == x); };
+                    break;
+                case "ecost":
+                    predicate = (card) => { return bytes.Any(x => card.EngagementCost.HasValue && card.EngagementCost.Value == x); };
+                    break;
+                default:
+                    break;
+            }
+
+            if (predicate != null)
+            {
+                if (negate)
+                {
+                    predicate = NegateFilter(predicate);
+                }
+
+                results = results.Where(predicate).ToListSafe();
+            }
+
+            return results;
+        }
+
         private List<Card> FilterByEnum<TEnum>(string value, List<Card> results, bool negate)
             where TEnum: struct
         {
-            var tokens = value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe();
+            var tokens = value.SplitOnComma();
 
             var enums = new List<TEnum>();
 
             foreach (var token in tokens)
             {
                 var item = default(TEnum);
-                if (Enum.TryParse<TEnum>(value, out item))
+                if (Enum.TryParse<TEnum>(token, out item))
                 {
                     enums.Add(item);
                 }
             }
 
-            var typeName = typeof(TEnum).Name;
+            var typeName = typeof(TEnum).Name.ToLowerSafe();
             Func<Card, bool> predicate = null;
 
-            if (negate)
+            switch (typeName)
             {
-                switch (typeName)
-                {
-                    case "Sphere":
-                        predicate = (card) => { return !enums.Any(y => y.ToEnum<Sphere>() == card.Sphere); };
-                        break;
-                    default:
-                        break;
-                }
-            }
-            else
-            {
-                switch (typeName)
-                {
-                    case "Sphere":
-                        predicate = (card) => { return enums.Any(y => y.ToEnum<Sphere>() == card.Sphere); };
-                        break;
-                    default:
-                        break;
-                }
+                case "sphere":
+                    predicate = (card) => { return enums.Any(y => y.ToEnum<Sphere>() == card.Sphere); };
+                    break;
+                default:
+                    break;
             }
 
             if (predicate != null)
             {
-                results = results.Where(predicate).ToList();
+                if (negate)
+                {
+                    predicate = NegateFilter(predicate);
+                }
+
+                results = results.Where(predicate).ToListSafe();
             }
 
             return results;
@@ -1041,7 +1082,10 @@ namespace HallOfBeorn.Services
                     case "sphere":
                         results = FilterByEnum<Sphere>(value, results, negate);
                         break;
-                    case "cost":
+                    case "rcost":
+                    case "tcost":
+                    case "ecost":
+                        results = FilterByByte(field, value, results, negate);
                         break;
                     case "trait":
                         break;
@@ -1089,28 +1133,23 @@ namespace HallOfBeorn.Services
             if (!string.IsNullOrEmpty(model.Query))
             {
                 hasFilter = true;
-
                 isAdvancedSearch = (model.Query.StartsWith("-") || model.Query.StartsWith("+") || model.Query.Contains(" -") || model.Query.Contains(" +"));
             }
 
-            List<Card> results = null;
+            var query = isAdvancedSearch ? GetBasicQuery(model.Query).ToLowerSafe() : model.Query.ToLowerSafe();
 
-            if (!isAdvancedSearch)
-            {
-                results = !string.IsNullOrEmpty(model.Query) ?
-                    cards.Values.Where(
-                        x => (x.Title.ToLower().Contains(model.Query.ToLower()) || model.Query.ToLower() == randomKeyword)
-                        || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(model.Query.ToLower()))
-                        || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(model.Query.ToLower()))
-                        || x.Keywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                        || x.NormalizedKeywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                        || x.Traits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                        || x.NormalizedTraits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                        )
-                    .ToList()
-                    : cards.Values.ToList();
-            }
-
+            var results = !string.IsNullOrEmpty(query) ?
+                cards.Values.Where(
+                    x => (x.Title.ToLower().Contains(query) || query == randomKeyword)
+                    || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(query))
+                    || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(query))
+                    || x.Keywords.Any(y => y != null && y.ToLower().Contains(query))
+                    || x.NormalizedKeywords.Any(y => y != null && y.ToLower().Contains(query))
+                    || x.Traits.Any(y => y != null && y.ToLower().Contains(query))
+                    || x.NormalizedTraits.Any(y => y != null && y.ToLower().Contains(query))
+                    )
+                .ToList()
+                : cards.Values.ToList();
 
             if (model.CardType != CardType.None)
             {

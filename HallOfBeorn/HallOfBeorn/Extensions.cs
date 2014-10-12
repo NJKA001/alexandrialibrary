@@ -142,5 +142,36 @@ namespace HallOfBeorn
 
             return (TEnum)self;
         }
+
+        public static List<string> SplitOn(this string self, char separator)
+        {
+            if (string.IsNullOrEmpty(self))
+                return new List<string>();
+
+            return self.Split(new char[] { separator }, StringSplitOptions.RemoveEmptyEntries).ToListSafe();
+        }
+
+        public static List<string> SplitOnSpace(this string self)
+        {
+            return self.SplitOn(' ');
+        }
+
+        public static List<string> SplitOnComma(this string self)
+        {
+            return self.SplitOn(',');
+        }
+
+        public static List<string> SplitOnEquals(this string self)
+        {
+            return self.SplitOn('=');
+        }
+
+        public static string ToLowerSafe(this string self)
+        {
+            if (string.IsNullOrEmpty(self))
+                return self;
+
+            return self.ToLower();
+        }
     }
 }
