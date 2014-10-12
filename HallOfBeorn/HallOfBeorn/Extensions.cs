@@ -126,5 +126,21 @@ namespace HallOfBeorn
 
             return Regex.IsMatch(self, pattern, RegexOptions.IgnoreCase);
         }
+
+        public static List<T> ToListSafe<T>(this IEnumerable<T> self)
+        {
+            if (self == null)
+                return new List<T>();
+
+            return self.ToList();
+        }
+
+        public static TEnum ToEnum<TEnum>(this object self) where TEnum: struct
+        {
+            if (self == null)
+                return default(TEnum);
+
+            return (TEnum)self;
+        }
     }
 }

@@ -967,6 +967,115 @@ namespace HallOfBeorn.Services
             return cards.Values.ToList();
         }
 
+        private List<Card> FilterByEnum<TEnum>(string value, List<Card> results, bool negate)
+            where TEnum: struct
+        {
+            var tokens = value.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe();
+
+            var enums = new List<TEnum>();
+
+            foreach (var token in tokens)
+            {
+                var item = default(TEnum);
+                if (Enum.TryParse<TEnum>(value, out item))
+                {
+                    enums.Add(item);
+                }
+            }
+
+            var typeName = typeof(TEnum).Name;
+            Func<Card, bool> predicate = null;
+
+            if (negate)
+            {
+                switch (typeName)
+                {
+                    case "Sphere":
+                        predicate = (card) => { return !enums.Any(y => y.ToEnum<Sphere>() == card.Sphere); };
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (typeName)
+                {
+                    case "Sphere":
+                        predicate = (card) => { return enums.Any(y => y.ToEnum<Sphere>() == card.Sphere); };
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            if (predicate != null)
+            {
+                results = results.Where(predicate).ToList();
+            }
+
+            return results;
+        }
+
+        private List<Card> AdvancedSearch(string query, List<Card> results)
+        {
+            var filters = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe().Where(x => x.StartsWith("-") || x.StartsWith("+")).ToListSafe();
+
+            foreach (var filter in filters)
+            {
+                var fields = filter.Split(new char[] { ':', '=' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe();
+
+                if (fields.Count != 2 || string.IsNullOrEmpty(fields[0]) || string.IsNullOrEmpty(fields[1]))
+                    continue;
+
+                var negate = (fields[0][0] == '-');
+                var field = fields[0].ToLower().Trim('-', '+');
+                var value = fields[1];
+
+                switch (field)
+                {
+                    case "set":
+                        break;
+                    case "type":
+                        break;
+                    case "sphere":
+                        results = FilterByEnum<Sphere>(value, results, negate);
+                        break;
+                    case "cost":
+                        break;
+                    case "trait":
+                        break;
+                    case "keyword":
+                        break;
+                    case "encounter":
+                        break;
+                    case "artist":
+                        break;
+                    case "category":
+                        break;
+                    case "victory":
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            return results;
+        }
+
+        private string GetBasicQuery(string query)
+        {
+            if (string.IsNullOrEmpty(query))
+                return string.Empty;
+
+            var parts = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe().Where(x => !x.StartsWith("-") && !x.StartsWith("+")).ToListSafe();
+
+            if (parts.Count == 0)
+                return string.Empty;
+
+            return string.Join(" ", parts);
+        }
+
         public IEnumerable<Card> Search(SearchViewModel model)
         {
             if (!string.IsNullOrEmpty(model.Query) && model.Query.Trim().ToLower() == randomKeyword)
@@ -975,24 +1084,33 @@ namespace HallOfBeorn.Services
             }
 
             var hasFilter = false;
-
-            var results = !string.IsNullOrEmpty(model.Query) ?
-                cards.Values.Where(
-                    x => (x.Title.ToLower().Contains(model.Query.ToLower()) || model.Query.ToLower() == randomKeyword)
-                    || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(model.Query.ToLower()))
-                    || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(model.Query.ToLower()))
-                    || x.Keywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                    || x.NormalizedKeywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                    || x.Traits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                    || x.NormalizedTraits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
-                    )
-                .ToList()
-                : cards.Values.ToList();
+            var isAdvancedSearch = false;
 
             if (!string.IsNullOrEmpty(model.Query))
             {
                 hasFilter = true;
+
+                isAdvancedSearch = (model.Query.StartsWith("-") || model.Query.StartsWith("+") || model.Query.Contains(" -") || model.Query.Contains(" +"));
             }
+
+            List<Card> results = null;
+
+            if (!isAdvancedSearch)
+            {
+                results = !string.IsNullOrEmpty(model.Query) ?
+                    cards.Values.Where(
+                        x => (x.Title.ToLower().Contains(model.Query.ToLower()) || model.Query.ToLower() == randomKeyword)
+                        || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(model.Query.ToLower()))
+                        || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(model.Query.ToLower()))
+                        || x.Keywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
+                        || x.NormalizedKeywords.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
+                        || x.Traits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
+                        || x.NormalizedTraits.Any(y => y != null && y.ToLower().Contains(model.Query.ToLower()))
+                        )
+                    .ToList()
+                    : cards.Values.ToList();
+            }
+
 
             if (model.CardType != CardType.None)
             {
@@ -1088,6 +1206,11 @@ namespace HallOfBeorn.Services
                     hasFilter = true;
                     results = results.Where(x => x.VictoryPoints == victoryPoints).ToList();
                 }
+            }
+
+            if (isAdvancedSearch)
+            {
+                results = AdvancedSearch(model.Query, results);
             }
 
             var takeCount = hasFilter || model.Random ? results.Count : maxResults;
