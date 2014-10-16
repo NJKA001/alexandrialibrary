@@ -473,9 +473,6 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\tolkien.ttf" />
-    <None Include=".ebextensions\01increase-timeout.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\attack.gif" />
     <Content Include="Images\Baggins.png" />
