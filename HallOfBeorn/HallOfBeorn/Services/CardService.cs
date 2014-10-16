@@ -16,7 +16,7 @@ namespace HallOfBeorn.Services
         {
             LoadProducts();
             LoadDecks();
-            LoadRelationships();
+            //LoadRelationships();
             LoadScenarioCards();
             LoadCategories();
 
@@ -428,6 +428,7 @@ namespace HallOfBeorn.Services
             AddDeck(new BeornsPathRtMTacticsSpirit());
         }
 
+        /*
         private void AddRelationship(string leftTitle, string leftSet, string rightTitle, string rightSet)
         {
             var leftCard = cards.Values.Where(x => (string.Equals(x.Title, leftTitle) || string.Equals(x.NormalizedTitle, leftTitle)) && (string.IsNullOrEmpty(leftSet) || string.Equals(x.CardSet.Abbreviation, leftSet))).FirstOrDefault();
@@ -960,7 +961,7 @@ namespace HallOfBeorn.Services
             AddRelationship("Westfold Horse-breeder", "VoI", "Steed of the Mark", "TMV");
             AddRelationship("Westfold Horse-breeder", "VoI", "Rohan Warhorse", "VoI");
             AddRelationship("Westfold Horse-breeder", "VoI", "Asfaloth", "FoS");
-        }
+        }*/
 
         public IEnumerable<Card> All()
         {
@@ -1000,6 +1001,69 @@ namespace HallOfBeorn.Services
                 case "ecost":
                     predicate = (card) => { return bytes.Any(x => card.EngagementCost.HasValue && card.EngagementCost.Value == x); };
                     break;
+                case "threat":
+                    predicate = (card) => { return bytes.Any(x => card.Threat == x); };
+                    break;
+                case "wp":
+                    predicate = (card) => { return bytes.Any(x => card.Willpower == x); };
+                    break;
+                case "atk":
+                    predicate = (card) => { return bytes.Any(x => card.Attack == x); };
+                    break;
+                case "def":
+                    predicate = (card) => { return bytes.Any(x => card.Defense == x); };
+                    break;
+                case "hp":
+                    predicate = (card) => { return bytes.Any(x => card.HitPoints == x); };
+                    break;
+                case "victory":
+                    predicate = (card) => { return bytes.Any(x => card.VictoryPoints == x); };
+                    break;
+                default:
+                    break;
+            }
+
+            if (predicate != null)
+            {
+                if (negate)
+                {
+                    predicate = NegateFilter(predicate);
+                }
+
+                results = results.Where(predicate).ToListSafe();
+            }
+
+            return results;
+        }
+
+        private List<Card> FilterByString(string typeName, string value, List<Card> results, bool negate)
+        {
+            var names = value.SplitOnComma();
+            Func<Card, bool> predicate = null;
+
+            switch (typeName)
+            {
+                case "cycle":
+                    predicate = (card) => { return names.Any(y => card.CardSet.Cycle.MatchesPattern(y)); };
+                    break;
+                case "set":
+                    predicate = (card) => { return names.Any(y => card.CardSet.Name.MatchesWildcard(y) || card.CardSet.Abbreviation.MatchesWildcard(y)); };
+                    break;
+                case "encounter":
+                    predicate = (card) => { return names.Any(y => card.EncounterSet.MatchesPattern(y)); };
+                    break;
+                case "trait":
+                    predicate = (card) => { return names.Any(y => card.Traits.Select(z => z.Trim('.')).Any(a => a.MatchesPattern(y))); };
+                    break;
+                case "keyword":
+                    predicate = (card) => { return names.Any(y => card.Keywords.Select(z => z.Trim('.')).Any(a => a.MatchesPattern(y))); };
+                    break;
+                case "text":
+                    predicate = (card) => { return names.Any(y => card.Text.MatchesPattern(y)); };
+                    break;
+                case "artist":
+                    predicate = (card) => { return names.Any(y => (card.Artist != null && card.Artist.Name.MatchesPattern(y)) || (card.SecondArtist != null && card.SecondArtist.Name.MatchesPattern(y))); };
+                    break;
                 default:
                     break;
             }
@@ -1038,8 +1102,14 @@ namespace HallOfBeorn.Services
 
             switch (typeName)
             {
+                case "cardtype":
+                    predicate = (card) => { return enums.Any(y => y.ToEnum<CardType>() == card.CardType); };
+                    break;
                 case "sphere":
                     predicate = (card) => { return enums.Any(y => y.ToEnum<Sphere>() == card.Sphere); };
+                    break;
+                case "category":
+                    predicate = (card) => { return enums.Any(y => card.Categories.Any(z => y.ToEnum<Category>() == z)); };
                     break;
                 default:
                     break;
@@ -1075,9 +1145,14 @@ namespace HallOfBeorn.Services
 
                 switch (field)
                 {
+                    case "cycle":
+                        results = FilterByString(field, value, results, negate);
+                        break;
                     case "set":
+                        results = FilterByString(field, value, results, negate);
                         break;
                     case "type":
+                        results = FilterByEnum<CardType>(value, results, negate);
                         break;
                     case "sphere":
                         results = FilterByEnum<Sphere>(value, results, negate);
@@ -1085,19 +1160,30 @@ namespace HallOfBeorn.Services
                     case "rcost":
                     case "tcost":
                     case "ecost":
+                    case "threat":
+                    case "wp":
+                    case "atk":
+                    case "def":
+                    case "hp":
                         results = FilterByByte(field, value, results, negate);
                         break;
                     case "trait":
+                        results = FilterByString(field, value, results, negate);
                         break;
                     case "keyword":
+                        results = FilterByString(field, value, results, negate);
                         break;
                     case "encounter":
+                        results = FilterByString(field, value, results, negate);
                         break;
                     case "artist":
+                        results = FilterByString(field, value, results, negate);
                         break;
                     case "category":
+                        results = FilterByEnum<Category>(value, results, negate);
                         break;
                     case "victory":
+                        results = FilterByByte(field, value, results, negate);
                         break;
                     default:
                         break;

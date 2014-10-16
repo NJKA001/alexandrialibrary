@@ -173,5 +173,31 @@ namespace HallOfBeorn
 
             return self.ToLower();
         }
+
+        public static bool MatchesWildcard(this string self, string pattern)
+        {
+            if (string.IsNullOrEmpty(self) || string.IsNullOrEmpty(pattern))
+                return false;
+
+            var prefix = pattern.StartsWith("*");
+            var suffix = pattern.EndsWith("*");
+
+            pattern = pattern.Trim('*');
+
+            if (prefix && suffix)
+            {
+                return self.ToLower().Contains(pattern.ToLower());
+            }
+            else if (prefix)
+            {
+                return self.ToLower().EndsWith(pattern.ToLower());
+            }
+            else if (suffix)
+            {
+                return self.ToLower().StartsWith(pattern.ToLower());
+            }
+
+            return self.ToLower() == pattern.ToLower();
+        }
     }
 }
