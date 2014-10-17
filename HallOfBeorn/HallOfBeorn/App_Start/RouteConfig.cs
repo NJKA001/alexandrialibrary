@@ -14,6 +14,12 @@ namespace HallOfBeorn
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "WebRouting",
+                url: "index.html",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
                 "Export",
                 "Export/{name}",
                 new { controller = "Export", action = "Get" }
