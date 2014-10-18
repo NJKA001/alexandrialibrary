@@ -15,6 +15,7 @@ namespace HallOfBeorn.Models
         GenCon_Expansion = 5,
         GenConSaga_Expansion = 8,
         Nightmare_Expansion = 6,
-        Custom_Expansion = 7
+        Fellowship_Deck = 7,
+        Custom_Expansion = 99,
     }
 }

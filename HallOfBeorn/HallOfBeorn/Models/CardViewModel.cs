@@ -442,6 +442,7 @@ namespace HallOfBeorn.Models
                         return getQuestCardImagePath(true); 
                     case Models.CardType.Campaign:
                     case Models.CardType.Nightmare_Setup:
+                    case Models.CardType.GenCon_Setup:
                         return getSetupCardImagePath(true);
                     default:
                         return null;
@@ -459,6 +460,7 @@ namespace HallOfBeorn.Models
                         return getQuestCardImagePath(false);
                     case Models.CardType.Campaign:
                     case Models.CardType.Nightmare_Setup:
+                    case Models.CardType.GenCon_Setup:
                         return getSetupCardImagePath(false);
                     default:
                         return null;
