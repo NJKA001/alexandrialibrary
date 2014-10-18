@@ -17,7 +17,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "29d5feef-6165-4077-bb80-692526a8a924",
                 CardType = Models.CardType.Hero,
                 IsUnique = true,
@@ -40,7 +39,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "1f28f098-09d4-43fa-8fba-eae551a5d4fe",
                 Sphere = Models.Sphere.Leadership,
                 CardType = Models.CardType.Ally,
@@ -59,7 +57,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "2f0a3f18-c84f-4458-b6f7-2e6be9acee6b",
                 Sphere = Models.Sphere.Leadership,
                 CardType = Models.CardType.Attachment,
@@ -77,7 +74,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "66d8e628-8ca8-4605-9017-aece027f054f",
                 Sphere = Models.Sphere.Tactics,
                 CardType = Models.CardType.Attachment,
@@ -94,7 +90,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "80cdd2b5-60cf-4d47-afe7-505b79abcb1b",
                 Sphere = Models.Sphere.Tactics,
                 CardType = Models.CardType.Event,
@@ -109,7 +104,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "90d300da-a557-44b1-a634-d54782ff5e48",
                 Sphere = Models.Sphere.Spirit,
                 CardType = Models.CardType.Attachment,
@@ -126,7 +120,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "b442354c-887d-403e-815b-a11f10a8760d",
                 Sphere = Models.Sphere.Spirit,
                 CardType = Models.CardType.Event,
@@ -142,7 +135,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "3eb1141f-bf1f-401e-a69d-e4df0af2a8ab",
                 Sphere = Models.Sphere.Lore,
                 CardType = Models.CardType.Ally,
@@ -161,7 +153,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "63c6bd3a-5566-412d-9199-3929d2fc3cf2",
                 Sphere = Models.Sphere.Lore,
                 CardType = Models.CardType.Attachment,
@@ -177,7 +168,6 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card()
             {
-                ImageType = Models.ImageType.Png,
                 Id = "6a871e9e-fa3e-4556-8730-09aed1a3ec40",
                 Sphere = Models.Sphere.Neutral,
                 CardType = Models.CardType.Event,
@@ -253,7 +243,6 @@ If ~Nazgûl of Minas ~Morgul is defeated, the players have won the game.",
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "a6dd52d0-375a-41ea-ae77-b0fd9bcb6629",
                 CardType = CardType.Objective,
                 Title = "To the Tower",
@@ -272,7 +261,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "aca1ee7f-ad29-4218-8dd5-f7f7a8e617fe",
                 CardType = CardType.Enemy,
                 Title = "Morgul Bodyguard",
@@ -292,7 +280,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "c12057ee-64d0-419a-adb8-17632e3182b0",
                 CardType = CardType.Enemy,
                 Title = "Morgul Sorcerer",
@@ -312,7 +299,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "6987d363-bcba-4f34-97b1-d26f080c843e",
                 CardType = CardType.Enemy,
                 Title = "Morgul Tracker",
@@ -332,7 +318,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "a305f78f-0d26-4a56-9d5b-7fb0210e6bd4",
                 CardType = CardType.Enemy,
                 IsUnique = true,
@@ -352,7 +337,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "499195c5-389f-4a56-b67e-b6e5b8f2fb91",
                 CardType = CardType.Enemy,
                 IsUnique = true,
@@ -372,7 +356,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "3ef4f724-8f91-42d3-9ba2-5d731283c069",
                 CardType = CardType.Enemy,
                 IsUnique = true,
@@ -395,7 +378,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "3e0e63ba-d11b-4c8a-aab6-047f19013ca7",
                 CardType = CardType.Location,
                 Title = "Morgul Road",
@@ -412,10 +394,10 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
-                Id = "e176b4d7-2fae-4025-8a71-5c3bc843e2e1",
-                CardType = CardType.Location,
                 Title = "Morgul Vale",
+                Id = "e176b4d7-2fae-4025-8a71-5c3bc843e2e1",
+                ImageType = Models.ImageType.Png,
+                CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 3,
                 Traits = new List<string> { "Valley." },
@@ -429,7 +411,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "95f2f7ac-5d85-43e5-930d-d866b00bef26",
                 CardType = CardType.Location,
                 Title = "The White Bridge",
@@ -446,7 +427,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "418e1e02-52fe-4aef-b543-3875837dd38a",
                 CardType = CardType.Treachery,
                 Title = "Impenetrable Fog",
@@ -461,7 +441,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "46c7bfd7-96b7-4fe4-a110-3464ba6c0023",
                 CardType = CardType.Treachery,
                 Title = "Sleepless Malice",
@@ -476,7 +455,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "08af0240-fb38-4a33-a1f0-af07fd496b42",
                 CardType = CardType.Treachery,
                 Title = "Terror Drives Them",
@@ -491,7 +469,6 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
 
             Cards.Add(new Card()
             {
-                ImageType = ImageType.Png,
                 Id = "8ac2d3ea-7e6d-4e9e-9cc5-70b65b24b835",
                 CardType = CardType.Treachery,
                 Title = "The Dead City Looms",
