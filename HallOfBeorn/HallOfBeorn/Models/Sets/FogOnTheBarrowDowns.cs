@@ -156,7 +156,7 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 ScenarioNumber = 5,
                 StageNumber = 4,
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 4,
                 Number = 4,
                 Artist = Artist.Unknown
 
@@ -175,9 +175,9 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             });
             Cards.Add(new Card()
             {
-                Title = "",
+                Title = "Standing Stones",
                 Id = "80AA9A99-4DB0-403E-B013-557406F9C4AC",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Location,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 6,
@@ -199,7 +199,7 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             {
                 Title = "Ancient Barrow",
                 Id = "DCECC2B9-7AAE-4E77-8268-07DD49FCFFF9",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Location,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 8,
@@ -208,9 +208,9 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             });
             Cards.Add(new Card()
             {
-                Title = "",
+                Title = "Stone Ring",
                 Id = "3861F516-CB2D-407C-854D-3590572D69FC",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Location,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 9,
@@ -219,9 +219,9 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             });
             Cards.Add(new Card()
             {
-                Title = "",
+                Title = "North Downs",
                 Id = "A98F4E8A-B2DC-48BA-B0A1-FA7AA53A5597",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Location,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 10,
@@ -259,9 +259,9 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             });
             Cards.Add(new Card()
             {
-                Title = "",
+                Title = "I'm Waiting for You!",
                 Id = "044CBEF3-2DFF-4153-9D8E-170826EB1B50",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Treachery,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 14,
@@ -269,9 +269,9 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             });
             Cards.Add(new Card()
             {
-                Title = "",
+                Title = "Long Groping Arm",
                 Id = "5CC082D1-028A-40B6-BA2B-551E8AC3AB34",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Treachery,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 15,
@@ -281,7 +281,7 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             {
                 Title = "Chill Fog",
                 Id = "38E841B2-29E8-496C-93A9-13C96031FC2E",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Treachery,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 16,
@@ -291,7 +291,7 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             {
                 Title = "Frozen by Fear",
                 Id = "35971087-EE5B-4075-AE12-4B730AA873EB",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Treachery,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 17,
@@ -301,7 +301,7 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             {
                 Title = "Dreadful Song",
                 Id = "A625C893-4B7B-4765-9E2B-FE403DD5548B",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Treachery,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 18,
@@ -309,9 +309,17 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
             });
             Cards.Add(new Card()
             {
-                Title = "",
+                Title = "Tom Bombadil",
+                IsUnique = true,
                 Id = "A611EE75-F6C3-4BC6-97E2-B897F6A36DAC",
-                CardType = Models.CardType.Enemy,
+                CardType = Models.CardType.Objective_Ally,
+                Willpower = 3,
+                Attack = 3,
+                Defense = 3,
+                HitPoints = 6,
+                Traits = new List<string> { "Legend." },
+                Text = "When Revealed: Choose a player. That player gains control of Tom Bombadil, ready and committed to the quest. At the end of the round, discard Tom Bombadil. Then shuffle the encounter discard pile into the encounter deck. This effect cannot be canceled.",
+                FlavorText = "\"Tom Bom, Jolly Tom, Tom Bombadillo!\" -Tom Bombadil, The Fellowship of the Ring",
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 19,
