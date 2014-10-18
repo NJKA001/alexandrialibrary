@@ -127,10 +127,13 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 CardType = Models.CardType.Quest,
                 ScenarioNumber = 5,
                 StageNumber = 2,
+                Text = "When Revealed: Add Hollow Circle to the staging area. Each player reveals 1 encounter card.",
+                OppositeText = "Forced: At the end of the refresh phase, raise each player's threat by 1.\r\nThe players cannot defeat this stage unless Hollow Circle is in the victory display.",
+                QuestPoints = 14,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 2,
-                Artist = Artist.Unknown
+                Artist = Artist.Emrah_Elmasli
 
             });
             Cards.Add(new Card()
@@ -141,6 +144,14 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 CardType = Models.CardType.Quest,
                 ScenarioNumber = 5,
                 StageNumber = 3,
+                Text = "When Revealed: The first player adds Standing Stones to the staging area. Each other player reveals 1 encounter card. Shuffle the encounter discard pile and each copy of Great Barrows into the encounter deck.",
+                OppositeText = 
+@"Progress cannot be placed here while Great Barrow is in play.
+
+Forced: After a player is eliminated (at any stage), raise the threat of each player at this stage by 10.
+
+The players cannot defeat this stage unless each player in the game is at this stage and Standing Stones is in the victory display. If the players defeat this stage, they win the game.",
+                QuestPoints = 16,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 3,
@@ -155,6 +166,12 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 CardType = Models.CardType.Quest,
                 ScenarioNumber = 5,
                 StageNumber = 4,
+                Text = "When Revealed: End your quest phase (do not resolve the quest). Discard cards from the encounter deck until a Wight enemy is discarded. Add the discarded Wight enemy to the staging area. Discard all but X allies you control where X is the number of enemies engaged with you.",
+                OppositeText = 
+@"Forced: When a location is revealed at this stage, cancel its effects and discard it. Then, raise your threat by that card's Threat (including modifiers).
+
+Forced: After this stage is defeated, advance to stage 3B at the beginning of the travel phase (combining staging areas with stage 3B) and place 1 progress on a Great Barrow at that stage.",
+                QuestPoints = 9,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 4,
                 Number = 4,
@@ -167,6 +184,13 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 IsUnique = true,
                 Id = "5FC12A2C-1F79-4EEB-BC43-8432797DCCBC",
                 CardType = Models.CardType.Location,
+                Threat = 3,
+                QuestPoints = 3,
+                Traits = new List<string> { "Ruins.", "Downs." },
+                Keywords = new List<string> { "Immune to player card effects." },
+                Text = "Travel: Each player searches the encounter deck and discard pile for a Wight enemy and puts it into play engaged with him. Shuffle the encounter deck.",
+                FlavorText = "It was shapeless and yet significant: like a landmark, or a guarding finger, or more like a warning.\r\n-The Fellowship of the Ring",
+                VictoryPoints = 3,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 5,
@@ -178,6 +202,13 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Standing Stones",
                 Id = "80AA9A99-4DB0-403E-B013-557406F9C4AC",
                 CardType = Models.CardType.Location,
+                Threat = 4,
+                QuestPoints = 4,
+                Traits = new List<string> { "Ruins.", "Downs." },
+                Keywords = new List<string> { "Immune to player card effects." },
+                Text = "Travel: The first player searches the encounter deck, discard pile and victory display the a Great Barrow and adds it to the staging area. Shuffle the encounter deck.",
+                FlavorText = "He had passed between them almost before he was aware: and even as he did so darkness seemed to fall round him. -The Fellowship of the Ring",
+                VictoryPoints = 3,
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 6,
@@ -189,9 +220,15 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Great Barrow",
                 Id = "20749647-0C3C-4BB8-ABD5-C9466452FC60",
                 CardType = Models.CardType.Location,
+                Threat = 1,
+                QuestPoints = 1,
+                Traits = new List<string> { "Ruins.", "Downs." },
+                Keywords = new List<string> { "Peril.", "Immune to player card effects.", "The players cannot travel here." },
+                Text = "Forced: After Great Barrow enters the staging area, remove each character you control from the quest and create your own staging area. Then advance to a separate stage 4A by yourself.",
                 VictoryPoints = 5,
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 5,
+                EasyModeQuantity = 3,
                 Number = 7,
                 Artist = Artist.Unknown
             });
@@ -200,8 +237,15 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Ancient Barrow",
                 Id = "DCECC2B9-7AAE-4E77-8268-07DD49FCFFF9",
                 CardType = Models.CardType.Location,
+                Threat = 0,
+                IsVariableThreat = true,
+                QuestPoints = 4,
+                Traits = new List<string> { "Ruins.", "Downs." },
+                Keywords = new List<string> { "X is 1 plus the number of facedown cards under this location." },
+                Text = "Forced: After Ancient Barrow enters play, each player places an ally he controls facedown under this location. When Ancient Barrow leaves play as an explored location, return each ally under this location to its owner's hand.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 3,
+                EasyModeQuantity = 2,
                 Number = 8,
                 Artist = Artist.Unknown
 
@@ -211,8 +255,13 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Stone Ring",
                 Id = "3861F516-CB2D-407C-854D-3590572D69FC",
                 CardType = Models.CardType.Location,
+                Threat = 3,
+                QuestPoints = 3,
+                Text = "While Stone Ring is in the staging area, each Wight enemy engaged with a player gets +1 Attack and +1 Defense and applies the first sentence of its game text to each player at this stage as if it were engaged with him.",
+                FlavorText = "Stone rings grinned out of the ground like broken teeth in the moonlight. -The Fellowship of the Ring",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 4,
+                EasyModeQuantity = 3,
                 Number = 9,
                 Artist = Artist.Unknown
 
@@ -222,8 +271,13 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "North Downs",
                 Id = "A98F4E8A-B2DC-48BA-B0A1-FA7AA53A5597",
                 CardType = Models.CardType.Location,
+                Threat = 2,
+                QuestPoints = 5,
+                Traits = new List<string> { "Downs." },
+                Text = "While North Downs is in the staging area, characters use their Willpower instead of their Defense when defending against Wight enemies.",
+                Shadow = "Shadow: Attacking enemy gets +2 Attack. If this attack destroys a character, raise each player's threat by 2.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 4,
                 Number = 10,
                 Artist = Artist.Unknown
             });
@@ -232,8 +286,17 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Barrow-wight",
                 Id = "74D9131D-BED7-4E9A-B649-05D4344ED339",
                 CardType = Models.CardType.Enemy,
+                EngagementCost = 30,
+                Threat = 3,
+                Attack = 5,
+                Defense = 1,
+                HitPoints = 6,
+                Traits = new List<string> { "Wight." },
+                Keywords = new List<string> { "While [Card] is engaged with a player, that player's threat cannot be reduced." },
+                Text = "Forced: After Barrow-wight attacks and destroys a character, that character's controller raises his threat by 2.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 4,
+                EasyModeQuantity = 3,
                 Number = 11,
                 Artist = Artist.Unknown
             });
@@ -242,8 +305,16 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Cold-wight",
                 Id = "BE22869A-14ED-45ED-90E1-AA0D3A19A1FF",
                 CardType = Models.CardType.Enemy,
+                EngagementCost = 35,
+                Threat = 2,
+                Attack = 4,
+                Defense = 1,
+                HitPoints = 5,
+                Traits = new List<string> { "Wight." },
+                Keywords = new List<string> { "While [Card] is engaged with a player, that player cannot draw cards from card effects." },
+                Text = "Forced: After Cold-wight attacks and destroys a character, that character's controller discards a random card from his hand.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 12,
                 Artist = Artist.Unknown
             });
@@ -252,8 +323,16 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Dark-wight",
                 Id = "6F3E5C9B-22B7-409A-B20C-578B49E419C7",
                 CardType = Models.CardType.Enemy,
+                EngagementCost = 40,
+                Threat = 2,
+                Attack = 3,
+                Defense = 1,
+                HitPoints = 7,
+                Traits = new List<string> { "Wight." },
+                Keywords = new List<string> { "While [Card] is engaged with a player, that player's heros cannot gain resources from card effects." },
+                Text = "Forced: After Dark-wight attacks and destroys a character, that character's controller discards all resources from each hero he controls.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 13,
                 Artist = Artist.Unknown
             });
@@ -262,8 +341,11 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "I'm Waiting for You!",
                 Id = "044CBEF3-2DFF-4153-9D8E-170826EB1B50",
                 CardType = Models.CardType.Treachery,
+                Text = "When Revealed: Each Wight enemy engaged with a player makes an immediate attack. If no attacks were made this way, I'm Waiting for You! gains surge.",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack (+3 Attack instead if the defending character is an ally).",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 2,
+                EasyModeQuantity = 0,
                 Number = 14,
                 Artist = Artist.Unknown
             });
@@ -272,8 +354,10 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Long Groping Arm",
                 Id = "5CC082D1-028A-40B6-BA2B-551E8AC3AB34",
                 CardType = Models.CardType.Treachery,
+                Keywords = new List<string> { "Peril." },
+                Text = "When Revealed: Until the end of the phase, each Wight enemy engaged with you contributes its Threat to the total Threat in the staging area. If no enemies are engaged with you, search the encounter deck and discard pile for a Wight enemy and put it into play engaged with you. Shuffle the encounter deck.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 3,
                 Number = 15,
                 Artist = Artist.Unknown
             });
@@ -282,8 +366,10 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Chill Fog",
                 Id = "38E841B2-29E8-496C-93A9-13C96031FC2E",
                 CardType = Models.CardType.Treachery,
+                Text = "When Revealed: Discard all resources in play. Each player raises his threat by 1 for each resource he discarded this way. If no resources were discarded this way, Chill Fog gains surge.",
+                Shadow = "Shadow: Raise your threat by 1 for each damage dealt by this attack.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 2,
                 Number = 16,
                 Artist = Artist.Unknown
             });
@@ -292,8 +378,12 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Frozen by Fear",
                 Id = "35971087-EE5B-4075-AE12-4B730AA873EB",
                 CardType = Models.CardType.Treachery,
+                Keywords = new List<string> { "Surge.", "Doomed 1." },
+                Text = "When Revealed: Until the end of the round, players cannot trigger Action or Response effects.",
+                Shadow = "Shadow: Until the end of the round, attacking enemy cannot take damage.",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 3,
+                EasyModeQuantity = 2,
                 Number = 17,
                 Artist = Artist.Unknown
             });
@@ -302,8 +392,12 @@ The Lord of the ~Rings: The Black Riders Saga Expansion is required to play Fog 
                 Title = "Dreadful Song",
                 Id = "A625C893-4B7B-4765-9E2B-FE403DD5548B",
                 CardType = Models.CardType.Treachery,
+                Traits = new List<string> { "Enchantment." },
+                Keywords = new List<string> { "Peril." },
+                Text = "When Revealed: Attach to a questing hero you control. Counts as a Condition attachment with the text: \"Limit 1 per hero. Attached hero's Willpower is 0. Forced: At the end of the round, raise your threat by 1 for each Wight enemy engaged with you.\"",
                 EncounterSet = "Fog on the Barrow-downs",
-                Quantity = 1,
+                Quantity = 2,
+                EasyModeQuantity = 1,
                 Number = 18,
                 Artist = Artist.Unknown
             });
