@@ -199,5 +199,20 @@ namespace HallOfBeorn
 
             return self.ToLower() == pattern.ToLower();
         }
+
+        public static Tuple<TEnum, bool> ParseEnum<TEnum>(this string self)
+            where TEnum: struct
+        {
+            var item = default(TEnum);
+
+            if (string.IsNullOrEmpty(self))
+                return new Tuple<TEnum, bool>(item, false);
+
+            var name = self.Replace('-', '_').Replace('+', '_');
+
+            var valid = Enum.TryParse<TEnum>(name, true, out item);
+
+            return new Tuple<TEnum, bool>(item, valid);
+        }
     }
 }

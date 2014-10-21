@@ -1038,31 +1038,28 @@ namespace HallOfBeorn.Services
 
         private List<Card> FilterByString(string typeName, string value, List<Card> results, bool negate)
         {
-            var names = value.SplitOnComma();
+            var names = value.SplitOnComma().Select(x => x.Replace('+', ' ').Replace('_', ' ')).ToList();
             Func<Card, bool> predicate = null;
 
             switch (typeName)
             {
                 case "cycle":
-                    predicate = (card) => { return names.Any(y => card.CardSet.Cycle.MatchesPattern(y)); };
+                    predicate = (card) => { return names.Any(y => card.CardSet.Cycle.MatchesWildcard(y)); };
                     break;
                 case "set":
                     predicate = (card) => { return names.Any(y => card.CardSet.Name.MatchesWildcard(y) || card.CardSet.Abbreviation.MatchesWildcard(y)); };
                     break;
                 case "encounter":
-                    predicate = (card) => { return names.Any(y => card.EncounterSet.MatchesPattern(y)); };
+                    predicate = (card) => { return names.Any(y => card.EncounterSet.MatchesWildcard(y)); };
                     break;
                 case "trait":
-                    predicate = (card) => { return names.Any(y => card.Traits.Select(z => z.Trim('.')).Any(a => a.MatchesPattern(y))); };
+                    predicate = (card) => { return names.Any(y => card.Traits.Select(z => z.Trim('.')).Any(a => a.MatchesWildcard(y))); };
                     break;
                 case "keyword":
-                    predicate = (card) => { return names.Any(y => card.Keywords.Select(z => z.Trim('.')).Any(a => a.MatchesPattern(y))); };
-                    break;
-                case "text":
-                    predicate = (card) => { return names.Any(y => card.Text.MatchesPattern(y)); };
+                    predicate = (card) => { return names.Any(y => card.Keywords.Select(z => z.Trim('.')).Any(a => a.MatchesWildcard(y))); };
                     break;
                 case "artist":
-                    predicate = (card) => { return names.Any(y => (card.Artist != null && card.Artist.Name.MatchesPattern(y)) || (card.SecondArtist != null && card.SecondArtist.Name.MatchesPattern(y))); };
+                    predicate = (card) => { return names.Any(y => (card.Artist != null && card.Artist.Name.MatchesWildcard(y)) || (card.SecondArtist != null && card.SecondArtist.Name.MatchesWildcard(y))); };
                     break;
                 default:
                     break;
@@ -1090,10 +1087,10 @@ namespace HallOfBeorn.Services
 
             foreach (var token in tokens)
             {
-                var item = default(TEnum);
-                if (Enum.TryParse<TEnum>(token, out item))
+                var parsedItem = token.ParseEnum<TEnum>();
+                if (parsedItem.Item2)
                 {
-                    enums.Add(item);
+                    enums.Add(parsedItem.Item1);
                 }
             }
 
