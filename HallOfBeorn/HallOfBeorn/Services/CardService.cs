@@ -1226,6 +1226,7 @@ namespace HallOfBeorn.Services
                     x => (x.Title.ToLower().Contains(query) || query == randomKeyword)
                     || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(query))
                     || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(query))
+                    || (!string.IsNullOrEmpty(x.OppositeText) && x.OppositeText.ToLower().Contains(query))
                     || x.Keywords.Any(y => y != null && y.ToLower().Contains(query))
                     || x.NormalizedKeywords.Any(y => y != null && y.ToLower().Contains(query))
                     || x.Traits.Any(y => y != null && y.ToLower().Contains(query))
