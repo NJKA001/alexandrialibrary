@@ -367,6 +367,7 @@ If 10 or more progress tokens are on To the Tower, the players have lost the gam
                 Defense = 4,
                 HitPoints = 5,
                 Traits = new List<string> { "Nazgûl.", "Captain." },
+                NormalizedTraits = new List<string> { "Nazgul.", "Captain." },
                 Keywords = new List<string> { "Cannot have attachments." },
                 Text = "Reduce any amount of damage dealt to Nazgûl of Minas Morgul to 1.",
                 FlavorText = "\"Come not between the Nazgûl and his prey!\"\r\n-The Witch King, The Return of the King",

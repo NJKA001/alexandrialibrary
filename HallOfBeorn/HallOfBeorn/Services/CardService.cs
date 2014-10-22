@@ -1053,10 +1053,10 @@ namespace HallOfBeorn.Services
                     predicate = (card) => { return names.Any(y => card.EncounterSet.MatchesWildcard(y)); };
                     break;
                 case "trait":
-                    predicate = (card) => { return names.Any(y => card.Traits.Select(z => z.Trim('.')).Any(a => a.MatchesWildcard(y))); };
+                    predicate = (card) => { return names.Any(y => card.Traits.Select(z => z.Trim(' ','.')).Any(a => a.MatchesWildcard(y)) || card.NormalizedTraits.Select(z => z.Trim(' ', '.')).Any(a => a.MatchesWildcard(y))); };
                     break;
                 case "keyword":
-                    predicate = (card) => { return names.Any(y => card.Keywords.Select(z => z.Trim('.')).Any(a => a.MatchesWildcard(y))); };
+                    predicate = (card) => { return names.Any(y => card.Keywords.Select(z => z.Trim(' ','.')).Any(a => a.MatchesWildcard(y)) || card.NormalizedKeywords.Select(z => z.Trim(' ', '.')).Any(a => a.MatchesWildcard(y))); };
                     break;
                 case "artist":
                     predicate = (card) => { return names.Any(y => (card.Artist != null && card.Artist.Name.MatchesWildcard(y)) || (card.SecondArtist != null && card.SecondArtist.Name.MatchesWildcard(y))); };

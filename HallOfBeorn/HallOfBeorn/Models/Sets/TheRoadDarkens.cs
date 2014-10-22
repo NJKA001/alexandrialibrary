@@ -528,7 +528,6 @@ Forced: After placing the 6th damage here, the first player takes control of the
                 Defense = 2,
                 HitPoints = 4,
                 Traits = new List<string> { "Creature.", "Warg." },
-                Keywords = new List<string> { "Surge." },
                 Text = "Forced: After Howling Warg attacks, place 1 damage on an active location.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. If this attack destroys a character, place 1 damage on an active location.",
                 EncounterSet = "The Ring Goes South",
