@@ -975,6 +975,33 @@ namespace HallOfBeorn.Services
 
         private List<Card> FilterByByte(string typeName, string value, List<Card> results, bool negate)
         {
+            //Params: card value, filter values. returns bool
+            Func<byte, List<byte>, bool> comparison = null;
+
+            if (value.StartsWith(">"))
+            {
+                comparison = (cardValue, filters) => { return filters.Any(f => cardValue >  f); };
+            }
+            else if (value.StartsWith("<"))
+            {
+                comparison = (cardValue, filters) => { return filters.Any(f => cardValue < f); };
+            }
+            else if (value.Contains("-"))
+            {
+                comparison = (cardValue, filters) => {
+                    if (filters.Count != 2 || filters[0] > filters[1])
+                        return false;
+
+                    return cardValue >= filters[0] && cardValue <= filters[1];
+                };
+            }
+            else
+            {
+                comparison = (cardValue, filters) => { return filters.Any(f => cardValue == f); };
+            }
+
+            value = value.TrimStart('>', '<').Replace("-", ",");
+
             var tokens = value.SplitOnComma();
 
             var bytes = new List<byte>();
@@ -993,31 +1020,31 @@ namespace HallOfBeorn.Services
             switch (typeName)
             {
                 case "rcost":
-                    predicate = (card) => { return bytes.Any(x => card.ResourceCost.HasValue && card.ResourceCost.Value == x); };
+                    predicate = (card) => { return card.ResourceCost.HasValue && comparison(card.ResourceCost.Value, bytes); };
                     break;
                 case "tcost":
-                    predicate = (card) => { return bytes.Any(x => card.ThreatCost.HasValue && card.ThreatCost.Value == x); };
+                    predicate = (card) => { return card.ThreatCost.HasValue && comparison(card.ThreatCost.Value, bytes); };
                     break;
                 case "ecost":
-                    predicate = (card) => { return bytes.Any(x => card.EngagementCost.HasValue && card.EngagementCost.Value == x); };
+                    predicate = (card) => { return card.EngagementCost.HasValue && comparison(card.EngagementCost.Value, bytes); };
                     break;
                 case "threat":
-                    predicate = (card) => { return bytes.Any(x => card.Threat == x); };
+                    predicate = (card) => { return comparison(card.Threat, bytes); };
                     break;
                 case "wp":
-                    predicate = (card) => { return bytes.Any(x => card.Willpower == x); };
+                    predicate = (card) => { return comparison(card.Willpower, bytes); };
                     break;
                 case "atk":
-                    predicate = (card) => { return bytes.Any(x => card.Attack == x); };
+                    predicate = (card) => { return comparison(card.Attack, bytes); };
                     break;
                 case "def":
-                    predicate = (card) => { return bytes.Any(x => card.Defense == x); };
+                    predicate = (card) => { return comparison(card.Defense, bytes); };
                     break;
                 case "hp":
-                    predicate = (card) => { return bytes.Any(x => card.HitPoints == x); };
+                    predicate = (card) => { return card.HitPoints.HasValue && comparison(card.HitPoints.Value, bytes); };
                     break;
                 case "victory":
-                    predicate = (card) => { return bytes.Any(x => card.VictoryPoints == x); };
+                    predicate = (card) => { return comparison(card.VictoryPoints, bytes); };
                     break;
                 default:
                     break;
@@ -1060,6 +1087,32 @@ namespace HallOfBeorn.Services
                     break;
                 case "artist":
                     predicate = (card) => { return names.Any(y => (card.Artist != null && card.Artist.Name.MatchesWildcard(y)) || (card.SecondArtist != null && card.SecondArtist.Name.MatchesWildcard(y))); };
+                    break;
+                default:
+                    break;
+            }
+
+            if (predicate != null)
+            {
+                if (negate)
+                {
+                    predicate = NegateFilter(predicate);
+                }
+
+                results = results.Where(predicate).ToListSafe();
+            }
+
+            return results;
+        }
+
+        private List<Card> FilterByBool(string typeName, List<Card> results, bool negate)
+        {
+            Func<Card, bool> predicate = null;
+
+            switch (typeName)
+            {
+                case "unique":
+                    predicate = (card) => { return card.IsUnique; };
                     break;
                 default:
                     break;
@@ -1133,12 +1186,17 @@ namespace HallOfBeorn.Services
             {
                 var fields = filter.Split(new char[] { ':', '=' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe();
 
-                if (fields.Count != 2 || string.IsNullOrEmpty(fields[0]) || string.IsNullOrEmpty(fields[1]))
+                if (fields.Count == 0 || string.IsNullOrEmpty(fields[0]))
                     continue;
 
                 var negate = (fields[0][0] == '-');
                 var field = fields[0].ToLower().Trim('-', '+');
-                var value = fields[1];
+                var value = string.Empty;
+
+                if (fields.Count > 1)
+                {
+                    value = fields[1];
+                }
 
                 switch (field)
                 {
@@ -1181,6 +1239,9 @@ namespace HallOfBeorn.Services
                         break;
                     case "victory":
                         results = FilterByByte(field, value, results, negate);
+                        break;
+                    case "unique":
+                        results = FilterByBool(field, results, negate);
                         break;
                     default:
                         break;
