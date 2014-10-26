@@ -393,8 +393,8 @@ namespace HallOfBeorn.Models
                 var image = _card.ImageName.ToUrlSafeString();
 
                 return string.IsNullOrEmpty(_card.ImageName) ?
-                    string.Format("/Images/Cards/{0}/{1}{2}{3}", set, title, type, ext)
-                    : string.Format("/Images/Cards/{0}{1}", image, ext);
+                    string.Format("https://s3.amazonaws.com/hallofbeorn-resources/Images/Cards/{0}/{1}{2}{3}", set, title, type, ext)
+                    : string.Format("https://s3.amazonaws.com/hallofbeorn-resources/Images/Cards/{0}{1}", image, ext);
             }
         }
 
@@ -414,7 +414,7 @@ namespace HallOfBeorn.Models
             var image = _card.ImageName.ToUrlSafeString();
             var suffix = isFirst ? "A" : "B";
 
-            return string.Format("/Images/Cards/{0}/{1}{2}-{3}{4}{5}", set, title, subtitle, number, suffix, ext);
+            return string.Format("https://s3.amazonaws.com/hallofbeorn-resources/Images/Cards/{0}/{1}{2}-{3}{4}{5}", set, title, subtitle, number, suffix, ext);
         }
 
         string getSetupCardImagePath(bool isFirst)
@@ -430,7 +430,7 @@ namespace HallOfBeorn.Models
             var title = _card.Title.ToUrlSafeString();
             var suffix = isFirst ? "A" : "B";
 
-            return string.Format("/Images/Cards/{0}/{1}-Setup{2}{3}", set, title, suffix, ext);
+            return string.Format("https://s3.amazonaws.com/hallofbeorn-resources/Images/Cards/{0}/{1}-Setup{2}{3}", set, title, suffix, ext);
         }
 
         public string ImagePath1
@@ -564,7 +564,7 @@ namespace HallOfBeorn.Models
             get
             {
                 return HasEncounterSet ?
-                    string.Format("/Images/Cards/{0}/{1}.png", _card.CardSet.NormalizedName.ToUrlSafeString(), _card.EncounterSet.ToUrlSafeString())
+                    string.Format("https://s3.amazonaws.com/hallofbeorn-resources/Images/Cards/{0}/{1}.png", _card.CardSet.NormalizedName.ToUrlSafeString(), _card.EncounterSet.ToUrlSafeString())
                     : string.Empty;
             }
         }
