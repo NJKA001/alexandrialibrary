@@ -12,6 +12,32 @@ namespace HallOfBeorn
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.html");
+            routes.IgnoreRoute("{resource}.ico");
+            routes.IgnoreRoute("Content/{resource}.css");
+            routes.IgnoreRoute("Content/fonts/{resource}.ttf");
+            routes.IgnoreRoute("Content/themes/base/{resource}.css");
+            routes.IgnoreRoute("Content/themes/base/images/{resource}.png");
+            routes.IgnoreRoute("Content/themes/base/minified/images/{resource}.png");
+            routes.IgnoreRoute("Content/themes/base/minified/{resource}.css");
+            routes.IgnoreRoute("Scripts/{resource}.js");
+            routes.IgnoreRoute("Images/{resource}.jpg");
+            routes.IgnoreRoute("Images/{resource}.png");
+            routes.IgnoreRoute("Images/{resource}.gif");
+
+            routes.RouteExistingFiles = true;
+
+            routes.MapRoute(
+                "CardImageRoute",
+                "Images/Cards/{setName}/{imageName}",
+                new { controller = "Image", action = "GetCardImage", setName = UrlParameter.Optional, imageName = UrlParameter.Optional }
+            );
+
+            routes.MapRoute(
+                "ProductImageRoute",
+                "Images/Products/{imageName}",
+                new { controller = "Image", action = "GetProductImage", imageName = UrlParameter.Optional }
+            );
 
             routes.MapRoute(
                 name: "RootRoute",
