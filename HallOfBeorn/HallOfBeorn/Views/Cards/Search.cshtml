@@ -32,12 +32,10 @@
 @using (Html.BeginForm("Search", "Cards", FormMethod.Post))
 {
     <div class="form-group">
-        <div style="display:table;">
-            <div style="display:table-cell;width:100%;margin-right:4px;">@Html.TextBoxFor(x => x.Query, new { style = "text-align:left;width:95%;margin-right:4px;" })</div>
-            <div style="display:table-cell;width:1px;">
+        <div>
+            <div style="display:inline-block;min-width:300px;margin-right:4px;">@Html.TextBoxFor(x => x.Query, new { style = "text-align:left;width:95%;margin-right:4px;" })</div>
+            <div style="display:inline-block;">
                 <input type="submit" value="Search" style="margin-left:6px;border-radius:8px;background-color:lightgray;" />
-            </div>
-            <div style="display:table-cell;width:1px;">
                 <a id="resetButton" href="#" style="margin-left:6px;margin-right:8px;width:70px;">Clear</a>
             </div>
         </div>
