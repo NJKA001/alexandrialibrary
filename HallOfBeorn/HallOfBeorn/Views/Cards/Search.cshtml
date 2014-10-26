@@ -32,70 +32,76 @@
 @using (Html.BeginForm("Search", "Cards", FormMethod.Post))
 {
     <div class="form-group">
-        @Html.TextBoxFor(x => x.Query, new { style = "margin-right:2px;" })
-        <input type="submit" value="Search" style="border-radius:8px;background-color:lightgray;" />
-        <a id="resetButton" href="#" style="margin-left:40px;">Clear Filters</a>
-
-        <div>
+        <div style="display:table;">
+            <div style="display:table-cell;width:100%;margin-right:4px;">@Html.TextBoxFor(x => x.Query, new { style = "text-align:left;width:95%;margin-right:4px;" })</div>
+            <div style="display:table-cell;width:1px;">
+                <input type="submit" value="Search" style="margin-left:6px;border-radius:8px;background-color:lightgray;" />
+            </div>
+            <div style="display:table-cell;width:1px;">
+                <a id="resetButton" href="#" style="margin-left:6px;margin-right:8px;width:70px;">Clear</a>
+            </div>
+        </div>
+        
+        <div style="margin-top:10px;display:block;">
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Set</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Set</span>
             @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style = "margin-right:12px;max-width:170px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Type</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Type</span>
             @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style = "margin-right:12px;;max-width:140px;width:140px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:76px;display:inline-block;">Sphere</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Sphere</span>
             @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { style = "margin-right:12px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Cost</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Cost</span>
             @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style = "margin-right:12px;width:90px;" })
             </span>
         </div>
         <div>
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Trait</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Trait</span>
             @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style = "margin-right:12px;max-width:170px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Keyword</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Keyword</span>
             @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style = "margin-right:12px;max-width:140px;width:140px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:76px;display:inline-block;">Encounter</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Encounter</span>
             @Html.DropDownListFor(x => x.EncounterSet, SearchViewModel.EncounterSets, new { style = "margin-right:12px;max-width:170px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Unique</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Unique</span>
             @Html.CheckBoxFor(x => x.Unique, new { style = "margin-right:12px;" })
             </span>
         </div>
         <div>
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Artist</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Artist</span>
             @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { style = "margin-right:12px;max-width:170px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Sort</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Sort</span>
             @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:12px;max-width:140px;width:140px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:76px;display:inline-block;">Category</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Category</span>
             @Html.DropDownListFor(x => x.Category, SearchViewModel.Categories, new { style = "margin-right:12px;max-width:170px;width:170px;" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Victory</span>
+            <span style="margin-right:2px;width:70px;display:inline-block;">Victory</span>
             @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { style = "margin-right:12px;width:90px;" })
             </span>
             @*
@@ -155,13 +161,13 @@
 @foreach (var card in @Model.Cards)
 {
     <hr style="color:#616161;" />
-    <div style="margin:6px;border: 0px solid gray;border-radius: 8px;min-height:200px;">
+    <div style="margin:6px;border: 0px solid gray;border-radius: 8px;min-height:220px;">
         <div style="margin-bottom:2px;">
             @if (@card.IsUnique)
             {
                 <img src="/Images/unique-card.png" style="margin-bottom:-3px;margin-right:-4px;height:16px;width:16px;"/>
             }
-            @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-bottom:2px;font-size:medium;font-weight:bold;" })
+            @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-bottom:2px;font-size:medium;font-weight:bold;display:inline-block;" })
             <span style="display:inline-block;color:#616161;">@card.SetName</span>
             <span style="display:inline-block;">
             @if (@card.HasSphere)
@@ -180,13 +186,13 @@
                 @if (@card.HasSecondImage)
                 {
                     <span style="text-align:left;">
-                        <img src="@card.ImagePath1" style="height:160px;"/>
-                        <img src="@card.ImagePath2" style="height:160px;margin-left:4px;"/>
+                        <img src="@card.ImagePath1" style="height:180px;"/>
+                        <img src="@card.ImagePath2" style="height:180px;margin-left:4px;"/>
                     </span>
                 }
                 else
                 {
-                <img src="@card.ImagePath" style="height:160px;"/>
+                <img src="@card.ImagePath" style="height:180px;"/>
                 }
             </a>
         </div>
@@ -256,20 +262,19 @@
             {
                 @keyword @: &nbsp;
             }
-            <br />
-            @card.Text
-
+            @if (!string.IsNullOrEmpty(@card.Text))
+            {
+                <div>@card.Text</div>
+            }
             @if (!string.IsNullOrEmpty(@card.OppositeText))
             {
-                <br />
                 <hr style="margin-left:24px;margin-right:24px;"/>
-                @card.OppositeText
+                <div>@card.OppositeText</div>
             }
             @if (!string.IsNullOrEmpty(@card.Shadow))
             {
-                <br />
                 <hr style="margin-left:24px;margin-right:24px;"/>    
-                @card.Shadow
+                <div>@card.Shadow</div>
             }
         </div>
     </div>
