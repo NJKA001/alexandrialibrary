@@ -21,6 +21,7 @@ namespace HallOfBeorn.Models.Sets
                 Id = "6DF2AB16-492E-4C7F-B095-B7D46138AB11",
                 IsUnique = true,
                 CardType = CardType.Hero,
+                Sphere = Models.Sphere.Tactics,
                 ThreatCost = 10,
                 Willpower = 2,
                 Attack = 2,
