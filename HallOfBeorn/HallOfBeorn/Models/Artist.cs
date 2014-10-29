@@ -219,6 +219,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Alexander_Kozachenko);
             all.Add(Artist.Romana_Kendelic);
             all.Add(Artist.Christine_Griffin);
+            all.Add(Artist.Matt_Stawicki);
 
             //The Hobbit: Over Hill and Under Hill
             all.Add(Artist.Blake_Henriksen);
@@ -711,6 +712,7 @@ namespace HallOfBeorn.Models
         public static Artist Mathias_Kollros = new Artist { Name = "Mathias Kollros", URL = "http://guterrez.deviantart.com" };
         public static Artist Matt_Bradbury = new Artist { Name = "Matt Bradbury", URL = "http://bradburydigital.deviantart.com" };
         public static Artist Matt_Smith = new Artist { Name = "Matt Smith", URL = "https://www.google.com/search?q=matt+smith+fantasy+art" };
+        public static Artist Matt_Stawicki = new Artist { Name = "Matt Stawicki", URL = "http://www.mattstawicki.com" };
         public static Artist Matt_Stewart = new Artist { Name = "Matt Stewart", URL = "http://mattstewartartblog.blogspot.com" };
         public static Artist Matthew_Starbuck = new Artist { Name = "Matthew Starbuck", URL = "http://faxtar.deviantart.com" };
         public static Artist Melanie_Maier = new Artist { Name = "Melanie Maier", URL = "http://melaniemaier.deviantart.com" };

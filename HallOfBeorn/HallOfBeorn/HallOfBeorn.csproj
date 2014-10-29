@@ -298,6 +298,7 @@
     <Compile Include="Models\Products\JourneyAlongTheAnduinNightmareProduct.cs" />
     <Compile Include="Models\Products\KhazadDumProduct.cs" />
     <Compile Include="Models\Products\NightmareDeckProductGroup.cs" />
+    <Compile Include="Models\Products\NinInEilphProduct.cs" />
     <Compile Include="Models\Products\PassageThroughMirkwoodNightmareProduct.cs" />
     <Compile Include="Models\Products\ReturnToMirkwoodNightmareProduct.cs" />
     <Compile Include="Models\Products\ReturnToMirkwoodProduct.cs" />
@@ -370,6 +371,7 @@
     <Compile Include="Models\Sets\JourneyAlongTheAnduinNightmare.cs" />
     <Compile Include="Models\Sets\KhazadDum.cs" />
     <Compile Include="Models\Products\KhazadDumNightmareProduct.cs" />
+    <Compile Include="Models\Sets\NinInEilph.cs" />
     <Compile Include="Models\Sets\OverTheMistyMountainsGrimNightmare.cs" />
     <Compile Include="Models\Sets\PassageThroughMirkwoodNightmare.cs" />
     <Compile Include="Models\Sets\ReturnToMirkwood.cs" />

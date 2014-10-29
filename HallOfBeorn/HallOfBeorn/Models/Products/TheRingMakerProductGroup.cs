@@ -14,6 +14,7 @@ namespace HallOfBeorn.Models.Products
             AddProduct(new TheDunlandTrapProduct());
             AddProduct(new TheThreeTrialsProduct());
             AddProduct(new TroubleInTharbadProduct());
+            AddProduct(new NinInEilphProduct());
         }
     }
 }
