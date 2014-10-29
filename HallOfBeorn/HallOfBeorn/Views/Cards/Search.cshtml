@@ -5,7 +5,7 @@
     ViewBag.Title = "Lord of the Rings: The Card Game - Search";
 }
 
-<script src="/Scripts/jquery-1.8.2.js" ></script>
+@section scripts {
 <script type="text/javascript">
     $(document).ready(function () {
         $('#resetButton').click(function () {
@@ -26,6 +26,122 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(function () {
+        var availableTags = [
+          "Aragorn",
+          "Gloin",
+          "Theodred",
+          "Gimli",
+          "Legolas",
+          "Thalin",
+          "Eowyn",
+          "Dunhere",
+          "Eleanor",
+          "Denethor",
+          "Beravor",
+          "Glorfindel",
+          "Bilbo Baggins",
+          "Frodo Baggins",
+          "Prince Imrahil",
+          "Brand son of Bain",
+          "Boromir",
+          "Dain Ironfoot",
+          "Dwalin",
+          "Bifur",
+          "Elladan",
+          "Elrohir",
+          "Hama",
+          "Elrond",
+          "Beregond",
+          "Hirluin",
+          "Mirlonde",
+          "Pippin",
+          "Faramir",
+          "Caldara",
+          "Theoden",
+          "Sam Gamgee",
+          "Merry",
+          "Fatty Bolger",
+          "Celeborn",
+          "Idraen",
+          "Haldir of Lorien",
+          "Mablung",
+          "Gildor Inglorion",
+          "Damrod",
+          "Elfhelm",
+          "Anborn",
+          "Rumil",
+          "Orophin",
+          "Asfaloth",
+          "Bill the Pony",
+          "Thorin Oakenshield",
+          "Nori",
+          "Ori",
+          "Dori",
+          "Bombur",
+          "Oin",
+          "Balin",
+          "Eomer",
+          "Grima",
+          "Saruman",
+          "Gandalf",
+          "Radagast",
+          "Gwaihir",
+          "Landroval",
+          "Erestor",
+          "Arwen Undomiel",
+          "Emery",
+          "Henamarth Riversong",
+          "Tom Bombadil",
+          "Farmer Maggot",
+          "Barliman Butterbur",
+          "Guthlaf",
+          "+set:",
+          "-set:",
+          "+type:",
+          "-type:",
+          "+sphere:",
+          "-sphere:",
+          "+cost:",
+          "-cost:",
+          "+unique:",
+          "-unique:",
+          "+trait:",
+          "-trait:",
+          "+keyword:",
+          "-keyword:",
+          "+encounter:",
+          "-encounter:",
+          "+artist:",
+          "-artist:",
+          "+category:",
+          "-category:",
+          "+victory:",
+          "-victory:",
+          "+tcost:",
+          "-tcost:",
+          "+wp:",
+          "-wp:",
+          "+atk:",
+          "-atk:",
+          "+def:",
+          "-def:",
+          "+hp:",
+          "-hp:",
+          "+ecost:",
+          "-ecost:",
+          "+threat:",
+          "-threat:"
+        ];
+        $("#Query").autocomplete({
+            source: availableTags,
+            minLength: 2
+        });
+        $("#Query").autocomplete("widget").addClass("autocompleteClass");
+    });
+</script>    
+}
 
 <h2>Search</h2>
 

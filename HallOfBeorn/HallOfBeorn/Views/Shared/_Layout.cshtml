@@ -6,9 +6,12 @@
         <title>Hall of Beorn</title>
         <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
         <link rel="apple-touch-icon" href="~/Images/HallOfBeorn-AppleTouchIcon.png"/>
+        <link href="@Url.Content("~/Content/themes/base/jquery.ui.all.css")" rel="stylesheet" type="text/css" />
         <meta name="viewport" content="width=device-width" />
         @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
     </head>
     <body>
         <header>
@@ -50,8 +53,9 @@
                 </div>
             </div>
         </footer>
-
+        @*
         @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jquery-ui")*@
         @RenderSection("scripts", required: false)
     </body>
 </html>
