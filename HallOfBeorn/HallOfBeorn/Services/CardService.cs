@@ -22,6 +22,25 @@ namespace HallOfBeorn.Services
 
             //NOTE: These traits are referenced by scenarios but not included on a player card or encounter card as a trait
             traits["Captive."] = "Captive.";
+
+            /*
+            Func<Card, bool> isAutoComplete = (card) =>
+                {
+                    if (card.IsUnique)
+                        return true;
+
+                    return (card.CardType == CardType.Hero || card.CardType == CardType.Ally || card.CardType == CardType.Attachment || card.CardType == CardType.Event || card.CardType == CardType.Objective || card.CardType == CardType.Objective_Ally);
+                };
+
+            Func<Card, string> getTitle = (card) =>
+                {
+                    return (!string.IsNullOrEmpty(card.NormalizedTitle)) ?
+                        card.NormalizedTitle
+                        : card.Title;
+                };
+
+            var autocomplete = string.Join(",", new HashSet<string>(cards.Values.Where(x => isAutoComplete(x)).Select(y => string.Format("\"{0}\"", getTitle(y))).ToList()));
+            */
         }
 
         private readonly List<Product> products = new List<Product>();
