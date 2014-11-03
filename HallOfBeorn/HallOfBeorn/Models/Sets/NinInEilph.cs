@@ -173,6 +173,103 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 Artist = Artist.Romana_Kendelic
             });
+            Cards.Add(new Card()
+            {
+                Title = "Ancient Marsh-dweller",
+                IsUnique = true,
+                Id = "0E7077B4-DCA9-4C3F-B446-1883D9DE6C2D",
+                CardType = CardType.Enemy,
+                EngagementCost = 45,
+                Threat = 3,
+                Attack = 6,
+                Defense = 4,
+                HitPoints = 9,
+                Traits = new List<string> { "Creature." },
+                Text = "Cannot have attachments.\r\nAncient Marsh-dweller gets +1 Threat and +1 Attack for each resource token on it.\r\nForced: After any number of time counters are removed from the current quest, place a resource token here.",
+                EncounterSet = "The Nin-in-Eilph",
+                VictoryPoints = 5,
+                Number = 103,
+                Quantity = 1,
+                Artist = Artist.Tom_Garden
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Giant Swamp Adder",
+                Id = "33C27FE4-18A5-444D-9310-912FA781E435",
+                CardType = CardType.Enemy,
+                EngagementCost = 35,
+                Threat = 3,
+                Attack = 3,
+                Defense = 3,
+                HitPoints = 6,
+                Traits = new List<string> { "Creature." },
+                Text = "Cannot have attachments.\r\nForced: After any number of time counters are removed from the current quest, ~Giant ~Swamp Adder attacks the engaged player.",
+                FlavorText = "There were also abominable creatures haunting the reeds and tussocks... -The Fellowship of the Ring",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 104,
+                Quantity = 3,
+                Artist = Artist.Unknown
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Neekerbreekers",
+                Id = "4A692551-0155-461A-8445-9BBAEF3748F6",
+                CardType = CardType.Enemy,
+                EngagementCost = 20,
+                Threat = 2,
+                Attack = 1,
+                Defense = 1,
+                HitPoints = 6,
+                Traits = new List<string> { "Creature.", "Insect." },
+                Text = "Forced: After any number of time counters are removed from the current quest, the engaged player must deal 2 damage to an ally he controls.",
+                Shadow = "Shadow: Deal 1 damage to the defending character.",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 105,
+                Quantity = 3,
+                Artist = Artist.Unknown
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Fen of Reeds",
+                Id = "CC5C8C35-22A9-4B2F-84F3-CEFB538CF318",
+                CardType = CardType.Location,
+                Threat = 2,
+                QuestPoints = 3,
+                Traits = new List<string> { "Marsh." },
+                Text = "While Fen of Reeds is in the staging area, it gains: \"Forced: After the players advance to a quest stage, each player must exhaust a character he controls.\"",
+                Shadow = "Shadow: Attacking enemy gets +1 Attack for each time counter on the quest.",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 106,
+                Quantity = 2,
+                Artist = Artist.Anthony_Feliciano
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Finger of Glanduin",
+                Id = "2EF843B2-840E-445F-BBF0-99668D721BB9",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 3,
+                Traits = new List<string> { "River.", "Marsh." },
+                Text = "While Finger of Glanduin is in the staging area, it gains : \"Forced: At the end of each round, remove 1 progress from each location in play.\"",
+                Shadow = "Shadow: If this attack destroys a character remove all progress from the current quest.",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 107,
+                Quantity = 2,
+                Artist = Artist.Anthony_Feliciano
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Remnants of Elder Days",
+                Id = "0C1F9402-977A-4709-94D0-BA8E610D30C2",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: Each player must search the encounter deck or discard pile for a Creature enemy and put it into play engaged with him. Shuffle the encounter deck. This effect cannot be canceled.",
+                FlavorText = "\"An evil of the Ancient World it seemed, such as I have never seen before...\"\r\n-Aragorn, The Fellowship of the Ring",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 111,
+                Quantity = 2,
+                Artist = Artist.Mark_Bulahao
+            });
         }
     }
 }
