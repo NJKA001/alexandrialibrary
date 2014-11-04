@@ -175,6 +175,22 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
+                Title = "Nalir",
+                Id = "555E54CE-95EF-4C46-AFF1-89DED1E8376D",
+                IsUnique = true,
+                CardType = CardType.Objective_Ally,
+                Willpower = 0,
+                Attack = 1,
+                Defense = 2,
+                HitPoints = 3,
+                Traits = new List<string> { "Dwarf." },
+                Text = "The first player gains control of Nalir.\r\nForced: At the beginning of the refresh phase, raise your threat by 1 for each player in the game.\r\nIf Nalir leaves play, the players lose the game.",
+                Number = 102,
+                Quantity = 1,
+                Artist = Artist.Mariusz_Gandzel
+            });
+            Cards.Add(new Card()
+            {
                 Title = "Ancient Marsh-dweller",
                 IsUnique = true,
                 Id = "0E7077B4-DCA9-4C3F-B446-1883D9DE6C2D",
@@ -257,6 +273,48 @@ namespace HallOfBeorn.Models.Sets
                 Number = 107,
                 Quantity = 2,
                 Artist = Artist.Anthony_Feliciano
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Hidden Eyot",
+                Id = "E22607A9-EBDB-4EE9-8713-51B40CFF7A8F",
+                CardType = CardType.Location,
+                Threat = 3,
+                QuestPoints = 4,
+                Traits = new List<string> { "Marsh." },
+                Text = "Response: After Hidden Eyot leaves play as an explored location, place 2 time counters on the current quest.\r\nTravel: Each player must exhaust a character he controls to travel here.",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 108,
+                Quantity = 2,
+                Artist = Artist.Titus_Lunter
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Sinking Bog",
+                Id = "E8AF5016-FB3E-4DC6-AD8C-3E754B2A7DBD",
+                CardType = Models.CardType.Location,
+                Threat = 1,
+                QuestPoints = 5,
+                Traits = new List<string> { "Marsh." },
+                Text = "While Sinking Bog is in the staging area, each character gets -1 Willpower, -1 Attack, and -1 Defense for each Item attached to it. This ability does not stack with other copies of Sinking Bog.",
+                Shadow = "Shadow: Defending character gets -1 Defense for this attack for each attachment attached to it.",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 109,
+                Quantity = 3,
+                Artist = Artist.Ben_Zweifel
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Shifting Marshland",
+                Id = "C91E980D-CC5F-4BD6-982B-6EA12F76BD51",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Surge." },
+                Text = "When Revealed: Remove 1 time counter from the current quest.",
+                Shadow = "Shadow: Attacking enemy makes an additional attack after this one.",
+                EncounterSet = "The Nin-in-Eilph",
+                Number = 110,
+                Quantity = 3,
+                Artist = Artist.Rick_Price
             });
             Cards.Add(new Card()
             {
