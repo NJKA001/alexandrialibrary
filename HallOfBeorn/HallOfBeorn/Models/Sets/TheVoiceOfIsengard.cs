@@ -5,11 +5,12 @@ using System.Web;
 
 namespace HallOfBeorn.Models.Sets
 {
-    public class VoiceofIsengard : CardSet
+    public class TheVoiceofIsengard : CardSet
     {
         protected override void Initialize()
         {
-            Name = "Voice of Isengard";
+            Name = "The Voice of Isengard";
+            AlternateName = "Voice of Isengard";
             Abbreviation = "VoI";
             Number = 22;
             SetType = Models.SetType.Deluxe_Expansion;

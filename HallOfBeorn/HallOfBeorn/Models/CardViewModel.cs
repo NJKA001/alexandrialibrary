@@ -407,7 +407,7 @@ namespace HallOfBeorn.Models
                 format = ImageType.Png;
 
             var ext = string.Format(".{0}", format.ToString().ToLower());
-            var set = _card.CardSet.Name.ToUrlSafeString();
+            var set = !string.IsNullOrEmpty(_card.CardSet.NormalizedName) ? _card.CardSet.NormalizedName.ToUrlSafeString() : _card.CardSet.Name.ToUrlSafeString();
             var title = Title.ToUrlSafeString();
             var subtitle = _card.SlugIncludesOppositeTitle ? "-" + _card.OppositeTitle.ToUrlSafeString() : string.Empty;
             var number = _card.StageNumber.ToString();
@@ -426,7 +426,7 @@ namespace HallOfBeorn.Models
                 format = ImageType.Png;
 
             var ext = string.Format(".{0}", format.ToString().ToLower());
-            var set = _card.CardSet.Name.ToUrlSafeString();
+            var set = !string.IsNullOrEmpty(_card.CardSet.NormalizedName) ? _card.CardSet.NormalizedName.ToUrlSafeString() : _card.CardSet.Name.ToUrlSafeString();
             var title = _card.Title.ToUrlSafeString();
             var suffix = isFirst ? "A" : "B";
 

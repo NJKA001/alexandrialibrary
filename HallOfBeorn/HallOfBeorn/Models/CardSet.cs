@@ -58,6 +58,8 @@ namespace HallOfBeorn.Models
         public SetType SetType { get; protected set; }
         public List<Card> Cards { get; protected set; }
 
+        public string AlternateName { get; protected set; }
+
         static CardSet()
         {
         }
@@ -86,10 +88,10 @@ namespace HallOfBeorn.Models
         public static CardSet TheBloodOfGondor = new Sets.TheBloodofGondor();
         public static CardSet TheMorgulVale = new Sets.TheMorgulVale();
 
-        public static CardSet TheVoiceOfIsengard = new Sets.VoiceofIsengard();
+        public static CardSet TheVoiceOfIsengard = new Sets.TheVoiceofIsengard();
         public static CardSet TheDunlandTrap = new Sets.TheDunlandTrap();
         public static CardSet TheThreeTrials = new Sets.TheThreeTrials();
-        public static CardSet NinInEilph = new Sets.NinInEilph();
+        public static CardSet NinInEilph = new Sets.TheNinInEilph();
 
         public static CardSet TheHobbitOverHillAndUnderHill = new Sets.TheHobbitOverHillandUnderHill();
         public static CardSet TheHobbitOnTheDoorstep = new Sets.TheHobbitOntheDoorstep();

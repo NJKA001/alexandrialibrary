@@ -5,11 +5,13 @@ using System.Web;
 
 namespace HallOfBeorn.Models.Sets
 {
-    public class NinInEilph : CardSet
+    public class TheNinInEilph : CardSet
     {
         protected override void Initialize()
         {
-            Name = "Nin-in-Eilph";
+            Name = "The Nîn-in-Eilph";
+            NormalizedName = "The Nin-in-Eilph";
+            AlternateName = "Nin-in-Eilph";
             Abbreviation = "NiE";
             Number = 26;
             SetType = Models.SetType.Adventure_Pack;
@@ -175,6 +177,164 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card()
             {
+                Title = "Fleeing from Tharbad",
+                Id = "F9BB1203-1880-466D-8D2C-0E5F965F0796",
+                HasSecondImage = true,
+                StageNumber = 1,
+                CardType = CardType.Quest,
+                QuestPoints = 0,
+                OppositeText = "When Revealed: Advance to a random stage 2A.",
+                OppositeFlavorText = "No traveller has entered the Nîn-in-Eilph for an age and there is no path through the shifting marshland. You must find your own way across the treacherous bog.",
+                Text = "Setup: The first player takes control of Nalir. Set the Ancient Marsh-dweller aside, out of play. Each player searches the encounter deck for a different location and adds it to the staging area. Shuffle the encounter deck.",
+                FlavorText = "You've entered the vast marshlands of the Nin-in-Eilph with Nalir in order to escape Bellach and his Orcs. Now, you must cross the swamp in order to reach Hollin on the other side.",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 94,
+                Quantity = 1,
+                Artist = Artist.Igor_Kieryluk
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Through the Marsh",
+                OppositeTitle = "No End in Sight",
+                SlugIncludesOppositeTitle = true,
+                HasSecondImage = true,
+                Id = "694301EA-DB10-426F-9534-7187BE76CBEE",
+                CardType = CardType.Quest,
+                StageNumber = 2,
+                QuestPoints = 13,
+                Text = "When Revealed: Raise each player's threat by 1.",
+                FlavorText = "As you trudge through endless swamp, you begin to wonder if you will ever reach the other side.",
+                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 2A at random. Return this stage to the quest deck.\r\nPlayer card effects cannot be used to gain resources or draw cards.\r\nForced: When the players defeat this stage, advance to a random stage 3A.",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 95,
+                Quantity = 1,
+                Artist = Artist.Mariusz_Gandzel,
+                SecondArtist = Artist.Titus_Lunter
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Through the Marsh",
+                OppositeTitle = "A Weary Passage",
+                SlugIncludesOppositeTitle = true,
+                HasSecondImage = true,
+                Id = "DF7328BE-5545-4A0E-9252-B82E5CF578C9",
+                CardType = CardType.Quest,
+                StageNumber = 2,
+                QuestPoints = 13,
+                Text = "When Revealed: Raise each player's threat by 1.",
+                FlavorText = "As you trudge through endless swamp, you begin to wonder if you will ever reach the other side.",
+                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 2A at random. Return this stage to the quest deck.\r\nIn order to commit characters to the quest, a player must first discard a card at random from his hand.\r\nForced: When the players defeat this stage, advance to a random stage 3A.",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 96,
+                Quantity = 1,
+                Artist = Artist.Mariusz_Gandzel,
+                SecondArtist = Artist.Adam_Lane
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Through the Marsh",
+                OppositeTitle = "A Forgotten Land",
+                SlugIncludesOppositeTitle = true,
+                HasSecondImage = true,
+                Id = "713D0422-C8CD-42A7-90A4-17FE35E91345",
+                CardType = CardType.Quest,
+                StageNumber = 2,
+                QuestPoints = 13,
+                Text = "When Revealed: Raise each player's threat by 1.",
+                FlavorText = "As you trudge through endless swamp, you begin to wonder if you will ever reach the other side.",
+                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 2A at random. Return this stage to the quest deck.\r\nEach player cannot play more than 1 card each round.\r\nForced: When the players defeat this stage, advance to a random stage 3A.",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 97,
+                Quantity = 1,
+                Artist = Artist.Mariusz_Gandzel,
+                SecondArtist = Artist.Adam_Lane
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Lost in the Swanfleet",
+                OppositeTitle = "Impassable Marshland",
+                SlugIncludesOppositeTitle = true,
+                HasSecondImage = true,
+                Id = "50DB49B4-DC96-44CE-9AC4-5656EAAA05BB",
+                CardType = CardType.Quest,
+                StageNumber = 3,
+                QuestPoints = 16,
+                Text = "When Revealed: Raise each player's threat by 1. Add Ancient Marsh-dweller to the staging area (from out of play or engaged with a player) and heal all damage from it.",
+                FlavorText = "Lost as you are, your presence in the marsh has not gone unnoticed. An ancient and foul swamp creature stalks your company...",
+                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 3A at random. Return this stage to the quest deck.\r\nEach location in play gets +1 Threat.",
+                OppositeFlavorText = "Despite the size of the creatures hunting you, the swamp itself is your worst enemy. The ground sinks down beneath you and the mud pulls the boots off your feet. Every step forward is a struggle...",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 98,
+                Quantity = 1,
+                Artist = Artist.Silver_Saaremael,
+                SecondArtist = Artist.Ilich_Henriquez
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Lost in the Swanfleet",
+                OppositeTitle = "A Treacherous Swamp",
+                SlugIncludesOppositeTitle = true,
+                HasSecondImage = true,
+                Id = "5520B64E-D343-4D82-AA67-255A53498A4E",
+                CardType = CardType.Quest,
+                StageNumber = 3,
+                QuestPoints = 16,
+                Text = "When Revealed: Raise each player's threat by 1. Add Ancient Marsh-dweller to the staging area (from out of play or engaged with a player) and heal all damage from it.",
+                FlavorText = "Lost as you are, your presence in the marsh has not gone unnoticed. An ancient and foul swamp creature stalks your company...",
+                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 3A at random. Return this stage to the quest deck.\r\nEach player cannot ready more than 5 characters during the refresh phase.",
+                OppositeFlavorText = "After wandering aimlessly for so long, harried by foul creatues, your resolve begins to waver and your companions collapse from exhaustion. If you cannot find a way across, the swamp will erase all evidence of your passage...",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 99,
+                Quantity = 1,
+                Artist = Artist.Silver_Saaremael,
+                SecondArtist = Artist.Matt_Bradbury
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Lost in the Swanfleet",
+                OppositeTitle = "Creatures of a Forgotten Age",
+                SlugIncludesOppositeTitle = true,
+                HasSecondImage = true,
+                Id = "75C13731-B19C-4721-AA05-671FE5BAE81C",
+                CardType = CardType.Quest,
+                StageNumber = 3,
+                QuestPoints = 16,
+                Text = "When Revealed: Raise each player's threat by 1. Add Ancient Marsh-dweller to the staging area (from out of play or engaged with a player) and heal all damage from it.",
+                FlavorText = "Lost as you are, your presence in the marsh has not gone unnoticed. An ancient and foul swamp creature stalks your company...",
+                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 3A at random. Return this stage to the quest deck.\r\nEach enemy in the staging area gets -20 enagement cost.",
+                OppositeFlavorText = "As if the swamp itself was not bad enough, its foul denizens swarm around you, their serpentine forms slithering through the murky water that rises to your waist...",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 100,
+                Quantity = 1,
+                Artist = Artist.Silver_Saaremael,
+                SecondArtist = Artist.Silver_Saaremael
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Out of the Swamp",
+                HasSecondImage = true,
+                Id = "75C43258-4AA2-4348-8766-4CBC41DAB6F6",
+                CardType = CardType.Quest,
+                StageNumber = 4,
+                QuestPoints = null,
+                Text = "When Revealed: Add Ancient Marsh-dweller to the staging area (from out of play or engaged with a player) and heal all damage on it. Then Ancient Marsh-dweller makes an attack against each player in player order.",
+                FlavorText = "Beyond all hope, you have reached the edge of the swamp! You can see the gentle rise of the hills in the distance, but the huge marsh-dweller that has pursued your company now lies between you and dry land.",
+                OppositeText = "Time 2.\r\nForced: After the last time counter is removed from this stage, Ancient Marsh-dweller makes an attack against each player in order. Place 2 time counters on this stage.\r\nWhen Ancient Marsh-dweller is defeated, the players win the game.",
+                EncounterSet = "The Nîn-in-Eilph",
+                IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
+                Number = 101,
+                Quantity = 1,
+                Artist = Artist.Rafal_Hrynkiewicz
+            });
+            Cards.Add(new Card()
+            {
                 Title = "Nalir",
                 Id = "555E54CE-95EF-4C46-AFF1-89DED1E8376D",
                 IsUnique = true,
@@ -185,6 +345,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 3,
                 Traits = new List<string> { "Dwarf." },
                 Text = "The first player gains control of Nalir.\r\nForced: At the beginning of the refresh phase, raise your threat by 1 for each player in the game.\r\nIf Nalir leaves play, the players lose the game.",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 102,
                 Quantity = 1,
                 Artist = Artist.Mariusz_Gandzel
@@ -202,7 +363,7 @@ namespace HallOfBeorn.Models.Sets
                 HitPoints = 9,
                 Traits = new List<string> { "Creature." },
                 Text = "Cannot have attachments.\r\nAncient Marsh-dweller gets +1 Threat and +1 Attack for each resource token on it.\r\nForced: After any number of time counters are removed from the current quest, place a resource token here.",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 VictoryPoints = 5,
                 Number = 103,
                 Quantity = 1,
@@ -221,10 +382,11 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Creature." },
                 Text = "Cannot have attachments.\r\nForced: After any number of time counters are removed from the current quest, ~Giant ~Swamp Adder attacks the engaged player.",
                 FlavorText = "There were also abominable creatures haunting the reeds and tussocks... -The Fellowship of the Ring",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 104,
-                Quantity = 3,
-                Artist = Artist.Unknown
+                Quantity = 4,
+                EasyModeQuantity = 3,
+                Artist = Artist.Dmitry_Prosvirnin
             });
             Cards.Add(new Card()
             {
@@ -239,10 +401,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Creature.", "Insect." },
                 Text = "Forced: After any number of time counters are removed from the current quest, the engaged player must deal 2 damage to an ally he controls.",
                 Shadow = "Shadow: Deal 1 damage to the defending character.",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 105,
                 Quantity = 3,
-                Artist = Artist.Unknown
+                Artist = Artist.Dmitry_Prosvirnin
             });
             Cards.Add(new Card()
             {
@@ -254,9 +416,10 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Marsh." },
                 Text = "While Fen of Reeds is in the staging area, it gains: \"Forced: After the players advance to a quest stage, each player must exhaust a character he controls.\"",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each time counter on the quest.",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 106,
-                Quantity = 2,
+                Quantity = 3,
+                EasyModeQuantity = 2,
                 Artist = Artist.Anthony_Feliciano
             });
             Cards.Add(new Card()
@@ -269,9 +432,9 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "River.", "Marsh." },
                 Text = "While Finger of Glanduin is in the staging area, it gains : \"Forced: At the end of each round, remove 1 progress from each location in play.\"",
                 Shadow = "Shadow: If this attack destroys a character remove all progress from the current quest.",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 107,
-                Quantity = 2,
+                Quantity = 3,
                 Artist = Artist.Anthony_Feliciano
             });
             Cards.Add(new Card()
@@ -283,7 +446,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 4,
                 Traits = new List<string> { "Marsh." },
                 Text = "Response: After Hidden Eyot leaves play as an explored location, place 2 time counters on the current quest.\r\nTravel: Each player must exhaust a character he controls to travel here.",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 108,
                 Quantity = 2,
                 Artist = Artist.Titus_Lunter
@@ -298,7 +461,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Marsh." },
                 Text = "While Sinking Bog is in the staging area, each character gets -1 Willpower, -1 Attack, and -1 Defense for each Item attached to it. This ability does not stack with other copies of Sinking Bog.",
                 Shadow = "Shadow: Defending character gets -1 Defense for this attack for each attachment attached to it.",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 109,
                 Quantity = 3,
                 Artist = Artist.Ben_Zweifel
@@ -311,9 +474,10 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "Surge." },
                 Text = "When Revealed: Remove 1 time counter from the current quest.",
                 Shadow = "Shadow: Attacking enemy makes an additional attack after this one.",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 110,
                 Quantity = 3,
+                EasyModeQuantity = 2,
                 Artist = Artist.Rick_Price
             });
             Cards.Add(new Card()
@@ -323,9 +487,10 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each player must search the encounter deck or discard pile for a Creature enemy and put it into play engaged with him. Shuffle the encounter deck. This effect cannot be canceled.",
                 FlavorText = "\"An evil of the Ancient World it seemed, such as I have never seen before...\"\r\n-Aragorn, The Fellowship of the Ring",
-                EncounterSet = "The Nin-in-Eilph",
+                EncounterSet = "The Nîn-in-Eilph",
                 Number = 111,
-                Quantity = 2,
+                Quantity = 1,
+                EasyModeQuantity = 0,
                 Artist = Artist.Mark_Bulahao
             });
         }

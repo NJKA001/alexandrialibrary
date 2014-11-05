@@ -1093,7 +1093,7 @@ namespace HallOfBeorn.Services
                     predicate = (card) => { return names.Any(y => card.CardSet.Cycle.MatchesWildcard(y)); };
                     break;
                 case "set":
-                    predicate = (card) => { return names.Any(y => card.CardSet.Name.MatchesWildcard(y) || card.CardSet.Abbreviation.MatchesWildcard(y)); };
+                    predicate = (card) => { return names.Any(y => card.CardSet.Name.MatchesWildcard(y) || card.CardSet.Abbreviation.MatchesWildcard(y) || (!string.IsNullOrEmpty(card.CardSet.AlternateName) && card.CardSet.AlternateName.MatchesWildcard(y)) || (!string.IsNullOrEmpty(card.CardSet.NormalizedName) && card.CardSet.NormalizedName.MatchesWildcard(y))); };
                     break;
                 case "encounter":
                     predicate = (card) => { return names.Any(y => card.EncounterSet.MatchesWildcard(y)); };
@@ -1349,7 +1349,7 @@ namespace HallOfBeorn.Services
             if (model.CardSet != null && model.CardSet != "Any")
             {
                 hasFilter = true;
-                results = results.Where(x => x.CardSet.Name == model.CardSet || (!string.IsNullOrEmpty(x.CardSet.Cycle) && x.CardSet.Cycle.ToUpper() == model.CardSet)).ToList();
+                results = results.Where(x => x.CardSet.Name == model.CardSet || (!string.IsNullOrEmpty(x.CardSet.AlternateName) && x.CardSet.AlternateName == model.CardSet) || (!string.IsNullOrEmpty(x.CardSet.NormalizedName) && x.CardSet.NormalizedName == model.CardSet) || (!string.IsNullOrEmpty(x.CardSet.Cycle) && x.CardSet.Cycle.ToUpper() == model.CardSet)).ToList();
             }
 
             if (model.Trait != null && model.Trait != "Any")

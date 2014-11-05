@@ -220,6 +220,7 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Romana_Kendelic);
             all.Add(Artist.Christine_Griffin);
             all.Add(Artist.Matt_Stawicki);
+            all.Add(Artist.Dmitry_Prosvirnin);
 
             //The Hobbit: Over Hill and Under Hill
             all.Add(Artist.Blake_Henriksen);
@@ -621,6 +622,7 @@ namespace HallOfBeorn.Models
         public static Artist Dimitri_Bielak = new Artist { Name = "Dimitri Bielak", URL = "http://bielakdimitri.canalblog.com" };
         public static Artist Dleoblack = new Artist { Name = "Dleoblack", URL = "http://dleoblack.deviantart.com" };
         public static Artist Dmitry_Burmak = new Artist { Name = "Dmitry Burmak", URL = "http://devburmak.deviantart.com" };
+        public static Artist Dmitry_Prosvirnin = new Artist { Name = "Dmitry Prosvirnin", URL = "http://www.d8p.daportfolio.com" };
         public static Artist Dominique_Peyronnet = new Artist { Name = "Dominique Peyronnet", URL = "https://www.google.com/search?q=dominique+peyronnet+art" };
         public static Artist Drazenka_Kimpel = new Artist { Name = "Drazenka Kimpel", URL = "http://www.creativedust.com" };
         public static Artist Drew_Whitmore = new Artist { Name = "Drew Whitmore", URL = "http://toasty.deviantart.com" };
