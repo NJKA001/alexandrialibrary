@@ -149,6 +149,7 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "Wingfoot",
                 Id = "3BF23B7E-44B9-4973-9C07-D288FDB24FAA",
+                IsUnique = true,
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Lore,
                 ResourceCost = 1,

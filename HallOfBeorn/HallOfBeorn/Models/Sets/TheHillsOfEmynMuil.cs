@@ -87,7 +87,7 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Defense = 1,
                 Willpower = 1,
                 HitPoints = 2,
-                Text = "Descendant of Thorondor cannot have restricted attachments.Response: After Descendant of Thorondor enters or leaves play, deal 2 damage to any 1 enemy in the staging area.",
+                Text = "Descendant of Thorondor cannot have restricted attachments.\r\nResponse: After Descendant of Thorondor enters or leaves play, deal 2 damage to any 1 enemy in the staging area.",
                 Number = 75,
                 Artist = Artist.Igor_Kieryluk
             });

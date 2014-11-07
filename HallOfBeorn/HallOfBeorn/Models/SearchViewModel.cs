@@ -49,6 +49,9 @@ namespace HallOfBeorn.Models
         [Display(Name = "Unique")]
         public bool Unique { get; set; }
 
+        [Display(Name = "Unique")]
+        public Uniqueness IsUnique { get; set; }
+
         [Display(Name = "Sort")]
         public Sort Sort { get; set; }
 
@@ -122,6 +125,11 @@ namespace HallOfBeorn.Models
         public static IEnumerable<SelectListItem> Sorts
         {
             get { return typeof(Sort).GetSelectListItems(", "); }
+        }
+
+        public static IEnumerable<SelectListItem> UniquenessValues
+        {
+            get { return typeof(Uniqueness).GetSelectListItems(); }
         }
 
         public static IEnumerable<SelectListItem> Artists

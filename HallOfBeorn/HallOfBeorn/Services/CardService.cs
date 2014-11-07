@@ -283,7 +283,7 @@ namespace HallOfBeorn.Services
                 CreateCategoryFilter(@"(reduce|lower).*(your|player).*threat", Category.Threat_Control, "your threat is lower"),
                 CreateCategoryFilter(@"((enemy|enemies).*staging[\s]area.*attack|attacker.*against.*enemy not engaged with you|Any character may choose attached enemy as the target of an attack)", Category.Staging_Area_Attack),
                 CreateCategoryFilter("(choose (an enemy|a location).*(staging area|not engaged with you))|add.*each enemy's engagement cost|each enemy.*gets.*engagement cost", Category.Staging_Area_Control),
-                CreateCategoryFilter(@"after[\s].*[\s]enters[\s]play", Category.Enters_Play),
+                CreateCategoryFilter(@"after[\s].*[\s](enters|enters or leaves)[\s]play", Category.Enters_Play),
                 CreateCategoryFilter(@"after[\s].*[\s]leaves[\s]play", Category.Leaves_Play, "After attached location leaves play"),
                 CreateCategoryFilter(@"(after[\s]you[\s]play[\s].*[\s]from[\s]your[\s]hand|after you play)", Category.Played_From_Hand),
                 CreateCategoryFilter(@"attach 1 attachment card|an attachment of cost 3 or less and put it into play|you may attach that card facedown|to play Weapon and Armor attachments on|put into play the revealed card for no cost", Category.Equipping)
@@ -1387,6 +1387,14 @@ namespace HallOfBeorn.Services
             {
                 hasFilter = true;
                 results = results.Where(x => x.IsUnique).ToList();
+            }
+
+            if (model.IsUnique != Uniqueness.Any)
+            {
+                hasFilter = true;
+                results = model.IsUnique == Uniqueness.Yes ?
+                    results.Where(x => x.IsUnique).ToList()
+                    : results.Where(x => !x.IsUnique).ToList();
             }
 
             if (!string.IsNullOrEmpty(model.Artist) && model.Artist != "Any")
