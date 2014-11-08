@@ -125,7 +125,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 4,
                 Traits = new List<string>() { "Record." },
                 Keywords = new List<string>() { "Attach to a Spirit hero." },
-                Text = "Reduce the cost to play Map of Earnil by 1 for each hero you control with a printed Spirit resource icon.\r\nAction: Discard Map of Earnil to play any Spirit event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your dekc.",
+                Text = "Reduce the cost to play Map of Earnil by 1 for each hero you control with a printed Spirit resource icon.\r\nAction: Discard Map of Earnil to play any Spirit event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
                 Number = 87,
                 Artist = Artist.Florian_Stitz

@@ -308,7 +308,7 @@ namespace HallOfBeorn.Models.Sets
                 QuestPoints = 16,
                 Text = "When Revealed: Raise each player's threat by 1. Add Ancient Marsh-dweller to the staging area (from out of play or engaged with a player) and heal all damage from it.",
                 FlavorText = "Lost as you are, your presence in the marsh has not gone unnoticed. An ancient and foul swamp creature stalks your company...",
-                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 3A at random. Return this stage to the quest deck.\r\nEach enemy in the staging area gets -20 enagement cost.",
+                OppositeText = "Time 3.\r\nForced: After the last time counter is removed from this stage, advance to a different stage 3A at random. Return this stage to the quest deck.\r\nEach enemy in the staging area gets -20 engagement cost.",
                 OppositeFlavorText = "As if the swamp itself was not bad enough, its foul denizens swarm around you, their serpentine forms slithering through the murky water that rises to your waist...",
                 EncounterSet = "The Nîn-in-Eilph",
                 IncludedEncounterSets = new List<EncounterSet> { EncounterSet.WearyTravelers },
