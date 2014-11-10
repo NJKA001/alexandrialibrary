@@ -183,6 +183,30 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Quantity = 2,
                 Artist = Artist.Rafal_Hrynkiewicz
             });
+            Cards.Add(new Card()
+            {
+                Title = "Obsidian Arrows",
+                Id = "21A706A7-E6DA-4DEE-AF67-961F384939E3",
+                CardType = CardType.Treachery,
+                Text = "When Revealed: The current quest gains archery 2 until the end of the round. Then, assign all archery damage to characters in play as if it were the beginning of the combat phase.",
+                Shadow = "Shadow: Attacking enemy gets +X Attack. X is that enemy's archery value.",
+                EncounterSet = "Into Ithilien Nightmare",
+                Number = 8,
+                Quantity = 2,
+                Artist = Artist.Aurelien_Hubert
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Savage Fray",
+                Id = "D76B2003-839A-406A-AF4D-BFBE8402E8F0",
+                CardType = CardType.Treachery,
+                Keywords = new List<string> { "Doomed 2." },
+                Text = "When Revealed: If the current quest has a keyword, until the end of the round, switch that keyword from battle to siege, or siege to battle, if able. If the current quest does not have a keyword, Savage Fray gains surge.",
+                EncounterSet = "Into Ithilien Nightmare",
+                Number = 9,
+                Quantity = 2,
+                Artist = Artist.Tiziano_Baracchi
+            });
         }
     }
 }

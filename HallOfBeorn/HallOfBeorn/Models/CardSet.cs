@@ -130,6 +130,7 @@ namespace HallOfBeorn.Models
 
         public static CardSet PerilInPelargirNightmare = new Sets.PerilInPelargirNightmare();
         public static CardSet IntoIthilienNightmare = new Sets.IntoIthilienNightmare();
+        public static CardSet TheSiegeOfCairAndrosNightmare = new Sets.TheSiegeOfCairAndrosNightmare();
 
         //public static CardSet FirstAge = new Sets.FirstAge();
     }

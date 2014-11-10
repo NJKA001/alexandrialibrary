@@ -406,6 +406,7 @@
     <Compile Include="Models\Sets\TheRedhornGateNightmare.cs" />
     <Compile Include="Models\Sets\TheRoadDarkens.cs" />
     <Compile Include="Models\Sets\TheSeventhLevelNightmare.cs" />
+    <Compile Include="Models\Sets\TheSiegeOfCairAndrosNightmare.cs" />
     <Compile Include="Models\Sets\TheStewardsFear.cs" />
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
     <Compile Include="Models\Sets\TheThreeTrials.cs" />

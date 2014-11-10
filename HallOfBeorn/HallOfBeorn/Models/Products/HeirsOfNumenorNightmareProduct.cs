@@ -12,6 +12,7 @@ namespace HallOfBeorn.Models.Products
         {
             CardSets.Add(CardSet.PerilInPelargirNightmare);
             CardSets.Add(CardSet.IntoIthilienNightmare);
+            CardSets.Add(CardSet.TheSiegeOfCairAndrosNightmare);
         }
     }
 }
