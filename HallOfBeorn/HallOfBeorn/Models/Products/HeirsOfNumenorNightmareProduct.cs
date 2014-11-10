@@ -11,6 +11,7 @@ namespace HallOfBeorn.Models.Products
             : base("Heirs of Númenor Nightmare Decks", "MEN21", ImageType.Jpg)
         {
             CardSets.Add(CardSet.PerilInPelargirNightmare);
+            CardSets.Add(CardSet.IntoIthilienNightmare);
         }
     }
 }

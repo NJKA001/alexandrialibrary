@@ -368,6 +368,7 @@
     <Compile Include="Models\Sets\FoundationsOfStone.cs" />
     <Compile Include="Models\Sets\FoundationsOfStoneNightmare.cs" />
     <Compile Include="Models\Sets\HeirsOfNumenor.cs" />
+    <Compile Include="Models\Sets\IntoIthilienNightmare.cs" />
     <Compile Include="Models\Sets\IntoThePitNightmare.cs" />
     <Compile Include="Models\Sets\JourneyAlongTheAnduinNightmare.cs" />
     <Compile Include="Models\Sets\KhazadDum.cs" />

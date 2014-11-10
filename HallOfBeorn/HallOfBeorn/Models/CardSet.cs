@@ -129,6 +129,7 @@ namespace HallOfBeorn.Models
         public static CardSet FogOnTheBarrowDowns = new Sets.FogOnTheBarrowDowns();
 
         public static CardSet PerilInPelargirNightmare = new Sets.PerilInPelargirNightmare();
+        public static CardSet IntoIthilienNightmare = new Sets.IntoIthilienNightmare();
 
         //public static CardSet FirstAge = new Sets.FirstAge();
     }
