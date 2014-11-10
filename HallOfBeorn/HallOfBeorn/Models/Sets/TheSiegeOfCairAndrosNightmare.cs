@@ -10,7 +10,7 @@ namespace HallOfBeorn.Models.Sets
         protected override void Initialize()
         {
             Name = "The Siege of Cair Andros Nightmare";
-            Abbreviation = "IIN";
+            Abbreviation = "TSoCAN";
             SetType = Models.SetType.Nightmare_Expansion;
             Cycle = "NIGHTMARE";
             Number = 2055;
