@@ -267,7 +267,7 @@ namespace HallOfBeorn.Services
                 CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Willpower", Category.Willpower_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Hit[\s]Point", Category.Hit_Point_Bonus),
-                CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card|look at the top 2 cards of your deck. Add 1 to your hand", Category.Card_Draw),
+                CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card|look at the top 2 cards of your deck. Add 1 to your hand|take it into your hand", Category.Card_Draw),
                 CreateCategoryFilter(@"search[\s].*your[\s]deck", Category.Card_Search),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck|the top card of your deck faceup|exchange a card in your hand with the top card of your deck", Category.Player_Scrying, "encounter deck"),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying),
