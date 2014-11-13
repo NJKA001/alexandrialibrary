@@ -283,6 +283,7 @@
     <Compile Include="Models\Products\AJourneyToRhosgobelNightmareProduct.cs" />
     <Compile Include="Models\Products\AJourneyToRhosgobelProduct.cs" />
     <Compile Include="Models\Products\AssaultOnOsgiliathProduct.cs" />
+    <Compile Include="Models\Products\CelebrimborsSecretProduct.cs" />
     <Compile Include="Models\Products\ConflictAtTheCarrockNightmareProduct.cs" />
     <Compile Include="Models\Products\ConflictAtTheCarrokProduct.cs" />
     <Compile Include="Models\Products\CoreSetProduct.cs" />
@@ -357,6 +358,7 @@
     <Compile Include="Models\Sets\AJourneyToRhosgobelNightmare.cs" />
     <Compile Include="Models\Sets\AssaultOnOsgiliath.cs" />
     <Compile Include="Models\Sets\AJourneyToRhosgobel.cs" />
+    <Compile Include="Models\Sets\CelebrimborsSecret.cs" />
     <Compile Include="Models\Sets\ConflictAtTheCarrock.cs" />
     <Compile Include="Models\Sets\ConflictAtTheCarrockNightmare.cs" />
     <Compile Include="Models\Sets\CoreSet.cs" />

@@ -15,6 +15,7 @@ namespace HallOfBeorn.Models.Products
             AddProduct(new TheThreeTrialsProduct());
             AddProduct(new TroubleInTharbadProduct());
             AddProduct(new TheNinInEilphProduct());
+            AddProduct(new CelebrimborsSecretProduct());
         }
     }
 }
