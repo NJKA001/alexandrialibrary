@@ -379,7 +379,7 @@ When The Crossing at Tharbad is explored, the players win the game.",
                 EncounterSet = "Trouble in Tharbad",
                 Number = 74,
                 Quantity = 2,
-                Artist = Artist.Unknown
+                Artist = Artist.Nate_Abell
             });
             Cards.Add(new Card()
             {
@@ -398,7 +398,7 @@ Forced: At the beginning of the quest phase, place 1 progress on Tharbad Hideout
                 EncounterSet = "Trouble in Tharbad",
                 Number = 75,
                 Quantity = 2,
-                Artist = Artist.Unknown
+                Artist = Artist.Nate_Abell
             });
             Cards.Add(new Card()
             {
@@ -418,7 +418,7 @@ While ~Ruins of the Second Age is the active location, deal engaged enemies 1 ad
                 Number = 76,
                 Quantity = 2,
                 EasyModeQuantity = 1,
-                Artist = Artist.Unknown
+                Artist = Artist.Nate_Abell
             });
             Cards.Add(new Card()
             {

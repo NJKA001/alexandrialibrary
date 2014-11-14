@@ -155,7 +155,7 @@ The players cannot defeat this stage unless each player in the game is at this s
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 3,
-                Artist = Artist.Unknown
+                Artist = Artist.Florian_Devos
 
             });
             Cards.Add(new Card()
@@ -175,7 +175,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 4,
                 Number = 4,
-                Artist = Artist.Unknown
+                Artist = Artist.Mark_Bulahao
 
             });
             Cards.Add(new Card()
@@ -194,7 +194,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 5,
-                Artist = Artist.Unknown
+                Artist = Artist.Jose_Vega
 
             });
             Cards.Add(new Card()
@@ -212,7 +212,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 6,
-                Artist = Artist.Unknown
+                Artist = Artist.Jose_Vega
 
             });
             Cards.Add(new Card()
@@ -230,7 +230,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 Quantity = 5,
                 EasyModeQuantity = 3,
                 Number = 7,
-                Artist = Artist.Unknown
+                Artist = Artist.Anthony_Devine
             });
             Cards.Add(new Card()
             {
@@ -247,7 +247,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 Quantity = 3,
                 EasyModeQuantity = 2,
                 Number = 8,
-                Artist = Artist.Unknown
+                Artist = Artist.Ferdinand_Dumago_Ladera
 
             });
             Cards.Add(new Card()
@@ -263,7 +263,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 Quantity = 4,
                 EasyModeQuantity = 3,
                 Number = 9,
-                Artist = Artist.Unknown
+                Artist = Artist.Ferdinand_Dumago_Ladera
 
             });
             Cards.Add(new Card()
@@ -279,7 +279,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 4,
                 Number = 10,
-                Artist = Artist.Unknown
+                Artist = Artist.Emrah_Elmasli
             });
             Cards.Add(new Card()
             {
@@ -298,7 +298,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 Quantity = 4,
                 EasyModeQuantity = 3,
                 Number = 11,
-                Artist = Artist.Unknown
+                Artist = Artist.Anthony_Devine
             });
             Cards.Add(new Card()
             {
@@ -316,7 +316,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 3,
                 Number = 12,
-                Artist = Artist.Unknown
+                Artist = Artist.Anthony_Devine
             });
             Cards.Add(new Card()
             {
@@ -334,7 +334,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 3,
                 Number = 13,
-                Artist = Artist.Unknown
+                Artist = Artist.Anthony_Devine
             });
             Cards.Add(new Card()
             {
@@ -347,7 +347,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 Quantity = 2,
                 EasyModeQuantity = 0,
                 Number = 14,
-                Artist = Artist.Unknown
+                Artist = Artist.Anthony_Devine
             });
             Cards.Add(new Card()
             {
@@ -359,7 +359,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 3,
                 Number = 15,
-                Artist = Artist.Unknown
+                Artist = Artist.Mariusz_Gandzel
             });
             Cards.Add(new Card()
             {
@@ -371,7 +371,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 2,
                 Number = 16,
-                Artist = Artist.Unknown
+                Artist = Artist.Anthony_Feliciano
             });
             Cards.Add(new Card()
             {
@@ -385,7 +385,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 Quantity = 3,
                 EasyModeQuantity = 2,
                 Number = 17,
-                Artist = Artist.Unknown
+                Artist = Artist.Rafal_Hrynkiewicz
             });
             Cards.Add(new Card()
             {
@@ -399,7 +399,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 Quantity = 2,
                 EasyModeQuantity = 1,
                 Number = 18,
-                Artist = Artist.Unknown
+                Artist = Artist.Florian_Devos
             });
             Cards.Add(new Card()
             {
@@ -417,7 +417,7 @@ Forced: After this stage is defeated, advance to stage 3B at the beginning of th
                 EncounterSet = "Fog on the Barrow-downs",
                 Quantity = 1,
                 Number = 19,
-                Artist = Artist.Unknown
+                Artist = Artist.Romana_Kendelic
             });
             Cards.Add(new Card()
             {

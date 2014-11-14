@@ -72,7 +72,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "At the end of the round, discard [Card] from play." },
                 Text = "Response: After you play Galadriel from your hand, search the top 5 cards of your deck for an attachment of cost 3 or less and put it into play. Put the remaining cards back in any order.",
                 Number = 3,
-                Quantity = 3
+                Quantity = 3,
+                Artist = Artist.Sebastian_Giacobino
             });
             Cards.Add(new Card()
             {
@@ -90,7 +91,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string> { "Gondor.", "Warrior." },
                 Text = "Boromir gets +2 Defense while defending against an enemy with an engagement cost higher than your threat.\r\nResponse: After Boromir takes any amount of damage, ready him.",
                 Number = 4,
-                Quantity = 3
+                Quantity = 3,
+                Artist = Artist.Chris_Rahn
             });
             Cards.Add(new Card()
             {
@@ -109,7 +111,8 @@ namespace HallOfBeorn.Models.Sets
                 Keywords = new List<string> { "At the end of the round, discard [Card] from play." },
                 Text = "Response: After Elrond enters play, choose one: heal all damage on a hero, discard a Condition attachment, or each player draws 1 card.",
                 Number = 5,
-                Quantity = 3
+                Quantity = 3,
+                Artist = Artist.Allen_Douglas
             });
             Cards.Add(new Card()
             {
@@ -128,7 +131,8 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Response: After Bilbo ~Baggins enters play, search your deck for a Pipe attachment and add it to your hand. Shuffle your deck.",
                 FlavorText = "\"Elves may thrive on speech alone, and Dwarves endure great weariness, but I am an old Hobbit, and I miss my meal at noon.\" -The Fellowship of the Ring",
                 Number = 6,
-                Quantity = 3
+                Quantity = 3,
+                Artist = Artist.Sebastian_Giacobino
             });
             Cards.Add(new Card()
             {
