@@ -221,6 +221,8 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Christine_Griffin);
             all.Add(Artist.Matt_Stawicki);
             all.Add(Artist.Dmitry_Prosvirnin);
+            all.Add(Artist.David_Hammond);
+            all.Add(Artist.Louis_Green);
 
             //The Hobbit: Over Hill and Under Hill
             all.Add(Artist.Blake_Henriksen);
@@ -613,6 +615,7 @@ namespace HallOfBeorn.Models
         public static Artist David_Chen = new Artist { Name = "David Chen", URL = "https://www.google.com/search?q=David+Chen+Fantasy+Art" };
         public static Artist David_Demaret = new Artist { Name = "David Demaret", URL = "http://moonxels.deviantart.com" };
         public static Artist David_Gaillet = new Artist { Name = "David Gaillet", URL = "http://davidgaillet.deviantart.com" };
+        public static Artist David_Hammond = new Artist { Name = "David Hammond", URL = "https://www.behance.net/kollatt" };
         public static Artist David_Horne = new Artist { Name = "David Horne", URL = "http://www.epilogue.net/gallery/davidhorne" };
         public static Artist David_Kegg = new Artist { Name = "David Kegg", URL = "http://david-kegg.deviantart.com" };
         public static Artist David_Lecossu = new Artist { Name = "David Lecossu", URL = "http://d--co.deviantart.com" };
@@ -696,6 +699,7 @@ namespace HallOfBeorn.Models
         public static Artist Logan_Feliciano = new Artist { Name = "Logan Feliciano", URL = "http://2wenty.deviantart.com" };
         public static Artist Loren_Fetterman = new Artist { Name = "Loren Fetterman", URL = "http://loren86.deviantart.com" };
         public static Artist Lorraine_Schleter = new Artist { Name = "Lorraine Schleter", URL = "http://lorraine-schleter.deviantart.com" };
+        public static Artist Louis_Green = new Artist { Name = "Louis Green", URL = "http://louisgreen.blogspot.com" };
         public static Artist Lucas_Graciano = new Artist { Name = "Lucas Graciano", URL = "http://lucasgraciano.deviantart.com" };
         public static Artist Lukasz_Jaskolski = new Artist { Name = "Lukasz Jaskolski", URL = "http://www.fadingray.com" };
         public static Artist Magali_Villeneuve = new Artist { Name = "Magali Villeneuve", URL = "http://magali-villeneuve.blogspot.com" };
