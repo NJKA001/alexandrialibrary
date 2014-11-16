@@ -241,6 +241,14 @@
                             {
                                 <b>@token.Text</b>
                             }
+                            else if (token.IsStrong)
+                            {
+                                <strong>@token.Text</strong>
+                            }
+                            else if (token.IsEmphasized)
+                            {
+                                <em>@token.Text</em>
+                            }
                             else if (token.IsTrait)
                             {
                                 <a title="Trait Search" style="font-weight:bold;font-style:italic;" href='@string.Format("/Cards/Search?Trait={0}.", @token.Text.Trim().TrimEnd('.'))'>@token.Text</a>

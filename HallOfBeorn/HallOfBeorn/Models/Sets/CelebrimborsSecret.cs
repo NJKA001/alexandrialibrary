@@ -19,7 +19,6 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "Galadriel",
                 Id = "39125C18-14B2-4DB5-B349-2219D85D3B9C",
-                ImageType = Models.ImageType.Png,
                 IsUnique = true,
                 CardType = CardType.Hero,
                 Sphere = Sphere.Spirit,
@@ -147,7 +146,6 @@ Exhaust Mirror of Galadriel to search the top 10 cards of your deck for a card a
             {
                 Title = "Wandering Ent",
                 Id = "44DBC554-BB67-4B9F-B991-44B532FF51BF",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Ally,
                 Sphere = Sphere.Lore,
                 ResourceCost = 2,
@@ -181,7 +179,6 @@ Exhaust Mirror of Galadriel to search the top 10 cards of your deck for a card a
             {
                 Title = "Nenya",
                 Id = "C401525F-CB67-405C-AE28-FC97E8D060DC",
-                ImageType = Models.ImageType.Png,
                 IsUnique = true,
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Neutral,
@@ -238,7 +235,6 @@ The players cannot win unless Celebrimbor's Mould is attached to a hero. If the 
             {
                 Title = "Bellach",
                 Id = "1A2D5848-ADC1-4D9B-95C9-075BA51967AC",
-                ImageType = Models.ImageType.Png,
                 IsUnique = true,
                 CardType = CardType.Enemy,
                 EngagementCost = 50,
@@ -259,7 +255,6 @@ The players cannot win unless Celebrimbor's Mould is attached to a hero. If the 
             {
                 Title = "The Orcs' Search",
                 Id = "C4837705-289B-4D77-8598-C4AC537FE5A4",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Objective,
                 Text = 
 @"When a location has damage equal to its printed quest points, place it facedown underneath The Orcs' Search.
@@ -334,9 +329,9 @@ Scour: Place 1 damage on the active location.",
                 HitPoints = 5,
                 Traits = new List<string> { "Mordor.", "Orc." },
                 Text = 
-@"Forced: After Prowling Orc attacks, place 1 damage on the active location.
+@"Forced: After Prowling ~Orc attacks, place 1 damage on the active location.
 
-Scour: Prowling Orc engages the player with the highest threat and makes an immediate attack.",
+Scour: Prowling ~Orc engages the player with the highest threat and makes an immediate attack.",
                 FlavorText = "\"Garn! You don't even know what you're looking for.\" -Orc, The Return of the King",
                 EncounterSet = "Celebrimbor's Secret",
                 Number = 129,
@@ -398,7 +393,7 @@ Scour: Prowling Orc engages the player with the highest threat and makes an imme
                 Threat = 3,
                 QuestPoints = 3,
                 Traits = new List<string> { "Ost-in-Edhil.", "Ruins." },
-                Text = "Forced: After placing any amount of progress here, trigger the topmost Scour effect in the discard pile, if able.",
+                Text = "Forced: After placing any amount of progress here, trigger the topmost **Scour** effect in the discard pile, if able.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. If this attack destroys a character, raise each player's threat by 1 for each card underneath The Orcs' Search.",
                 EncounterSet = "Celebrimbor's Secret",
                 Number = 133,
@@ -424,7 +419,7 @@ Scour: Prowling Orc engages the player with the highest threat and makes an imme
                 Title = "Desecrated Ruins",
                 Id = "50569FE5-5258-42DC-A7DE-0CC5061C6DB7",
                 CardType = CardType.Treachery,
-                Text = "When Revealed: Place 3 damage on the active location. If there is no active location, Desecrated Ruins gains surge.",
+                Text = "When Revealed: Place 3 damage on the active location. If there is no active location, Desecrated ~Ruins gains surge.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. If this attack destroys an ally, place X damage on the active location. X is that ally's cost.",
                 EncounterSet = "Celebrimbor's Secret",
                 Number = 135,
@@ -436,7 +431,7 @@ Scour: Prowling Orc engages the player with the highest threat and makes an imme
                 Title = "Spies from Mordor",
                 Id = "61056789-670B-46D3-952C-828CD916A783",
                 CardType = CardType.Treachery,
-                Text = "When Revealed: Each player must exhaust X characters he controls. X is the number of cards underneath The Orcs' Search. If no characters are exhausted this way, Spies from Mordor gains surge.",
+                Text = "When Revealed: Each player must exhaust X characters he controls. X is the number of cards underneath The Orcs' Search. If no characters are exhausted this way, Spies from ~Mordor gains surge.",
                 Shadow = "Shadow: Defending player discards a non-objective attachment he controls.",
                 EncounterSet = "Celebrimbor's Secret",
                 Number = 136,

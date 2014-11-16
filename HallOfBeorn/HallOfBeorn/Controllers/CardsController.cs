@@ -18,6 +18,16 @@ namespace HallOfBeorn.Controllers
 
         private CardService _cardService;
 
+        private List<string> strongPhrases = new List<string> {
+            "lost the game",
+            "lose the game",
+            "win the game",
+            "won the game",
+            "end the game",
+            "win this game",
+            "the players cannot"
+        };
+
         private void InitializeSearch(SearchViewModel model)
         {
             model.Cards = new List<CardViewModel>();
@@ -129,6 +139,7 @@ namespace HallOfBeorn.Controllers
                 count++;
 
                 var token = new Token();
+                var partText = part;
 
                 var normalized = part.TrimStart('(').TrimEnd('.', ',', ':', '"', '\'', ')');
                 var escaped = part.StartsWith("~");
@@ -172,21 +183,33 @@ namespace HallOfBeorn.Controllers
                         checkForSuffix(token, part, normalized);
                         effect.Tokens.Add(token);
                         continue;
+                    } else if (part.StartsWith("**") && part.EndsWith("**"))
+                    {
+                        token.IsStrong = true;
+                        partText = part.Replace("**", string.Empty);
+                    }
+                    else if (part.StartsWith("*") && part.EndsWith("*"))
+                    {
+                        token.IsEmphasized = true;
+                        partText = part.Trim('*');
                     }
 
-                    token.Text = token.Prefix + part.TrimStart('~');
+                    token.Text = token.Prefix + partText.TrimStart('~');
                 }
 
-                checkForTitleReference(token, part);
+                checkForTitleReference(token, partText);
                 
                 effect.Tokens.Add(token);
             }
 
-            if (text.Contains("lost the game") || text.Contains("lose the game") || text.Contains("win the game") || text.Contains("won the game") || text.Contains("end the game") || text.Contains("win this game"))
+            foreach (var phrase in strongPhrases)
             {
-                if (!effect.Tokens[0].IsTrigger)
+                if (text.ToLower().Contains(phrase))
                 {
-                    effect.IsCritical = true;
+                    if (!effect.Tokens[0].IsTrigger)
+                    {
+                        effect.IsCritical = true;
+                    }
                 }
             }
 
