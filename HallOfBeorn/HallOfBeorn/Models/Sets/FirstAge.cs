@@ -5,7 +5,6 @@ using System.Web;
 
 namespace HallOfBeorn.Models.Sets
 {
-    /*
     public class FirstAge : CardSet
     {
         protected override void Initialize()
@@ -17,7 +16,7 @@ namespace HallOfBeorn.Models.Sets
 
             Cards.Add(new Card() {
                 Title = "Aredhel",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1d572e45-94ed-4563-96d5-1bcf358c775d",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -36,7 +35,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "Azaghâl",
                 NormalizedTitle = "Azaghal",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "c10276a3-fc4d-4c05-9378-e22437febd30",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -54,7 +53,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Barahir",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "ccb27322-b28f-4cec-8998-bc3a38da9d7a",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -75,7 +74,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "Bëor",
                 NormalizedTitle = "Beor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a71937a2-dd20-40d3-bfb6-a6cf7856011a",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -94,7 +93,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Caranthir",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "f14eb968-2181-456e-97cf-3275af57d890",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -113,7 +112,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Celegorm",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d0590810-8dfe-43e0-9b12-63ebcbaee153",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -132,7 +131,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Chieftain of Men",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1a6e1994-f32a-4241-9e0b-c4f4e43ae7a4",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Leadership,
@@ -149,7 +148,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Curufin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "6f13ed8d-8e7c-46c7-b65d-d26370409324",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -168,7 +167,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Daeron",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "611f6d5b-d1f6-49cb-b9e5-f2d5bf77a7ef",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -186,7 +185,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Dwarf of the Blue Mountains",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d8557f01-c6a5-4568-826f-70083fa6b98d",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Lore,
@@ -203,7 +202,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Elwing",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "7efcb2f7-e893-475c-8e60-001dc95ba430",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -222,7 +221,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "Eöl",
                 NormalizedTitle = "Eol",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "c12463e1-712b-4a77-8579-f9cafc7d9332",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -240,7 +239,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Finduilas",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "16ee9351-7842-400d-ba3a-0fe4d9f30634",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -258,7 +257,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Gondolin Guard",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "4b61a531-071c-44a9-b569-261c41f182d7",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Tactics,
@@ -275,7 +274,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Green-elf Ranger",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d9de0bc8-78fa-4f1d-b2a6-8d952daefe55",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Lore,
@@ -293,7 +292,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Hador",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1490551a-e98f-4f75-b619-90c4c510eff0",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -311,7 +310,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Haladin Woodsman",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b1d66533-fa81-466a-a26c-eb0ddf3ea2a6",
                 CardType = CardType.Ally,
                 Sphere = Sphere.Spirit,
@@ -328,7 +327,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Huan",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "eea419ce-71ae-499b-a1fb-dd69a5633be4",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -346,7 +345,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Huor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "5ed2a83a-fb4d-48ed-847c-8e5e3a116cc6",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -364,7 +363,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Mablung",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "f59f2aa8-ce8a-4fbe-bfdf-420e6b330aed",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -382,7 +381,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Maedhros",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "357b134b-1af6-4cb4-8fc5-1f7c3fc1cc05",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -400,7 +399,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Maeglin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "bdbcd9ef-ba0d-4136-a973-2ebc7215cd23",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -418,7 +417,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Maglor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "12651993-2955-4c4a-8695-5828b0f26f2a",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -437,7 +436,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Melian",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a9b02bb6-4c38-4fb3-8f73-4d2c68a90a89",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -456,7 +455,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Morwen",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "36eba031-02ff-4ea1-b127-aa1adf64bbac",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -474,7 +473,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Orodreth",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "c02cefa2-c4ed-4377-a2f4-113d4ed4cbfb",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -492,7 +491,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Telchar the Smith",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3e458f23-12fd-4192-a0f2-676f0aa91287",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -510,7 +509,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Thorondor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "4989c17b-edde-4a5d-8438-5fcc23dd0271",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -529,7 +528,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Tuor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "6317b5a1-6547-45de-85b9-f1c9798f4dd2",
                 IsUnique = true,
                 CardType = CardType.Ally,
@@ -548,7 +547,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card() {
                 Title = "Aranrúth",
                 NormalizedTitle = "Aranruth",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a4274bdd-ac5f-4ca6-8897-b7f4d3c683b7",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -563,7 +562,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Ard-galen Horse",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b9ef5e42-ff98-4189-9d36-12d6d57a20ae",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Lore,
@@ -576,7 +575,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Blue Shield",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "af4552f6-713a-4418-a3be-5388655d19f2",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -590,7 +589,7 @@ namespace HallOfBeorn.Models.Sets
             });
             Cards.Add(new Card() {
                 Title = "Dragon-helm",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9288286a-a88b-41a8-889b-83e8f4c1e91d",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -608,7 +607,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "Elf-friend",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9972048e-4e59-4444-8957-17d5b43164a7",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Spirit,
@@ -621,7 +620,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "Galvorn Armor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "ed103684-c82e-4f33-933b-329fc1598b3f",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Mastery,
@@ -634,7 +633,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "Gurthang",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "2cf2b206-3dcb-41f3-abdb-c3c3282779f9",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -648,7 +647,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "Harp of Fingon",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "63d72bcd-bee5-4eaa-a2b4-8e5af8244d4e",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -663,7 +662,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "Haudh-en-Ndengin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "56e3c47e-9fbe-4b86-92f5-05679788aa07",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -677,7 +676,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "Hidden House",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "47905ede-7cb1-4c1d-919a-af92f71fce5a",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Lore,
@@ -690,7 +689,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "High Kingship of the Noldor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1c20dbce-2c45-4c0b-8c3a-874e84908a25",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -704,7 +703,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
             });
             Cards.Add(new Card() {
                 Title = "Mormegil",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "8a9a4961-146f-4f92-8372-c8f4ac733964",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -723,7 +722,7 @@ All enemies get -1 Threat and -10 engagement cost.",
             Cards.Add(new Card() {
                 Title = "Nauglamír",
                 NormalizedTitle = "Nauglamir",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "4186631e-c283-4a5e-b364-7a8ade2255ab",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -737,7 +736,7 @@ All enemies get -1 Threat and -10 engagement cost.",
             });
             Cards.Add(new Card() {
                 Title = "Nimphelos",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "8c871b05-b22c-41ac-8094-fb266dcc895b",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -753,7 +752,7 @@ All enemies get -1 Threat and -10 engagement cost.",
             Cards.Add(new Card() {
                 Title = "Oath of Fëanor",
                 NormalizedTitle = "Oath of Feanor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "92602678-0802-4c45-971e-0eff7a57855a",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Mastery,
@@ -768,7 +767,7 @@ All enemies get -1 Threat and -10 engagement cost.",
             });
             Cards.Add(new Card() {
                 Title = "Oath of Friendship",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d09ff424-b2df-4b1a-a343-2dafaf3d1d98",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Leadership,
@@ -785,7 +784,7 @@ Response: After you play Oath of Friendship, you may immediately search your dec
             });
             Cards.Add(new Card() {
                 Title = "Oath of Silence",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "57bae876-e0f7-48e2-b626-8b53216ef26c",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Lore,
@@ -802,7 +801,7 @@ Response: After Oath of Silence is attached to a hero you control, search your d
             });
             Cards.Add(new Card() {
                 Title = "Oath of Vengeance",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "969445ff-0b61-4f68-b563-ae11d365e125",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Tactics,
@@ -819,7 +818,7 @@ Action: Spend 1 resource from Oath of Vengeance to give attached hero +1 Willpow
             });
             Cards.Add(new Card() {
                 Title = "Poisoned Javelin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b113f353-7dab-4689-8f16-05c7e6935950",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Mastery,
@@ -832,7 +831,7 @@ Action: Spend 1 resource from Oath of Vengeance to give attached hero +1 Willpow
             });
             Cards.Add(new Card() {
                 Title = "Ring of Barahir",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a9491de0-6e74-4f2f-bfee-1c8e5e441166",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -846,7 +845,7 @@ Action: Spend 1 resource from Oath of Vengeance to give attached hero +1 Willpow
             });
             Cards.Add(new Card() {
                 Title = "Ringil",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "818a434c-d23a-4ec3-ac46-63e2665f4510",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -864,7 +863,7 @@ If the attached hero is Fingolfin, Ringil gains: 'Response: After the attached c
             });
             Cards.Add(new Card() {
                 Title = "Rochallor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3d3a2ede-39f8-420d-a121-93f19d284253",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -878,7 +877,7 @@ If the attached hero is Fingolfin, Ringil gains: 'Response: After the attached c
             });
             Cards.Add(new Card() {
                 Title = "Shadowy Cloak",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3ae5e27e-a66a-43a1-a967-c102e9ab9da3",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -897,7 +896,7 @@ Action: Exhaust Shadowy Cloak to either add 1 resource to Shadowy Cloak or ready
             });
             Cards.Add(new Card() {
                 Title = "Solitary Outlaw",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "5ce97207-9317-4cd5-bb75-1df2c7f0cdb3",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Neutral,
@@ -914,7 +913,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Vingilot",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1cd9af84-475d-4949-b0a0-6977601aaf86",
                 IsUnique = true,
                 CardType = CardType.Attachment,
@@ -928,7 +927,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "...And Yet A Warning",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "bbcf552f-73cc-44c4-8d53-d16a926cc895",
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
@@ -940,7 +939,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "A Great Doom",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "533740a7-2348-4ef2-9c5d-1bf2b26a4daa",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
@@ -953,7 +952,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Arts of Felagund",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "7c6344c7-b769-4548-b64b-ade76bcd9c1c",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
@@ -967,7 +966,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Banners and Horns",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b3c1c5fd-56ca-4b9c-a9b5-d9796e090c76",
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
@@ -979,7 +978,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Dark Elf",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "e642bba0-dd93-4d9c-b714-113ab91480d2",
                 CardType = CardType.Event,
                 Sphere = Sphere.Mastery,
@@ -991,7 +990,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Dark Heart of the Smith",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "6795405b-b28c-43bf-ae4d-318643d19d63",
                 CardType = CardType.Event,
                 Sphere = Sphere.Mastery,
@@ -1003,7 +1002,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Day Shall Come Again",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "7bbfe8f2-e9ed-430f-a01a-0b27b6eba9a4",
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
@@ -1015,7 +1014,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Defied and Mocked",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "96fa686b-dcae-426d-b002-9a4f45754117",
                 CardType = CardType.Event,
                 Sphere = Sphere.Mastery,
@@ -1027,7 +1026,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Dreadful Death",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "8bba480a-0306-4eb3-a577-99cdef1e1430",
                 CardType = CardType.Event,
                 Sphere = Sphere.Mastery,
@@ -1039,7 +1038,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Dreams from Ulmo",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "8cfb1da9-d041-44f4-acb7-42a872bd55e0",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
@@ -1052,7 +1051,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Erchamion",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "0061b168-c37d-46bc-ac7b-2eedad688b80",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
@@ -1065,7 +1064,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Feast of Reuniting",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "e8fd8691-39fe-49fe-9292-b47399d1153e",
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
@@ -1077,7 +1076,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Fire of Life",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "50166774-b3ac-425b-8662-8caf1986688e",
                 CardType = CardType.Event,
                 Sphere = Sphere.Mastery,
@@ -1090,7 +1089,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Flame Light! Flee Night!",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "600f25fa-0863-4f7c-baf2-e68677200988",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
@@ -1102,7 +1101,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Friendship of Ulmo",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "92cc7a50-91b9-469b-8038-20d18807c29e",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
@@ -1115,7 +1114,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Hold to the Oath",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "eddac7bc-182e-4b80-9171-bfa48dbfa679",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
@@ -1128,7 +1127,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Hour of Need",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "94639ce3-19a2-41dc-92f5-e4a7b4d44b06",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
@@ -1140,7 +1139,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Leaguer",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "af32245f-be6f-4efc-87a2-e58ca08e8d42",
                 CardType = CardType.Event,
                 Sphere = Sphere.Neutral,
@@ -1152,7 +1151,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Madness of Rage",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "ddb7c844-c06b-453a-bbe9-5d4b9795859d",
                 CardType = CardType.Event,
                 Sphere = Sphere.Mastery,
@@ -1165,7 +1164,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             Cards.Add(new Card() {
                 Title = "Manwë's Pity",
                 NormalizedTitle = "Manwe's Pity",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b0356374-d811-4ebf-84e0-916262b4b8ac",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
@@ -1178,7 +1177,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "No Better Hope",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "33c90530-7cef-4138-b6b5-0bbe5c997f1f",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
@@ -1190,7 +1189,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Open Battle",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "6cd143f3-4f7b-40c7-a09d-3f37b910676b",
                 CardType = CardType.Event,
                 Sphere = Sphere.Mastery,
@@ -1204,7 +1203,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Passed in Peace",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "495c08de-1f3d-4d5c-9c27-2767c3dab2f3",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
@@ -1216,7 +1215,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Secret Toil",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "78970cd3-4c09-4c5d-83a7-261fb7dddfd6",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
@@ -1228,7 +1227,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Secrets of Craft",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3840d489-587b-4ffb-8159-1040aa258f88",
                 CardType = CardType.Event,
                 Sphere = Sphere.Lore,
@@ -1240,7 +1239,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
             });
             Cards.Add(new Card() {
                 Title = "Song of Gladness",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "44138d4e-bb5d-4413-b28e-e29a39d93bc5",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
@@ -1257,7 +1256,7 @@ Action: Reduce your threat by 3.",
             Cards.Add(new Card() {
                 Title = "Song of Lúthien",
                 NormalizedTitle = "Song of Luthien",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "0236a411-93bd-4865-99c7-afbbcf66e0a8",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
@@ -1270,7 +1269,7 @@ Action: Reduce your threat by 3.",
             });
             Cards.Add(new Card() {
                 Title = "Song of Staying",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1e9fb582-1b63-4d5e-98a1-c95b4ea8d5b4",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
@@ -1283,7 +1282,7 @@ Action: Reduce your threat by 3.",
             });
             Cards.Add(new Card() {
                 Title = "Strength of Men",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d2f9888e-31f9-42ef-b930-50d67ddcd2f8",
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
@@ -1295,7 +1294,7 @@ Action: Reduce your threat by 3.",
             });
             Cards.Add(new Card() {
                 Title = "Strengthen the Watch",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b03a4bd2-850f-4d18-b61b-28248537d448",
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
@@ -1307,7 +1306,7 @@ Action: Reduce your threat by 3.",
             });
             Cards.Add(new Card() {
                 Title = "The Day Has Come!",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "64f09d1d-9421-449d-a121-9b572001e576",
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
@@ -1319,7 +1318,7 @@ Action: Reduce your threat by 3.",
             });
             Cards.Add(new Card() {
                 Title = "Undismayed",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d2f9f10a-db5c-4aa0-ae0c-e9d33c244a69",
                 CardType = CardType.Event,
                 Sphere = Sphere.Tactics,
@@ -1331,7 +1330,7 @@ Action: Reduce your threat by 3.",
             });
             Cards.Add(new Card() {
                 Title = "Beren",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a63323ae-29de-4368-b8c8-7fa8131d9224",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1351,7 +1350,7 @@ Action: Reduce your threat by 3.",
             Cards.Add(new Card() {
                 Title = "Círdan",
                 NormalizedTitle = "Cirdan",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b47b0c9d-67d8-49cf-b481-e812cb6aa4df",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1370,7 +1369,7 @@ Action: Reduce your threat by 3.",
             Cards.Add(new Card() {
                 Title = "Eärendil",
                 NormalizedTitle = "Earendil",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "464a02c5-9a1c-4391-bbe8-ed2563a89ae5",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1388,7 +1387,7 @@ Action: Reduce your threat by 3.",
             });
             Cards.Add(new Card() {
                 Title = "Ecthelion",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "370caea5-4a48-4031-b416-608b66880dbb",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1407,7 +1406,7 @@ Action: Reduce your threat by 3.",
             Cards.Add(new Card() {
                 Title = "Fëanor",
                 NormalizedTitle = "Feanor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "8147cf97-844f-41db-a6cb-456bb2d8d1bb",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1429,7 +1428,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Fingolfin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "2aa57f53-97d0-45e9-9254-9c064889d1ea",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1448,7 +1447,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Fingon",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "69a4e781-151b-4d30-a24e-6137009bf22e",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1466,7 +1465,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Finrod Felagund",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "cf173190-392e-47d7-8d04-b3401434296e",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1484,7 +1483,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Haleth",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "877ac60b-3a6d-48b0-8bb8-5a5ae8d5ff4c",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1503,7 +1502,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             Cards.Add(new Card() {
                 Title = "Húrin",
                 NormalizedTitle = "Hurin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "612a0a90-b2d9-49c4-88af-8d99fbd00dab",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1521,7 +1520,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Idril Celebrindal",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3944f3e6-15bc-4af6-8e50-b92a7f8d20d6",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1540,7 +1539,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             Cards.Add(new Card() {
                 Title = "Lúthien",
                 NormalizedTitle = "Luthien",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "267a3597-c2d2-4de0-8121-4c3e71678b2f",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1558,7 +1557,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Thingol",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "31de6df1-d605-4ad4-ac36-29f717bfc92e",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1576,7 +1575,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Turgon",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "6eae327e-c827-4f1a-97aa-01967e3c9051",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1595,7 +1594,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             Cards.Add(new Card() {
                 Title = "Túrin Turambar",
                 NormalizedTitle = "Turin Turambar",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "401c19ae-f7b8-4ce8-80ec-06c14ef6b323",
                 IsUnique = true,
                 CardType = CardType.Hero,
@@ -1613,7 +1612,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth the Wolf of Angband",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "0577b869-c00d-47dd-bb49-95e0b08022ec",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -1635,7 +1634,7 @@ When Revealed: Add 1 damage to the current quest stage.",
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth the Devouring Spirit",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "63ab237a-2da9-41a1-977a-9a64cd17cb74",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -1657,7 +1656,7 @@ When Revealed: Carcharoth the Devouring Spirit makes an immediate attack on the 
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth the Red Maw",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "b2fb8e22-c2c4-4cab-be7a-2fb1f30916bc",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -1679,7 +1678,7 @@ Forced: Caracharoth the Red Maw makes two attacks during the combat phase. (Deal
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth the Tormented",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1b1b1030-6a1c-43dc-94d3-85a2515e4e81",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -1701,7 +1700,7 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
             });
             Cards.Add(new Card() {
                 Title = "Banks of the Esgalduin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "20e151a1-5ed2-49c7-9d6c-f8fa7cea829d",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "River.", "Water." },
@@ -1716,7 +1715,7 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
             });
             Cards.Add(new Card() {
                 Title = "Brethil Dwelling",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "e6eb53ee-ae0c-4cec-b221-10fbe03b6d91",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Outpost." },
@@ -1731,7 +1730,7 @@ Forced: After an attack by Carcharoth the Tormented resolves, discard one charac
             });
             Cards.Add(new Card() {
                 Title = "Dark Valley",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "e24b29f1-50ac-4c3d-a844-a5d75298f1c7",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -1750,7 +1749,7 @@ Travel: Carcharoth makes an immediate attack against the first player.",
             });
             Cards.Add(new Card() {
                 Title = "Dimbar Field",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a89e2f4f-67fd-41e8-aae4-2635b066784c",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Plain." },
@@ -1769,7 +1768,7 @@ Travel: Discard all allies in each player's hand.",
             });
             Cards.Add(new Card() {
                 Title = "Eaves of Region",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "2c2b1c05-919a-43a3-bccb-828d09d4a1f2",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Forest." },
@@ -1788,7 +1787,7 @@ Travel: Each player must discard 1 random card from his hand.",
             });
             Cards.Add(new Card() {
                 Title = "Gates of Menegroth",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "da73fa42-76b3-4ca0-8d93-339a6c503691",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -1803,7 +1802,7 @@ Travel: Each player must discard 1 random card from his hand.",
             });
             Cards.Add(new Card() {
                 Title = "Iant Iaur",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "36475989-914f-4190-a619-6bc032c19034",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -1819,7 +1818,7 @@ Travel: Each player must discard 1 random card from his hand.",
             });
             Cards.Add(new Card() {
                 Title = "Neldoreth Settlement",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "f477641e-650d-4025-9abb-a5ef12bd9663",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Outpost." },
@@ -1835,7 +1834,7 @@ Travel: Each player must discard 1 random card from his hand.",
             });
             Cards.Add(new Card() {
                 Title = "Pass of Anach",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "5f09bd7b-f321-4531-81e3-58a8c1e4befb",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -1851,7 +1850,7 @@ Travel: Each player must discard 1 random card from his hand.",
             });
             Cards.Add(new Card() {
                 Title = "Taur-nu-Fuin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a2ca8cfa-856d-43ab-bae7-fea5c55bb786",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Forest.", "Dark." },
@@ -1866,7 +1865,7 @@ Travel: Each player must discard 1 random card from his hand.",
             });
             Cards.Add(new Card() {
                 Title = "Beleg Strongbow",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "cad9261a-140a-4aaf-82d3-07229e9f1fce",
                 IsUnique = true,
                 CardType = CardType.Objective,
@@ -1885,7 +1884,7 @@ Travel: Each player must discard 1 random card from his hand.",
                 Title = "At Last Upon the Wolf",
                 HasSecondImage = true,
                 StageNumber = 2,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "e0d350d5-742f-4924-863a-4db922a71a8a",
                 CardType = CardType.Quest,
                 Quantity = 1,
@@ -1905,7 +1904,7 @@ If Carcharoth the Tormented is destroyed, you have recovered the Silmaril and wo
                 Title = "Ride Forth in the Morning",
                 HasSecondImage = true,
                 StageNumber = 1,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "1187c127-c5ef-45fa-962f-ff3d54ac7fe9",
                 CardType = CardType.Quest,
                 QuestPoints = 20,
@@ -1926,7 +1925,7 @@ Players cannot advance to stage 2 unless Carcharoth has at least 10 damage on hi
                 Title = "Ruin Upon the World",
                 HasSecondImage = true,
                 StageNumber = 3,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "444d39bf-aee8-488e-ad06-ee36445e5ec4",
                 CardType = CardType.Quest,
                 QuestPoints = null,
@@ -1947,7 +1946,7 @@ If Gates of Menegroth is destroyed, the players lose the game.",
             Cards.Add(new Card() {
                 Title = "Hunting of the Wolf",
                 SlugIncludesType = true,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "db41eb04-4428-4b6f-8a7f-358cb4507a74",
                 CardType = CardType.Campaign,
@@ -1978,7 +1977,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "A Doom Fulfilled",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "59f3a810-fc7e-4aa3-bbc6-2d66dc489909",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Doom." },
@@ -1991,7 +1990,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Devil's Cunning",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "98a5aadf-1e0f-4d9f-b774-edc353311bf0",
                 CardType = CardType.Treachery,
                 Quantity = 3,
@@ -2002,7 +2001,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Espied from Afar",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "c851ed2b-b69b-4f99-94cd-62c078e3d260",
                 CardType = CardType.Treachery,
                 Quantity = 2,
@@ -2013,7 +2012,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Evil Days",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "3cd659f1-0aa4-4466-a654-f9a4bd4ecc6a",
                 CardType = CardType.Treachery,
                 Quantity = 3,
@@ -2024,7 +2023,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Flame of Anguish",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "170846a1-d160-43fd-b56d-83bcb97c661a",
                 CardType = CardType.Treachery,
                 Quantity = 3,
@@ -2036,7 +2035,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Fled in Fear",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "62db2179-f1a9-4447-957e-9ca03f503cc5",
                 CardType = CardType.Treachery,
                 Quantity = 3,
@@ -2048,7 +2047,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Stood Now in Wrath",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9a0d9373-9886-4f4a-848e-969d612b5212",
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Surge." },
@@ -2061,7 +2060,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Crazed Thrall",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "eb8ca983-1634-4be3-a327-e2c881a9490a",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Thrall." },
@@ -2078,7 +2077,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Devouring Werewolf",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "bcbde72b-55fa-487e-a3ff-9547c34d7e5e",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -2097,7 +2096,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Draugluin",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "fe9fb08b-52e3-4bc1-b55d-d5994fbab19c",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -2117,7 +2116,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Guard Wolf",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "282c7b69-c8c3-454f-ac9d-3d99175dd6c2",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
@@ -2135,7 +2134,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Hunting Wolf",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "7e54d64b-8b77-467c-b482-352cd9f9d9ef",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
@@ -2153,7 +2152,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Monstrous Bat",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "cb6a1b6a-3f57-4184-90cb-7d46d0173457",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Vampire." },
@@ -2170,7 +2169,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Ravenous Werewolf",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9e13b25d-2797-42be-812a-3af05738318e",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
@@ -2188,7 +2187,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Thuringwethil",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "29d1487e-e223-4569-96ba-ac53a251eaba",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -2207,7 +2206,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Wolf-Sauron",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "86f818f2-aad7-4a8f-9bc8-c06ef4fae756",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -2227,7 +2226,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "No Living Creature",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "ec67d8da-eac3-461b-ab76-e7eea78542a4",
                 CardType = CardType.Event,
                 Traits = new List<string>() { "Maia." },
@@ -2239,7 +2238,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Bridge to the Isle",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "86c20ae9-1c32-4ea5-aacc-ac8e470fbb10",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -2256,7 +2255,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Dark Hills",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "655a251a-c839-4d93-a455-4cb7ac94f57a",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Hills." },
@@ -2271,7 +2270,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Deep Pit",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "020cc51d-16d3-4c81-9223-8e19874ead9d",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Dungeon." },
@@ -2285,7 +2284,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "Gates of Tol-in-Gaurhoth",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a9e19cb1-947a-49f4-a1b9-afbd9ce3da09",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Fortification." },
@@ -2300,7 +2299,7 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
             });
             Cards.Add(new Card() {
                 Title = "High Tower",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "0951f775-17ab-465f-9776-7495f45fa3b0",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -2318,7 +2317,7 @@ Response: After High Tower is explored as the active location, remove one Condit
             });
             Cards.Add(new Card() {
                 Title = "Vacant Pit",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "db13208a-926b-4037-bda4-aa5461efd0f3",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Dungeon." },
@@ -2333,7 +2332,7 @@ Response: After High Tower is explored as the active location, remove one Condit
             });
             Cards.Add(new Card() {
                 Title = "Walls of Stone",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "eb292959-22e1-4e25-ae41-b2ad77549962",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Fortification." },
@@ -2348,7 +2347,7 @@ Response: After High Tower is explored as the active location, remove one Condit
             });
             Cards.Add(new Card() {
                 Title = "Eyes in the Dark",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "111d8917-7733-41a8-8941-b24698ed17e4",
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Devoured." },
@@ -2361,7 +2360,7 @@ Response: After High Tower is explored as the active location, remove one Condit
             Cards.Add(new Card() {
                 Title = "Finrod Felagund",
                 SlugIncludesType = true,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "829081e4-0ffa-41ea-9bb4-cb6d64aa06cc",
                 IsUnique = true,
                 CardType = CardType.Objective,
@@ -2379,7 +2378,7 @@ Response: After High Tower is explored as the active location, remove one Condit
             Cards.Add(new Card() {
                 Title = "The Pits of Sauron",
                 StageNumber = 2,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "62abfd48-b415-402f-bcd8-df92ae5a1b27",
                 CardType = CardType.Quest,
@@ -2399,7 +2398,7 @@ If the captured hero is destroyed, the players lose the game. If Devouring Werew
             Cards.Add(new Card() {
                 Title = "Tol-in-Gaurhoth",
                 StageNumber = 3,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "4016a752-46bf-4574-9c14-a51e4835bc0b",
                 CardType = CardType.Quest,
@@ -2419,7 +2418,7 @@ If the players destroy Wolf-Sauron, they have rescued the prisoners and won the 
             Cards.Add(new Card() {
                 Title = "Upon the Bridge",
                 StageNumber = 1,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "c794640f-5ecb-4ba2-a414-374ccc8d466f",
                 CardType = CardType.Quest,
@@ -2437,7 +2436,7 @@ When this stage is completed, advance to stage 3A. This stage cannot be complete
             Cards.Add(new Card() {
                 Title = "Isle of Werewolves",
                 SlugIncludesType = true,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "f03bc416-e4cd-4bda-944c-51a33a55b1d0",
                 CardType = CardType.Campaign,
@@ -2462,7 +2461,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Foul Vapour",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "9f27803d-8a57-4512-914c-9a9435e947b6",
                 CardType = CardType.Treachery,
                 Quantity = 2,
@@ -2474,7 +2473,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Lord of Werewolves",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "5f59b83c-45bc-4625-9ff9-160019cb9ae2",
                 CardType = CardType.Treachery,
                 Quantity = 2,
@@ -2486,7 +2485,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Master of Shadows",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "48540efb-e1d0-4453-a50e-c5cbb80fc176",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Maia." },
@@ -2498,7 +2497,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Song of Wizardry",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "47fafb31-e329-4fc6-aa95-93a9ffb3dc8e",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Song." },
@@ -2511,7 +2510,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Weight of Horror",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "4bcbe3a9-c908-46f8-b5b0-a459564067fa",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Condition." },
@@ -2523,7 +2522,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Angband Orc",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "c020347f-a024-48f6-97de-8a9e73003739",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Orc." },
@@ -2542,7 +2541,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Balrog of Angband",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "a35bb6d5-566b-4836-a792-3ab6b14c775e",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Balrog." },
@@ -2562,7 +2561,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
             });
             Cards.Add(new Card() {
                 Title = "Carcharoth",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "ad033513-3b27-4410-9171-5e890667fa15",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -2585,7 +2584,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Fire-drake",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "e1a095dc-996f-4b3c-b17a-a20bc10f8953",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Dragon." },
@@ -2605,7 +2604,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Gothmog",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "28ae9d78-15e7-4fbe-b156-e9ead6a37886",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -2625,7 +2624,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Long-worm",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "4f26696d-0dc1-4e1e-883d-5ee7789c6339",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Dragon." },
@@ -2644,7 +2643,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Morgoth",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "f01c44ef-3494-48b4-abe7-f4d5213a3216",
                 IsUnique = true,
                 CardType = CardType.Enemy,
@@ -2663,7 +2662,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Orc Captain",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "08a9cee0-543b-4251-a085-2cb869140cd4",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Orc." },
@@ -2681,7 +2680,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Troll of Angband",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "ad8cf095-594e-4d14-adef-aafa4f31e60c",
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Troll." },
@@ -2700,7 +2699,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Echoing Corridor",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "f77d7157-b5e6-4b8f-b3e0-fa4d512d214a",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Underground." },
@@ -2715,7 +2714,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Labyrinthine Stairs",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d4263007-1ce9-4437-92a8-e6031cff3b09",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Underground." },
@@ -2730,7 +2729,7 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
             });
             Cards.Add(new Card() {
                 Title = "Nethermost Hall",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "32bd3aaa-a8bb-4258-9b17-28beeeb3430b",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -2751,7 +2750,7 @@ Travel: Search the encounter deck and discard pile for Gothmog and add him to th
             });
             Cards.Add(new Card() {
                 Title = "Orc Armory",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "692fd26f-06c5-4375-ba1c-ed7cf26df1d9",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Armory." },
@@ -2766,7 +2765,7 @@ Travel: Search the encounter deck and discard pile for Gothmog and add him to th
             });
             Cards.Add(new Card() {
                 Title = "Pits of Angband",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d6362581-bf1a-4e9f-9059-9ef492ed157f",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -2788,7 +2787,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Subterranean Furnace",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "47564431-f77f-4389-879f-491e580d1704",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Underground." },
@@ -2802,7 +2801,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Thrall Quarters",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "85a7618b-8f0c-4ba2-8489-00aa65c9610c",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -2819,7 +2818,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Torturer's Dungeon",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "8c616380-0331-4e90-80b7-f0451ac75eb5",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Chamber." },
@@ -2833,7 +2832,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Trackless Cavern",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "fb3baa06-68d4-40c8-8154-97c1ee0f156b",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Underground.", "Dark." },
@@ -2847,7 +2846,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Tunnels of Shadow",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "c74ed070-15f4-4f80-bbe9-ce678a9cb935",
                 IsUnique = true,
                 CardType = CardType.Location,
@@ -2863,7 +2862,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Angband Sword",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "0921abfd-2cd7-493f-878b-ad4cb99e010c",
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Item.", "Weapon." },
@@ -2876,7 +2875,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Dreadful Garments",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "78db9650-a652-4a3d-bff4-1423cbfb83e2",
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Disguise." },
@@ -2888,7 +2887,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Element of Surprise",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d2d61431-56a0-4aa4-8900-d9ba9aec4703",
                 CardType = CardType.Objective,
                 Traits = new List<string>() { "Initiative." },
@@ -2900,7 +2899,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             });
             Cards.Add(new Card() {
                 Title = "Silmaril",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "8b38140d-9a06-4155-8bb3-f803ff353520",
                 IsUnique = true,
                 CardType = CardType.Objective,
@@ -2914,7 +2913,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
             Cards.Add(new Card() {
                 Title = "Descent into Darkness",
                 StageNumber = 2,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "53d6dc87-a084-4220-ad38-a39e655f1d44",
                 CardType = CardType.Quest,
@@ -2934,7 +2933,7 @@ The players cannot advance unless Nethermost Hall is in the victory display.",
             Cards.Add(new Card() {
                 Title = "Doors of Angband",
                 StageNumber = 1,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "5d55e464-f59d-454f-971c-a35f1376a420",
                 CardType = CardType.Quest,
@@ -2952,7 +2951,7 @@ If Carcharoth has 0 hit points, advance to stage 2 immediately.",
             Cards.Add(new Card() {
                 Title = "The Greatest Deed",
                 StageNumber = 3,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "7272499a-1047-4431-82d8-83e88e7de3e5",
                 CardType = CardType.Quest,
@@ -2971,7 +2970,7 @@ The players cannot advance to the next stage unless they control the Silmaril ob
             Cards.Add(new Card() {
                 Title = "To See the Light",
                 StageNumber = 4,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "8432e9fc-ecb8-4948-a6dd-d75dad26e42e",
                 CardType = CardType.Quest,
@@ -2989,7 +2988,7 @@ If the players defeat this stage or Carcharoth has 0 hit points, the players hav
             Cards.Add(new Card() {
                 Title = "The Seat of Morgoth",
                 SlugIncludesType = true,
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 HasSecondImage = true,
                 Id = "1ad0b223-e659-4358-bf3e-fbc687cba2aa",
                 CardType = CardType.Campaign,
@@ -3018,7 +3017,7 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
             });
             Cards.Add(new Card() {
                 Title = "Clumsy Step",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "d17ece37-4951-4dbf-a5b9-0b07092e8c5f",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Noise." },
@@ -3031,7 +3030,7 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
             });
             Cards.Add(new Card() {
                 Title = "Devouring Spirit",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "11916b96-fe83-4a57-985d-4fb1746d4cfc",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Condition." },
@@ -3043,7 +3042,7 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
             });
             Cards.Add(new Card() {
                 Title = "Evil Lust",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "092d5e7a-6483-4ded-98c3-fa4478169f1f",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Condition." },
@@ -3055,7 +3054,7 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
             });
             Cards.Add(new Card() {
                 Title = "Filth and Desolation",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "074cb89d-4815-49d8-aa9b-07abd3c5331a",
                 CardType = CardType.Treachery,
                 Quantity = 2,
@@ -3067,7 +3066,7 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
             });
             Cards.Add(new Card() {
                 Title = "Foolish Ruckus",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "715771dc-35aa-477e-a28f-e0d9e2954b54",
                 CardType = CardType.Treachery,
                 Traits = new List<string>() { "Noise." },
@@ -3080,7 +3079,7 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
             });
             Cards.Add(new Card() {
                 Title = "Heroic Diversion",
-                ImageType = ImageType.Png,
+                ImageType = ImageType.Jpg,
                 Id = "083af9c9-b1b3-4185-b09b-59eff4440f10",
                 CardType = CardType.Treachery,
                 Keywords = new List<string>() { "Doomed 1." },
@@ -3091,5 +3090,5 @@ When engaged with an enemy with the Sneak keyword, players may cancel all progre
                 Artist = Artist.Jenny_Dolfen
             });
         }
-    }*/
+    }
 }

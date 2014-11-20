@@ -363,7 +363,7 @@ namespace HallOfBeorn.Services
             productGroups.Add(new GenConDeckProductGroup());
             productGroups.Add(new NightmareDeckProductGroup());
 
-            //productGroups.Add(new CustomProductGroup());
+            productGroups.Add(new CustomProductGroup());
 
             foreach (var productGroup in productGroups)
             {
@@ -1133,6 +1133,9 @@ namespace HallOfBeorn.Services
                 case "unique":
                     predicate = (card) => { return card.IsUnique; };
                     break;
+                case "custom":
+                    predicate = (card) => { return card.CardSet.SetType == SetType.Custom_Expansion; };
+                    break;
                 default:
                     break;
             }
@@ -1260,6 +1263,9 @@ namespace HallOfBeorn.Services
                         results = FilterByByte(field, value, results, negate);
                         break;
                     case "unique":
+                        results = FilterByBool(field, results, negate);
+                        break;
+                    case "custom":
                         results = FilterByBool(field, results, negate);
                         break;
                     default:
