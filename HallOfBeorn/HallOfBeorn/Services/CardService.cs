@@ -1200,8 +1200,9 @@ namespace HallOfBeorn.Services
             return results;
         }
 
-        private List<Card> AdvancedSearch(string query, List<Card> results)
+        private List<Card> AdvancedSearch(SearchViewModel searchModel, List<Card> results)
         {
+            var query = searchModel.Query;
             var filters = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe().Where(x => x.StartsWith("-") || x.StartsWith("+")).ToListSafe();
 
             foreach (var filter in filters)
@@ -1267,6 +1268,10 @@ namespace HallOfBeorn.Services
                         break;
                     case "custom":
                         results = FilterByBool(field, results, negate);
+                        if (!negate)
+                        {
+                            searchModel.Custom = true;
+                        }
                         break;
                     default:
                         break;
@@ -1427,14 +1432,13 @@ namespace HallOfBeorn.Services
 
             if (isAdvancedSearch)
             {
-                results = AdvancedSearch(model.Query, results);
+                results = AdvancedSearch(model, results);
             }
 
             var takeCount = hasFilter || model.Random ? results.Count : maxResults;
 
             results = results.Take(takeCount).ToList();
 
-            /*
             if (!model.Custom)
             {
                 if ((model.CardSet == null || model.CardSet == "Any") && (model.EncounterSet == null || model.EncounterSet == "Any") && model.Sphere != Sphere.Mastery)
@@ -1442,7 +1446,6 @@ namespace HallOfBeorn.Services
                     results = results.Where(x => x.CardSet.SetType != SetType.Custom_Expansion).ToList();
                 }
             }
-            */
 
             if (model.Random)
             {
