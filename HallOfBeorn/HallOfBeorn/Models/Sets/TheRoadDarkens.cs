@@ -949,7 +949,7 @@ Forced: At the end of the quest phase, The ~Balrog makes an attack if it is in p
                 HitPoints = 3,
                 Traits = new List<string> { "Orc." },
                 Keywords = new List<string> { "Peril.", "Archery 2." },
-                Text = "When Revealed: Assign X damage among characters you control.",
+                Text = "X is the number of players in the game.\r\nWhen Revealed: Assign X damage among characters you control.",
                 EncounterSet = "Journey in the Dark",
                 Number = 49,
                 Quantity = 3,
