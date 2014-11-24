@@ -25,9 +25,8 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 2,
                 IsUnique = true,
                 Traits = new List<string>() { "Mount." },
-                Text = "Action: Exhaust Asfaloth to place 1 progress token on any location. (2 tokens instead if attached hero is Glorfindel.)",
+                Text = "Attach to a Noldor or Silvan hero.\r\nAction: Exhaust Asfaloth to place 1 progress token on any location. (2 tokens instead if attached hero is Glorfindel.)",
                 FlavorText = "Suddenly into view below came a white horse, gleaming in the shadows, running swiftly. In the dusk its headstall flickered and flashed as if it were studded with gems like living stars. -The Fellowship of the Ring",
-                Keywords = new List<string>() { "Attach to a Noldor or Silvan hero." },
                 Number = 110,
                 Artist = Artist.Sandara_Tang
             });
@@ -219,8 +218,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Lore,
                 Quantity = 3,
                 ResourceCost = 0,
-                Text = "Action: Discard Healing Herbs and exhaust attached hero to heal all damage on 1 character.",
-                Keywords = new List<string>() { "Attach to a Lore hero." },
+                Text = "Attach to a Lore hero.\r\nAction: Discard Healing Herbs and exhaust attached hero to heal all damage on 1 character.",
                 Number = 109,
                 Artist = Artist.Sara_Biddle
             });
@@ -264,9 +262,8 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 IsUnique = true,
-                Text = "Attached hero does not exhaust to commit to a quest.",
+                Text = "Attach to a Noldor or Silvan hero.\r\nAttached hero does not exhaust to commit to a quest.",
                 FlavorText = "\"... those who have dwelt in the blassed realm live at once in both worlds, and against both the Seen and Unseen they have great power.\"\r\n-Gandalf, The Fellowship of the Ring",
-                Keywords = new List<string>() { "Attach to a Noldor or Silvan hero." },
                 Number = 107,
                 Artist = Artist.Lin_Bo
             });

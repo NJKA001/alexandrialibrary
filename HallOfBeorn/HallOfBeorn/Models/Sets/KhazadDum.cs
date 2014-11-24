@@ -159,8 +159,7 @@ If players defeat this stage, they win the game.",
                 Traits = new List<string>() { "Item." },
                 Quantity = 3,
                 ResourceCost = 0,
-                Text = "Limit 1 Boots from Erebor per character.\r\nAttached character gets +1 hit point.",
-                Keywords = new List<string>() { "Attach to a Dwarf or Hobbit character." },
+                Text = "Attach to a Dwarf or Hobbit character. Limit 1 Boots from Erebor per character.\r\nAttached character gets +1 hit point.",
                 Number = 13,
                 Artist = Artist.Carolina_Eade
             });
@@ -228,8 +227,8 @@ If players defeat this stage, they win the game.",
                 EncounterSet = "Twists and Turns",
                 Traits = new List<string>() { "Light." },
                 Quantity = 1,
-                Text = "Action: Exhaust Cave Torch to place up to 3 progress tokens on a Dark location.Forced: After Cave Torch exhausts, discard the top card of the encounter deck. If that card is an enemy, add it to the staging area.",
-                Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
+                Text = "Attach to a hero.\r\nAction: Exhaust Cave Torch to place up to 3 progress tokens on a Dark location.Forced: After Cave Torch exhausts, discard the top card of the encounter deck. If that card is an enemy, add it to the staging area.",
+                Keywords = new List<string>() { "Restricted." },
                 Number = 41,
                 Artist = Artist.David_Lecossu
             });
@@ -371,9 +370,9 @@ And runes of power upon the door.
                 Traits = new List<string>() { "Item.", " Weapon." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached character gets +1 Attack.Response: After attached character attacks, deal 1 damage to the defending enemy.",
+                Text = "Attach to a Dwarf character.\r\nAttached character gets +1 Attack.\r\nResponse: After attached character attacks, deal 1 damage to the defending enemy.",
                 FlavorText = "\"We make good armour and keen swords, but we cannot again make mail or blade to match those that were made before the dragon came.\" -Gloin, The Fellowship of the Ring",
-                Keywords = new List<string>() { "Attach to a Dwarf character.", " Restricted." },
+                Keywords = new List<string>() { "Restricted." },
                 Number = 7,
                 Artist = Artist.Carolina_Eade
             });
@@ -488,8 +487,7 @@ Action: Exhaust Erebor ~Record Keeper and pay 1 Lore resource to choose and read
                 Attack = 1,
                 Defense = 3,
                 HitPoints = 1,
-                Text = "Characters with ranged are eligible to attack Goblin Archer while it is in the staging area.Forced: After an enemy is revealed from the encounter deck, the first player must deal 1 damage to 1 character he controls.",
-                Keywords = new List<string>() { "Players cannot optionally engage [Card]." },
+                Text = "Players cannot optionally engaged Goblin Archer.\r\nCharacters with ranged are eligible to attack Goblin Archer while it is in the staging area.Forced: After an enemy is revealed from the encounter deck, the first player must deal 1 damage to 1 character he controls.",
                 Threat = 2,
                 Number = 32,
                 Artist = Artist.Salvador_Trakal
@@ -727,8 +725,7 @@ If there are no enemies in play, immediately advance to the next stage of the sc
                 Quantity = 3,
                 ResourceCost = 2,
                 IsUnique = true,
-                Text = "Action: Exhaust Narvi's Belt to give attached hero a Leadership, Lore, Tactics, or Spirit icon until the end of the phase.",
-                Keywords = new List<string>() { "Attach to a Dwarf hero." },
+                Text = "Attach to a Dwarf hero.\r\nAction: Exhaust Narvi's Belt to give attached hero a Leadership, Lore, Tactics, or Spirit icon until the end of the phase.",
                 Number = 3,
                 Artist = Artist.Carolina_Eade,
                 HasErrata = true

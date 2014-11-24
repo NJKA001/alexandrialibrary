@@ -43,8 +43,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Leadership,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Signal." },
-                Text = "Attached hero gains +1 Attack.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Mark to another hero.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAttached hero gains +1 Attack.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Mark to another hero.",
                 Quantity = 3,
                 Number = 2,
                 Artist = Artist.Joko_Mulyono,
@@ -102,14 +101,13 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Neutral,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Song." },
-                Text = "Attached hero gains a Leadership resource icon.",
+                Text = "Attach to a hero.\r\nAttached hero gains a Leadership resource icon.",
                 FlavorText = 
 @"From the ashes a fire shall be woken,
 A light from the shadows shall spring: 
 Renewed shall be blade that was broken,
 The crownless again shall be king.
 -The Fellowship of the Ring",
-                Keywords = new List<string>() { "Attach to a hero." },
                 Quantity = 3,
                 Number = 10,
                 Artist = Artist.John_Gravato

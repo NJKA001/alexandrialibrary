@@ -141,8 +141,7 @@ Attached hero gets +1 Defense.",
                 Traits = new List<string>() { "Condition." },
                 Quantity = 3,
                 ResourceCost = 0,
-                Text = "Response: After you travel to a Mountain or Underground location, ready attached character and reduce your threat by 1.",
-                Keywords = new List<string>() { "Attach to a Dwarf character." },
+                Text = "Attach to a Dwarf character.\r\nResponse: After you travel to a Mountain or Underground location, ready attached character and reduce your threat by 1.",
                 Number = 82,
                 Artist = Artist.Carolina_Eade
             });
@@ -305,8 +304,8 @@ Attached hero gets +1 Defense.",
                 Traits = new List<string>() { "Item.", " Armor." },
                 Quantity = 3,
                 ResourceCost = 2,
-                Text = "Attached character gets +1 hit point and +1 Defense.",
-                Keywords = new List<string>() { "Attach to a Dwarf or Hobbit character.", " Restricted." },
+                Text = "Attach to a Dwarf or Hobbit character.\r\nAttached character gets +1 hit point and +1 Defense.",
+                Keywords = new List<string>() { "Restricted." },
                 Number = 80,
                 Artist = Artist.Magali_Villeneuve
             });

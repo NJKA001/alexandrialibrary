@@ -106,9 +106,8 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Traits = new List<string>() { "Condition." },
                 Quantity = 3,
                 ResourceCost = 0,
-                Text = "Action: Discard Born Aloft from play to return attached ally to its owner's hand.",
+                Text = "Attach to an ally.\r\nAction: Discard Born Aloft from play to return attached ally to its owner's hand.",
                 FlavorText = "\"Very well,\" said Gandalf. \"Take us where and as far as you will!\" -The Hobbit",
-                Keywords = new List<string>() { "Attach to an ally." },
                 Number = 29,
                 Artist = Artist.Salvador_Trakal
             });
@@ -122,8 +121,7 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Traits = new List<string>() { "Signal." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached hero gains +1 Defense.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Warning to another hero.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAttached hero gains +1 Defense.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Warning to another hero.",
                 Number = 26,
                 Artist = Artist.Taufiq,
                 SecondArtist = Artist.Vicki_Pangestu
@@ -157,9 +155,8 @@ Players cannot defeat this stage if there are any Troll enemies in play.",
                 Traits = new List<string>() { "Item." },
                 Quantity = 3,
                 ResourceCost = 2,
-                Text = "While attached character is defending, cancel any shadow effects on cards dealt to the attacking enemy.",
+                Text = "Attach to a Lore character.\r\nWhile attached character is defending, cancel any shadow effects on cards dealt to the attacking enemy.",
                 FlavorText = "\"Keep close to the fire, with your faces outward!\" cried Strider. \"Keep some of th elonger sticks ready in your hands.\" -The Fellowship of the Ring",
-                Keywords = new List<string>() { "Attach to a Lore character." },
                 Number = 33,
                 Artist = Artist.Toni_Justamante_Jacobs
             });
@@ -286,9 +283,8 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Traits = new List<string>() { "Title." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached character gains the Rohan trait.",
+                Text = "Attach to a character.\r\nAttached character gains the Rohan trait.",
                 FlavorText = "\"Nor indeed am I a stranger: for I have been in this land before, more than once, and ridden with the host of the Rohirrim, though under other name and in other guise.\" -Aragorn, The Two Towers",
-                Keywords = new List<string>() { "Attach to a character." },
                 Number = 31,
                 Artist = Artist.Magali_Villeneuve
             });
@@ -386,8 +382,7 @@ Action: Spend 1 Leadership resource to place that resource on Grimbeorn the Old.
                 Traits = new List<string>() { "Song." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached hero gains a Lore resource icon.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAttached hero gains a Lore resource icon.",
                 Number = 34,
                 Artist = Artist.Magali_Villeneuve
             });

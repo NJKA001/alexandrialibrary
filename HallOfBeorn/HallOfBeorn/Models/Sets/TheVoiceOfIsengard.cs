@@ -164,8 +164,8 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 IsUnique = false,
                 Quantity = 3,
                 Traits = new List<string>() { "Mount." },
-                Keywords = new List<string> { "Attach to a Tactics or Rohan hero.", "Restricted." },
-                Text = "Response: After attached hero participates in an attack that destroys an enemy, exhaust Rohan Warhorse to ready attached hero.",
+                Keywords = new List<string> { "Restricted." },
+                Text = "Attach to a Tactics or Rohan hero.\r\nResponse: After attached hero participates in an attack that destroys an enemy, exhaust Rohan Warhorse to ready attached hero.",
                 FlavorText = "Their horses were of great stature, strong and clean-limbed... -The Two Towers",
                 Number = 8,
                 Artist = Artist.Jeff_Lee_Johnson
@@ -180,8 +180,7 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 IsUnique = false,
                 Quantity = 3,
                 Traits = new List<string>() { "Item." },
-                Keywords = new List<string> { "Attach to a Spirit hero." },
-                Text = "While attached hero is ready, shadow cards dealt to enemies engaged with you are dealt face up. ~(Shadow card effects are still resolved when resolving enemy attacks.)",
+                Text = "Attach to a Spirit hero.\r\nWhile attached hero is ready, shadow cards dealt to enemies engaged with you are dealt face up. ~(Shadow card effects are still resolved when resolving enemy attacks.)",
                 FlavorText = "...one of them uncovered a small lamp that gave out a slender silver beam. -The Fellowship of the Ring",
                 Number = 9,
                 Artist = Artist.Owen_William_Weber
@@ -196,8 +195,7 @@ Response: After Saruman enters play, choose a non-unique enemy or location in th
                 IsUnique = true,
                 Quantity = 3,
                 Traits = new List<string>() { "Item." },
-                Keywords = new List<string> { "Attach to a hero." },
-                Text = "Response: After you raise your threat from the Doomed keyword, exhaust Keys of Othanc to add 1 resource to attached hero's resource pool.",
+                Text = "Attach to a hero.\r\nResponse: After you raise your threat from the Doomed keyword, exhaust Keys of Othanc to add 1 resource to attached hero's resource pool.",
                 FlavorText = "\"He has the Key of Orthanc\" -Gandalf, The Two Towers",
                 Number = 10,
                 Artist = Artist.Magali_Villeneuve

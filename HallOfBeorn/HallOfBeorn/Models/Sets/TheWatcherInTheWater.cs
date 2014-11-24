@@ -146,8 +146,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 1,
                 IsUnique = true,
-                Text = "Response: After you play a Dwarf character from your hand, draw 1 card.",
-                Keywords = new List<string>() { "Attach to a Dwarf hero." },
+                Text = "Attach to a Dwarf hero.\r\nResponse: After you play a Dwarf character from your hand, draw 1 card.",
                 Number = 61,
                 Artist = Artist.Ilich_Henriquez
             });
@@ -278,8 +277,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 3,
                 IsUnique = true,
-                Text = "Attached hero gains a Leadership resource icon.\r\nIf attached hero is Aragorn, each character you control gets +1 Willpower.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero. Attached hero gains a Leadership resource icon.\r\nIf attached hero is Aragorn, each character you control gets +1 Willpower.",
                 Number = 55,
                 Artist = Artist.Sara_Biddle
             });

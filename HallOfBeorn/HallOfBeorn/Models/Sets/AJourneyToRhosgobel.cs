@@ -100,9 +100,8 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Spirit,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Mathom." },
-                Text = "Response: After attached location is explored, the first player draws 3 cards.",
+                Text = "Attach to a location.\r\nResponse: After attached location is explored, the first player draws 3 cards.",
                 FlavorText = "The Mathom-house it was called; for anything that Hobbits had no immediate use for, but were unwilling to throw away, they called a mathom. Their dwellings were apt to become rather crowded with mathoms... -The Fellowship of the Ring",
-                Keywords = new List<string>() { "Attach to a location." },
                 Quantity = 3,
                 Number = 56,
                 Artist = Artist.Anna_Mohrbacher
@@ -142,8 +141,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Leadership,
                 ResourceCost = 2,
                 Traits = new List<string>() { "Signal." },
-                Text = "Attached hero gains +1 Willpower.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Quest to another hero.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAttached hero gains +1 Willpower.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Quest to another hero.",
                 Quantity = 3,
                 Number = 51,
                 Artist = Artist.Leonardo_Borazio

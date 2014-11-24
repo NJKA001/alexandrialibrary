@@ -125,8 +125,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 IsUnique = true,
                 Traits = new List<string>() { "Artifact.", " Item.", " Ring." },
-                Text = "Attached hero gets +1 hit point for each Artifact attachment attached to it.If attached hero is Aragorn, he also gains a Lore resource icon.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAttached hero gets +1 hit point for each Artifact attachment attached to it.\r\nIf attached hero is Aragorn, he also gains a Lore resource icon.",
                 Quantity = 3,
                 Number = 7,
                 Artist = Artist.Sara_Biddle

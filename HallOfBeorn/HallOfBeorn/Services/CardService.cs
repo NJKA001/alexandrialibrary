@@ -20,9 +20,6 @@ namespace HallOfBeorn.Services
             LoadScenarioCards();
             LoadCategories();
 
-            //NOTE: These traits are referenced by scenarios but not included on a player card or encounter card as a trait
-            traits["Captive."] = "Captive.";
-
             /*
             Func<Card, bool> isAutoComplete = (card) =>
                 {
@@ -1441,7 +1438,7 @@ namespace HallOfBeorn.Services
 
             if (!model.Custom)
             {
-                if ((model.CardSet == null || model.CardSet == "Any") && (model.EncounterSet == null || model.EncounterSet == "Any") && model.Sphere != Sphere.Mastery)
+                if ((model.CardSet == null || model.CardSet == "Any") && (model.EncounterSet == null || model.EncounterSet == "Any") && model.Sphere != Sphere.Mastery && (model.Trait == null || model.Trait == "Any") && (model.Keyword == null || model.Keyword == "Any"))
                 {
                     results = results.Where(x => x.CardSet.SetType != SetType.Custom_Expansion).ToList();
                 }

@@ -115,12 +115,10 @@ namespace HallOfBeorn.Models.Sets
                 Id = "4823aae3-46ef-4a75-89f9-cbd3aa1b9007",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Spirit,
-                Keywords = new List<string> { "Attach to a Gondor or Dúnedain hero." },
-                NormalizedKeywords = new List<string>() { "Attach to a Gondor or Dunedain hero." },
                 ResourceCost = 0,
                 Quantity = 3,
                 Traits = new List<string>() { "Condition." },
-                Text = "Action: Spend 1 resource from attached hero's resource pool to give attached hero +1 Defense for each resource in its resource pool until the end of the phase. (Limit once per phase.)",
+                Text = "Attach to a Gondor or Dúnedain hero.\r\nAction: Spend 1 resource from attached hero's resource pool to give attached hero +1 Defense for each resource in its resource pool until the end of the phase. (Limit once per phase.)",
                 FlavorText = "\"Believe not that in the land of Gondor the blood of Numenor is spent, nor all its pride and dignity forgotten.\" -Boromir, The Fellowship of the Ring",
                 Number = 13,
                 Artist = Artist.Magali_Villeneuve

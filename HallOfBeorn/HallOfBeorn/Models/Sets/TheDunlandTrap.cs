@@ -80,9 +80,9 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Models.Sphere.Tactics,
                 Quantity = 3,
                 Traits = new List<string> { "Mount." },
-                Keywords = new List<string> { "Attach to a Tactics or Rohan hero.", "Restricted." },
+                Keywords = new List<string> { "Restricted." },
                 Text =
-@"Attached hero gets +1 Attack (+2 Attack instead if attached hero is Éomer).
+@"Attach to a Tactics or Rohan hero.\r\nAttached hero gets +1 Attack (+2 Attack instead if attached hero is Éomer).
 
 Response: After attached hero attacks alone, exhaust Firefoot to choose a non-unique enemy engaged with you. Excess damage dealt by this attack is assigned to the chosen enemy.",
                 Number = 4,

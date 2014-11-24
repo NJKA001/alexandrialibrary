@@ -126,8 +126,7 @@ namespace HallOfBeorn.Models.Sets
                 Quantity = 3,
                 ResourceCost = 2,
                 IsUnique = true,
-                Text = "Each Dwarf character gets +1 hit point.",
-                Keywords = new List<string>() { "Attach to a Leadership hero." },
+                Text = "Attach to a Leadership hero.\r\nEach Dwarf character gets +1 hit point.",
                 Number = 130,
                 Artist = Artist.Jake_Murray
             });
@@ -225,8 +224,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Traits = new List<string>() { "Item." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Action: Discard Miruvor to (choose two): ready attached hero, add 1 resource to attached hero's resource pool, attached hero gets +1 Willpower until the end of the round, or put Miruvor on the top of your deck.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAction: Discard Miruvor to (choose two): ready attached hero, add 1 resource to attached hero's resource pool, attached hero gets +1 Willpower until the end of the round, or put Miruvor on the top of your deck.",
                 Number = 133,
                 Artist = Artist.Sara_Biddle
             });
@@ -359,8 +357,7 @@ Players cannot win the game while Durin's Bane is in play. If Durin's Bane leave
                 Quantity = 3,
                 ResourceCost = 2,
                 IsUnique = true,
-                Text = "He gains a Spirit resource icon.\r\nAction: Exhaust Elrond and Vilya to reveal the top card of your deck. You can immediately play or put into play the revealed card for no cost, if able. Otherwise, move the revealed card to the bottom of your deck.",
-                Keywords = new List<string>() { "Attach to Elrond." },
+                Text = "Attach to Elrond. He gains a Spirit resource icon.\r\nAction: Exhaust Elrond and Vilya to reveal the top card of your deck. You can immediately play or put into play the revealed card for no cost, if able. Otherwise, move the revealed card to the bottom of your deck.",
                 Number = 137,
                 Artist = Artist.Sara_Biddle
             });

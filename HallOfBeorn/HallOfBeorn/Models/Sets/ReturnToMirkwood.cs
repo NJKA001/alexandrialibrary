@@ -122,8 +122,7 @@ Player cannot defeat this stage if there are any enemies in play. If players def
                 Traits = new List<string>() { "Signal." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached hero gains sentinel.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Signal to another hero.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero. Attached hero gains sentinel.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Signal to another hero.",
                 Number = 117,
                 Artist = Artist.Ijur
             });
@@ -282,9 +281,8 @@ Forced: At the end of each round, raise the threat of the player guarding ~Gollu
                 Traits = new List<string>() { "Boon." },
                 Quantity = 3,
                 ResourceCost = 3,
-                Text = "Action: Exhaust Support of the Eagles to choose an Eagle ally. Until the end of the phase, attached hero adds that ally's Attack or Defense (choose 1) to its own.",
+                Text = "Attach to a Tactics hero.\r\nAction: Exhaust Support of the Eagles to choose an Eagle ally. Until the end of the phase, attached hero adds that ally's Attack or Defense (choose 1) to its own.",
                 FlavorText = "\"I would bear you, whither you will, even were you made of stone.\" -Gwaihir, The Return of the King",
-                Keywords = new List<string>() { "Attach to a Tactics hero." },
                 Number = 120,
                 Artist = Artist.Ilich_Henriquez
             });

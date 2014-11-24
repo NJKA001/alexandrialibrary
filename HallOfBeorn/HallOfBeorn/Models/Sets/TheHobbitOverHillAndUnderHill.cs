@@ -194,8 +194,8 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 1,
                 Willpower = 0,
                 HitPoints = 10,
-                Text = "Immune to player card effects.\r\nBeorn does not exhaust to defend.",
-                Keywords = new List<string>() { "Sentinel.", " Cannot have attachments." },
+                Text = "Cannot have attachments. Immune to player card effects.\r\nBeorn does not exhaust to defend.",
+                Keywords = new List<string>() { "Sentinel." },
                 Number = 5,
                 Artist = Artist.Emrah_Elmasli
             });
@@ -245,8 +245,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Artifact.", " Ring." },
                 Quantity = 1,
                 IsUnique = true,
-                Text = "Action: When answering a riddle, spend 1 Baggins resource to discard an additional player card from the top of your deck.\r\n\r\nAction: Exhaust Bilbo's Magic ~Ring and raise each player's threat by 2 to add 1 Baggins resource to Bilbo ~Baggins' resource pool.",
-                Keywords = new List<string>() { "Attach to Bilbo ~Baggins." },
+                Text = "Attach to Bilbo ~Baggins.\r\nAction: When answering a riddle, spend 1 Baggins resource to discard an additional player card from the top of your deck.\r\n\r\nAction: Exhaust Bilbo's Magic ~Ring and raise each player's threat by 2 to add 1 Baggins resource to Bilbo ~Baggins' resource pool.",
                 Number = 79,
                 Artist = Artist.Magali_Villeneuve
             });
@@ -328,8 +327,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Item." },
                 Quantity = 3,
                 ResourceCost = 0,
-                Text = "Action: Discard Cram to ready attached hero.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAction: Discard Cram to ready attached hero.",
                 Number = 11,
                 Artist = Artist.Adam_Lane
             });
@@ -501,8 +499,8 @@ The players have won the game.",
                 Quantity = 1,
                 ResourceCost = 0,
                 IsUnique = true,
-                Text = "Attached character gets +2 Attack.Response: After attached character destroys an Orc enemy, draw 1 card.",
-                Keywords = new List<string>() { "Attach to a hero or Gandalf.", " Restricted." },
+                Text = "Attach to a hero or Gandalf.\r\nAttached character gets +2 Attack.\r\nResponse: After attached character destroys an Orc enemy, draw 1 card.",
+                Keywords = new List<string>() { "Restricted." },
                 Number = 22,
                 Artist = Artist.Magali_Villeneuve
             });
@@ -902,9 +900,9 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Quantity = 1,
                 ResourceCost = 0,
                 IsUnique = true,
-                Text = "Attached character gets +2 Attack.Response: After attached hero destroys an Orc enemy, add 1 resource to that hero's resource pool.",
+                Text = "Attach to a hero.\r\nAttached character gets +2 Attack.Response: After attached hero destroys an Orc enemy, add 1 resource to that hero's resource pool.",
                 FlavorText = "\"This, Thorin, the runes name Orcrist, the Goblin-cleaver in the ancient tongue of Gondolin; it was a famous blade.\" -Elrond, The Hobbit",
-                Keywords = new List<string>() { "Attach to a hero.", " Restricted." },
+                Keywords = new List<string>() { "Restricted." },
                 Number = 21,
                 Artist = Artist.Magali_Villeneuve
             });
@@ -1016,9 +1014,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Traits = new List<string>() { "Item." },
                 Quantity = 3,
                 ResourceCost = 0,
-                Text = "Action: Exhaust Spare Hood and Cloak and exhaust attached character to ready another character. Then, attach Spare Hood and Cloak to that character.",
+                Text = "Attach to a character.\r\nAction: Exhaust Spare Hood and Cloak and exhaust attached character to ready another character. Then, attach Spare Hood and Cloak to that character.",
                 FlavorText = "\"You will have to manage without pocket-handkerchiefs, and a good many other things, before you get to the journey's end. As for a hat, I have got a spare hood and cloak in my luggage.\" -Dwalin, The Hobbit",
-                Keywords = new List<string>() { "Attach to a character." },
                 Number = 12,
                 Artist = Artist.David_Kegg
             });
@@ -1032,9 +1029,9 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Quantity = 1,
                 ResourceCost = 0,
                 IsUnique = true,
-                Text = "Bilbo ~Baggins gets +1 Willpower, +1 Attack, and +1 Defense.\r\n\r\nResponse: After Bilbo ~Baggins exhausts to defend, discard the top card of the encounter deck. Deal damage to the attacking enemy equal to the discarded card's Threat.",
+                Text = "Attach to Bilbo ~Baggins.\r\nBilbo ~Baggins gets +1 Willpower, +1 Attack, and +1 Defense.\r\n\r\nResponse: After Bilbo ~Baggins exhausts to defend, discard the top card of the encounter deck. Deal damage to the attacking enemy equal to the discarded card's Threat.",
                 FlavorText = "\"I shall call you Sting.\" -Bilbo, The Hobbit",
-                Keywords = new List<string>() { "Attach to Bilbo ~Baggins.", "Restricted." },
+                Keywords = new List<string>() { "Restricted." },
                 Number = 20,
                 Artist = Artist.Magali_Villeneuve
             });
@@ -1167,9 +1164,8 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Quantity = 3,
                 ResourceCost = 1,
                 IsUnique = true,
-                Text = "Travel Action: Exhaust Thror's Map to choose a location in the staging area. Make that location the active location. (If there is another active location, return it to the staging area.)",
+                Text = "Attach to a hero.\r\nTravel Action: Exhaust Thror's Map to choose a location in the staging area. Make that location the active location. (If there is another active location, return it to the staging area.)",
                 FlavorText = "\"This was made by Thror, your grandfather, Thorin.\" he said in answer to the dwarves' excited questions. \"It is a plan of the Mountain.\" -Gandalf, The Hobbit",
-                Keywords = new List<string>() { "Attach to a hero." },
                 Number = 13,
                 Artist = Artist.Jake_Murray,
                 HasErrata = true

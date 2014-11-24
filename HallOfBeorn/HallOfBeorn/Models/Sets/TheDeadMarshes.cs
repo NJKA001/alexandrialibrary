@@ -58,8 +58,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Item." },
                 Quantity = 3,
                 ResourceCost = 2,
-                Text = "Attached hero gains ranged.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Cache to another hero.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero. Attached hero gains ranged.\r\nAction: Pay 1 resource from attached hero's pool to attach Dunedain Cache to another hero.",
                 Number = 97,
                 Artist = Artist.Stephanie_M_Brown
             });
@@ -111,9 +110,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Skill." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Action: Exhaust Fast Hitch to ready attached character.",
+                Text = "Attach to a Hobbit character.\r\nAction: Exhaust Fast Hitch to ready attached character.",
                 FlavorText = "'And I put as fast a hitch over the stump as any one could have done, in the Shire or out of it.' -Sam, The Two Towers",
-                Keywords = new List<string>() { "Attach to a Hobbit character." },
                 Number = 103,
                 Artist = Artist.David_A_Nash
             });
@@ -235,9 +233,8 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Song." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached hero gains a Tactics resource icon.",
+                Text = "Attach to a hero.\r\nAttached hero gains a Tactics resource icon.",
                 FlavorText = "We go, we go, we go to war, to hew the stone and break the door. -The Two Towers",
-                Keywords = new List<string>() { "Attach to a hero." },
                 Number = 104,
                 Artist = Artist.Leonardo_Borazio
             });
@@ -250,13 +247,12 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Song." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Action: Exhaust Song of Mocking to choose another hero. Until the end of the phase, attached hero takes all damage assigned to the chosen hero.",
+                Text = "Attach to a hero.\r\nAction: Exhaust Song of Mocking to choose another hero. Until the end of the phase, attached hero takes all damage assigned to the chosen hero.",
                 FlavorText = @"Old fat spider spinning in a tree!
 Old fat spider can't see me!
 Attercop! Attercop!
 Won't you stop. Stop your spinning and look for me! 
 -Bilbo Baggins, The Hobbit ",
-                Keywords = new List<string>() { "Attach to a hero." },
                 Number = 99,
                 Artist = Artist.Carolina_Eade
             });

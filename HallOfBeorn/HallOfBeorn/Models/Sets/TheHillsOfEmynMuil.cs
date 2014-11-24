@@ -257,8 +257,7 @@ While Amon Lhaw is the active location, treat all attachments as if their printe
                 Traits = new List<string>() { "Song." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "Attached hero gains a Spirit resource icon.",
-                Keywords = new List<string>() { "Attach to a hero." },
+                Text = "Attach to a hero.\r\nAttached hero gains a Spirit resource icon.",
                 Number = 81,
                 Artist = Artist.Tiziano_Baracchi
             });

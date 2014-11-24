@@ -145,9 +145,10 @@ Forced: If A Murder of Crows would be destroyed, shuffle it back into the encoun
                 Threat = 5,
                 QuestPoints = null,
                 Traits = new List<string> { "Trollshaws." },
-                Keywords = new List<string> { "Progress cannot be placed here." },
                 Text = 
-@"Travel: Sack 1.
+@"Progress cannot be placed here.
+
+Travel: Sack 1.
 
 Forced: After Comfortable Light becomes the active location, discard it.",
                 FlavorText = "Out of the dark mass of the trees they could now see a light shining, a reddish comfortable-looking light... -The Hobbit",

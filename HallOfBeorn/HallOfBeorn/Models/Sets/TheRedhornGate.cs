@@ -176,8 +176,7 @@ Response: After Elrohir is declared as a defender, pay 1 resource from his resou
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Neutral,
                 ResourceCost = 0,
-                Text = "Action: Discard Good Meal to lower the cost of the next event you play this round that matches attached hero's sphere by 2.",
-                Keywords = new List<string>() { "Attach to a Hobbit hero." },
+                Text = "Attach to a Hobbit hero.\r\nAction: Discard Good Meal to lower the cost of the next event you play this round that matches attached hero's sphere by 2.",
                 Quantity = 3,
                 Number = 10,
                 Artist = Artist.David_A_Nash

@@ -324,8 +324,8 @@ Response: After Elladan is declared as an attacker, pay 1 resource from his reso
                 Traits = new List<string>() { "Item.", " Weapon." },
                 Quantity = 3,
                 ResourceCost = 1,
-                Text = "When attached character attacks an enemy, that enemy gets -2 Defense until the end of the phase.",
-                Keywords = new List<string>() { "Attach to a Noldor or Silvan character.", " Restricted." },
+                Text = "Attach to a Noldor or Silvan character.\r\nWhen attached character attacks an enemy, that enemy gets -2 Defense until the end of the phase.",
+                Keywords = new List<string>() { "Restricted." },
                 Number = 31,
                 Artist = Artist.Sara_Biddle
             });
@@ -368,10 +368,11 @@ Response: After Elladan is declared as an attacker, pay 1 resource from his reso
                 Quantity = 3,
                 ResourceCost = 1,
                 Text = 
-@"Response: After ~Song of Eärendil enters play, draw 1 card.
+@"Attach to a Spirit hero.
+
+Response: After ~Song of Eärendil enters play, draw 1 card.
                 
 Response: After another player raises his threat, raise your threat by 1 to reduce that player's threat by 1.",
-                Keywords = new List<string>() { "Attach to a Spirit hero." },
                 Number = 34,
                 Artist = Artist.K_R_Harris
             });

@@ -514,13 +514,12 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Ally,
                 Sphere = Sphere.Tactics,
                 Traits = new List<string>() { "Creature.", "Eagle.", "Noble." },
-                Keywords = new List<string>() { "Cannot have restricted attachments." },
                 ResourceCost = 5,
                 Willpower = 2,
                 Attack = 4,
                 Defense = 1,
                 HitPoints = 4,
-                Text = "Response: After you play Thorondor from hand, put a character from any player's discard pile into play under its owner's control.",
+                Text = "Cannot have restricted attachments.\r\nResponse: After you play Thorondor from hand, put a character from any player's discard pile into play under its owner's control.",
                 EncounterSet = "First Age",
                 Number = 26,
                 Artist = Artist.Ted_Nasmith
@@ -552,9 +551,9 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Mastery,
                 Traits = new List<string>() { "Item.", "Weapon." },
-                Keywords = new List<string>() { "Attach to a hero with a printed Mastery icon.", "Restricted." },
+                Keywords = new List<string>() { "Restricted." },
                 ResourceCost = 2,
-                Text = "Action: Exhaust Aranrúth to give attached hero a Leadership, Lore, Tactics, or Spirit icon until the end of the phase.If attached hero is Thingol, Aranrúth gains, 'Attached hero gets +2 Attack.'",
+                Text = "Attach to a hero with a printed Mastery icon.\r\nAction: Exhaust Aranrúth to give attached hero a Leadership, Lore, Tactics, or Spirit icon until the end of the phase.\r\nIf attached hero is Thingol, Aranrúth gains, 'Attached hero gets +2 Attack.'",
                 EncounterSet = "First Age",
                 Number = 161,
                 Artist = Artist.Mathieu_Degrotte
@@ -567,7 +566,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Lore,
                 Traits = new List<string>() { "Mount." },
                 ResourceCost = 3,
-                Text = "Attach to a Noldor hero. Limit 1 per hero.Action: Exhaust Ard-galen Horse to place 1 progress token on each location in the staging area.",
+                Text = "Attach to a Noldor hero. Limit 1 per hero.\r\nAction: Exhaust Ard-galen Horse to place 1 progress token on each location in the staging area.",
                 EncounterSet = "First Age",
                 Number = 57,
                 Artist = Artist.Unknown
@@ -594,10 +593,12 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Tactics,
                 Traits = new List<string>() { "Item.", "Armor.", "Artifact." },
-                Keywords = new List<string> { "Attach to a hero with the House of Hador trait.", "Restricted." },
+                Keywords = new List<string> { "Restricted." },
                 ResourceCost = 3,
-                Text = 
-@"Response: After attached hero is damaged, exhaust Dragon-helm and raise your threat by 3 to cancel all damage from that attack.
+                Text =
+@"Attach to a hero with the House of Hador trait.
+
+Response: After attached hero is damaged, exhaust Dragon-helm and raise your threat by 3 to cancel all damage from that attack.
                 
 If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages with you, it gets -1 Attack and -1 Defense until the end of the round.'",
                 EncounterSet = "First Age",
@@ -653,8 +654,7 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
                 Sphere = Sphere.Leadership,
                 Traits = new List<string>() { "Instrument." },
                 ResourceCost = 2,
-                Keywords = new List<string> { "Attach to a hero with the House of Fingolfin trait." },
-                Text = "Action: After a Corruption token is removed from play, exhaust Harp of Fingon to add 1 resource to the attached hero's resource pool.",
+                Text = "Attach to a hero with the House of Fingolfin trait.\r\nAction: After a Corruption token is removed from play, exhaust Harp of Fingon to add 1 resource to the attached hero's resource pool.",
                 EncounterSet = "First Age",
                 Number = 48,
                 Artist = Artist.Egor_Gafidov
@@ -743,8 +743,7 @@ All enemies get -1 Threat and -10 engagement cost.",
                 Sphere = Sphere.Spirit,
                 Traits = new List<string>() { "Item.", "Artifact." },
                 ResourceCost = 0,
-                Keywords = new List<string> { "Attach to a hero." },
-                Text = "Action: Pay 1 resource from attached hero's resource pool to give attached hero +1 Willpower until the end of the phase. (Limit three times per phase.)",
+                Text = "Attach to a hero.\r\nAction: Pay 1 resource from attached hero's resource pool to give attached hero +1 Willpower until the end of the phase. (Limit three times per phase.)",
                 EncounterSet = "First Age",
                 Number = 67,
                 Artist = Artist.US_Pixelstory
@@ -848,10 +847,12 @@ Action: Spend 1 resource from Oath of Vengeance to give attached hero +1 Willpow
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Tactics,
                 Traits = new List<string>() { "Item.", "Weapon." },
-                Keywords = new List<string> { "Attach to a hero with the House of Fingolfin trait.", "Restricted." },
+                Keywords = new List<string> { "Restricted." },
                 ResourceCost = 2,
-                Text = 
-@"Attached hero gets +1 Attack (+2 Attack if Fingolfin). 
+                Text =
+@"Attach to a hero with the House of Fingolfin trait.
+
+Attached hero gets +1 Attack (+2 Attack if Fingolfin). 
                 
 If the attached hero is Fingolfin, Ringil gains: 'Response: After the attached character attacks alone, cancel all damage from the attack and reduce your threat by that amount instead.'",
                 EncounterSet = "First Age",
@@ -881,10 +882,10 @@ If the attached hero is Fingolfin, Ringil gains: 'Response: After the attached c
                 Sphere = Sphere.Spirit,
                 Traits = new List<string>() { "Enchantment." },
                 ResourceCost = 2,
-                Keywords = new List<string> { "Attach to Lúthien." },
-                NormalizedKeywords = new List<string> { "Attach to Luthien." },
-                Text = 
-@"Resources on Shadowy Cloak can only be used to pay for Lúthien's ability.
+                Text =
+@"Attach to Lúthien.
+
+Resources on Shadowy Cloak can only be used to pay for Lúthien's ability.
                 
 Action: Exhaust Shadowy Cloak to either add 1 resource to Shadowy Cloak or ready Lúthien.",
                 EncounterSet = "First Age",
@@ -1090,7 +1091,7 @@ Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does n
                 CardType = CardType.Event,
                 Sphere = Sphere.Leadership,
                 ResourceCost = 1,
-                Text = "Play only if you control a hero with the Edain trait.Action: Search your deck for a character with the Edain trait and put it into play. That character does not exhaust to quest, attack, or defend until the end of the round. Discard that character at the end of the round.",
+                Text = "Play only if you control a hero with the Edain trait.\r\nAction: Search your deck for a character with the Edain trait and put it into play. That character does not exhaust to quest, attack, or defend until the end of the round. Discard that character at the end of the round.",
                 EncounterSet = "First Age",
                 Number = 96,
                 Artist = Artist.John_Howe
@@ -1679,7 +1680,7 @@ Forced: Caracharoth the Red Maw makes two attacks during the combat phase. (Deal
                 IsUnique = true,
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
-                Keywords = new List<string>() { "Relentless.", "Cannot leave play." },
+                Keywords = new List<string>() { "Relentless." },
                 EngagementCost = 1,
                 Threat = 6,
                 Attack = 9,
@@ -1687,7 +1688,7 @@ Forced: Caracharoth the Red Maw makes two attacks during the combat phase. (Deal
                 HitPoints = 25,
                 Quantity = 1,
                 Text = 
-@"Forced: Carcharoth the Tormented engages the first player during the encounter phase.
+@"Cannot leave play.\r\nForced: Carcharoth the Tormented engages the first player during the encounter phase.
 
 Forced: After an attack by Carcharoth the Tormented resolves, discard one character the defending player controls.",
                 EncounterSet = "Hunting of the Wolf",
@@ -2559,7 +2560,7 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
                 IsUnique = true,
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
-                Keywords = new List<string>() { "Relentless.", "Indestructible.", "Cannot leave play." },
+                Keywords = new List<string>() { "Relentless.", "Indestructible." },
                 EngagementCost = 4,
                 Threat = 0,
                 IsVariableThreat = true,
@@ -2568,7 +2569,9 @@ Heroes in the pit area are immune to player card effects and cannot leave the pi
                 HitPoints = 15,
                 Quantity = 1,
                 Text = 
-@"X is 5 times the number of players.
+@"Cannot leave play.
+
+X is 5 times the number of players.
                 
 Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 EncounterSet = "The Seat of Morgoth",

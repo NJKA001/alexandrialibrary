@@ -101,8 +101,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Leadership,
                 ResourceCost = 4,
                 Traits = new List<string>() { "Record." },
-                Keywords = new List<string>() { "Attach to a Leadership hero." },
-                Text = "Reduce the cost to play Tome of Atanatar by 1 for each hero you control with a printed Leadership resource icon.\r\n\r\nAction: Discard Tome of Atanatar to play any Leadership event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
+                Text = "Attach to a Leadership hero. Reduce the cost to play Tome of Atanatar by 1 for each hero you control with a printed Leadership resource icon.\r\nAction: Discard Tome of Atanatar to play any Leadership event card in your discard pile as if it were in your hand. Then, place that event on the bottom of your deck.",
                 Quantity = 3,
                 Number = 109,
                 Artist = Artist.Jason_Ward

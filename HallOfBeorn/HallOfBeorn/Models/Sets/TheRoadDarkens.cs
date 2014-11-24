@@ -158,8 +158,8 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Neutral,
                 ResourceCost = 2,
                 Traits = new List<string> { "Artifact.", "Item.", "Staff." },
-                Keywords = new List<string> { "Attach to Gandalf.", "Restricted." },
-                Text = "Action: Exhaust Gandalf's Staff to (choose one): choose a player to draw 1 card, add 1 resource to a hero's resource pool, or discard a shadow card from a non-unique enemy.",
+                Keywords = new List<string> { "Restricted." },
+                Text = "Attach to Gandalf.\r\nAction: Exhaust Gandalf's Staff to (choose one): choose a player to draw 1 card, add 1 resource to a hero's resource pool, or discard a shadow card from a non-unique enemy.",
                 FlavorText = "...he held his staff aloft, and from its tip there came a feint radiance. -The Fellowship of the Ring",
                 Number = 8,
                 Quantity = 3,
@@ -190,8 +190,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Models.Sphere.Fellowship,
                 ResourceCost = 2,
                 Traits = new List<string> { "Fellowship." },
-                Keywords = new List<string> { "Attach to the Ring-bearer." },
-                Text = "Each hero gets +1 Willpower.\r\nForced: After a character is destroyed, discard Fellowship of the Ring.",
+                Text = "Attach to the Ring-bearer.\r\nEach hero gets +1 Willpower.\r\nForced: After a character is destroyed, discard Fellowship of the Ring.",
                 Number = 10,
                 Quantity = 3,
                 Artist = Artist.Michael_Komarck
@@ -207,9 +206,11 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Models.Sphere.Neutral,
                 ResourceCost = 2,
                 Traits = new List<string> { "Artifact.", "Item.", "Weapon." },
-                Keywords = new List<string> { "Attach to a Hobbit hero.", "Restricted." },
-                Text = 
-@"Attached hero gets +1 Willpower, +1 Attack, and +1 Defense.
+                Keywords = new List<string> { "Restricted." },
+                Text =
+@"Attach to a Hobbit hero.
+
+Attached hero gets +1 Willpower, +1 Attack, and +1 Defense.
 
 Response: After attached hero exhausts to defend an attack, discard the top card of the encounter deck. Deal damage to the attacking enemy equal to the discarded card's Threat.",
                 Number = 11,
@@ -226,8 +227,7 @@ Response: After attached hero exhausts to defend an attack, discard the top card
                 CampaignCardType = Models.CampaignCardType.Boon,
                 ResourceCost = 1,
                 Traits = new List<string> { "Artifact.", "Item.", "Armor." },
-                Keywords = new List<string> { "Attach to Ring-bearer." },
-                Text = "Attached hero gets +1 Defense and +1 hit point.",
+                Text = "Attach to Ring-bearer.\r\nAttached hero gets +1 Defense and +1 hit point.",
                 FlavorText = "\"I should feel happier if I knew you were wearing it. I have a fancy it would turn even the knives of the Black Riders...\" -Bilbo, The Fellowship of the Ring",
                 Number = 12,
                 Quantity = 1,
@@ -264,9 +264,11 @@ Response: After attached character destroys an Orc enemy, draw 1 card.",
                 CampaignCardType = Models.CampaignCardType.Boon,
                 ResourceCost = 3,
                 Traits = new List<string> { "Artifact.", "Item.", "Weapon." },
-                Keywords = new List<string> { "Attach to a Noble hero or Aragorn.", "Restricted." },
-                Text = 
-@"Attached hero gets +1 Willpower, +1 Attack, and +1 Defense.
+                Keywords = new List<string> { "Restricted." },
+                Text =
+@"Attach to a Noble hero or Aragorn.
+
+Attached hero gets +1 Willpower, +1 Attack, and +1 Defense.
 
 Response: After an attack in which the attached hero defended resolves, exhaust Andúril to target the enemy that just attacked. Declare attached hero as an attacker against that enemy (and resolve the attack).",
                 Number = 14,
