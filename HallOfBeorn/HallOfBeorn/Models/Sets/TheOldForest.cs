@@ -243,8 +243,8 @@ If the players defeat this stage, they win the game.",
                 Defense = 4,
                 HitPoints = 12,
                 Traits = new List<string> { "Tree." },
-                Keywords = new List<string> { "Indestructible.", "Immune to player card effects." },
-                Text = "Forced: When Old Man Willow attacks, discard a random location from the victory display. The defending player raises his threat by X, where X is that location's victory point value.",
+                Keywords = new List<string> { "Indestructible." },
+                Text = "Immune to player card effects.\r\nForced: When Old Man Willow attacks, discard a random location from the victory display. The defending player raises his threat by X, where X is that location's victory point value.",
                 EncounterSet = "The Old Forest",
                 Number = 7,
                 Quantity = 1,
@@ -315,9 +315,10 @@ If the players defeat this stage, they win the game.",
                 Threat = 1,
                 QuestPoints = 5,
                 Traits = new List<string> { "Forest.", "River." },
-                Keywords = new List<string> { "Immune to player card effects." },
-                Text = 
-@"The player cannot win the game while Withywindle is in play.
+                Text =
+@"Immune to player card effects.
+
+The player cannot win the game while Withywindle is in play.
 
 While Withywindle is the active location, the first player reveals 1 additional encounter card during the quest phase.",
                 FlavorText = "\"The Withywindle valley is said to be the queerest part of the whole wood...\" -Merry, The Fellowship of the Ring",
@@ -385,8 +386,7 @@ While Withywindle is the active location, the first player reveals 1 additional 
                 IsVariableThreat = true,
                 QuestPoints = 4,
                 Traits = new List<string> { "Forest." },
-                Keywords = new List<string> { "X equals the number of players in the game." },
-                Text = "While Wall of Trees is in the staging area, progress must be placed on Wall of Trees before it can be placed on the current quest.",
+                Text = "X equals the number of players in the game.\r\nWhile Wall of Trees is in the staging area, progress must be placed on Wall of Trees before it can be placed on the current quest.",
                 FlavorText = "The trees drew close again on either side, and they could no longer see far ahead. -The Fellowship of the Ring",
                 IsVariableVictoryPoints = true,
                 EncounterSet = "The Old Forest",

@@ -413,9 +413,8 @@ If the players defeat this stage, they have escaped the Blackroot Vale with Deru
                 Traits = new List<string>() { "Blackroot Vale." },
                 Quantity = 1,
                 IsUnique = true,
-                Keywords = new List<string>() { "Immune to player card effects.", },
                 Text =
-@"X is twice the number of players in the game.
+@"Immune to player card effects. X is twice the number of players in the game.
 
 While The Stone of Erech is that active location, characters with less than 2 Willpower cannot ready.
 

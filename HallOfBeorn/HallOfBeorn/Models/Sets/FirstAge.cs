@@ -442,13 +442,12 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Ally,
                 Sphere = Sphere.Neutral,
                 Traits = new List<string>() { "Maia." },
-                Keywords = new List<string>() { "At the end of the round, discard [Card] from play.", "Melian cannot attack or defend." },
                 ResourceCost = 3,
                 Willpower = 4,
                 Attack = 0,
                 Defense = 0,
                 HitPoints = 3,
-                Text = "Response: After you play Melian from hand, choose a player and (choose 1): enemies do not make engagement checks against the chosen player until the end of the round, enemies cannot attack the chosen player this round, or the chosen player may look at the top 3 cards of the encounter deck.",
+                Text = "At the end of the round, discard Melian from play.\r\nMelian cannot attack or defend.\r\nResponse: After you play Melian from hand, choose a player and (choose 1): enemies do not make engagement checks against the chosen player until the end of the round, enemies cannot attack the chosen player this round, or the chosen player may look at the top 3 cards of the encounter deck.",
                 EncounterSet = "First Age",
                 Number = 16,
                 Artist = Artist.Andrew_Ryan
@@ -710,9 +709,10 @@ If attached hero is Túrin, Dragon-helm gains, 'Response: After an enemy engages
                 Sphere = Sphere.Mastery,
                 Traits = new List<string>() { "Name." },
                 ResourceCost = 1,
-                Keywords = new List<string> { "Attach to Túrin Turambar.", "Limit one Name in play." },
-                Text = 
-@"Túrin Turambar gains a Tactics resource icon.
+                Text =
+@"Attach to Túrin Turambar. Limit 1 Name in play.
+
+Túrin Turambar gains a Tactics resource icon.
                 
 All enemies get -1 Threat and -10 engagement cost.",
                 EncounterSet = "First Age",
@@ -758,9 +758,7 @@ All enemies get -1 Threat and -10 engagement cost.",
                 Sphere = Sphere.Mastery,
                 Traits = new List<string>() { "Oath." },
                 ResourceCost = 1,
-                Keywords = new List<string> { "Attach to a character with the House of Fëanor trait.", "Limit 1 per character." },
-                NormalizedKeywords = new List<string> { "Attach to a character with the House of Feanor trait." },
-                Text = "Corruption on the attached character cannot be removed.Planning Action: Exhaust Oath of Fëanor to switch the printed Attack and Willpower of the attached character until the end of the round.",
+                Text = "Attach to a character with the House of Fëanor trait. Limit 1 per character.\r\nCorruption on the attached character cannot be removed.\r\nPlanning Action: Exhaust Oath of Fëanor to switch the printed Attack and Willpower of the attached character until the end of the round.",
                 EncounterSet = "First Age",
                 Number = 51,
                 Artist = Artist.Jenny_Dolfen
@@ -773,9 +771,10 @@ All enemies get -1 Threat and -10 engagement cost.",
                 Sphere = Sphere.Leadership,
                 Traits = new List<string>() { "Oath." },
                 ResourceCost = 1,
-                Keywords = new List<string> { "Attach to a hero.", "Limit 2 in play." },
                 Text = 
-@"Action: Move any number of resources from the attached hero's resource pool to the resource pool of another hero with Oath of Friendship attached.
+@"Attach to a hero. Limit 2 in play.
+
+Action: Move any number of resources from the attached hero's resource pool to the resource pool of another hero with Oath of Friendship attached.
 
 Response: After you play Oath of Friendship, you may immediately search your deck for another copy of Oath of Friendship and add it to your hand. Then, shuffle your deck.",
                 EncounterSet = "First Age",
@@ -790,9 +789,8 @@ Response: After you play Oath of Friendship, you may immediately search your dec
                 Sphere = Sphere.Lore,
                 Traits = new List<string>() { "Oath." },
                 ResourceCost = 0,
-                Keywords = new List<string> { "Attach to a hero.", "Limit 1 per player." },
                 Text = 
-@"Forced: Discard one card from your hand at the end of each round.
+@"Attach to a hero. Limit 1 per hero.\r\nForced: Discard one card from your hand at the end of each round.
                 
 Response: After Oath of Silence is attached to a hero you control, search your deck for 2 cards and add them to your hand. Then, shuffle your deck.",
                 EncounterSet = "First Age",
@@ -807,9 +805,8 @@ Response: After Oath of Silence is attached to a hero you control, search your d
                 Sphere = Sphere.Tactics,
                 Traits = new List<string>() { "Oath." },
                 ResourceCost = 2,
-                Keywords = new List<string> { "Attach to a hero.", "Limit 1 per hero." },
                 Text = 
-@"Response: After a character you control is destroyed, place 1 resource on Oath of Vengeance.
+@"Attach to a hero. Limit 1 per hero.\r\nResponse: After a character you control is destroyed, place 1 resource on Oath of Vengeance.
 
 Action: Spend 1 resource from Oath of Vengeance to give attached hero +1 Willpower or +1 Attack until the end of the phase.",
                 EncounterSet = "First Age",
@@ -901,10 +898,9 @@ Action: Exhaust Shadowy Cloak to either add 1 resource to Shadowy Cloak or ready
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Neutral,
                 Traits = new List<string>() { "Condition." },
-                Keywords = new List<string>() { "Limit 1 per hero." },
                 ResourceCost = 0,
                 Text = 
-@"Setup: Attach to a hero. This hero must be the only hero you control.
+@"Limit 1 per hero.\r\nSetup: Attach to a hero. This hero must be the only hero you control.
                 
 Attached hero gets +2 Willpower, +2 Attack, +2 Defense, +2 hit points and does not exhaust to quest.",
                 EncounterSet = "First Age",
@@ -1617,7 +1613,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
                 IsUnique = true,
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
-                Keywords = new List<string>() { "Indestructible.", "Immune to player card effects." },
+                Keywords = new List<string>() { "Indestructible." },
                 EngagementCost = 50,
                 Threat = 6,
                 Attack = 5,
@@ -1625,7 +1621,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
                 HitPoints = 20,
                 Quantity = 3,
                 Text = 
-@"Forced: While Carcharoth the Wolf of Angband is in the staging area, he attacks a random location in play during the combat phase (the first player may declare a defender if it is the active location).
+@"Immune to player card effects.\r\nForced: While Carcharoth the Wolf of Angband is in the staging area, he attacks a random location in play during the combat phase (the first player may declare a defender if it is the active location).
 
 When Revealed: Add 1 damage to the current quest stage.",
                 EncounterSet = "Hunting of the Wolf",
@@ -1639,7 +1635,7 @@ When Revealed: Add 1 damage to the current quest stage.",
                 IsUnique = true,
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
-                Keywords = new List<string>() { "Indestructible.", "Immune to player card effects." },
+                Keywords = new List<string>() { "Indestructible." },
                 EngagementCost = 50,
                 Threat = 4,
                 Attack = 8,
@@ -1647,7 +1643,7 @@ When Revealed: Add 1 damage to the current quest stage.",
                 HitPoints = 20,
                 Quantity = 3,
                 Text = 
-@"Forced: While Carcharoth the Devouring Spirit is in the staging area, he attacks a random location in play during the combat phase (the first player may declare a defender if it is the active location).
+@"Immune to player card effects.\r\nForced: While Carcharoth the Devouring Spirit is in the staging area, he attacks a random location in play during the combat phase (the first player may declare a defender if it is the active location).
                 
 When Revealed: Carcharoth the Devouring Spirit makes an immediate attack on the first player.",
                 EncounterSet = "Hunting of the Wolf",
@@ -1661,7 +1657,7 @@ When Revealed: Carcharoth the Devouring Spirit makes an immediate attack on the 
                 IsUnique = true,
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
-                Keywords = new List<string>() { "Indestructible.", "Immune to player card effects." },
+                Keywords = new List<string>() { "Indestructible." },
                 EngagementCost = 50,
                 Threat = 5,
                 Attack = 6,
@@ -1669,7 +1665,7 @@ When Revealed: Carcharoth the Devouring Spirit makes an immediate attack on the 
                 HitPoints = 20,
                 Quantity = 3,
                 Text = 
-@"Forced: While Carcharoth the Red Maw is in the staging area, he attacks a random location in play during the combat phase (the first player may declare a defender if it is the active location).
+@"Immune to player card effects.\r\nForced: While Carcharoth the Red Maw is in the staging area, he attacks a random location in play during the combat phase (the first player may declare a defender if it is the active location).
 
 Forced: Caracharoth the Red Maw makes two attacks during the combat phase. (Deal a separate shadow card for each attack.)",
                 EncounterSet = "Hunting of the Wolf",
@@ -2082,14 +2078,13 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 IsUnique = true,
                 CardType = CardType.Enemy,
                 Traits = new List<string>() { "Creature.", "Werewolf." },
-                Keywords = new List<string>() { "Immune to player card effects.", " Cannot leave the pit area." },
                 EngagementCost = 1,
                 Threat = 3,
                 Attack = 6,
                 Defense = 3,
                 HitPoints = 10,
                 Quantity = 1,
-                Text = "Forced: Characters destroyed by Devouring Werewolf are removed from the game.",
+                Text = "Immune to player card effects. Cannot leave the pit area.\r\nForced: Characters destroyed by Devouring Werewolf are removed from the game.",
                 EncounterSet = "The Isle of Werewolves",
                 Number = 125,
                 Artist = Artist.David_Wuertemburg
@@ -2243,12 +2238,11 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 IsUnique = true,
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Bridge.", "Water." },
-                Keywords = new List<string>() { "Immune to player card effects." },
                 Threat = 3,
                 QuestPoints = 6,
                 Quantity = 1,
                 VictoryPoints = 0,
-                Text = "While Bridge to the Isle is the active location, enemies with the Werewolf trait get +1 Attack and +1 Defense.Forced: After Bridge to the Isle is explored, add Draugluin to the staging area.",
+                Text = "Immune to player card effects.\r\nWhile Bridge to the Isle is the active location, enemies with the Werewolf trait get +1 Attack and +1 Defense.Forced: After Bridge to the Isle is explored, add Draugluin to the staging area.",
                 EncounterSet = "The Isle of Werewolves",
                 Number = 111,
                 Artist = Artist.Bogdan_Amidzic
@@ -2288,11 +2282,10 @@ When Carcharoth attacks a location, subtract the threat of the location from Car
                 Id = "a9e19cb1-947a-49f4-a1b9-afbd9ce3da09",
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Fortification." },
-                Keywords = new List<string>() { "Immune to player card effects." },
                 Threat = 4,
                 QuestPoints = 2,
                 Quantity = 2,
-                Text = "The first enemy with the Werewolf trait revealed each turn gains surge.",
+                Text = "Immune to player card effects.\r\nThe first enemy with the Werewolf trait revealed each turn gains surge.",
                 EncounterSet = "The Isle of Werewolves",
                 Number = 106,
                 Artist = Artist.Elshazam
@@ -2738,9 +2731,8 @@ Forced: Players cannot reduce their threat while Carcharoth is in play.",
                 QuestPoints = 7,
                 Quantity = 1,
                 VictoryPoints = 2,
-                Keywords = new List<string> { "Immune to player card effects." },
                 Text = 
-@"Forced: After Nethermost Hall is explored as the active location, advance to stage 3.
+@"Immune to player card effects.\r\nForced: After Nethermost Hall is explored as the active location, advance to stage 3.
                 
 Travel: Search the encounter deck and discard pile for Gothmog and add him to the staging area, if able.",
                 Shadow = "Shadow: The attacking enemy gets +1 Attack and +1 Defense until the end of the phase.",
@@ -2774,9 +2766,8 @@ Travel: Search the encounter deck and discard pile for Gothmog and add him to th
                 QuestPoints = 10,
                 Quantity = 1,
                 VictoryPoints = 1,
-                Keywords = new List<string> { "Immune to player card effects." },
                 Text = 
-@"This location does not contribute its threat while it is in the staging area.
+@"Immune to player card effects.\r\nThis location does not contribute its threat while it is in the staging area.
 
 Forced: The first enemy revealed each round gains surge.
 
@@ -2806,12 +2797,11 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
                 IsUnique = true,
                 CardType = CardType.Location,
                 Traits = new List<string>() { "Path." },
-                Keywords = new List<string>() { "Immune to player card effects.", " This location does not contribute its threat while it is in the staging area." },
                 Threat = 5,
                 QuestPoints = 15,
                 Quantity = 1,
                 VictoryPoints = 1,
-                Text = "Forced: While Thrall Quarters is the active location, add 1 to the Threat of discarded encounter cards when resolving a Sneak test.Response: After Thrall Quarters leaves play, add Dreadful Garments to the staging area.",
+                Text = "Immune to player card effects. This location does not contribute its threat while it is in the staging area.\r\nForced: While Thrall Quarters is the active location, add 1 to the Threat of discarded encounter cards when resolving a Sneak test.Response: After Thrall Quarters leaves play, add Dreadful Garments to the staging area.",
                 EncounterSet = "The Seat of Morgoth",
                 Number = 144,
                 Artist = Artist.Clive_Lauzon
@@ -2855,7 +2845,7 @@ Response: After Pits of Angband leaves play, add Angband Sword to the staging ar
                 QuestPoints = 20,
                 Quantity = 1,
                 VictoryPoints = 1,
-                Text = "Immune to player card effects. This location does not contribute its threat while it is in the staging area.Forced: While Tunnels of Shadow is the active location, the encounter deck is shuffled before discarding cards for a Sneak test.Response: After Tunnels of Shadow leaves play, add Element of Surprise to the staging area.",
+                Text = "Immune to player card effects. This location does not contribute its threat while it is in the staging area.\r\nForced: While Tunnels of Shadow is the active location, the encounter deck is shuffled before discarding cards for a Sneak test.Response: After Tunnels of Shadow leaves play, add Element of Surprise to the staging area.",
                 EncounterSet = "The Seat of Morgoth",
                 Number = 145,
                 Artist = Artist.Rebekah_Burlew

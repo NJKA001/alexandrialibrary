@@ -278,8 +278,7 @@ Attached hero gets +1 Defense.",
                 Traits = new List<string>() { "Condition." },
                 Quantity = 3,
                 ResourceCost = 0,
-                Text = "Response: After a Song card is played, add 1 resource to attached hero's resource pool.",
-                Keywords = new List<string>() { "Attach to a Lore hero.", " Limit 1 per hero." },
+                Text = "Attach to a Lore hero. Limit 1 per hero.\r\nResponse: After a Song card is played, add 1 resource to attached hero's resource pool.",
                 Number = 85,
                 Artist = Artist.Winona_Nelson
             });

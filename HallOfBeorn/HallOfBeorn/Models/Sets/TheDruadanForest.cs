@@ -74,9 +74,8 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Tactics,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Skill." },
-                Text = "Response: After attached hero attacks and destroys an enemy, deal 1 damage to another enemy that shares a Trait with the enemy just destroyed.",
-                FlavorText = "He slew many of them and the rest fled. - The Two Towers",
-                Keywords = new List<string>() { "Attach to a Tactics hero.", " Limit 1 per hero." },
+                Text = "Attach to a Tactics hero. Limit 1 per hero.\r\nResponse: After attached hero attacks and destroys an enemy, deal 1 damage to another enemy that shares a Trait with the enemy just destroyed.",
+                FlavorText = "He slew many of them and the rest fled. -The Two Towers",
                 Quantity = 3,
                 Number = 35,
                 Artist = Artist.Blake_Henriksen

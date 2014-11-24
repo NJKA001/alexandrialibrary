@@ -377,8 +377,7 @@ namespace HallOfBeorn.Models.Sets
                 Traits = new List<string>() { "Condition." },
                 Quantity = 3,
                 ResourceCost = 4,
-                Text = "Heroes do not exhaust to attack, defend, or commit to a quest while attached location is the active location.",
-                Keywords = new List<string>() { "Limit 1 per deck.", " Attach to a location." },
+                Text = "Limit 1 per deck. Attach to a location. Heroes do not exhaust to attack, defend, or commit to a quest while attached location is the active location.",
                 Number = 103,
                 Artist = Artist.Magali_Villeneuve
             });

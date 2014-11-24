@@ -190,10 +190,11 @@ Response: After Elrohir is declared as a defender, pay 1 resource from his resou
                 Sphere = Sphere.Tactics,
                 ResourceCost = 0,
                 Text = 
-@"Attached hero gets +1 Attack for each resource token on another copy of Keeping Count that is above the current number of resource tokens on this card.
+@"Attach to a hero. Limit 1 per hero.
+
+Attached hero gets +1 Attack for each resource token on another copy of Keeping Count that is above the current number of resource tokens on this card.
 
 Forced: After attached hero attacks and destroys an enemy, place 1 resource token on this card.",
-                Keywords = new List<string>() { "Attach to a hero.", " Limit 1 per hero." },
                 Quantity = 3,
                 Number = 5,
                 Artist = Artist.Mark_Tarrisse

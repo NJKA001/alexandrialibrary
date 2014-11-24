@@ -135,8 +135,7 @@ Response: After attached hero attacks alone, exhaust Firefoot to choose a non-un
                 Sphere = Models.Sphere.Spirit,
                 Quantity = 3,
                 Traits = new List<string> { "Song." },
-                Keywords = new List<string> { "Limit 1 per deck.", "Attach to a hero." },
-                Text = "Response: When attached hero is destroyed, add The Fall of Gil-galad to the victory display to reduce your threat by X, where X is the attached hero's threat cost.",
+                Text = "Limit 1 per deck. Attach to a hero.\r\nResponse: When attached hero is destroyed, add The Fall of Gil-galad to the victory display to reduce your threat by X, where X is the attached hero's threat cost.",
                 FlavorText = 
 @"...for into darkness fell his star
 in Mordor where the shadows are.
@@ -275,9 +274,9 @@ Forced: After the last time counter is removed from this stage, the players make
                 HitPoints = 5,
                 Quantity = 1,
                 Traits = new List<string> { "Dunland.", "Boar Clan." },
-                Keywords = new List<string> { "Cannot have attachments.", "Cannot leave play." },
                 Text = 
-@"Chief Turch engages the first player.
+@"Cannot have attachments. Cannot leave play.
+Chief Turch engages the first player.
 
 Forced: After an enemy engages a player, remove 1 time counter from the current quest.",
                 FlavorText = "",

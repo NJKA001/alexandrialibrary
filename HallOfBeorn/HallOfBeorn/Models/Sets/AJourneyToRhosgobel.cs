@@ -313,12 +313,11 @@ While Rhosgobel is in the staging area, Wilyador cannot be healed.Travel: Player
                 HitPoints = 20,
                 Traits = new List<string>() { "Creature.", " Eagle." },
                 Text = 
-@"Forced: At the end of each round, Wilyador suffers 2 damage.
+@"No attachments. The first player gains control of Wilyador.\r\nForced: At the end of each round, Wilyador suffers 2 damage.
 
 Wilyador cannot be healed of more than 5 wounds by a single effect. 
 
 If Wilyador leaves play, the players have lost the game.",
-                Keywords = new List<string>() { "No attachments.", " The first player gains control of [Card]." },
                 EncounterSet = "A Journey to Rhosgobel",
                 Quantity = 1,
                 Number = 64,

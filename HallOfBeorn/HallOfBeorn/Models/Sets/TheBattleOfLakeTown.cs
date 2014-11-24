@@ -79,8 +79,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 5,
                 Defense = 9,
                 HitPoints = 20,
-                Text = "When Revealed: Smaug the Mighty makes an immediate attack against each player (deal and resolve a shodow card for each attack).",
-                Keywords = new List<string>() { "Immune to player card effects." },
+                Text = "Immune to player card effects.\r\nWhen Revealed: Smaug the Mighty makes an immediate attack against each player (deal and resolve a shodow card for each attack).",
                 Threat = 7,
                 Number = 4,
                 Artist = Artist.Christopher_Burdett
@@ -99,8 +98,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 7,
                 Defense = 7,
                 HitPoints = 20,
-                Text = "When Revealed: Resolve all burn damage from all locations in play",
-                Keywords = new List<string>() { "Immune to player card effects." },
+                Text = "Immune to player card effects.\r\nWhen Revealed: Resolve all burn damage from all locations in play",
                 Threat = 6,
                 Number = 5,
                 Artist = Artist.Christopher_Burdett
@@ -118,8 +116,7 @@ namespace HallOfBeorn.Models.Sets
                 Attack = 8,
                 Defense = 8,
                 HitPoints = 20,
-                Text = "Excess damage from attacks by Smaug the Magnificent must be assigned to Lake-town.When Revealed: Move 3 damage from Smaug the Magnificent to Lake-town.",
-                Keywords = new List<string>() { "Immune to player card effects." },
+                Text = "Immune to player card effects.\r\nExcess damage from attacks by Smaug the Magnificent must be assigned to Lake-town.When Revealed: Move 3 damage from Smaug the Magnificent to Lake-town.",
                 Threat = 5,
                 Number = 6,
                 Artist = Artist.Christopher_Burdett

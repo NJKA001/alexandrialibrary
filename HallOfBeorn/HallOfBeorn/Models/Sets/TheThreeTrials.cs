@@ -184,8 +184,7 @@ namespace HallOfBeorn.Models.Sets
                 ResourceCost = 1,
                 Sphere = Sphere.Neutral,                
                 Traits = new List<string> { "Item." },
-                Keywords = new List<string> { "Attach to a hero.", "Limit 1 per hero." },
-                Text = "The first event card you play each round that matches attached hero's printed sphere gains secrecy 1.",
+                Text = "Attach to a hero. Limit 1 per hero.\r\nThe first event card you play each round that matches attached hero's printed sphere gains secrecy 1.",
                 FlavorText = "Each cloak was fastened about the neck with a brooch like a green leaf veined with silver. -The Fellowship of the Ring",
                 Number = 34,
                 Artist = Artist.Jason_Ward
@@ -473,9 +472,10 @@ If Key of the Raven is discarded, add it to the staging area.",
                 IsVariableThreat = true,
                 QuestPoints = 12,
                 Traits = new List<string> { "Forest.", "Hills." },
-                Keywords = new List<string> { "Immune to player card effects.", "X is the number of players in the game." },
-                Text = 
-@"Travel: The players must exhaust 3 Key objectives.
+                Text =
+@"Immune to player card effects. X is the number of players in the game.
+
+Travel: The players must exhaust 3 Key objectives.
 
 Forced: After the players travel here, each engaged Guardian enemy makes an immediate attack.",
                 VictoryPoints = 5,
@@ -497,8 +497,7 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
                 Defense = 2,
                 HitPoints = 4,
                 Traits = new List<string> { "Undead.", "Spirit." },
-                Keywords = new List<string> { "Cannot have attachments." },
-                Text = "Spirit of the Wild gets +1 Threat and +1 Attack for each Key objectives the players control.",
+                Text = "Cannot have attachments.\r\nSpirit of the Wild gets +1 Threat and +1 Attack for each Key objectives the players control.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack for each Key objective the players control.",
                 EncounterSet = "The Three Trials",
                 Number = 50,
@@ -532,8 +531,8 @@ Forced: After the players travel here, each engaged Guardian enemy makes an imme
                 IsVariableThreat = true,
                 QuestPoints = 3,
                 Traits = new List<string> { "Hills." },
-                Keywords = new List<string> { "Doomed 2.", "X is the number of players in the game." },
-                Text = "While Grim Foothills is in the staging area, progress must be placed on Grim Foothills before it can be placed on the active location.",
+                Keywords = new List<string> { "Doomed 2." },
+                Text = "X is the number of players in the game.\r\nWhile Grim Foothills is in the staging area, progress must be placed on Grim Foothills before it can be placed on the active location.",
                 EncounterSet = "The Three Trials",
                 Number = 52,
                 Artist = Artist.Michael_Rasmussen

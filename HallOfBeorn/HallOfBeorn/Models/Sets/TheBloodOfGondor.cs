@@ -415,9 +415,10 @@ If the players defeat this stage, they have won the game.",
                 Defense = 1,
                 HitPoints = 4,
                 Traits = new List<string>() { "Gondor.", " Noble.", " Ranger." },
-                Keywords = new List<string>() { "The first player gains control of [Card]." },
                 Text = 
-@"Combat Action: Exhaust Faramir to turn 1 hidden card faceup. If that card is an enemy, deal 3 damage to it.
+@"The first player gains control of Faramir.
+
+Combat Action: Exhaust Faramir to turn 1 hidden card faceup. If that card is an enemy, deal 3 damage to it.
 
 If Faramir leaves play, the players have lost the game.",
                 EncounterSet = "The Blood of Gondor",
@@ -455,9 +456,10 @@ If Faramir leaves play, the players have lost the game.",
                 Defense = 2,
                 HitPoints = 3,
                 Traits = new List<string>() { "Gondor.", " Noble." },
-                Keywords = new List<string>() { "The first player gains control of [Card]." },
                 Text = 
-@"Action: Exhaust Lord Alcaron to return an enemy engaged with you to the staging area.
+@"The first player gains control of Lord Alcaron.
+
+Action: Exhaust Lord Alcaron to return an enemy engaged with you to the staging area.
 
 If Lord Alcaron leaves play, the players have lost the game.",
                 EncounterSet = "The Blood of Gondor",

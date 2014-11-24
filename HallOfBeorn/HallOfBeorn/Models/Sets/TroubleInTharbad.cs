@@ -256,9 +256,10 @@ Forced: After a character leaves play, raise its controller's threat by 2.",
                 Defense = 2,
                 HitPoints = 3,
                 Traits = new List<string> { "Dwarf." },
-                Keywords = new List<string> { "The first player gains control of [Card]." },
                 Text = 
-@"Forced: At the beginning of the refresh phase, raise your threat by 1 for each player in the game.
+@"The first player gains control of Nalir.
+
+Forced: At the beginning of the refresh phase, raise your threat by 1 for each player in the game.
 
 If Nalir leaves play, the players lose the game.",
                 EncounterSet = "Trouble in Tharbad",
@@ -296,9 +297,8 @@ If Nalir leaves play, the players lose the game.",
                 Defense = 4,
                 HitPoints = 7,
                 Traits = new List<string> { "Mordor.", "Spy." },
-                Keywords = new List<string> { "X is the number of players in the game." },
                 Text = 
-@"Orc and Creature enemies get -30 engagement cost and +1 Threat.
+@"X is the number of players in the game.\r\nOrc and Creature enemies get -30 engagement cost and +1 Threat.
 
 Forced: When Bellach is destroyed, shuffle him into the encounter deck.",
                 EncounterSet = "Trouble in Tharbad",
@@ -315,9 +315,8 @@ Forced: When Bellach is destroyed, shuffle him into the encounter deck.",
                 Threat = 2,
                 QuestPoints = 10,
                 Traits = new List<string> { "City.", "Ruins.", "River." },
-                Keywords = new List<string> { "Immune to player card effects. ", "Cannot leave the staging area." },
-                Text = 
-@"The Crossing at Tharbad gets +2 quest points for each player in the game.
+                Text =
+@"Immune to player card effects. Cannot leave the staging area.\r\nThe Crossing at Tharbad gets +2 quest points for each player in the game.
                 
 When The Crossing at Tharbad is explored, the players win the game.",
                 EncounterSet = "Trouble in Tharbad",

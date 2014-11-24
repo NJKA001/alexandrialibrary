@@ -92,9 +92,9 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Tactics,
                 ResourceCost = 1,
                 Traits = new List<string>() { "Armor.", " Item." },
-                Text = "Attached hero gains +1 Defense. (+2 Defense instead if attached hero has the Gondor trait.)",
+                Text = "Attach to a hero. Limit 1 per hero.\r\nAttached hero gains +1 Defense. (+2 Defense instead if attached hero has the Gondor trait.)",
                 FlavorText = "There flowered a White Tree, and that was for Gondor... -The Return of the King",
-                Keywords = new List<string>() { "Attach to a hero.", " Restricted.", " Limit 1 per hero." },
+                Keywords = new List<string>() { "Restricted." },
                 Quantity = 3,
                 Number = 5,
                 Artist = Artist.Owen_William_Weber
