@@ -148,8 +148,8 @@ namespace HallOfBeorn.Models.Simple
         {
             var viewModel = new CardViewModel(card);
             return (!string.IsNullOrEmpty(viewModel.ImagePath1)) ?
-                URL_ROOT + viewModel.ImagePath1
-                : URL_ROOT + viewModel.ImagePath;
+                viewModel.ImagePath1
+                : viewModel.ImagePath;
         }
 
         private string GetBackImagePath(Card card)
@@ -157,7 +157,7 @@ namespace HallOfBeorn.Models.Simple
             var viewModel = new CardViewModel(card);
 
             return (!string.IsNullOrEmpty(viewModel.ImagePath2)) ?
-                URL_ROOT + viewModel.ImagePath2
+                viewModel.ImagePath2
                 : null;
         }
 
