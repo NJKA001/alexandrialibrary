@@ -52,7 +52,6 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, Scenario> scenarios = new Dictionary<string, Scenario>();
         private readonly Dictionary<string, Category> categories = new Dictionary<string, Category>();
         private readonly Dictionary<byte, string> victoryPointValues = new Dictionary<byte, string>();
-        private readonly List<WeightedSearchFilter> filters = new List<WeightedSearchFilter>();
 
         const int MAX_RESULTS = 128;
 
@@ -1461,6 +1460,7 @@ namespace HallOfBeorn.Services
 
         public IEnumerable<Card> Search(SearchViewModel model)
         {
+            var filters = new List<WeightedSearchFilter>();
             var results = new Dictionary<string, CardScore>();
 
             if (model.HasQuery)
