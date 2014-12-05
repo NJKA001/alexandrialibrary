@@ -8,13 +8,20 @@ namespace HallOfBeorn.Models
     public class WeightedSearchFilter
     {
         public WeightedSearchFilter(Func<SearchViewModel, Card, bool> check, float score)
+            : this(check, score, 0f)
+        {
+        }
+
+        public WeightedSearchFilter(Func<SearchViewModel, Card, bool> check, float score, float miss)
         {
             _check = check;
             _score = score;
+            _miss = miss;
         }
 
         private readonly Func<SearchViewModel, Card, bool> _check;
         private readonly float _score;
+        private readonly float _miss;
 
         public static float WeightedScore(Card card, float score)
         {
@@ -61,7 +68,7 @@ namespace HallOfBeorn.Models
 
         public float Score(SearchViewModel search, Card card)
         {
-            return _check(search, card) ? WeightedScore(card, _score) : 0f;
+            return _check(search, card) ? WeightedScore(card, _score) : _miss;
         }
     }
 }
