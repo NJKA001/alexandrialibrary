@@ -1530,7 +1530,7 @@ namespace HallOfBeorn.Services
                                 results[card.Id].Score = score;
                             }
                         }
-                        else if (score > 0)
+                        else if (score != -1)
                         {
                             results[card.Id] = new CardScore(card, score);
                         }
