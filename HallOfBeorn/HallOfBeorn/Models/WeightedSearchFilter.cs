@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HallOfBeorn.Models
 {
-    public class WeightedSearchFilter : ISearchFilter
+    public class WeightedSearchFilter
     {
         public WeightedSearchFilter(Func<SearchViewModel, Card, bool> check, float score)
         {

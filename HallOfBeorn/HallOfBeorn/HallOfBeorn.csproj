@@ -274,7 +274,6 @@
     <Compile Include="Models\EncounterSet.cs" />
     <Compile Include="Models\EncounterSetViewModel.cs" />
     <Compile Include="Models\ImageType.cs" />
-    <Compile Include="Models\ISearchFilter.cs" />
     <Compile Include="Models\OCTGN\OctgnCard.cs" />
     <Compile Include="Models\OCTGN\OctgnProperty.cs" />
     <Compile Include="Models\OCTGN\OctgnSet.cs" />
@@ -354,7 +353,6 @@
     <Compile Include="Models\ScenarioQuestCard.cs" />
     <Compile Include="Models\ScenarioQuestViewModel.cs" />
     <Compile Include="Models\ScenarioViewModel.cs" />
-    <Compile Include="Models\SearchFilter.cs" />
     <Compile Include="Models\SearchRequest.cs" />
     <Compile Include="Models\SearchResult.cs" />
     <Compile Include="Models\SearchViewModel.cs" />
