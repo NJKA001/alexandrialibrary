@@ -16,7 +16,7 @@ namespace HallOfBeorn.Models
         private readonly Func<SearchViewModel, Card, bool> _check;
         private readonly float _score;
 
-        private float getWeightedScore(Card card)
+        public static float WeightedScore(Card card, float score)
         {
             var weight = 0;
 
@@ -56,12 +56,12 @@ namespace HallOfBeorn.Models
                     break;
             }
 
-            return _score + weight;
+            return score + weight;
         }
 
         public float Score(SearchViewModel search, Card card)
         {
-            return _check(search, card) ? getWeightedScore(card) : 0f;
+            return _check(search, card) ? WeightedScore(card, _score) : 0f;
         }
     }
 }

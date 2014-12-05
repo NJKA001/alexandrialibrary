@@ -1463,7 +1463,7 @@ namespace HallOfBeorn.Services
             var filters = new List<WeightedSearchFilter>();
             var results = new Dictionary<string, CardScore>();
 
-            if (model.HasQuery)
+            if (model.HasQuery && !string.IsNullOrEmpty(model.BasicQuery()))
             {
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.Title.IsEqualToLower(s.BasicQuery()); }, 200));
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.IsEqualToLower(s.BasicQuery()); }, 200));
@@ -1537,11 +1537,18 @@ namespace HallOfBeorn.Services
                     }
                 }
             }
-            else
+            else if (!model.IsAdvancedSearch())
             {
                 foreach (var item in cards.Where(x => x.Value.CardSet.Name == "Core Set" && x.Value.Number < 74))
                 {
                     results[item.Value.Id] = new CardScore(item.Value, 74 - item.Value.Number);
+                }
+            }
+            else
+            {
+                foreach (var card in cards.Values)
+                {
+                    results[card.Id] = new CardScore(card, WeightedSearchFilter.WeightedScore(card, 1));
                 }
             }
 
