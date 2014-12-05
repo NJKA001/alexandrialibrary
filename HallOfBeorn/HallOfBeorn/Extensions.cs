@@ -166,12 +166,32 @@ namespace HallOfBeorn
             return self.SplitOn('=');
         }
 
+        public static bool IsDefined(this string self)
+        {
+            return !string.IsNullOrEmpty(self);
+        }
+
         public static string ToLowerSafe(this string self)
         {
             if (string.IsNullOrEmpty(self))
-                return self;
+                return string.Empty;
 
             return self.ToLower();
+        }
+
+        public static bool IsEqualToLower(this string self, string other)
+        {
+            return self.ToLowerSafe() == other.ToLowerSafe();
+        }
+
+        public static bool StartsWithLower(this string self, string other)
+        {
+            return self.ToLowerSafe().StartsWith(other.ToLowerSafe());
+        }
+
+        public static bool ContainsLower(this string self, string other)
+        {
+            return self.ToLowerSafe().Contains(other.ToLowerSafe());
         }
 
         public static bool MatchesWildcard(this string self, string pattern)

@@ -25,6 +25,9 @@ namespace HallOfBeorn.Models
         {
         }
 
+        public const string DEFAULT_FILTER_VALUE = "Any";
+        public const string RANDOM_KEYWORD = "+random";
+
         [Display(Name = "Search")]
         public string Query { get; set; }
 
@@ -77,7 +80,10 @@ namespace HallOfBeorn.Models
             return category;
         }
 
-        public bool Random { get; set; }
+        public bool IsRandom()
+        {
+            return (!string.IsNullOrEmpty(this.Query) && this.Query.ContainsLower(RANDOM_KEYWORD));
+        }
 
         [Display(Name = "Results")]
         public List<CardViewModel> Cards { get; set; }
@@ -87,6 +93,196 @@ namespace HallOfBeorn.Models
 
         [Display(Name = "Victory")]
         public string VictoryPoints { get; set; }
+
+        public bool HasQuery
+        {
+            get { return !string.IsNullOrEmpty(this.Query); }
+        }
+
+        public bool HasCardType
+        {
+            get { return this.CardType != Models.CardType.None; }
+        }
+
+        public bool HasCardSet
+        {
+            get { return !string.IsNullOrEmpty(this.CardSet) && this.CardSet != DEFAULT_FILTER_VALUE; }
+        }
+
+        public bool HasTrait
+        {
+            get { return !string.IsNullOrEmpty(this.Trait) && this.Trait != DEFAULT_FILTER_VALUE; }
+        }
+
+        public bool HasKeyword
+        {
+            get { return !string.IsNullOrEmpty(this.Keyword) && this.Keyword != DEFAULT_FILTER_VALUE; }
+        }
+
+        public bool HasSphere
+        {
+            get { return this.Sphere != Models.Sphere.None; }
+        }
+
+        public bool HasCategory
+        {
+            get { return this.GetCategory() != Models.Category.None; }
+        }
+
+        public bool HasCost
+        {
+            get { return !string.IsNullOrEmpty(this.Cost) && this.Cost != DEFAULT_FILTER_VALUE; }
+        }
+
+        public bool HasArtist
+        {
+            get { return !string.IsNullOrEmpty(this.Artist) && this.Artist != DEFAULT_FILTER_VALUE; }
+        }
+
+        public bool HasEncounterSet
+        {
+            get { return !string.IsNullOrEmpty(this.EncounterSet) && this.EncounterSet != DEFAULT_FILTER_VALUE; }
+        }
+
+        public bool HasVictoryPoints
+        {
+            get { return !string.IsNullOrEmpty(this.VictoryPoints) && this.VictoryPoints != DEFAULT_FILTER_VALUE; }
+        }
+
+        public bool HasFilter()
+        {
+            if (HasQuery)
+                return true;
+
+            if (HasCardType)
+                return true;
+
+            if (HasCardSet)
+                return true;
+
+            if (HasTrait)
+                return true;
+
+            if (HasKeyword)
+                return true;
+
+            if (HasSphere)
+                return true;
+
+            if (HasCategory)
+                return true;
+
+            if (HasCost)
+                return true;
+
+            if (this.Unique)
+                return true;
+
+            if (this.IsUnique != Uniqueness.Any)
+                return true;
+
+            if (HasArtist)
+                return true;
+
+            if (HasEncounterSet)
+                return true;
+
+            if (HasVictoryPoints)
+                return true;
+
+            return false;
+        }
+
+        public bool CardTypeMatches(Card card)
+        {
+            if (CardType == CardType.Player)
+            {
+                return card.CardType == CardType.Hero || card.CardType == Models.CardType.Ally || card.CardType == Models.CardType.Attachment || card.CardType == Models.CardType.Event;
+            }
+            else if (CardType == CardType.Character)
+            {
+                return card.CardType == Models.CardType.Hero || card.CardType == Models.CardType.Ally || card.CardType == Models.CardType.Objective_Ally || (card.CardType == Models.CardType.Objective && card.HitPoints > 0);
+            }
+            else if (CardType == CardType.Encounter)
+            {
+                return card.CardType == Models.CardType.Enemy || card.CardType == Models.CardType.Location || card.CardType == Models.CardType.Treachery || card.CardType == Models.CardType.Objective || card.CardType == Models.CardType.Objective_Ally;
+            }
+            else if (CardType == CardType.Objective)
+            {
+                return card.CardType == Models.CardType.Objective || card.CardType == Models.CardType.Objective_Ally;
+            }
+            else if (CardType == CardType.Boon)
+            {
+                return card.CampaignCardType == CampaignCardType.Boon;
+            }
+            else if (CardType == CardType.Burden)
+            {
+                return card.CampaignCardType == CampaignCardType.Burden;
+            }
+            else
+                return CardType == card.CardType;
+        }
+
+        public bool CardSetMatches(Card card)
+        {
+            return card.CardSet.Name == this.CardSet || (!string.IsNullOrEmpty(card.CardSet.AlternateName) && card.CardSet.AlternateName == this.CardSet) || (!string.IsNullOrEmpty(card.CardSet.NormalizedName) && card.CardSet.NormalizedName == this.CardSet) || (!string.IsNullOrEmpty(card.CardSet.Cycle) && card.CardSet.Cycle.ToUpper() == this.CardSet);
+        }
+
+        public bool IsCustom(Card card)
+        {
+            if ((this.CardSet == null || this.CardSet == "Any") && (this.EncounterSet == null || this.EncounterSet == "Any") && this.Sphere != Sphere.Mastery && (this.Trait == null || this.Trait == "Any") && (this.Keyword == null || this.Keyword == "Any"))
+            {
+                return card.CardSet.SetType == SetType.Custom_Expansion;
+            }
+
+            return false;
+        }
+
+        public bool VictoryPointsMatch(Card card)
+        {
+            if (!HasVictoryPoints)
+                return false;
+
+            byte victoryPoints = 0;
+            if (byte.TryParse(this.VictoryPoints.Replace("Victory", string.Empty).Trim('.'), out victoryPoints))
+            {
+                return card.VictoryPoints == victoryPoints;
+            }
+
+            return false;
+        }
+
+        public bool IsAdvancedSearch()
+        {
+            if (string.IsNullOrEmpty(this.Query))
+                return false;
+
+            return (this.Query.StartsWith("-") || this.Query.StartsWith("+") || this.Query.Contains(" -") || this.Query.Contains(" +"));
+        }
+
+        private string basicQuery;
+
+        public string BasicQuery()
+        {
+            if (basicQuery == null)
+            {
+                if (IsAdvancedSearch())
+                {
+                    var parts = this.Query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe().Where(x => !x.StartsWith("-") && !x.StartsWith("+")).ToListSafe();
+
+                    if (parts.Count == 0)
+                        return string.Empty;
+
+                    basicQuery = string.Join(" ", parts).ToLowerSafe();
+                }
+                else
+                {
+                    basicQuery = this.Query.ToLowerSafe();
+                }
+            }
+
+            return basicQuery;
+        }
 
         public static IEnumerable<SelectListItem> CardTypes
         {

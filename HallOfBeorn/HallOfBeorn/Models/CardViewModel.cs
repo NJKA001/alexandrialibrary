@@ -8,8 +8,14 @@ namespace HallOfBeorn.Models
     public class CardViewModel
     {
         public CardViewModel(Card card)
+            : this(card, 0f)
+        {
+        }
+
+        public CardViewModel(Card card, float score)
         {
             _card = card;
+            _score = score;
 
             foreach (var encounterSet in _card.IncludedEncounterSets)
             {
@@ -18,6 +24,7 @@ namespace HallOfBeorn.Models
         }
 
         private Card _card;
+        private float _score;
         private readonly List<CardEffect> _keywordEffects = new List<CardEffect>();
         private readonly List<CardEffect> _textEffects = new List<CardEffect>();
         private readonly List<CardEffect> _shadowEffects = new List<CardEffect>();
@@ -29,6 +36,11 @@ namespace HallOfBeorn.Models
 
         public bool HasIncludedEncounterSets { get { return _includedEncounterSets.Count > 0; } }
         public List<EncounterSetViewModel> IncludedEncounterSets { get { return _includedEncounterSets; } }
+
+        public float Score
+        {
+            get { return _score; }
+        }
 
         public string Id
         {

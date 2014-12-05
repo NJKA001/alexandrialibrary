@@ -52,9 +52,9 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, Scenario> scenarios = new Dictionary<string, Scenario>();
         private readonly Dictionary<string, Category> categories = new Dictionary<string, Category>();
         private readonly Dictionary<byte, string> victoryPointValues = new Dictionary<byte, string>();
+        private readonly List<ISearchFilter> filters = new List<ISearchFilter>();
 
-        const int maxResults = 128;
-        const string randomKeyword = "random";
+        const int MAX_RESULTS = 128;
 
         private void AddProduct(Product product)
         {
@@ -1278,40 +1278,16 @@ namespace HallOfBeorn.Services
             return results;
         }
 
-        private string GetBasicQuery(string query)
+        /*
+        public IEnumerable<Card> SearchOld(SearchViewModel model)
         {
-            if (string.IsNullOrEmpty(query))
-                return string.Empty;
-
-            var parts = query.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToListSafe().Where(x => !x.StartsWith("-") && !x.StartsWith("+")).ToListSafe();
-
-            if (parts.Count == 0)
-                return string.Empty;
-
-            return string.Join(" ", parts);
-        }
-
-        public IEnumerable<Card> Search(SearchViewModel model)
-        {
-            if (!string.IsNullOrEmpty(model.Query) && model.Query.Trim().ToLower() == randomKeyword)
-            {
-                model.Random = true;
-            }
-
-            var hasFilter = false;
-            var isAdvancedSearch = false;
-
-            if (!string.IsNullOrEmpty(model.Query))
-            {
-                hasFilter = true;
-                isAdvancedSearch = (model.Query.StartsWith("-") || model.Query.StartsWith("+") || model.Query.Contains(" -") || model.Query.Contains(" +"));
-            }
-
-            var query = isAdvancedSearch ? GetBasicQuery(model.Query).ToLowerSafe() : model.Query.ToLowerSafe();
+            var hasFilter = model.HasFilter();
+            var isAdvancedSearch = model.IsAdvancedSearch();
+            var query = model.BasicQuery();
 
             var results = !string.IsNullOrEmpty(query) ?
                 cards.Values.Where(
-                    x => (x.Title.ToLower().Contains(query) || query == randomKeyword)
+                    x => (x.Title.ToLower().Contains(query) || model.IsRandom())
                     || (!string.IsNullOrEmpty(x.NormalizedTitle) && x.NormalizedTitle.ToLower().Contains(query))
                     || (!string.IsNullOrEmpty(x.Text) && x.Text.ToLower().Contains(query))
                     || (!string.IsNullOrEmpty(x.OppositeText) && x.OppositeText.ToLower().Contains(query))
@@ -1432,7 +1408,7 @@ namespace HallOfBeorn.Services
                 results = AdvancedSearch(model, results);
             }
 
-            var takeCount = hasFilter || model.Random ? results.Count : maxResults;
+            var takeCount = hasFilter || model.IsRandom() ? results.Count : MAX_RESULTS;
 
             results = results.Take(takeCount).ToList();
 
@@ -1444,7 +1420,7 @@ namespace HallOfBeorn.Services
                 }
             }
 
-            if (model.Random)
+            if (model.IsRandom())
             {
                 var total = results.Count();
                 if (total > 1)
@@ -1479,8 +1455,161 @@ namespace HallOfBeorn.Services
                     case Sort.Set_Number:
                     default:
                         return results.OrderBy(x => x.CardSet.Number).ThenBy(x => x.Number);
+                 }
+            }
+        }*/
+
+        public IEnumerable<Card> Search(SearchViewModel model)
+        {
+            var results = new Dictionary<string, CardScore>();
+
+            if (model.HasQuery)
+            {
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.Title.IsEqualToLower(s.BasicQuery()); }, 200));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.IsEqualToLower(s.BasicQuery()); }, 200));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.Title.StartsWithLower(s.BasicQuery()); }, 111));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.StartsWithLower(s.BasicQuery()); }, 111));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.Title.ContainsLower(s.BasicQuery()); }, 100));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.ContainsLower(s.BasicQuery()); }, 100));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.Text.ContainsLower(s.BasicQuery()); }, 100));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.OppositeText.ContainsLower(s.BasicQuery()); }, 100));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.Traits.Any(t => t.ToLowerSafe().Contains(s.BasicQuery())); }, 100));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTraits.Any(t => t.ToLowerSafe().Contains(s.BasicQuery())); }, 100));
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.Keywords.Any(k => k.ToLowerSafe().Contains(s.BasicQuery())); }, 100));
+            }
+
+            if (model.HasCardType)
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.CardTypeMatches(c); }, 100));
+
+            if (model.HasCardSet)
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.CardSetMatches(c); }, 100));
+
+            if (model.HasTrait)
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.HasTrait(s.Trait); }, 100));
+
+            if (model.HasKeyword)
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.HasKeyword(s.Keyword); }, 100));
+            
+            if (model.HasSphere)
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.Sphere == c.Sphere; }, 100));
+
+            if (model.HasCategory)
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.Categories.Any(x => x == s.GetCategory()); }, 100));
+
+            if (model.HasCost)
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.Cost == c.ResourceCostLabel; }, 100));
+
+            if (model.HasArtist)
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.Artist == c.Artist.Name; }, 100));
+
+            if (model.HasEncounterSet)
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.EncounterSet == c.EncounterSet; }, 100));
+
+            if (model.HasVictoryPoints)
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.Artist == c.Artist.Name; }, 100));
+            
+            if (model.Unique)
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.IsUnique; }, 100));
+
+            if (model.IsUnique != Uniqueness.Any)
+                filters.Add(new WeightedSearchFilter((s, c) => { return (s.IsUnique == Uniqueness.Yes && c.IsUnique) || (s.IsUnique == Uniqueness.No && !c.IsUnique); }, 50));
+
+            if (filters.Count > 0)
+            {
+                foreach (var card in cards.Values)
+                {
+                    foreach (var filter in filters)
+                    {
+                        var score = filter.Score(model, card);
+                        if (score > 0)
+                        {
+                            if (results.ContainsKey(card.Id))
+                            {
+                                if (score > results[card.Id].Score)
+                                {
+                                    results[card.Id].Score = score;
+                                }
+                            }
+                            else
+                            {
+                                results[card.Id] = new CardScore(card, score);
+                            }
+                        }
+                    }
                 }
             }
+            else
+            {
+                foreach (var item in cards.Where(x => x.Value.CardSet.Name == "Core Set" && x.Value.Number < 74))
+                {
+                    results[item.Value.Id] = new CardScore(item.Value, 74 - item.Value.Number);
+                }
+            }
+
+            if (!model.Custom)
+            {
+                var official = new Dictionary<string, CardScore>();
+
+                foreach (var score in results)
+                {
+                    if (!model.IsCustom(score.Value.Card))
+                        official.Add(score.Key, score.Value);
+                }
+
+                results = official;
+            }
+
+            if (model.IsRandom())
+            {
+                var total = results.Count();
+                if (total > 1)
+                {
+                    var random = new Random();
+                    var choice = random.Next(0, total - 1);
+                    var score = results.Values.ToList()[choice];
+                    results = new Dictionary<string, CardScore>();
+                    results[score.Card.Id] = score;
+                }
+            }
+
+            var takeCount = model.HasFilter() || model.IsRandom() ? results.Count : MAX_RESULTS;
+
+            var sortedResults = new List<Card>();
+
+            switch (model.Sort)
+            {
+                case Sort.Alphabetical:
+                    sortedResults = results.OrderBy(x => x.Value.Card.Title).Select(x => x.Value.Card).Take(takeCount).ToList();
+                    break;
+                case Sort.Sphere_Type_Cost:
+                    sortedResults = results.OrderBy(x => x.Value.Card.Sphere).ThenBy(x => x.Value.Card.CardType).ThenBy(x =>
+                    {
+                        if (x.Value.Card.ThreatCost.HasValue && x.Value.Card.ThreatCost.Value > 0)
+                            return x.Value.Card.ThreatCost.Value;
+                        else if (x.Value.Card.ResourceCost.HasValue && x.Value.Card.ResourceCost.Value > 0)
+                            return x.Value.Card.ResourceCost.Value;
+                        else if (x.Value.Card.EngagementCost.HasValue && x.Value.Card.EngagementCost.Value > 0)
+                            return x.Value.Card.EngagementCost.Value;
+                        else if (x.Value.Card.QuestPoints.HasValue && x.Value.Card.QuestPoints > 0)
+                            return x.Value.Card.QuestPoints.Value;
+                        else
+                            return -1;
+                    }).Select(x => x.Value.Card).Take(takeCount).ToList();
+                    break;
+                case Sort.Set_Number:
+                    sortedResults = results.OrderBy(x => x.Value.Card.CardSet.Number).ThenBy(x => x.Value.Card.Number).Select(x => x.Value.Card).Take(takeCount).ToList();
+                    break;
+                default:
+                    sortedResults = results.OrderByDescending(x => x.Value.Score).Select(y => y.Value.Card).Take(takeCount).ToList();
+                    break;
+            }
+
+            if (model.IsAdvancedSearch())
+            {
+                sortedResults = AdvancedSearch(model, sortedResults);
+            }
+
+            return sortedResults;
         }
 
         public Card Find(string id)
