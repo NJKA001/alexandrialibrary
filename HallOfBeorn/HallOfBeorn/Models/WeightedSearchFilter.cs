@@ -26,16 +26,18 @@ namespace HallOfBeorn.Models
             switch (card.CardType)
             {
                 case CardType.Hero:
-                    weight += 12;
+                    weight += 13;
                     break;
                 case CardType.Ally:
+                    weight += 9;
+                    break;
+                case CardType.Objective_Ally:
                     weight += 8;
                     break;
-                case CardType.Objective:
-                case CardType.Objective_Ally:
+                case CardType.Attachment:
                     weight += 7;
                     break;
-                case CardType.Attachment:
+                case CardType.Objective:
                     weight += 6;
                     break;
                 case CardType.Event:

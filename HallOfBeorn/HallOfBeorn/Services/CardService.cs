@@ -1506,7 +1506,7 @@ namespace HallOfBeorn.Services
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.EncounterSet == c.EncounterSet; }, 100));
 
             if (model.HasVictoryPoints)
-                filters.Add(new WeightedSearchFilter((s, c) => { return s.Artist == c.Artist.Name; }, 100));
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.VictoryPointsMatch(c); }, 100));
             
             if (model.Unique)
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.IsUnique; }, 100));
@@ -1521,19 +1521,18 @@ namespace HallOfBeorn.Services
                     foreach (var filter in filters)
                     {
                         var score = filter.Score(model, card);
-                        if (score > 0)
+                        
+                        if (results.ContainsKey(card.Id))
                         {
-                            if (results.ContainsKey(card.Id))
+                            var existing = results[card.Id].Score;
+                            if (score == 0 || (existing > 0 && score > existing))
                             {
-                                if (score > results[card.Id].Score)
-                                {
-                                    results[card.Id].Score = score;
-                                }
+                                results[card.Id].Score = score;
                             }
-                            else
-                            {
-                                results[card.Id] = new CardScore(card, score);
-                            }
+                        }
+                        else
+                        {
+                            results[card.Id] = new CardScore(card, score);
                         }
                     }
                 }
@@ -1579,10 +1578,10 @@ namespace HallOfBeorn.Services
             switch (model.Sort)
             {
                 case Sort.Alphabetical:
-                    sortedResults = results.OrderBy(x => x.Value.Card.Title).Select(x => x.Value.Card).Take(takeCount).ToList();
+                    sortedResults = results.Where(x => x.Value.Score > 0).OrderBy(x => x.Value.Card.Title).Select(x => x.Value.Card).Take(takeCount).ToList();
                     break;
                 case Sort.Sphere_Type_Cost:
-                    sortedResults = results.OrderBy(x => x.Value.Card.Sphere).ThenBy(x => x.Value.Card.CardType).ThenBy(x =>
+                    sortedResults = results.Where(x => x.Value.Score > 0).OrderBy(x => x.Value.Card.Sphere).ThenBy(x => x.Value.Card.CardType).ThenBy(x =>
                     {
                         if (x.Value.Card.ThreatCost.HasValue && x.Value.Card.ThreatCost.Value > 0)
                             return x.Value.Card.ThreatCost.Value;
@@ -1597,10 +1596,10 @@ namespace HallOfBeorn.Services
                     }).Select(x => x.Value.Card).Take(takeCount).ToList();
                     break;
                 case Sort.Set_Number:
-                    sortedResults = results.OrderBy(x => x.Value.Card.CardSet.Number).ThenBy(x => x.Value.Card.Number).Select(x => x.Value.Card).Take(takeCount).ToList();
+                    sortedResults = results.Where(x => x.Value.Score > 0).OrderBy(x => x.Value.Card.CardSet.Number).ThenBy(x => x.Value.Card.Number).Select(x => x.Value.Card).Take(takeCount).ToList();
                     break;
                 default:
-                    sortedResults = results.OrderByDescending(x => x.Value.Score).Select(y => y.Value.Card).Take(takeCount).ToList();
+                    sortedResults = results.Where(x => x.Value.Score > 0).OrderByDescending(x => x.Value.Score).Select(y => y.Value.Card).Take(takeCount).ToList();
                     break;
             }
 
