@@ -170,9 +170,9 @@
                                             }
 
                                             var quest = encodeURIComponent(result.title);
-                                            if (this.category == "Nightmare" && result.HasNightmare) {
-                                                encounterSet += "%20Nightmare";
-                                            }
+                                            //if (this.category == "Nightmare" && result.HasNightmare) {
+                                            //    quest += "%20Nightmare";
+                                            //}
 
                                             var url = 'http://' + window.location.host + "/Cards/Search?CardType=" + cardType + "&Quest=" + quest + "&HasShadow=" + hasShadow;
                                             if (query != '') {

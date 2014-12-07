@@ -1525,7 +1525,7 @@ namespace HallOfBeorn.Services
                 filters.Add(new WeightedSearchFilter((s, c) => 
                 {
                     return !string.IsNullOrEmpty(c.EncounterSet) && 
-                        scenario.QuestCards.Any(x => x.Quest.EncounterSet == c.EncounterSet || x.IncludedEncounterSets.Any(y => y.Name == c.EncounterSet)); }, 50));
+                        scenario.QuestCards.Any(x => (x.Quest != null && x.Quest.EncounterSet != null && x.Quest.EncounterSet == c.EncounterSet) || (x.IncludedEncounterSets != null && x.IncludedEncounterSets.Any(y => y != null && y.Name == c.EncounterSet))); }, 50));
             }
 
             if (filters.Count > 0)
