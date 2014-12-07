@@ -273,6 +273,7 @@
     <Compile Include="Models\Decks\TalesFromTheCards\WhereEaglesDare.cs" />
     <Compile Include="Models\EncounterSet.cs" />
     <Compile Include="Models\EncounterSetViewModel.cs" />
+    <Compile Include="Models\HasShadow.cs" />
     <Compile Include="Models\ImageType.cs" />
     <Compile Include="Models\OCTGN\OctgnCard.cs" />
     <Compile Include="Models\OCTGN\OctgnProperty.cs" />

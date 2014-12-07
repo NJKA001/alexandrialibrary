@@ -318,6 +318,8 @@ namespace HallOfBeorn.Controllers
                     var objectiveCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
                     var objectiveAllyCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
                     var surgeCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var shadowCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var hasEasy = false;
                     var hasNightmare = false;
 
                     foreach (var card in scenario.ScenarioCards)
@@ -326,12 +328,24 @@ namespace HallOfBeorn.Controllers
                         cardCounts[1] += card.NormalQuantity;
                         cardCounts[2] += card.NightmareQuantity;
 
+                        if (cardCounts[0] != cardCounts[1])
+                        {
+                            hasEasy = true;
+                        }
+
                         if (card.Card.Traits.Any(x => x == "Surge.") || card.Card.Text.Contains(" surge"))
                         {
                             surgeCounts[0] += card.EasyQuantity;
                             surgeCounts[1] += card.NormalQuantity;
                             surgeCounts[2] += card.NightmareQuantity;
                         }
+                        if (!string.IsNullOrEmpty(card.Card.Shadow))
+                        {
+                            shadowCounts[0] += card.EasyQuantity;
+                            shadowCounts[1] += card.NormalQuantity;
+                            shadowCounts[2] += card.NightmareQuantity;
+                        }
+
                         if (card.Card.CardSet.SetType == SetType.Nightmare_Expansion)
                         {
                             hasNightmare = true;
@@ -367,6 +381,7 @@ namespace HallOfBeorn.Controllers
                         }
                     }
 
+                    details["HasEasy"] = hasEasy;
                     details["HasNightmare"] = hasNightmare;
 
                     for (int i = 0; i < 3; i++)
@@ -381,6 +396,8 @@ namespace HallOfBeorn.Controllers
                         details[prefix + "LocationPercentage"] = ((float)enemyCounts[i] / (float)cardCounts[i]); //*100;
                         details[prefix + "Treacheries"] = treacheryCounts[i];
                         details[prefix + "TreacheryPercentage"] = ((float)treacheryCounts[i] / (float)cardCounts[i]); //*100;
+                        details[prefix + "Shadows"] = shadowCounts[i];
+                        details[prefix + "ShadowPercentage"] = ((float)shadowCounts[i] / (float)cardCounts[i]); //*100;
                         details[prefix + "Objectives"] = objectiveCounts[i];
                         details[prefix + "ObjectivePercentage"] = ((float)objectiveCounts[i] / (float)cardCounts[i]); //*100;
                         details[prefix + "HasObjectives"] = (objectiveCounts[i] > 0);

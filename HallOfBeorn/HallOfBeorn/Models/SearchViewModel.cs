@@ -94,85 +94,94 @@ namespace HallOfBeorn.Models
         [Display(Name = "Victory")]
         public string VictoryPoints { get; set; }
 
-        public bool HasQuery
+        public HasShadow HasShadow { get; set; }
+
+        public string Quest { get; set; }
+
+        public bool HasQuest()
         {
-            get { return !string.IsNullOrEmpty(this.Query); }
+            return !string.IsNullOrEmpty(this.Quest);
         }
 
-        public bool HasCardType
+        public bool HasQuery()
         {
-            get { return this.CardType != Models.CardType.None; }
+            return !string.IsNullOrEmpty(this.Query);
         }
 
-        public bool HasCardSet
+        public bool HasCardType()
         {
-            get { return !string.IsNullOrEmpty(this.CardSet) && this.CardSet != DEFAULT_FILTER_VALUE; }
+            return this.CardType != Models.CardType.None;
         }
 
-        public bool HasTrait
+        public bool HasCardSet()
         {
-            get { return !string.IsNullOrEmpty(this.Trait) && this.Trait != DEFAULT_FILTER_VALUE; }
+            return !string.IsNullOrEmpty(this.CardSet) && this.CardSet != DEFAULT_FILTER_VALUE;
         }
 
-        public bool HasKeyword
+        public bool HasTrait()
         {
-            get { return !string.IsNullOrEmpty(this.Keyword) && this.Keyword != DEFAULT_FILTER_VALUE; }
+            return !string.IsNullOrEmpty(this.Trait) && this.Trait != DEFAULT_FILTER_VALUE;
         }
 
-        public bool HasSphere
+        public bool HasKeyword()
         {
-            get { return this.Sphere != Models.Sphere.None; }
+            return !string.IsNullOrEmpty(this.Keyword) && this.Keyword != DEFAULT_FILTER_VALUE;
         }
 
-        public bool HasCategory
+        public bool HasSphere()
         {
-            get { return this.GetCategory() != Models.Category.None; }
+            return this.Sphere != Models.Sphere.None;
         }
 
-        public bool HasCost
+        public bool HasCategory()
         {
-            get { return !string.IsNullOrEmpty(this.Cost) && this.Cost != DEFAULT_FILTER_VALUE; }
+            return this.GetCategory() != Models.Category.None;
         }
 
-        public bool HasArtist
+        public bool HasCost()
         {
-            get { return !string.IsNullOrEmpty(this.Artist) && this.Artist != DEFAULT_FILTER_VALUE; }
+            return !string.IsNullOrEmpty(this.Cost) && this.Cost != DEFAULT_FILTER_VALUE;
         }
 
-        public bool HasEncounterSet
+        public bool HasArtist()
         {
-            get { return !string.IsNullOrEmpty(this.EncounterSet) && this.EncounterSet != DEFAULT_FILTER_VALUE; }
+            return !string.IsNullOrEmpty(this.Artist) && this.Artist != DEFAULT_FILTER_VALUE;
         }
 
-        public bool HasVictoryPoints
+        public bool HasEncounterSet()
         {
-            get { return !string.IsNullOrEmpty(this.VictoryPoints) && this.VictoryPoints != DEFAULT_FILTER_VALUE; }
+            return !string.IsNullOrEmpty(this.EncounterSet) && this.EncounterSet != DEFAULT_FILTER_VALUE;
+        }
+
+        public bool HasVictoryPoints()
+        {
+            return !string.IsNullOrEmpty(this.VictoryPoints) && this.VictoryPoints != DEFAULT_FILTER_VALUE;
         }
 
         public bool HasFilter()
         {
-            if (HasQuery)
+            if (HasQuery())
                 return true;
 
-            if (HasCardType)
+            if (HasCardType())
                 return true;
 
-            if (HasCardSet)
+            if (HasCardSet())
                 return true;
 
-            if (HasTrait)
+            if (HasTrait())
                 return true;
 
-            if (HasKeyword)
+            if (HasKeyword())
                 return true;
 
-            if (HasSphere)
+            if (HasSphere())
                 return true;
 
-            if (HasCategory)
+            if (HasCategory())
                 return true;
 
-            if (HasCost)
+            if (HasCost())
                 return true;
 
             if (this.Unique)
@@ -181,13 +190,13 @@ namespace HallOfBeorn.Models
             if (this.IsUnique != Uniqueness.Any)
                 return true;
 
-            if (HasArtist)
+            if (HasArtist())
                 return true;
 
-            if (HasEncounterSet)
+            if (HasEncounterSet())
                 return true;
 
-            if (HasVictoryPoints)
+            if (HasVictoryPoints())
                 return true;
 
             return false;
@@ -240,7 +249,7 @@ namespace HallOfBeorn.Models
 
         public bool VictoryPointsMatch(Card card)
         {
-            if (!HasVictoryPoints)
+            if (!HasVictoryPoints())
                 return false;
 
             byte victoryPoints = 0;

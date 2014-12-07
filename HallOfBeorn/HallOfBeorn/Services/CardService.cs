@@ -1463,56 +1463,70 @@ namespace HallOfBeorn.Services
             var filters = new List<WeightedSearchFilter>();
             var results = new Dictionary<string, CardScore>();
 
-            if (model.HasQuery && !string.IsNullOrEmpty(model.BasicQuery()))
+            if (model.HasQuery() && !string.IsNullOrEmpty(model.BasicQuery()))
             {
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.Title.IsEqualToLower(s.BasicQuery()); }, 200, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.IsEqualToLower(s.BasicQuery()); }, 200, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.Title.StartsWithLower(s.BasicQuery()); }, 111, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.StartsWithLower(s.BasicQuery()); }, 111, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.Title.ContainsLower(s.BasicQuery()); }, 100, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.ContainsLower(s.BasicQuery()); }, 100, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.Text.ContainsLower(s.BasicQuery()); }, 100, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.OppositeText.ContainsLower(s.BasicQuery()); }, 100, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.Traits.Any(t => t.ToLowerSafe().Contains(s.BasicQuery())); }, 100, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTraits.Any(t => t.ToLowerSafe().Contains(s.BasicQuery())); }, 100, -1));
-                filters.Add(new WeightedSearchFilter((s, c) => { return c.Keywords.Any(k => k.ToLowerSafe().Contains(s.BasicQuery())); }, 100, -1));
+                var queryFilters = new List<WeightedSearchFilter>();
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.Title.IsEqualToLower(s.BasicQuery()); }, 200));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.IsEqualToLower(s.BasicQuery()); }, 200));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.Title.StartsWithLower(s.BasicQuery()); }, 111));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.StartsWithLower(s.BasicQuery()); }, 111));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.Title.ContainsLower(s.BasicQuery()); }, 100));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTitle.ContainsLower(s.BasicQuery()); }, 100));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.Text.ContainsLower(s.BasicQuery()); }, 100));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.OppositeText.ContainsLower(s.BasicQuery()); }, 100));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.Traits.Any(t => t.ToLowerSafe().Contains(s.BasicQuery())); }, 100));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.NormalizedTraits.Any(t => t.ToLowerSafe().Contains(s.BasicQuery())); }, 100));
+                queryFilters.Add(new WeightedSearchFilter((s, c) => { return c.Keywords.Any(k => k.ToLowerSafe().Contains(s.BasicQuery())); }, 100));
+                filters.Add(new WeightedSearchFilter(queryFilters));
             }
 
-            if (model.HasCardType)
+            if (model.HasCardType())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.CardTypeMatches(c); }, 100));
 
-            if (model.HasCardSet)
+            if (model.HasCardSet())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.CardSetMatches(c); }, 100));
 
-            if (model.HasTrait)
+            if (model.HasTrait())
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.HasTrait(s.Trait); }, 100));
 
-            if (model.HasKeyword)
+            if (model.HasKeyword())
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.HasKeyword(s.Keyword); }, 100));
             
-            if (model.HasSphere)
+            if (model.HasSphere())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Sphere == c.Sphere; }, 100));
 
-            if (model.HasCategory)
+            if (model.HasCategory())
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.Categories.Any(x => x == s.GetCategory()); }, 100));
 
-            if (model.HasCost)
+            if (model.HasCost())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Cost == c.ResourceCostLabel; }, 100));
 
-            if (model.HasArtist)
+            if (model.HasArtist())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Artist == c.Artist.Name; }, 100));
 
-            if (model.HasEncounterSet)
+            if (model.HasEncounterSet())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.EncounterSet == c.EncounterSet; }, 100));
 
-            if (model.HasVictoryPoints)
+            if (model.HasVictoryPoints())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.VictoryPointsMatch(c); }, 100));
             
             if (model.Unique)
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.IsUnique; }, 100));
 
+            if (model.HasShadow != HasShadow.Any)
+                filters.Add(new WeightedSearchFilter((s, c) => { return (s.HasShadow == HasShadow.Yes && !string.IsNullOrEmpty(c.Shadow) || s.HasShadow == HasShadow.No && string.IsNullOrEmpty(c.Shadow)); }, 50));
+
             if (model.IsUnique != Uniqueness.Any)
                 filters.Add(new WeightedSearchFilter((s, c) => { return (s.IsUnique == Uniqueness.Yes && c.IsUnique) || (s.IsUnique == Uniqueness.No && !c.IsUnique); }, 50));
+
+            if (model.HasQuest())
+            {
+                var scenario = GetScenario(model.Quest.ToUrlSafeString());
+                filters.Add(new WeightedSearchFilter((s, c) => 
+                {
+                    return !string.IsNullOrEmpty(c.EncounterSet) && 
+                        scenario.QuestCards.Any(x => x.Quest.EncounterSet == c.EncounterSet || x.IncludedEncounterSets.Any(y => y.Name == c.EncounterSet)); }, 50));
+            }
 
             if (filters.Count > 0)
             {
@@ -1525,12 +1539,12 @@ namespace HallOfBeorn.Services
                         if (results.ContainsKey(card.Id))
                         {
                             var existing = results[card.Id].Score;
-                            if (score == 0 || (existing > 0 && score > existing))
+                            if (score == 0 || existing > 0 && score > existing)
                             {
                                 results[card.Id].Score = score;
                             }
                         }
-                        else if (score != -1)
+                        else
                         {
                             results[card.Id] = new CardScore(card, score);
                         }

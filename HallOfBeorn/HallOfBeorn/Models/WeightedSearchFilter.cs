@@ -19,7 +19,13 @@ namespace HallOfBeorn.Models
             _miss = miss;
         }
 
+        public WeightedSearchFilter(IEnumerable<WeightedSearchFilter> filters)
+        {
+            _filters = filters;
+        }
+
         private readonly Func<SearchViewModel, Card, bool> _check;
+        private readonly IEnumerable<WeightedSearchFilter> _filters;
         private readonly float _score;
         private readonly float _miss;
 
@@ -68,7 +74,24 @@ namespace HallOfBeorn.Models
 
         public float Score(SearchViewModel search, Card card)
         {
-            return _check(search, card) ? WeightedScore(card, _score) : _miss;
+            if (_filters != null)
+            {
+                var bestScore = 0f;
+                foreach (var filter in _filters)
+                {
+                    var score = filter.Score(search, card);
+                    if (score > bestScore)
+                    {
+                        bestScore = score;
+                    }
+                }
+
+                return bestScore;
+            }
+            else
+            {
+                return _check(search, card) ? WeightedScore(card, _score) : _miss;
+            }
         }
     }
 }

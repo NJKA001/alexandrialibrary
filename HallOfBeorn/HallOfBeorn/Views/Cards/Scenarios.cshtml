@@ -14,38 +14,108 @@
             if (id != null && id.length > 0) {
 
                 $.get("/Cards/ScenarioDetails/" + id).success(function (result) {
+                    var enemyData = [];
+                    var locationData = [];
+                    var treacheryData = [];
+                    var shadowData = [];
+
+                    if (result.HasEasy) {
+                        enemyData.push(result.EasyEnemies);
+                        locationData.push(result.EasyLocations);
+                        treacheryData.push(result.EasyTreacheries);
+                        shadowData.push(result.EasyShadows);
+                    }
+
+                    enemyData.push(result.NormalEnemies);
+                    locationData.push(result.NormalLocations);
+                    treacheryData.push(result.NormalTreacheries);
+                    shadowData.push(result.NormalShadows);
+
+                    if (result.HasNightmare) {
+                        enemyData.push(result.NightmareEnemies);
+                        locationData.push(result.NightmareLocations);
+                        treacheryData.push(result.NightmareTreacheries);
+                        shadowData.push(result.NightmareShadows);
+                    }
+
+                    console.log("shadow data");
+                    console.log(shadowData);
+
                     var series = [
                         {
                             name: 'Enemies',
-                            data: [result.EasyEnemies, result.NormalEnemies, result.NightmareEnemies]
+                            data: enemyData
                         },
                         {
                             name: 'Locations',
-                            data: [result.EasyLocations, result.NormalLocations, result.NightmareLocations]
+                            data: locationData
                         },
                         {
                             name: 'Treacheries',
-                            data: [result.EasyTreacheries, result.NormalTreacheries, result.NightmareTreacheries]
+                            data: treacheryData
+                        },
+                        {
+                            name: 'Shadows',
+                            data: shadowData
                         }
                     ];
 
                     if (result.EasyHasObjectives || result.NormalHasObjectives || result.NightmareHasObjectives) {
+                        var objectiveData = [];
+                        if (result.HasEasy) {
+                            objectiveData.push(result.EasyObjectives);
+                        }
+                        objectiveData.push(result.NormalObjectives);
+                        if (result.HasNightmare) {
+                            objectiveData.push(result.NightmareObjectives);
+                        }
+
                         series.push({
                             name: 'Objectives',
-                            data: [result.EasyObjectives, result.NormalObjectives, result.NightmareObjectives]
+                            data: objectiveData
                         });
                     }
                     if (result.EasyHasObjectiveAllies || result.NormalHasObjectiveAllies || result.NightmareHasObjectiveAllies) {
+                        var objectiveAllyData = [];
+                        if (result.HasEasy) {
+                            objectiveAllyData.push(result.EasyObjectiveAllies);
+                        }
+                        objectiveAllyData.push(result.NormalObjectiveAllies);
+                        if (result.HasNightmare) {
+                            objectiveAllyData.push(result.NightmareObjectiveAllies);
+                        }
+
                         series.push({
                             name: 'Objective Allies',
-                            data: [result.EasyObjectiveAllies, result.NormalObjectiveAllies, result.NightmareObjectiveAllies]
+                            data: objectiveAllyData
                         });
                     }
                     if (result.EasyHasSurge || result.NormalHasSurge || result.NightmareHasSurge) {
+                        var surgeData = [];
+                        if (result.HasEasy) {
+                            surgeData.push(result.EasySurges);
+                        }
+                        surgeData.push(result.NormalSurges);
+                        if (result.HasNightmare) {
+                            surgeData.push(result.NightmareSurges);
+                        }
+
                         series.push({
                             name: 'Surge',
-                            data: [result.EasySurges, result.NormalSurges, result.NightmareSurges]
+                            data: surgeData
                         });
+                    }
+
+                    var categories = [];
+
+                    if (result.HasEasy) {
+                        categories.push("Easy");
+                    }
+
+                    categories.push("Normal");
+
+                    if (result.HasNightmare) {
+                        categories.push("Nightmare");
                     }
 
                     $('#chartContainer').highcharts({
@@ -56,12 +126,12 @@
                             text: 'Statistics for ' + result.title
                         },
                         xAxis: {
-                            categories: ['Easy', 'Normal', 'Nightmare']
+                            categories: categories
                         },
                         yAxis: {
                             min: 0,
                             title: {
-                                text: 'Card Breakdowns'
+                                text: 'Encounter Card Breakdowns'
                             }
                         },
                         legend: {
@@ -74,7 +144,8 @@
                                     events: {
                                         click: function (e) {
                                             var cardType = 'Encounter';
-                                            var keyword = '';
+                                            var query = '';
+                                            var hasShadow = 'Any';
                                             switch (this.series.name) {
                                                 case 'Enemies':
                                                     cardType = 'Enemy';
@@ -92,21 +163,21 @@
                                                     cardType = 'Objective_Ally';
                                                     break;
                                                 case 'Surge':
-                                                    keyword = 'Surge.';
+                                                    query = 'Surge';
                                                     break;
+                                                case 'Shadows':
+                                                    hasShadow = 'Yes';
                                             }
 
-                                            var encounterSet = encodeURIComponent(result.title);
+                                            var quest = encodeURIComponent(result.title);
                                             if (this.category == "Nightmare" && result.HasNightmare) {
                                                 encounterSet += "%20Nightmare";
                                             }
 
-                                            var url = 'http://' + window.location.host + "/Cards/Search?CardType=" + cardType + "&EncounterSet=" + encounterSet;
-                                            if (keyword != '') {
-                                                url += '&Keyword=' + keyword;
+                                            var url = 'http://' + window.location.host + "/Cards/Search?CardType=" + cardType + "&Quest=" + quest + "&HasShadow=" + hasShadow;
+                                            if (query != '') {
+                                                url += '&Query=' + query;
                                             }
-
-                                            //console.log("url: " + url);
 
                                             window.open(url);
                                             return false;
