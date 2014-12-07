@@ -293,6 +293,114 @@ namespace HallOfBeorn.Controllers
             return View(model);
         }
 
+        private enum Mode
+        {
+            Easy = 0,
+            Normal = 1,
+            Nightmare = 2
+        }
+
+        public JsonResult ScenarioDetails(string id)
+        {
+            try
+            {
+                var details = new Dictionary<string, object>();
+                
+                var scenario = _cardService.GetScenario(id);
+                if (scenario != null)
+                {
+                    details["title"] = scenario.Title;
+
+                    var cardCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var enemyCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var locationCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var treacheryCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var objectiveCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var objectiveAllyCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var surgeCounts = new Dictionary<int, int>() { { 0, 0 }, { 1, 0 }, { 2, 0 } };
+                    var hasNightmare = false;
+
+                    foreach (var card in scenario.ScenarioCards)
+                    {
+                        cardCounts[0] += card.EasyQuantity;
+                        cardCounts[1] += card.NormalQuantity;
+                        cardCounts[2] += card.NightmareQuantity;
+
+                        if (card.Card.Traits.Any(x => x == "Surge.") || card.Card.Text.Contains(" surge"))
+                        {
+                            surgeCounts[0] += card.EasyQuantity;
+                            surgeCounts[1] += card.NormalQuantity;
+                            surgeCounts[2] += card.NightmareQuantity;
+                        }
+                        if (card.Card.CardSet.SetType == SetType.Nightmare_Expansion)
+                        {
+                            hasNightmare = true;
+                        }
+
+                        switch (card.Card.CardType)
+                        {
+                            case CardType.Enemy:
+                                enemyCounts[0] += card.EasyQuantity;
+                                enemyCounts[1] += card.NormalQuantity;
+                                enemyCounts[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Location:
+                                locationCounts[0] += card.EasyQuantity;
+                                locationCounts[1] += card.NormalQuantity;
+                                locationCounts[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Treachery:
+                                treacheryCounts[0] += card.EasyQuantity;
+                                treacheryCounts[1] += card.NormalQuantity;
+                                treacheryCounts[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Objective:
+                                objectiveCounts[0] += card.EasyQuantity;
+                                objectiveCounts[1] += card.NormalQuantity;
+                                objectiveCounts[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Objective_Ally:
+                                objectiveAllyCounts[0] += card.EasyQuantity;
+                                objectiveAllyCounts[1] += card.NormalQuantity;
+                                objectiveAllyCounts[2] += card.NightmareQuantity;
+                                break;
+                        }
+                    }
+
+                    details["HasNightmare"] = hasNightmare;
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        var mode = (Mode)i;
+                        var prefix = mode.ToString();
+
+                        details[prefix + "Cards"] = cardCounts[i];
+                        details[prefix + "Enemies"] = enemyCounts[i];
+                        details[prefix + "EnemyPercentage"] = ((float)enemyCounts[i] / (float)cardCounts[i]); //*100;
+                        details[prefix + "Locations"] = locationCounts[i];
+                        details[prefix + "LocationPercentage"] = ((float)enemyCounts[i] / (float)cardCounts[i]); //*100;
+                        details[prefix + "Treacheries"] = treacheryCounts[i];
+                        details[prefix + "TreacheryPercentage"] = ((float)treacheryCounts[i] / (float)cardCounts[i]); //*100;
+                        details[prefix + "Objectives"] = objectiveCounts[i];
+                        details[prefix + "ObjectivePercentage"] = ((float)objectiveCounts[i] / (float)cardCounts[i]); //*100;
+                        details[prefix + "HasObjectives"] = (objectiveCounts[i] > 0);
+                        details[prefix + "ObjectiveAllies"] = objectiveAllyCounts[i];
+                        details[prefix + "ObjectiveAllyPercentage"] = ((float)objectiveAllyCounts[i] / (float)cardCounts[i]); //*100;
+                        details[prefix + "HasObjectiveAllies"] = (objectiveAllyCounts[i] > 0);
+                        details[prefix + "Surges"] = surgeCounts[i];
+                        details[prefix + "SurgePercentage"] = ((float)surgeCounts[i] / (float)cardCounts[i]); //*100;
+                        details[prefix + "HasSurge"] = (surgeCounts[i] > 0);
+                    }
+                }
+
+                return Json(details, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         public ActionResult AdvancedSearch(AdvancedSearchViewModel model)
         {
             //InitializeSearch(model);

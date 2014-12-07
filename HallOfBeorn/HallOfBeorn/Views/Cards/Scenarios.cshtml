@@ -5,6 +5,127 @@
     ViewBag.Title = "Scenarios";
 }
 
+@section scripts {
+    <script type="text/javascript" src="/Scripts/highcharts.js"></script>
+    <script type="text/javascript">
+        var scenariosIndex = window.location.href.lastIndexOf("/Scenarios/");
+        if (scenariosIndex != -1) {
+            var id = window.location.href.substr(scenariosIndex + 11);
+            if (id != null && id.length > 0) {
+
+                $.get("/Cards/ScenarioDetails/" + id).success(function (result) {
+                    var series = [
+                        {
+                            name: 'Enemies',
+                            data: [result.EasyEnemies, result.NormalEnemies, result.NightmareEnemies]
+                        },
+                        {
+                            name: 'Locations',
+                            data: [result.EasyLocations, result.NormalLocations, result.NightmareLocations]
+                        },
+                        {
+                            name: 'Treacheries',
+                            data: [result.EasyTreacheries, result.NormalTreacheries, result.NightmareTreacheries]
+                        }
+                    ];
+
+                    if (result.EasyHasObjectives || result.NormalHasObjectives || result.NightmareHasObjectives) {
+                        series.push({
+                            name: 'Objectives',
+                            data: [result.EasyObjectives, result.NormalObjectives, result.NightmareObjectives]
+                        });
+                    }
+                    if (result.EasyHasObjectiveAllies || result.NormalHasObjectiveAllies || result.NightmareHasObjectiveAllies) {
+                        series.push({
+                            name: 'Objective Allies',
+                            data: [result.EasyObjectiveAllies, result.NormalObjectiveAllies, result.NightmareObjectiveAllies]
+                        });
+                    }
+                    if (result.EasyHasSurge || result.NormalHasSurge || result.NightmareHasSurge) {
+                        series.push({
+                            name: 'Surge',
+                            data: [result.EasySurges, result.NormalSurges, result.NightmareSurges]
+                        });
+                    }
+
+                    $('#chartContainer').highcharts({
+                        chart: {
+                            type: 'bar'
+                        },
+                        title: {
+                            text: 'Statistics for ' + result.title
+                        },
+                        xAxis: {
+                            categories: ['Easy', 'Normal', 'Nightmare']
+                        },
+                        yAxis: {
+                            min: 0,
+                            title: {
+                                text: 'Card Breakdowns'
+                            }
+                        },
+                        legend: {
+                            reversed: false
+                        },
+                        plotOptions: {
+                            series: {
+                                cursor: 'pointer',
+                                point: {
+                                    events: {
+                                        click: function (e) {
+                                            var cardType = 'Encounter';
+                                            var keyword = '';
+                                            switch (this.series.name) {
+                                                case 'Enemies':
+                                                    cardType = 'Enemy';
+                                                    break;
+                                                case 'Locations':
+                                                    cardType = 'Location';
+                                                    break;
+                                                case 'Treacheries':
+                                                    cardType = 'Treachery';
+                                                    break;
+                                                case 'Objectives':
+                                                    cardType = 'Objective';
+                                                    break;
+                                                case 'Objective Allies':
+                                                    cardType = 'Objective_Ally';
+                                                    break;
+                                                case 'Surge':
+                                                    keyword = 'Surge.';
+                                                    break;
+                                            }
+
+                                            var encounterSet = encodeURIComponent(result.title);
+                                            if (this.category == "Nightmare" && result.HasNightmare) {
+                                                encounterSet += "%20Nightmare";
+                                            }
+
+                                            var url = 'http://' + window.location.host + "/Cards/Search?CardType=" + cardType + "&EncounterSet=" + encounterSet;
+                                            if (keyword != '') {
+                                                url += '&Keyword=' + keyword;
+                                            }
+
+                                            //console.log("url: " + url);
+
+                                            window.open(url);
+                                            return false;
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        series: series,
+                        tooltip: {
+                            pointFormat: '<span style="font-size:11px;">{series.name}: {point.y}</span>'
+                        }
+                    });
+                });
+            }
+        }
+     </script>
+}
+
 @if (@Model.Detail != null)
 {
     <h2>@Model.Detail.Title</h2>
@@ -80,6 +201,7 @@
     
             lastEncounterSet = scenarioCard.EncounterSet;
         }
+     <div style="margin-top:40px;" id="chartContainer"></div>
 }
 else {
     <h2>Scenarios</h2>

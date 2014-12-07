@@ -9,6 +9,7 @@ namespace HallOfBeorn.Models
     {
         public ScenarioCard(Card card)
         {
+            Card = card;
             Title = card.Title;
             Set = card.CardSet.NormalizedName;
             EncounterSet = card.EncounterSet;
@@ -29,6 +30,7 @@ namespace HallOfBeorn.Models
             }
         }
 
+        public Card Card { get; private set; }
         public string Title { get; private set; }
         public string Set { get; private set; }
         public string EncounterSet { get; private set; }
