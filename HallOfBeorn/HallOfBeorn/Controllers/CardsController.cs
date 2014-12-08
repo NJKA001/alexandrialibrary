@@ -300,6 +300,142 @@ namespace HallOfBeorn.Controllers
             Nightmare = 2
         }
 
+        private class ScenarioTotalData
+        {
+            public ScenarioTotalData()
+            {
+                EasyData = new GameTypeData();
+                NormalData = new GameTypeData();
+                NightmareData = new GameTypeData();
+            }
+
+            public GameTypeData EasyData { get; private set; }
+            public GameTypeData NormalData { get; private set; }
+            public GameTypeData NightmareData { get; private set; }
+        }
+
+        private class GameTypeData
+        {
+            public GameTypeData()
+            {
+                ScenarioTitles = new List<string>();
+                EnemyTotals = new List<float>();
+                LocationTotals = new List<float>();
+                TreacheryTotals = new List<float>();
+                ObjectiveTotals = new List<float>();
+                ObjectiveAllyTotals = new List<float>();
+                ShadowTotals = new List<float>();
+                SurgeTotals = new List<float>();
+            }
+
+            public List<string> ScenarioTitles { get; private set; }
+            public List<float> EnemyTotals { get; private set; }
+            public List<float> LocationTotals { get; private set; }
+            public List<float> TreacheryTotals { get; private set; }
+            public List<float> ObjectiveTotals { get; private set; }
+            public List<float> ObjectiveAllyTotals { get; private set; }
+            public List<float> ShadowTotals { get; private set; }
+            public List<float> SurgeTotals { get; private set; }
+        }
+
+        public JsonResult ScenarioTotals()
+        {
+            var data = new ScenarioTotalData();
+
+            foreach (var scenarioGroup in _cardService.ScenarioGroups())
+            {
+                foreach (var scenario in scenarioGroup.Scenarios.Where(x => x.ScenarioCards.First().Card.CardSet.SetType != SetType.Custom_Expansion))
+                {
+                    data.EasyData.ScenarioTitles.Add(scenario.Title);
+                    data.NormalData.ScenarioTitles.Add(scenario.Title);
+                    data.NightmareData.ScenarioTitles.Add(scenario.Title);
+
+                    var enemyTotals = new Dictionary<int, float>{{ 0, 0f }, {1, 0f }, {2, 0f }};
+                    var locationTotals = new Dictionary<int, float> { { 0, 0f }, { 1, 0f }, { 2, 0f } };
+                    var treacheryTotals = new Dictionary<int, float> { { 0, 0f }, { 1, 0f }, { 2, 0f } };
+                    var objectiveTotals = new Dictionary<int, float> { { 0, 0f }, { 1, 0f }, { 2, 0f } };
+                    var objectiveAllyTotals = new Dictionary<int, float> { { 0, 0f }, { 1, 0f }, { 2, 0f } };
+                    var shadowTotals = new Dictionary<int, float> { { 0, 0f }, { 1, 0f }, { 2, 0f } };
+                    var surgeTotals = new Dictionary<int, float> { { 0, 0f }, { 1, 0f }, { 2, 0f } };
+
+                    foreach (var card in scenario.ScenarioCards)
+                    {
+                        switch (card.Card.CardType)
+                        {
+                            case CardType.Enemy:
+                                enemyTotals[0] += card.EasyQuantity;
+                                enemyTotals[1] += card.NormalQuantity;
+                                enemyTotals[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Location:
+                                locationTotals[0] += card.EasyQuantity;
+                                locationTotals[1] += card.NormalQuantity;
+                                locationTotals[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Treachery:
+                                treacheryTotals[0] += card.EasyQuantity;
+                                treacheryTotals[1] += card.NormalQuantity;
+                                treacheryTotals[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Objective:
+                                objectiveTotals[0] += card.EasyQuantity;
+                                objectiveTotals[1] += card.NormalQuantity;
+                                objectiveTotals[2] += card.NightmareQuantity;
+                                break;
+                            case CardType.Objective_Ally:
+                                objectiveAllyTotals[0] += card.EasyQuantity;
+                                objectiveAllyTotals[1] += card.NormalQuantity;
+                                objectiveAllyTotals[2] += card.NightmareQuantity;
+                                break;
+                            default:
+                                break;
+                        }
+
+                        if (card.Card.Keywords.Any(x => x != null && x == "Surge.") || (!string.IsNullOrEmpty(card.Card.Text) && card.Card.Text.Contains(" surge")))
+                        {
+                            surgeTotals[0] += card.EasyQuantity;
+                            surgeTotals[1] += card.NormalQuantity;
+                            surgeTotals[2] += card.NightmareQuantity;
+                        }
+
+                        if (!string.IsNullOrEmpty(card.Card.Shadow))
+                        {
+                            shadowTotals[0] += card.EasyQuantity;
+                            shadowTotals[1] += card.NormalQuantity;
+                            shadowTotals[2] += card.NightmareQuantity;
+                        }
+                    }
+
+                    data.EasyData.EnemyTotals.Add(enemyTotals[0]);
+                    data.EasyData.LocationTotals.Add(locationTotals[0]);
+                    data.EasyData.TreacheryTotals.Add(treacheryTotals[0]);
+                    data.EasyData.ObjectiveTotals.Add(objectiveTotals[0]);
+                    data.EasyData.ObjectiveAllyTotals.Add(objectiveAllyTotals[0]);
+                    data.EasyData.ShadowTotals.Add(shadowTotals[0]);
+                    data.EasyData.SurgeTotals.Add(surgeTotals[0]);
+
+                    data.NormalData.EnemyTotals.Add(enemyTotals[1]);
+                    data.NormalData.LocationTotals.Add(locationTotals[1]);
+                    data.NormalData.TreacheryTotals.Add(treacheryTotals[1]);
+                    data.NormalData.ObjectiveTotals.Add(objectiveTotals[1]);
+                    data.NormalData.ObjectiveAllyTotals.Add(objectiveAllyTotals[1]);
+                    data.NormalData.ShadowTotals.Add(shadowTotals[1]);
+                    data.NormalData.SurgeTotals.Add(surgeTotals[1]);
+
+                    data.NightmareData.EnemyTotals.Add(enemyTotals[2]);
+                    data.NightmareData.LocationTotals.Add(locationTotals[2]);
+                    data.NightmareData.TreacheryTotals.Add(treacheryTotals[2]);
+                    data.NightmareData.ObjectiveTotals.Add(objectiveTotals[2]);
+                    data.NightmareData.ObjectiveAllyTotals.Add(objectiveAllyTotals[2]);
+                    data.NightmareData.ShadowTotals.Add(shadowTotals[2]);
+                    data.NightmareData.SurgeTotals.Add(surgeTotals[2]);
+                    
+                }
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult ScenarioDetails(string id)
         {
             try
