@@ -14,78 +14,112 @@
             id = window.location.href.substr(scenariosIndex + 11);
         }
 
+        function loadTotals(selector, title, data) {
+            var scenarioTitles = data.NormalData.ScenarioTitles;
+            var enemyData = data.NormalData.EnemyTotals;
+            var locationData = data.NormalData.LocationTotals;
+            var treacheryData = data.NormalData.TreacheryTotals;
+            var objectiveData = data.NormalData.ObjectiveTotals;
+            var objectiveAllyData = data.NormalData.ObjectiveAllyTotals;
+            var shadowData = data.NormalData.ShadowTotals;
+            var surgeData = data.NormalData.SurgeTotals;
+
+            $(selector).highcharts({
+                title: {
+                    text: title + ' (Normal Mode)',
+                    x: -20 //center
+                },
+                subtitle: {
+                    text: 'Encounter Card Types By Scenario',
+                    x: -20
+                },
+                xAxis: {
+                    categories: scenarioTitles //['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                },
+                yAxis: {
+                    title: {
+                        text: 'Count'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                },
+                tooltip: {
+                    valueSuffix: ' {category}'
+                },
+                legend: {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0
+                },
+                series: [{
+                    name: 'Enemies',
+                    data: enemyData //[7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
+                }, {
+                    name: 'Locations',
+                    data: locationData //[-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
+                }, {
+                    name: 'Treacheries',
+                    data: treacheryData //[-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
+                }, {
+                    name: 'Objectives',
+                    data: objectiveData //[3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
+                }, {
+                    name: 'Objective Allies',
+                    data: objectiveAllyData
+                }, {
+                    name: 'Shadows',
+                    data: shadowData
+                }, {
+                    name: 'Surges',
+                    data: surgeData
+                }
+                ]
+            });
+        }
+
         console.log("scenariosIndex: " + scenariosIndex + " id: " + id);
         if (id ==  null || id == '') {
             console.log("scenario totals");
-            $.get("/Cards/ScenarioTotals").success(function (data) {
-                console.log("scenario totals");
-                console.log(data);
-
-                var scenarioTitles = data.NormalData.ScenarioTitle;
-                var enemyData = data.NormalData.EnemyTotals;
-                var locationData = data.NormalData.LocationTotals;
-                var treacheryData = data.NormalData.TreacheryTotals;
-                var objectiveData = data.NormalData.ObjectiveTotals;
-                var objectiveAllyData = data.NormalData.ObjectiveAllyTotals;
-                var shadowData = data.NormalData.ShadowTotals;
-                var surgeData = data.NormalData.SurgeTotals;
-
-                $('#totalsContainer').highcharts({
-                    title: {
-                        text: 'Encounter Card Types By Scenario',
-                        x: -20 //center
-                    },
-                    subtitle: {
-                        text: '',
-                        x: -20
-                    },
-                    xAxis: {
-                        categories: scenarioTitles //['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Count'
-                        },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                    },
-                    tooltip: {
-                        valueSuffix: ' {category}'
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
-                    },
-                    series: [{
-                        name: 'Enemies',
-                        data: enemyData //[7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                    }, {
-                        name: 'Locations',
-                        data: locationData //[-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                    }, {
-                        name: 'Treacheries',
-                        data: treacheryData //[-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                    }, {
-                        name: 'Objectives',
-                        data: objectiveData //[3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                    }, {
-                        name: 'Objective Allies',
-                        data: objectiveAllyData
-                    }, {
-                        name: 'Shadows',
-                        data: shadowData
-                    }, {
-                        name: 'Surges',
-                        data: surgeData
-                    }
-                    ]
-                });
+            $.get("/Cards/ScenarioTotals?id=Core+Set,Shadows+of+Mirkwood").success(function (data) {
+                console.log("  core set titles");
+                console.log(data.NormalData.ScenarioTitles);
+                loadTotals('#coreTotalsContainer', 'Core Set and Shadows of Mirkwood', data);
             });
+            $.get("/Cards/ScenarioTotals?id=Khazad-dûm,Dwarrowdelf").success(function (data) {
+                console.log("  KD set titles");
+                console.log(data.NormalData.ScenarioTitles);
+                loadTotals('#kdTotalsContainer', 'Khazad-dûm and Dwarrowdelf', data);
+            });
+            $.get("/Cards/ScenarioTotals?id=Heirs+of+Númenor,Against+the+Shadow").success(function (data) {
+                console.log("  KD set titles");
+                console.log(data.NormalData.ScenarioTitles);
+                loadTotals('#honTotalsContainer', 'Heirs of Númenor and Against the Shadow', data);
+            });
+            $.get("/Cards/ScenarioTotals?id=The+Voice+of+Isengard,The+Ring-maker").success(function (data) {
+                console.log("  KD set titles");
+                console.log(data.NormalData.ScenarioTitles);
+                loadTotals('#voiTotalsContainer', 'The Voice of Isengard and The Ring-maker', data);
+            });
+            $.get("/Cards/ScenarioTotals?id=The+Hobbit").success(function (data) {
+                console.log("  KD set titles");
+                console.log(data.NormalData.ScenarioTitles);
+                loadTotals('#hobbitTotalsContainer', 'The Hobbit', data);
+            });
+            $.get("/Cards/ScenarioTotals?id=The+Lord+of+the+Rings").success(function (data) {
+                console.log("  KD set titles");
+                console.log(data.NormalData.ScenarioTitles);
+                loadTotals('#lotrTotalsContainer', 'The Lord of the Rings', data);
+            });
+            $.get("/Cards/ScenarioTotals?id=GenCon").success(function (data) {
+                console.log("  KD set titles");
+                console.log(data.NormalData.ScenarioTitles);
+                loadTotals('#genConTotalsContainer', 'GenCon', data);
+            });
+            //Heirs+of+Númenor,Against+The+Shadow
         } else {
             
             if (id != null && id.length > 0) {
@@ -367,5 +401,11 @@ else {
         }
     }
     </div>
-    <div style="margin-top:40px;" id="totalsContainer"></div>
+    <div style="margin-top:40px;" id="coreTotalsContainer"></div>
+    <div style="margin-top:40px;" id="kdTotalsContainer"></div>
+    <div style="margin-top:40px;" id="honTotalsContainer"></div>
+    <div style="margin-top:40px;" id="voiTotalsContainer"></div>
+    <div style="margin-top:40px;" id="hobbitTotalsContainer"></div>
+    <div style="margin-top:40px;" id="lotrTotalsContainer"></div>
+    <div style="margin-top:40px;" id="genConTotalsContainer"></div>
 }

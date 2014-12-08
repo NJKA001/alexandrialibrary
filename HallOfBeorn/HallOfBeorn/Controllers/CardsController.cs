@@ -338,13 +338,22 @@ namespace HallOfBeorn.Controllers
             public List<float> SurgeTotals { get; private set; }
         }
 
-        public JsonResult ScenarioTotals()
+        public JsonResult ScenarioTotals(string id)
         {
             var data = new ScenarioTotalData();
+            
+            var groupNames = new string[0];
+            if (!string.IsNullOrEmpty(id)) {
+                groupNames = id.Split(','); //new string[2] { "Core Set", "Shadows of Mirkwood" };
+            }
 
-            foreach (var scenarioGroup in _cardService.ScenarioGroups())
+            var filter = (!string.IsNullOrEmpty(id)) ?
+                new Func<ScenarioGroup, bool>((g) => { return !string.IsNullOrEmpty(g.Name) && groupNames.Any(y => y == g.Name); }) :
+                new Func<ScenarioGroup, bool>((g) => { return !string.IsNullOrEmpty(g.Name); });
+            
+            foreach (var scenarioGroup in _cardService.ScenarioGroups().Where(filter))
             {
-                foreach (var scenario in scenarioGroup.Scenarios.Where(x => x.ScenarioCards.First().Card.CardSet.SetType != SetType.Custom_Expansion))
+                foreach (var scenario in scenarioGroup.Scenarios)
                 {
                     data.EasyData.ScenarioTitles.Add(scenario.Title);
                     data.NormalData.ScenarioTitles.Add(scenario.Title);
