@@ -81,45 +81,44 @@
             });
         }
 
-        console.log("scenariosIndex: " + scenariosIndex + " id: " + id);
+        //console.log("scenariosIndex: " + scenariosIndex + " id: " + id);
         if (id ==  null || id == '') {
             console.log("scenario totals");
             $.get("/Cards/ScenarioTotals?id=Core+Set,Shadows+of+Mirkwood").success(function (data) {
-                console.log("  core set titles");
-                console.log(data.NormalData.ScenarioTitles);
+                //console.log("  core set titles");
+                //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#coreTotalsContainer', 'Core Set and Shadows of Mirkwood', data);
             });
             $.get("/Cards/ScenarioTotals?id=Khazad-dûm,Dwarrowdelf").success(function (data) {
-                console.log("  KD set titles");
-                console.log(data.NormalData.ScenarioTitles);
+                //console.log("  KD set titles");
+                //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#kdTotalsContainer', 'Khazad-dûm and Dwarrowdelf', data);
             });
             $.get("/Cards/ScenarioTotals?id=Heirs+of+Númenor,Against+the+Shadow").success(function (data) {
-                console.log("  KD set titles");
-                console.log(data.NormalData.ScenarioTitles);
+                //console.log("  KD set titles");
+                //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#honTotalsContainer', 'Heirs of Númenor and Against the Shadow', data);
             });
             $.get("/Cards/ScenarioTotals?id=The+Voice+of+Isengard,The+Ring-maker").success(function (data) {
-                console.log("  KD set titles");
-                console.log(data.NormalData.ScenarioTitles);
+                //console.log("  KD set titles");
+                //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#voiTotalsContainer', 'The Voice of Isengard and The Ring-maker', data);
             });
             $.get("/Cards/ScenarioTotals?id=The+Hobbit").success(function (data) {
-                console.log("  KD set titles");
-                console.log(data.NormalData.ScenarioTitles);
+                //console.log("  KD set titles");
+                //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#hobbitTotalsContainer', 'The Hobbit', data);
             });
             $.get("/Cards/ScenarioTotals?id=The+Lord+of+the+Rings").success(function (data) {
-                console.log("  KD set titles");
-                console.log(data.NormalData.ScenarioTitles);
+                //console.log("  KD set titles");
+                //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#lotrTotalsContainer', 'The Lord of the Rings', data);
             });
             $.get("/Cards/ScenarioTotals?id=GenCon").success(function (data) {
-                console.log("  KD set titles");
-                console.log(data.NormalData.ScenarioTitles);
+                //console.log("  KD set titles");
+                //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#genConTotalsContainer', 'GenCon', data);
             });
-            //Heirs+of+Númenor,Against+The+Shadow
         } else {
             
             if (id != null && id.length > 0) {
