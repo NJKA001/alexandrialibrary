@@ -236,23 +236,6 @@ namespace HallOfBeorn.Services
             return CreateCategoryFilter(pattern, category, null);
         }
 
-        /*
-        private Func<Card, Category> CreateCategoryFilter(string pattern, Category category, string negation)
-        {
-            Func<Card, Category> filter = (card) =>
-                {
-                    foreach (var line in card.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
-                    {
-                        if (line.MatchesPattern(pattern) && (string.IsNullOrEmpty(negation) || !line.ToLower().Contains(negation.ToLower())))
-                            return category;
-                    }
-
-                    return Category.None;
-                };
-
-            return filter;
-        }*/
-
         private Func<Card, Category> CreateCategoryFilter(string pattern, Category category, params string[] negations)
         {
             Func<Card, Category> filter = (card) =>
@@ -262,9 +245,7 @@ namespace HallOfBeorn.Services
                     if (line.MatchesPattern(pattern)) {
                         if (negations == null || negations.Length == 0 || !negations.Any(x => line.ToLowerSafe().Contains(x.ToLowerSafe())))
                             return category;
-                    }
-                    //&& ( string.IsNullOrEmpty(negation) || !line.ToLower().Contains(negation.ToLower())))
-                        
+                    }   
                 }
 
                 return Category.None;
