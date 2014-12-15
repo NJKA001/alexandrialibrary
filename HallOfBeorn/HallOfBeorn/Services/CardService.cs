@@ -236,6 +236,7 @@ namespace HallOfBeorn.Services
             return CreateCategoryFilter(pattern, category, null);
         }
 
+        /*
         private Func<Card, Category> CreateCategoryFilter(string pattern, Category category, string negation)
         {
             Func<Card, Category> filter = (card) =>
@@ -250,6 +251,26 @@ namespace HallOfBeorn.Services
                 };
 
             return filter;
+        }*/
+
+        private Func<Card, Category> CreateCategoryFilter(string pattern, Category category, params string[] negations)
+        {
+            Func<Card, Category> filter = (card) =>
+            {
+                foreach (var line in card.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (line.MatchesPattern(pattern)) {
+                        if (negations == null || negations.Length == 0 || !negations.Any(x => line.ToLowerSafe().Contains(x.ToLowerSafe())))
+                            return category;
+                    }
+                    //&& ( string.IsNullOrEmpty(negation) || !line.ToLower().Contains(negation.ToLower())))
+                        
+                }
+
+                return Category.None;
+            };
+
+            return filter;
         }
 
         private void LoadCategories()
@@ -257,30 +278,30 @@ namespace HallOfBeorn.Services
             var filters = new List<Func<Card, Category>>
             {
                 CreateCategoryFilter(@"add[\s]{1}[\d]{1}[\s]{1}resource", Category.Resource_Acceleration),
-                CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource|add 1 resource to a Gondor or Noble|give attached hero a (Leadership|Tactics|Spirit|Lore)|gains a (Leadership|Tactics|Spirit|Lore)", Category.Resource_Smoothing),
+                CreateCategoryFilter(@"move[\s]{1}.*[\s]{1}resource|Pay 1 resource from a hero's resource pool to add 1 resource|add 1 resource to a Gondor or Noble|give attached hero a (Leadership|Tactics|Spirit|Lore)|gains a (Leadership|Tactics|Spirit|Lore)|you can spend resources of any sphere", Category.Resource_Smoothing),
                 CreateCategoryFilter(@"(ally|allies){1,}.*into[\s]play|put into play the revealed card for no cost", Category.Mustering),
-                CreateCategoryFilter(@"\+[\d]*[\s]Attack", Category.Attack_Bonus),
+                CreateCategoryFilter(@"\+[\d]*[\s]Attack|add its Attack", Category.Attack_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Defense", Category.Defense_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Willpower|add.*Willpower", Category.Willpower_Bonus),
                 CreateCategoryFilter(@"\+[\d]*[\s]Hit[\s]Point", Category.Hit_Point_Bonus),
-                CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card|look at the top 2 cards of your deck. Add 1 to your hand|take it into your hand|a card and add it to your hand", Category.Card_Draw),
+                CreateCategoryFilter(@"(draw|draws)[\s][\w]*[\s]card|look at the top 2 cards of your deck. Add 1 to your hand|take it into your hand|a card and add it to your hand|draws 1 additional card", Category.Card_Draw),
                 CreateCategoryFilter(@"search[\s].*your[\s]deck", Category.Card_Search),
-                CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck|the top card of your deck faceup|exchange a card in your hand with the top card of your deck", Category.Player_Scrying, "encounter deck"),
+                CreateCategoryFilter(@"(look|looks)[\s]at[\s].*[\s]deck|the top card of your deck faceup|exchange a card in your hand with the top card of your deck|reveal the top card of each player's deck", Category.Player_Scrying, "encounter deck", "Add 1 to your hand and discard the other"),
                 CreateCategoryFilter(@"(look|looks)[\s]at[\s].*encounter[\s]deck", Category.Encounter_Scrying),
-                CreateCategoryFilter("(enemy|enemies).*cannot attack", Category.Combat_Control),
+                CreateCategoryFilter("(enemy|enemies|engaged with you).*(cannot|do not) attack", Category.Combat_Control),
                 CreateCategoryFilter(@"heal[\s].*damage", Category.Healing),
                 CreateCategoryFilter(@"discard.*Condition[\s]attachment", Category.Condition_Control),
-                CreateCategoryFilter(@"place[\s].*progress|switch the active location|location enters play", Category.Location_Control),
-                CreateCategoryFilter("ready.*(character|hero|ally|allies|him|her|them)", Category.Readying, "While Dain Ironfoot is ready"),
+                CreateCategoryFilter(@"place[\s].*progress|switch the active location|location enters play|location gets -.*Threat|While attached to a location", Category.Location_Control),
+                CreateCategoryFilter("ready.*(character|hero|ally|allies|him|her|them|Prince)", Category.Readying, "While Dain Ironfoot is ready"),
                 CreateCategoryFilter(@"(return.*discard[\s]pile.*hand|shuffle.*discard[\s]pile.*back)", Category.Recursion, "encounter discard pile"),
                 CreateCategoryFilter(@"deal[\s]([\d]|X)*[\s]damage|Deal damage to the attacking enemy|Excess damage dealt by this attack is assigned", Category.Direct_Damage),
                 CreateCategoryFilter(@"(look at|revealed|enters play|top of the).*encounter[\s]deck", Category.Encounter_Control),
-                CreateCategoryFilter(@"cancel.*shadow|shadow[\s]cards", Category.Shadow_Control), 
+                CreateCategoryFilter(@"cancel.*shadow|shadow[\s]cards|look at 1 shadow card", Category.Shadow_Control), 
                 CreateCategoryFilter(@"(reduce|reduces|lower).*(his|your|player).*threat", Category.Threat_Control, "your threat is lower"),
-                CreateCategoryFilter(@"((enemy|enemies).*staging[\s]area.*attack|attacker.*against.*enemy not engaged with you|Any character may choose attached enemy as the target of an attack)", Category.Staging_Area_Attack),
-                CreateCategoryFilter("(choose (an enemy|a location).*(staging area|not engaged with you))|add.*each enemy's engagement cost|each enemy.*gets.*engagement cost", Category.Staging_Area_Control),
+                CreateCategoryFilter(@"((enemy|enemies).*staging[\s]area.*attack|attacker.*against.*enemy not engaged with you|Any character may choose attached enemy as the target of an attack)|deal 1 damage to an enemy in the staging area", Category.Staging_Area_Attack),
+                CreateCategoryFilter("(choose (an enemy|a location).*(staging area|not engaged with you))|add.*each enemy's engagement cost|each enemy.*gets.*engagement cost|return that enemy to the staging area", Category.Staging_Area_Control),
                 CreateCategoryFilter(@"after[\s].*[\s](enters|enters or leaves)[\s]play", Category.Enters_Play),
-                CreateCategoryFilter(@"after[\s].*[\s]leaves[\s]play|return (it|him|Keen-eyed Took) to your hand", Category.Leaves_Play, "After attached location leaves play"),
+                CreateCategoryFilter(@"(after[\s].*[\s]leaves[\s]play|return (it|him|Keen-eyed Took) to your hand)|if that ally is still in play, add it to your hand", Category.Leaves_Play, "After attached location leaves play"),
                 CreateCategoryFilter(@"(after[\s]you[\s]play[\s].*[\s]from[\s]your[\s]hand|after you play)", Category.Played_From_Hand),
                 CreateCategoryFilter(@"attach 1 attachment card|an attachment of cost 3 or less and put it into play|you may attach that card facedown|to play Weapon and Armor attachments on|put into play the revealed card for no cost", Category.Equipping)
             };
