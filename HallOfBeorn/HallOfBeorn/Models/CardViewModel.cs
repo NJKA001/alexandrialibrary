@@ -37,6 +37,11 @@ namespace HallOfBeorn.Models
         public bool HasIncludedEncounterSets { get { return _includedEncounterSets.Count > 0; } }
         public List<EncounterSetViewModel> IncludedEncounterSets { get { return _includedEncounterSets; } }
 
+        public Card Card
+        {
+            get { return _card; }
+        }
+
         public float Score
         {
             get { return _score; }

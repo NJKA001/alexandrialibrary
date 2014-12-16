@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 
 using HallOfBeorn.Models;
+using HallOfBeorn.Models.Simple;
 using HallOfBeorn.Services;
 
 namespace HallOfBeorn.Controllers
@@ -594,6 +595,20 @@ namespace HallOfBeorn.Controllers
             }
 
             return View(model);
+        }
+
+        public JsonResult SearchJson(SearchViewModel model)
+        {
+            Search(model);
+
+            var data = new List<SimpleCard>();
+
+            foreach (var cardViewModel in model.Cards)
+            {
+                data.Add(new SimpleCard(cardViewModel.Card));
+            }
+
+            return Json(data, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
