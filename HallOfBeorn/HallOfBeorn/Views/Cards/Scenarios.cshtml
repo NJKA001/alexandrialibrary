@@ -8,6 +8,32 @@
 @section scripts {
     <script type="text/javascript" src="/Scripts/highcharts.js"></script>
     <script type="text/javascript">
+        var mode = 'Normal';
+        $(function () {
+            $('#easyModeButton').click(function () {
+                $('#easyModeButton').removeClass('inactiveButton').addClass('activeButton');
+                $('#normalModeButton').removeClass('activeButton').addClass('inactiveButton');
+                $('#nightmareModeButton').removeClass('activeButton').addClass('inactiveButton');
+                mode = 'Easy';
+                loadCharts();
+            });
+            $('#normalModeButton').click(function () {
+                $('#easyModeButton').removeClass('activeButton').addClass('inactiveButton');
+                $('#normalModeButton').removeClass('inactiveButton').addClass('activeButton');
+                $('#nightmareModeButton').removeClass('activeButton').addClass('inactiveButton');
+                mode = 'Normal';
+                loadCharts();
+            });
+            $('#nightmareModeButton').click(function () {
+                $('#easyModeButton').removeClass('activeButton').addClass('inactiveButton');
+                $('#normalModeButton').removeClass('activeButton').addClass('inactiveButton');
+                $('#nightmareModeButton').removeClass('inactiveButton').addClass('activeButton');
+                mode = 'Nightmare';
+                loadCharts();
+            });
+        });
+
+        var mode = 'Normal';
         var scenariosIndex = window.location.href.lastIndexOf("/Scenarios/");
         var id = '';
         if (scenariosIndex != -1) {
@@ -15,18 +41,41 @@
         }
 
         function loadTotals(selector, title, data) {
-            var scenarioTitles = data.NormalData.ScenarioTitles;
-            var enemyData = data.NormalData.EnemyTotals;
-            var locationData = data.NormalData.LocationTotals;
-            var treacheryData = data.NormalData.TreacheryTotals;
-            var objectiveData = data.NormalData.ObjectiveTotals;
-            var objectiveAllyData = data.NormalData.ObjectiveAllyTotals;
-            var shadowData = data.NormalData.ShadowTotals;
-            var surgeData = data.NormalData.SurgeTotals;
+
+            var scenarioTitles; // = data.NormalData.ScenarioTitles;
+            var enemyData; // = data.NormalData.EnemyTotals;
+            var locationData; // = data.NormalData.LocationTotals;
+            var treacheryData; // = data.NormalData.TreacheryTotals;
+            var objectiveData; // = data.NormalData.ObjectiveTotals;
+            var objectiveAllyData; // = data.NormalData.ObjectiveAllyTotals;
+            var shadowData; // = data.NormalData.ShadowTotals;
+            var surgeData; // = data.NormalData.SurgeTotals;
+
+            var modeData;
+            switch (mode) {
+                case 'Easy':
+                    modeData = data.EasyData;
+                    break;
+                case 'Normal':
+                    modeData = data.NormalData;
+                    break;
+                case 'Nightmare':
+                    modeData = data.NightmareData;
+                    break;
+            }
+            
+            scenarioTitles = modeData.ScenarioTitles;
+            enemyData = modeData.EnemyTotals;
+            locationData = modeData.LocationTotals;
+            treacheryData = modeData.TreacheryTotals;
+            objectiveData = modeData.ObjectiveTotals;
+            objectiveAllyData = modeData.ObjectiveAllyTotals;
+            shadowData = modeData.ShadowTotals;
+            surgeData = modeData.SurgeTotals;
 
             $(selector).highcharts({
                 title: {
-                    text: title + ' (Normal Mode)',
+                    text: title + ' (' + mode + ' Mode)',
                     x: -20 //center
                 },
                 subtitle: {
@@ -81,9 +130,7 @@
             });
         }
 
-        //console.log("scenariosIndex: " + scenariosIndex + " id: " + id);
-        if (id ==  null || id == '') {
-            console.log("scenario totals");
+        function loadCharts() {
             $.get("/Cards/ScenarioTotals?id=Core+Set,Shadows+of+Mirkwood").success(function (data) {
                 //console.log("  core set titles");
                 //console.log(data.NormalData.ScenarioTitles);
@@ -119,6 +166,12 @@
                 //console.log(data.NormalData.ScenarioTitles);
                 loadTotals('#genConTotalsContainer', 'GenCon', data);
             });
+        }
+        //console.log("scenariosIndex: " + scenariosIndex + " id: " + id);
+        if (id ==  null || id == '') {
+            console.log("scenario totals. mode: " + mode);
+
+            loadCharts();
         } else {
             
             if (id != null && id.length > 0) {
@@ -400,6 +453,7 @@ else {
         }
     }
     </div>
+    <div><button id="easyModeButton" class="inactiveButton">Easy</button><button id="normalModeButton" class="activeButton">Normal</button><button id="nightmareModeButton" class="inactiveButton">Nightmare</button></div>
     <div style="margin-top:40px;" id="coreTotalsContainer"></div>
     <div style="margin-top:40px;" id="kdTotalsContainer"></div>
     <div style="margin-top:40px;" id="honTotalsContainer"></div>

@@ -100,6 +100,28 @@ h5, h6 {
         text-decoration: none;
     }
 
+.activeButton {
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    border-color: black;
+    margin-top: 36px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: -8px;
+}
+
+.inactiveButton {
+    border-radius: 2px;
+    padding: 2px 4px 2px 4px;
+    background-color: gray;
+    color: white;
+    border-color: darkgray;
+    margin-top: 36px;
+    margin-left: 12px;
+    margin-right: 12px;
+    margin-bottom: -8px;
+}
 
 /* main layout
 ----------------------------------------------------------*/
