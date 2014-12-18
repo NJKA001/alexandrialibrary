@@ -75,7 +75,7 @@
 
             $(selector).highcharts({
                 chart: {
-                    type: 'column'
+                    type: 'area'
                 },
                 title: {
                     text: title + ' (' + mode + ' Mode)',
@@ -103,11 +103,6 @@
                 },
                 tooltip: {
                     pointFormat: '<span>{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>'
-                    //pointFormat: '{point.percentage}%'
-                    //valueSuffix: ' {category}'
-                    //formatter: function () {
-                    //    return '{category} : <b>' + Highcharts.numberFormat(this.percentage, 1) + '%</b>';
-                    //}
                 },
                 legend: {
                     layout: 'horizontal',
@@ -116,8 +111,14 @@
                     borderWidth: 0
                 },
                 plotOptions: {
-                    column: {
-                        stacking: 'percent'
+                    area: {
+                        stacking: 'percent',
+                        lineColor: '#ffffff',
+                        lineWidth: 1,
+                        marker: {
+                            lineWidth: 1,
+                            lineColor: '#ffffff'
+                        }
                     }
                 },
                 series: [{
