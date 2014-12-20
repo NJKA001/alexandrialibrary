@@ -21,6 +21,7 @@ namespace HallOfBeorn.Models.Sets
                 Title = "The Old Forest Introduction",
                 Id = "1C97EC47-0AF3-4038-9FE1-FC308E965487",
                 CardType = CardType.GenCon_Setup,
+                HasSecondImage = true,
                 CampaignCardType = CampaignCardType.Introduction,
                 OppositeText = 
 @"~Escape the agents of ~Mordor searching for you in the ~Shire by braving a trip through the strange woods on its border in The Old ~Forest, a scenario designed for The Lord of the ~Rings : The Card Game special event at Gen Con 2014! This scenario can be played as a stand-alone adventure or as part of your Lord of the ~Rings campaign. To play The Old ~Forest in campaign mode, see page 4/4 of this expansion.
@@ -39,6 +40,7 @@ The cards in The Old ~Forest scenario can be identified by this symbol before ea
                 Id = "D54CFC5A-86CD-4CDD-BB8F-91FEE2D19171",
                 CardType = CardType.GenCon_Setup,
                 CampaignCardType = CampaignCardType.Scenario_Rules,
+                HasSecondImage = true,
                 Text =
 @"New Staging Rules
 
@@ -109,6 +111,7 @@ The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The
                 Title = "Farewell to the Shire",
                 Id = "1351C3CA-4CC0-445E-BF8F-7FBE21E3F407",
                 CardType = Models.CardType.Quest,
+                HasSecondImage = true,
                 ScenarioNumber = 4,
                 StageNumber = 1,
                 QuestPoints = 0,
@@ -129,6 +132,7 @@ The Lord of the ~Rings : The Black Riders Saga Expansion is required to play The
                 OppositeTitle = "Dark Bad Place",
                 SlugIncludesOppositeTitle = true,
                 CardType = CardType.Quest,
+                HasSecondImage = true,
                 ScenarioNumber = 4,
                 StageNumber = 2,
                 QuestPoints = null,
@@ -152,6 +156,7 @@ Forced: After placing progress as a result of questing successfully, if there ar
                 OppositeTitle = "Choked with Brambles",
                 SlugIncludesOppositeTitle = true,
                 CardType = CardType.Quest,
+                HasSecondImage = true,
                 StageNumber = 2,
                 QuestPoints = null,
                 Text =
@@ -174,6 +179,7 @@ Forced: After placing progress as a result of questing successfully, if there ar
                 OppositeTitle = "Shifting Trees",
                 SlugIncludesOppositeTitle = true,
                 CardType = CardType.Quest,
+                HasSecondImage = true,
                 StageNumber = 2,
                 QuestPoints = null,
                 Text =
@@ -196,6 +202,7 @@ Forced: After placing progress as a result of questing successfully, if there ar
                 OppositeTitle = "Closing in Around Them",
                 SlugIncludesOppositeTitle = true,
                 CardType = CardType.Quest,
+                HasSecondImage = true,
                 StageNumber = 2,
                 QuestPoints = null,
                 Text =
@@ -216,6 +223,7 @@ Forced: After placing progress as a result of questing successfully, if there ar
                 Title = "The Wicked Willow",
                 Id = "A4F9F2CD-4D9A-46FB-A247-B97FE669CAF8",
                 CardType = CardType.Quest,
+                HasSecondImage = true,
                 StageNumber = 3,
                 QuestPoints = 18,
                 Text =
