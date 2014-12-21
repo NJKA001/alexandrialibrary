@@ -16,6 +16,7 @@ namespace HallOfBeorn.Models.Products
             AddProduct(new TroubleInTharbadProduct());
             AddProduct(new TheNinInEilphProduct());
             AddProduct(new CelebrimborsSecretProduct());
+            AddProduct(new TheAntleredCrownProduct());
         }
     }
 }

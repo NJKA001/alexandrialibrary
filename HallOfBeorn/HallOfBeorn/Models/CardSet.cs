@@ -93,6 +93,7 @@ namespace HallOfBeorn.Models
         public static CardSet TheThreeTrials = new Sets.TheThreeTrials();
         public static CardSet NinInEilph = new Sets.TheNinInEilph();
         public static CardSet CelebrimborsSecret = new Sets.CelebrimborsSecret();
+        public static CardSet TheAntleredCrown = new Sets.TheAntleredCrown();
 
         public static CardSet TheHobbitOverHillAndUnderHill = new Sets.TheHobbitOverHillandUnderHill();
         public static CardSet TheHobbitOnTheDoorstep = new Sets.TheHobbitOntheDoorstep();

@@ -8,7 +8,7 @@ namespace HallOfBeorn.Models.Products
     public class CelebrimborsSecretProduct : Product
     {
         public CelebrimborsSecretProduct()
-            : base("Celebrimbor's Secrey", "MEC30", ImageType.Png)
+            : base("Celebrimbor's Secret", "MEC30", ImageType.Png)
         {
             CardSets.Add(CardSet.CelebrimborsSecret);
         }
