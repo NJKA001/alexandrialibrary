@@ -57,6 +57,7 @@ namespace HallOfBeorn.Models.Sets
             Cards.Add(new Card()
             {
                 Title = "The Day's Rising",
+                IsUnique = true,
                 Id = "8EFF9151-549A-4A15-B68F-051925DC9A25",
                 CardType = CardType.Attachment,
                 Sphere = Sphere.Leadership,
@@ -77,7 +78,7 @@ namespace HallOfBeorn.Models.Sets
                 Sphere = Sphere.Tactics,
                 ResourceCost = 1,
                 Traits = new List<string> { "Title." },
-                Text = "Attach to a Warrior hero.\r\nResponse: After you optionally engage an enemy, exhaust Captain of Gondor to give attached hero +1 Attack and +1 Defense until the end of the round.",
+                Text = "Attach to a Warrior hero.\r\nResponse: After you optionally engage an enemy, exhaust ~Captain of ~Gondor to give attached hero +1 Attack and +1 Defense until the end of the round.",
                 FlavorText = "\"Boromir it was that drove the enemy at last back from this western shore...\" -Beregond, The Return of the King",
                 Number = 140,
                 Quantity = 3,
@@ -95,7 +96,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 2,
                 HitPoints = 3,
                 Traits = new List<string> { "Ent." },
-                Text = "Cannot have attachments. Enters play exhausted.\r\nBooming Ent gets +1 Attack for each damaged Ent character you control.",
+                Text = "Cannot have restricted attachments. Enters play exhausted.\r\nBooming ~Ent gets +1 Attack for each damaged Ent character you control.",
                 FlavorText = "\"...a man that hacks once at an Ent never gets a chance of a second blow.\" -Merry, The Two Towers",
                 Number = 141,
                 Quantity = 3,
@@ -167,7 +168,7 @@ namespace HallOfBeorn.Models.Sets
                 Defense = 3,
                 HitPoints = 5,
                 Traits = new List<string> { "Ent." },
-                Text = "Cannot have attachments. Treebeard enters play exhausted and collects 1 resource each resource phase. These resources can be used to pay for Ent cards played from your hand.\r\nAction: Pay 2 resources from Treebeard's pool to ready an Ent character.",
+                Text = "Cannot have restricted attachments. Treebeard enters play exhausted and collects 1 resource each resource phase. These resources can be used to pay for Ent cards played from your hand.\r\nAction: Pay 2 resources from Treebeard's pool to ready an Ent character.",
                 Number = 146,
                 Quantity = 3,
                 Artist = Artist.Mike_Nash
