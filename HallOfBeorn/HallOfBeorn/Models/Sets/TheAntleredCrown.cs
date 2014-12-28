@@ -109,7 +109,7 @@ namespace HallOfBeorn.Models.Sets
                 CardType = CardType.Event,
                 Sphere = Sphere.Spirit,
                 ResourceCost = 2,
-                Text = "Quest Action: Choose a non-unique enemu in the staging area. Until the end of the phase, progress that would be placed on the quest from questing successfully is instead assigned as damage to the chosen enemy. (Progress must still be placed on any active location first.)",
+                Text = "Quest Action: Choose a non-unique enemy in the staging area. Until the end of the phase, progress that would be placed on the quest from questing successfully is instead assigned as damage to the chosen enemy. (Progress must still be placed on any active location first.)",
                 FlavorText = "Like thunder they broke upon the enemy... -The Return of the King",
                 Number = 142,
                 Quantity = 3,
