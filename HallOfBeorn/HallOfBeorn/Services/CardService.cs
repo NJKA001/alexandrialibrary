@@ -1555,9 +1555,10 @@ namespace HallOfBeorn.Services
             }
             else if (!model.IsAdvancedSearch())
             {
-                foreach (var item in cards.Where(x => x.Value.CardSet.Name == "Core Set" && x.Value.Number < 74))
+                //If this is not an advanced search and there are no filters then return only the heroes from the Core Set
+                foreach (var item in cards.Where(x => x.Value.CardSet.Name == "Core Set" && x.Value.Number < 13))
                 {
-                    results[item.Value.Id] = new CardScore(item.Value, 74 - item.Value.Number);
+                    results[item.Value.Id] = new CardScore(item.Value, 13 - item.Value.Number);
                 }
             }
             else
