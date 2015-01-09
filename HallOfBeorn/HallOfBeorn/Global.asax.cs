@@ -23,6 +23,10 @@ namespace HallOfBeorn
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            
+            System.Web.HttpContext.Current.Application.Lock();
+            System.Web.HttpContext.Current.Application[Extensions.CardServiceKey] = new HallOfBeorn.Services.CardService();
+            System.Web.HttpContext.Current.Application.UnLock();
         }
     }
 }

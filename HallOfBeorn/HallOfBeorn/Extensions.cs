@@ -9,6 +9,8 @@ namespace HallOfBeorn
 {
     public static class Extensions
     {
+        public static string CardServiceKey = "cardService";
+
         public static string ToUrlSafeString(this string self)
         {
             if (string.IsNullOrEmpty(self))

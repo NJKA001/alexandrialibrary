@@ -14,7 +14,7 @@ namespace HallOfBeorn.Controllers
     {
         public CardsController()
         {
-            _cardService = new CardService();
+            _cardService = (CardService)System.Web.HttpContext.Current.Application[Extensions.CardServiceKey];
         }
 
         private CardService _cardService;
@@ -251,20 +251,6 @@ namespace HallOfBeorn.Controllers
 
             return View(model);
         }
-
-        /*
-        public ActionResult Scenarios()
-        {
-            var model = new ScenarioIndexViewModel();
-
-            foreach (var scenario in _cardService.Scenarios())
-            {
-                model.Scenarios.Add(new ScenarioViewModel(scenario));
-            }
-
-            return View(model);
-        }
-        */
 
         public ActionResult Scenarios(string id)
         {
