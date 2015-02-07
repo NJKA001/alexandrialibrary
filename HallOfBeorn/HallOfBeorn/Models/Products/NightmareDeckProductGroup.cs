@@ -31,6 +31,7 @@ namespace HallOfBeorn.Models.Products
             AddProduct(new ShadowAndFlameNightmareProduct());
 
             AddProduct(new TheHobbitOverHillAndUnderHillNightmareProduct());
+            AddProduct(new TheHobbitOnTheDoorstepNightmareProduct());
 
             AddProduct(new HeirsOfNumenorNightmareProduct());
         }

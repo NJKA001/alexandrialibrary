@@ -312,6 +312,9 @@ namespace HallOfBeorn.Models
             all.Add(Artist.Mark_Erwan_Tarrisse);
             all.Add(Artist.Allen_Douglas);
 
+            //The Hobbit: On the Doorstep Nightmare
+            all.Add(Artist.Beth_Sobel);
+
             //First Age
             all.Add(Artist.Unknown);
             all.Add(Artist.Ted_Nasmith);
@@ -585,6 +588,7 @@ namespace HallOfBeorn.Models
         public static Artist Aurelien_Hubert = new Artist { Name = "Aurelien Hubert", URL = "http://aurelien-hubert-ash.blogspot.com" };
         public static Artist Ben_Peek = new Artist { Name = "Ben Peek", URL = "https://www.google.com/search?q=been+peek+art" };
         public static Artist Ben_Zweifel = new Artist { Name = "Ben Zweifel", URL = "http://benzweifel.com" };
+        public static Artist Beth_Sobel = new Artist { Name = "Beth Sobel", URL = "http://www.bethsobel.com" };
         public static Artist Bill_Corbett = new Artist { Name = "Bill Corbett", URL = "http://billcorbett.deviantart.com" };
         public static Artist Blake_Henriksen = new Artist { Name = "Blake Henriksen", URL = "http://pinkhavok.deviantart.com" };
         public static Artist Brandon_Leach = new Artist { Name = "Brandon Leach", URL = "http://b-nine.deviantart.com" };

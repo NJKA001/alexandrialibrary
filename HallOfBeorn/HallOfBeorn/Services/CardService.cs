@@ -1418,6 +1418,11 @@ namespace HallOfBeorn.Services
 
             var sortedResults = new List<Card>();
 
+            if (filters.Count == 1 && model.CardSet != null && model.CardSet != "Any" && model.Sort == Sort.None)
+            {
+                model.Sort = Sort.Set_Number;
+            }
+
             switch (model.Sort)
             {
                 case Sort.Alphabetical:
