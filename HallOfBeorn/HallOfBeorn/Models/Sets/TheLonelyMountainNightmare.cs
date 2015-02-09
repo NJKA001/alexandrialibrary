@@ -19,7 +19,6 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "The Lonely Mountain Nightmare",
                 HasSecondImage = true,
-                ImageType = Models.ImageType.Png,
                 Id = "EF3EB70C-DB62-4936-8436-1C4AC260E5EC",
                 CardType = CardType.Nightmare_Setup,
                 Text =
@@ -86,7 +85,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             Cards.Add(new Card()
             {
                 Title = "Erebor Bats",
-                ImageType = Models.ImageType.Png,
                 Id = "80C660C1-D1E0-4E76-B0AE-DC6E8A85AF72",
                 CardType = CardType.Enemy,
                 EngagementCost = 15,
@@ -107,7 +105,6 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             Cards.Add(new Card()
             {
                 Title = "Secret Tunnel",
-                ImageType = Models.ImageType.Png,
                 Id = "DD0ABD80-3CAE-473B-B703-709769C0DE44",
                 CardType = CardType.Enemy,
                 Threat = 2,
@@ -123,7 +120,6 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             Cards.Add(new Card()
             {
                 Title = "Southern Spur",
-                ImageType = Models.ImageType.Png,
                 Id = "041F33FC-9A0C-4A44-B82D-20DB7B17ABCE",
                 CardType = CardType.Enemy,
                 Threat = 3,
@@ -139,7 +135,6 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             Cards.Add(new Card()
             {
                 Title = "The Front Gate",
-                ImageType = Models.ImageType.Png,
                 Id = "B3E3E92A-3E2D-43ED-AC5F-9297BF6EF6BE",
                 CardType = CardType.Enemy,
                 Threat = 5,
@@ -154,7 +149,6 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             Cards.Add(new Card()
             {
                 Title = "The Dragon's Ire",
-                ImageType = Models.ImageType.Png,
                 Id = "89206288-3B44-4F10-B5A6-93D6A3D6753F",
                 CardType = CardType.Treachery,
                 Keywords = new List<string> { "Doomed 1." },
@@ -167,7 +161,6 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             Cards.Add(new Card()
             {
                 Title = "Lust for Treasure",
-                ImageType = Models.ImageType.Png,
                 Id = "26B96D8A-5D48-4459-829B-467AE4A5D692",
                 CardType = CardType.Treachery,
                 Keywords = new List<string> { "Doomed 1." },

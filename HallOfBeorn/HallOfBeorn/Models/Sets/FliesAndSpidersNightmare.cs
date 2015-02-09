@@ -19,7 +19,6 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "Flies and Spiders Nightmare",
                 HasSecondImage = true,
-                ImageType = Models.ImageType.Png,
                 Id = "BE5BF36B-9CB2-4135-9A8B-8D51492BB0B9",
                 CardType = CardType.Nightmare_Setup,
                 Text =
@@ -88,7 +87,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             Cards.Add(new Card()
             {
                 Title = "Attercop",
-                ImageType = Models.ImageType.Png,
                 Id = "AD12F733-8892-46E7-8B55-6169DBAAF9FE",
                 CardType = CardType.Enemy,
                 EngagementCost = 35,
@@ -109,7 +107,6 @@ Poisoned characters cannot be declared as attackers or defenders against Atterco
             Cards.Add(new Card()
             {
                 Title = "Venomous Spider",
-                ImageType = Models.ImageType.Png,
                 Id = "992446A3-2CA6-47D0-BD7C-0F2D31DA9435",
                 CardType = CardType.Enemy,
                 EngagementCost = 25,
@@ -129,7 +126,6 @@ Poisoned characters cannot be declared as attackers or defenders against Atterco
             Cards.Add(new Card()
             {
                 Title = "Dark Colony",
-                ImageType = Models.ImageType.Png,
                 Id = "4F684192-E515-44C1-93BB-249A5D7B63F7",
                 CardType = CardType.Location,
                 Threat = 4,
@@ -145,7 +141,6 @@ Poisoned characters cannot be declared as attackers or defenders against Atterco
             Cards.Add(new Card()
             {
                 Title = "Mirkwood Path",
-                ImageType = Models.ImageType.Png,
                 Id = "025C830F-367E-4B63-A2E3-FD0487AE6CFA",
                 CardType = CardType.Location,
                 Threat = 0,
@@ -162,7 +157,6 @@ Poisoned characters cannot be declared as attackers or defenders against Atterco
             Cards.Add(new Card()
             {
                 Title = "Patch of Midnight",
-                ImageType = Models.ImageType.Png,
                 Id = "2D051679-CFC1-4D15-9620-ABE4DC47A848",
                 CardType = CardType.Location,
                 Threat = 3,
@@ -178,7 +172,6 @@ Poisoned characters cannot be declared as attackers or defenders against Atterco
             Cards.Add(new Card()
             {
                 Title = "A Horrible Battle",
-                ImageType = Models.ImageType.Png,
                 Id = "47BA816A-6C46-49F3-9324-8A218286A579",
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each player must either give 1 poison to each hero he controls, or reveal an encounter card.",
@@ -191,7 +184,6 @@ Poisoned characters cannot be declared as attackers or defenders against Atterco
             Cards.Add(new Card()
             {
                 Title = "Spider Bite",
-                ImageType = Models.ImageType.Png,
                 Id = "DDC6F70E-3935-4FB7-961F-1806A29CC1D8",
                 CardType = CardType.Treachery,
                 Keywords = new List<string> { "Surge." },

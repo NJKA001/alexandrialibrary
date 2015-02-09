@@ -19,7 +19,6 @@ namespace HallOfBeorn.Models.Sets
             {
                 Title = "The Battle of Five Armies Nightmare",
                 HasSecondImage = true,
-                ImageType = Models.ImageType.Png,
                 Id = "4B62A616-0F18-4577-A42D-0ACABA3703CF",
                 CardType = CardType.Nightmare_Setup,
                 Text =
@@ -93,7 +92,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             Cards.Add(new Card()
             {
                 Title = "Great Warg",
-                ImageType = Models.ImageType.Png,
                 Id = "87F3C5BC-CBEC-455B-B066-7C82FE775AFF",
                 CardType = CardType.Enemy,
                 EngagementCost = 25,
@@ -112,7 +110,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             Cards.Add(new Card()
             {
                 Title = "Frenzied Warg-Rider",
-                ImageType = Models.ImageType.Png,
                 Id = "{D0FDE199-F31D-4EA5-9CB4-129B90FC2CD4}",
                 CardType = CardType.Enemy,
                 EngagementCost = 15,
@@ -131,7 +128,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             Cards.Add(new Card()
             {
                 Title = "Gundabad Elite",
-                ImageType = Models.ImageType.Png,
                 Id = "5A4FCE0E-9A88-490C-A3C3-56FE747BBD35",
                 CardType = CardType.Enemy,
                 EngagementCost = 40,
@@ -149,7 +145,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             Cards.Add(new Card()
             {
                 Title = "Embattled Valley",
-                ImageType = Models.ImageType.Png,
                 Id = "E745CF55-FBF7-4D82-B81F-0BA4224BBECA",
                 CardType = CardType.Location,
                 Threat = 5,
@@ -163,8 +158,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             });
             Cards.Add(new Card()
             {
-                Title = "Eastern Rise",
-                ImageType = Models.ImageType.Png,
+                Title = "Eastern Ridge",
                 Id = "78D35EBB-65F9-45D2-87BD-CCDC42EBDB12",
                 CardType = CardType.Location,
                 Threat = 3,
@@ -180,7 +174,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             Cards.Add(new Card()
             {
                 Title = "Dread Has Come!",
-                ImageType = Models.ImageType.Png,
                 Id = "9F0316F2-C338-4967-A189-4F2DBB4DDCDF",
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Bolg makes an attack against each player in turn order. If at least 1 character is destroyed by one of these attacks, the players cannot place progress on the current quest phase this round.",
