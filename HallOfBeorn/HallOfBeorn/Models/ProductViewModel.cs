@@ -65,15 +65,24 @@ namespace HallOfBeorn.Models
         {
             get
             {
-                var cardSet = string.Empty;
-
-                var first = _product.CardSets.FirstOrDefault();
-                if (first != null)
+                if (_product.CardSets.Count == 1)
                 {
-                    cardSet = first.Name.Replace(' ', '+');
-                }
+                    var cardSet = string.Empty;
 
-                return string.Format("/Cards/Search?CardSet={0}", cardSet);
+                    var first = _product.CardSets.FirstOrDefault();
+                    if (first != null)
+                    {
+                        cardSet = first.Name.Replace(' ', '+');
+                    }
+
+                    return string.Format("/Cards/Search?CardSet={0}&Sort=Set_Number", cardSet);
+                }
+                else
+                {
+                    var query = string.Format("%2Bproduct%3A{0}", _product.Name.Replace(":", string.Empty).Replace(' ', '_'));
+
+                    return string.Format("/Cards/Search?Query={0}&Sort=Set_Number", query);
+                }                
             }
         }
 

@@ -57,6 +57,7 @@ namespace HallOfBeorn.Models
         public int Number { get; protected set; }
         public SetType SetType { get; protected set; }
         public List<Card> Cards { get; protected set; }
+        public Product Product { get; set; }
 
         public string AlternateName { get; protected set; }
 

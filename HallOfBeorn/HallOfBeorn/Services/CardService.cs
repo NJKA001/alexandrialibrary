@@ -61,6 +61,7 @@ namespace HallOfBeorn.Services
 
             foreach (var cardSet in product.CardSets)
             {
+                cardSet.Product = product;
                 AddSet(product, cardSet);
             }
         }
@@ -1093,6 +1094,9 @@ namespace HallOfBeorn.Services
                 case "set":
                     predicate = (card) => { return names.Any(y => card.CardSet.Name.MatchesWildcard(y) || card.CardSet.Abbreviation.MatchesWildcard(y) || (!string.IsNullOrEmpty(card.CardSet.AlternateName) && card.CardSet.AlternateName.MatchesWildcard(y)) || (!string.IsNullOrEmpty(card.CardSet.NormalizedName) && card.CardSet.NormalizedName.MatchesWildcard(y))); };
                     break;
+                case "product":
+                    predicate = (card) => { return names.Any(y => card.CardSet.Product != null && (card.CardSet.Product.Name.Replace(":",string.Empty).MatchesWildcard(y))); };
+                    break;
                 case "encounter":
                     predicate = (card) => { return names.Any(y => card.EncounterSet.MatchesWildcard(y)); };
                     break;
@@ -1225,6 +1229,9 @@ namespace HallOfBeorn.Services
                         results = FilterByString(field, value, results, negate);
                         break;
                     case "set":
+                        results = FilterByString(field, value, results, negate);
+                        break;
+                    case "product":
                         results = FilterByString(field, value, results, negate);
                         break;
                     case "type":
