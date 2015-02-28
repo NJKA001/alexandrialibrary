@@ -34,6 +34,9 @@ namespace HallOfBeorn.Models.Products
             AddProduct(new TheHobbitOnTheDoorstepNightmareProduct());
 
             AddProduct(new HeirsOfNumenorNightmareProduct());
+            AddProduct(new TheStewardsFearNightmareProduct());
+            AddProduct(new TheDruadanForestNightmareProduct());
+            AddProduct(new EncounterAtAmonDinNightmareProduct());
         }
     }
 }

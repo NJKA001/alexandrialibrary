@@ -10,6 +10,8 @@ namespace HallOfBeorn.Models.Products
         public HeirsOfNumenorNightmareProduct()
             : base("Heirs of Númenor Nightmare Decks", "MEN21", ImageType.Jpg)
         {
+            IsPremier = true;
+            IsNewSubGroup = true;
             CardSets.Add(CardSet.PerilInPelargirNightmare);
             CardSets.Add(CardSet.IntoIthilienNightmare);
             CardSets.Add(CardSet.TheSiegeOfCairAndrosNightmare);

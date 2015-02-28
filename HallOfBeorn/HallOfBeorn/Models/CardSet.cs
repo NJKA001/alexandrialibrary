@@ -137,7 +137,11 @@ namespace HallOfBeorn.Models
 
         public static CardSet FliesAndSpidersNightmare = new Sets.FliesAndSpidersNightmare();
         public static CardSet TheLonelyMountainNightmare = new Sets.TheLonelyMountainNightmare();
-        public static CardSet THeBattleOfFiveArmiesNightmare = new Sets.TheBattleOfFiveArmiesNightmare();
+        public static CardSet TheBattleOfFiveArmiesNightmare = new Sets.TheBattleOfFiveArmiesNightmare();
+
+        public static CardSet TheStewardsFearNightmare = new Sets.TheStewardsFearNightmare();
+        public static CardSet TheDruadanForestNightmare = new Sets.TheDruadanForestNightmare();
+        public static CardSet EncounterAtAmonDinNightmare = new Sets.EncounterAtAmonDinNightmare();
 
         public static CardSet FirstAge = new Sets.FirstAge();
     }

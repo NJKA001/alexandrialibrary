@@ -290,6 +290,7 @@
     <Compile Include="Models\Products\ConflictAtTheCarrokProduct.cs" />
     <Compile Include="Models\Products\CoreSetProduct.cs" />
     <Compile Include="Models\Products\CustomProductGroup.cs" />
+    <Compile Include="Models\Products\EncounterAtAmonDinNightmareProduct.cs" />
     <Compile Include="Models\Products\EncounterAtAmonDinProduct.cs" />
     <Compile Include="Models\Products\EscapeFromDolGuldurNightmareProduct.cs" />
     <Compile Include="Models\Products\FirstAgeProduct.cs" />
@@ -302,6 +303,8 @@
     <Compile Include="Models\Products\JourneyAlongTheAnduinNightmareProduct.cs" />
     <Compile Include="Models\Products\KhazadDumProduct.cs" />
     <Compile Include="Models\Products\NightmareDeckProductGroup.cs" />
+    <Compile Include="Models\Products\TheDruadanForestNightmareProduct.cs" />
+    <Compile Include="Models\Products\TheStewardsFearNightmareProduct.cs" />
     <Compile Include="Models\Products\TheAntleredCrownProduct.cs" />
     <Compile Include="Models\Products\TheHobbitOnTheDoorstepNightmareProduct.cs" />
     <Compile Include="Models\Products\TheNinInEilphProduct.cs" />
@@ -368,6 +371,7 @@
     <Compile Include="Models\Sets\CoreSet.cs" />
     <Compile Include="Models\Sets\DungeonsDeepAndCavernsDimNightmare.cs" />
     <Compile Include="Models\Sets\EncounterAtAmonDin.cs" />
+    <Compile Include="Models\Sets\EncounterAtAmonDinNightmare.cs" />
     <Compile Include="Models\Sets\EscapeFromDolGuldurNightmare.cs" />
     <Compile Include="Models\Sets\FliesAndSpidersNightmare.cs" />
     <Compile Include="Models\Sets\FlightFromMoriaNightmare.cs" />
@@ -383,6 +387,7 @@
     <Compile Include="Models\Sets\PerilInPelargirNightmare.cs" />
     <Compile Include="Models\Sets\TheAntleredCrown.cs" />
     <Compile Include="Models\Sets\TheBattleOfFiveArmiesNightmare.cs" />
+    <Compile Include="Models\Sets\TheDruadanForestNightmare.cs" />
     <Compile Include="Models\Sets\TheLonelyMountainNightmare.cs" />
     <Compile Include="Models\Sets\TheNinInEilph.cs" />
     <Compile Include="Models\Sets\OverTheMistyMountainsGrimNightmare.cs" />
@@ -418,6 +423,7 @@
     <Compile Include="Models\Sets\TheSeventhLevelNightmare.cs" />
     <Compile Include="Models\Sets\TheSiegeOfCairAndrosNightmare.cs" />
     <Compile Include="Models\Sets\TheStewardsFear.cs" />
+    <Compile Include="Models\Sets\TheStewardsFearNightmare.cs" />
     <Compile Include="Models\Sets\TheStoneOfErech.cs" />
     <Compile Include="Models\Sets\TheThreeTrials.cs" />
     <Compile Include="Models\Sets\TheWatcherInTheWater.cs" />

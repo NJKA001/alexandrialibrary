@@ -19,6 +19,7 @@ namespace HallOfBeorn.Models
         public string Code { get; private set; }
         public ImageType ImageType { get; private set; }
         public bool IsPremier { get; protected set; }
+        public bool IsNewSubGroup { get; protected set; }
         public string RulesUrl { get; protected set; }
 
         public List<CardSet> CardSets { get; private set; }

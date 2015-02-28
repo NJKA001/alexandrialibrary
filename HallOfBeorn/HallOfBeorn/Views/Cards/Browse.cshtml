@@ -29,7 +29,7 @@
     @{var lastProductWasPremier = false;}
     @foreach (var product in productGroup.ChildProducts)
     {
-        if (lastProductWasPremier && !product.IsPremier) {
+        if (lastProductWasPremier && !product.IsPremier || product.IsNewSubGroup) {
             <div/>
         }
         

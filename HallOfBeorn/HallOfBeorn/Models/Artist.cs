@@ -315,6 +315,9 @@ namespace HallOfBeorn.Models
             //The Hobbit: On the Doorstep Nightmare
             all.Add(Artist.Beth_Sobel);
 
+            //The Druadan Forest Nightmare
+            all.Add(Artist.Smirtouille);
+
             //First Age
             all.Add(Artist.Unknown);
             all.Add(Artist.Ted_Nasmith);
@@ -774,6 +777,7 @@ namespace HallOfBeorn.Models
         public static Artist Sidharth_Chatursedi = new Artist { Name = "Sidharth Chatursedi", URL = "http://sidharthchaturvedi.deviantart.com" };
         public static Artist Silver_Saaremael = new Artist { Name = "Silver Saaremäel", URL = "http://sept13.deviantart.com" };
         public static Artist Simon_Dominic = new Artist { Name = "Simon Dominic", URL = "https://www.google.com/search?q=Simon+Dominic+fantasy+art" };
+        public static Artist Smirtouille = new Artist { Name = "Smirtouille", URL = "http://smirtouille.deviantart.com" };
         public static Artist Soul_Core = new Artist { Name = "Soul Core", URL = "http://en.amokanet.ru" };
         public static Artist Stacey_Diana_Clark = new Artist { Name = "Stacey Diana Clark", URL = "http://staceydiana.blogspot.com" };
         public static Artist Stephane_Gantiez = new Artist { Name = "Stephane Gantiez", URL = "http://lodin111.deviantart.com" };

@@ -10,6 +10,7 @@ namespace HallOfBeorn.Models.Products
         public TheHobbitOverHillAndUnderHillNightmareProduct()
             : base("The Hobbit: Over Hill and Under Hill Nightmare Decks", "MEN17", ImageType.Jpg)
         {
+            IsPremier = true;
             CardSets.Add(CardSet.WeMustAwayEreBreakOfDayNightmare);
             CardSets.Add(CardSet.OverTheMistyMountainsGrimNightmare);
             CardSets.Add(CardSet.DungeonsDeepAndCavernsDimNightmare);
