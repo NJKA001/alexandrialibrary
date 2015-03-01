@@ -114,6 +114,114 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
                 Number = 2,
                 Artist = Artist.Jason_Ward
             });
+            Cards.Add(new Card()
+            {
+                Title = "Drúadan Warrior",
+                Id = "43BE3381-32F8-430A-A44E-C8B57A824FB3",
+                ImageType = Models.ImageType.Png,
+                CardType = Models.CardType.Enemy,
+                EngagementCost = 20,
+                Threat = 2,
+                Attack = 5,
+                Defense = 3,
+                HitPoints = 5,
+                Traits = new List<string> { "Wose." },
+                Keywords = new List<string> { "Prowl 2." },
+                Text = "Each hero with no resources in its resource pool cannot be declared as an attacker or defender against Drúadan Warrior.",
+                EncounterSet = "The Drúadan Forest Nightmare",
+                Quantity = 3,
+                Number = 3,
+                Artist = Artist.Tey_Bartolome
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Drúadan Warrior",
+                Id = "33D50B0D-9F82-49CD-A1DD-73008DA04A35",
+                CardType = Models.CardType.Enemy,
+                EngagementCost = 43,
+                Threat = 4,
+                Attack = 3,
+                Defense = 2,
+                HitPoints = 3,
+                Traits = new List<string> { "Wose." },
+                Keywords = new List<string> { "Archery 3." },
+                Text = "As an additional cost to optionally engage Drúadan Stalker, you must spend 2 resources.",
+                EncounterSet = "The Drúadan Forest Nightmare",
+                Quantity = 3,
+                Number = 4,
+                Artist = Artist.Jason_Ward
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Devil's Mirk",
+                Id = "D4C07C41-6B3D-463F-9767-DB42C424192C",
+                CardType = Models.CardType.Location,
+                Threat = 3,
+                QuestPoints = 3,
+                Traits = new List<string> { "Forest." },
+                Text = "Immune to player card effects.\r\nWhile Devil's Mirk is in the staging area, characters cannot be healed.\r\nWhile Devil's Mirk is the active location, each Wose enemy gets +2 Defense.",
+                EncounterSet = "The Drúadan Forest Nightmare",
+                Quantity = 3,
+                Number = 5,
+                Artist = Artist.Bill_Thompson
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Eilenach",
+                Id = "33083879-E3E1-4842-8A03-FFABC4900529",
+                ImageType = Models.ImageType.Png,
+                CardType = Models.CardType.Location,
+                Threat = 5,
+                QuestPoints = 4,
+                Traits = new List<string> { "Forest.", "Hills." },
+                Text = "Players cannot travel to Eilenach unless there is at least 1 resource in each hero's resource pool.",
+                Shadow = "Shadow: If the defending character has no resources, deal it 1 damage.",
+                FlavorText = "...standing up from the long ridges of the Drúadan Forest... -The Return of the King",
+                EncounterSet = "The Drúadan Forest Nightmare",
+                Quantity = 2,
+                Number = 6,
+                Artist = Artist.Jose_Vega
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Stonewain Valley",
+                Id = "CDF2CC0B-2FAB-4A29-944B-95BE00416244",
+                CardType = Models.CardType.Location,
+                Threat = 1,
+                QuestPoints = 6,
+                Traits = new List<string> { "Forest." },
+                Text = "While Stonewain Valley is in the staging area, resources discarded or spent by the first player for any reason are placed on Stonewain Valley.\r\nStonewain Valley gets +1 Threat for each resource on it.",
+                FlavorText = "\"Way is wide for four horses in Stonewain Valley yonder,\" he waved his hand southwards: \"but narrow at beginning and at end.\" -Ghân-buri-Ghân, The Return of the King",
+                EncounterSet = "The Drúadan Forest Nightmare",
+                Quantity = 2,
+                Number = 7,
+                Artist = Artist.Jake_Bullock
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Drums of the Wild Men",
+                Id = "30901B1E-FDAA-477A-A54D-BCE163E82FAA",
+                CardType = Models.CardType.Treachery,
+                Text = "When Revealed: Each player must trigger the prowl keyword on each enemy engaged with him, as if that enemy had been revealed from the encounter deck. Then, return each engaged Wose enemy to the staging area. If no enemies are returned to the staging area by this effect, Drums of the Wild Men gains surge.",
+                EncounterSet = "The Drúadan Forest Nightmare",
+                Quantity = 2,
+                Number = 8,
+                Artist = Artist.Smirtouille
+            });
+            Cards.Add(new Card()
+            {
+                Title = "Poison-darts",
+                Id = "27037F3E-B1E4-43B5-9C14-952661626477",
+                CardType = Models.CardType.Treachery,
+                Traits = new List<string> { "Item." },
+                Keywords = new List<string> { "Surge." },
+                Text = "When Revealed: Attach to the enemy in play with the highest engagement cost. (Counts as a Weapon attachment with the text: \"Attached enemy gets +2 Attack and gains Archery 2.\")",
+                FlavorText = "Merry did not like this talk of wild men and poisoned darts... -The Return of the King",
+                EncounterSet = "The Drúadan Forest Nightmare",
+                Quantity = 3,
+                Number = 9,
+                Artist = Artist.Melanie_Maier
+            });
         }
     }
 }

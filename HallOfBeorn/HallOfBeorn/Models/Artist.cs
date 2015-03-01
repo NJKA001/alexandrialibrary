@@ -317,6 +317,7 @@ namespace HallOfBeorn.Models
 
             //The Druadan Forest Nightmare
             all.Add(Artist.Smirtouille);
+            all.Add(Artist.Bill_Thompson);
 
             //First Age
             all.Add(Artist.Unknown);
@@ -593,6 +594,7 @@ namespace HallOfBeorn.Models
         public static Artist Ben_Zweifel = new Artist { Name = "Ben Zweifel", URL = "http://benzweifel.com" };
         public static Artist Beth_Sobel = new Artist { Name = "Beth Sobel", URL = "http://www.bethsobel.com" };
         public static Artist Bill_Corbett = new Artist { Name = "Bill Corbett", URL = "http://billcorbett.deviantart.com" };
+        public static Artist Bill_Thompson = new Artist { Name = "Bill Thompson", URL = "http://billyt1978.deviantart.com" };
         public static Artist Blake_Henriksen = new Artist { Name = "Blake Henriksen", URL = "http://pinkhavok.deviantart.com" };
         public static Artist Brandon_Leach = new Artist { Name = "Brandon Leach", URL = "http://b-nine.deviantart.com" };
         public static Artist Brent_Hollowel = new Artist { Name = "Brent Hollowel", URL = "http://brenthollowellart.blogspot.com" };
