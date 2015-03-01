@@ -9,6 +9,7 @@ namespace HallOfBeorn.Models
     {
         public Card()
         {
+            Text = string.Empty;
             Traits = new List<string>();
             NormalizedTraits = new List<string>();
             Keywords = new List<string>();
