@@ -134,7 +134,7 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             });
             Cards.Add(new Card()
             {
-                Title = "Drúadan Warrior",
+                Title = "Drúadan Stalker",
                 Id = "33D50B0D-9F82-49CD-A1DD-73008DA04A35",
                 CardType = Models.CardType.Enemy,
                 EngagementCost = 43,
