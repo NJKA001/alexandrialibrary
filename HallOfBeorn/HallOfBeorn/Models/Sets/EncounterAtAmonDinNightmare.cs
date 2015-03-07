@@ -105,7 +105,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Orc Raiders",
                 Id = "5960F48C-4C93-48F8-80A0-F00E118AB3FF",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Enemy,
                 EngagementCost = 32,
                 Threat = 4,
@@ -198,7 +197,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Save Us!",
                 Id = "F703C039-04F8-4852-BB6A-4AC576DF74EB",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Treachery,
                 Text = "When Revealed: Each player must choose: either discard 2 villager tokens from Rescued Villagers, or search the encounter deck and discard pile for an enemy, reveal it, and add it to the staging area. Shuffle the encounter deck.",
                 Shadow = "Shadow: Attacking enemy gets +1 Attack. Deal is another shadow card.",

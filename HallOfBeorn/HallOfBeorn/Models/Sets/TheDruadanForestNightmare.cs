@@ -118,7 +118,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Drúadan Warrior",
                 Id = "43BE3381-32F8-430A-A44E-C8B57A824FB3",
-                ImageType = Models.ImageType.Png,
                 CardType = Models.CardType.Enemy,
                 EngagementCost = 20,
                 Threat = 2,
@@ -169,7 +168,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "Eilenach",
                 Id = "33083879-E3E1-4842-8A03-FFABC4900529",
-                ImageType = Models.ImageType.Png,
                 CardType = Models.CardType.Location,
                 Threat = 5,
                 QuestPoints = 4,

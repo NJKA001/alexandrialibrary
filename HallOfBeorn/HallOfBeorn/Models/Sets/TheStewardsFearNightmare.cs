@@ -195,7 +195,6 @@ Finally, flip this setup card over and place it next to the quest deck. Its effe
             {
                 Title = "The Cabal's Champion",
                 Id = "7DA32523-DCC9-4198-911F-2E7D1AF14087",
-                ImageType = Models.ImageType.Png,
                 CardType = CardType.Objective,
                 Traits = new List<string> { "Title." },
                 Keywords = new List<string> { "Surge.", "Doomed 1." },
