@@ -177,6 +177,11 @@ namespace HallOfBeorn.Models
             get { return _card.CardType; }
         }
 
+        public CardSubtype CardSubtype
+        {
+            get { return _card.CardSubtype; }
+        }
+
         public string CardTypeName
         {
             get { return _card.CardType.ToString().Replace('_', '-'); }
@@ -186,8 +191,8 @@ namespace HallOfBeorn.Models
         {
             get
             {
-                return (_card.CampaignCardType == Models.CampaignCardType.Boon || _card.CampaignCardType == Models.CampaignCardType.Burden) ?
-                    _card.CampaignCardType.ToString()
+                return (_card.CardSubtype == Models.CardSubtype.Boon || _card.CardSubtype == Models.CardSubtype.Burden) ?
+                    _card.CardSubtype.ToString()
                     : (string)null;
 
             }
@@ -595,6 +600,11 @@ namespace HallOfBeorn.Models
         public bool HasEncounterSet
         {
             get { return !string.IsNullOrEmpty(EncounterSet); }
+        }
+
+        public bool HasCardSubtype
+        {
+            get { return _card.CardSubtype != Models.CardSubtype.None; }
         }
 
         public string EncounterSetImagePath

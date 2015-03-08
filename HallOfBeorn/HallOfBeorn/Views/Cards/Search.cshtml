@@ -63,13 +63,29 @@
             </span>
 
             <span style="display:inline-block;">
-            <span class="search-label">Type</span>
-            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { @class = "search-select-short" })
+            <span class="search-label" title="Scenario">Scenario</span>
+            @Html.DropDownListFor(x => x.Scenario, SearchViewModel.Scenarios, new { @class = "search-select" })
             </span>
 
             <span style="display:inline-block;">
             <span class="search-label">Encounter Set</span>
             @Html.DropDownListFor(x => x.EncounterSet, SearchViewModel.EncounterSets, new { @class = "search-select" })
+            </span>
+        </div>
+        <div>
+            <span style="display:inline-block;">
+            <span class="search-label">Type</span>
+            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { @class = "search-select-short" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span class="search-label" title="Card Subtype">Subtype</span>
+            @Html.DropDownListFor(x => x.CardSubtype, SearchViewModel.CardSubtypes, new { @class = "search-select-short" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span class="search-label">Sphere</span>
+            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { @class = "search-select-short" })
             </span>
         </div>
         <div style="margin-bottom:4px;">
@@ -80,12 +96,12 @@
 
             <span style="display:inline-block;">
             <span class="search-label">Keyword</span>
-            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { @class = "search-select-short" })
+            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { @class = "search-select" })
             </span>
 
             <span style="display:inline-block;">
-            <span class="search-label" title="Player Card Category">Play. Category</span>
-            @Html.DropDownListFor(x => x.Category, SearchViewModel.Categories, new { @class = "search-select" })
+            <span class="search-label">Victory Points</span>
+            @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { @class = "search-select" })
             </span>
         </div>
         <div style="margin-bottom:4px;">
@@ -94,38 +110,53 @@
             @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { @class = "search-select" })
             </span>
 
+            
+
             <span style="display:inline-block;">
-            <span class="search-label">Sphere</span>
-            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { @class = "search-select-short" })
+            <span class="search-label" title="Player Card Category">Play. Category</span>
+            @Html.DropDownListFor(x => x.Category, SearchViewModel.Categories, new { @class = "search-select" })
             </span>
 
             <span style="display:inline-block;">
             <span class="search-label" title="Encounter Card Category">Enc. Category</span>
             @Html.DropDownListFor(x => x.EncounterCategory, SearchViewModel.EncounterCategories, new { @class = "search-select" })
             </span>
-
-            
-            @*
-            <span style="display:inline-block;">
-            <span style="margin-right:2px;width:60px;display:inline-block;">Custom</span>
-            @Html.CheckBoxFor(x => x.Custom, new { style = "margin-right:12px;" })
-            </span>*@
-            
         </div>
         <div style="margin-bottom:4px;display:block;">
             <span style="display:inline-block;">
             <span class="search-label">Cost</span>
-            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { @class = "search-select" })
+            @Html.DropDownListFor(x => x.Cost, SearchViewModel.ResourceCosts, new { @class = "search-select" })
             </span>
 
             <span style="display:inline-block;">
             <span class="search-label">Unique</span>
             @Html.DropDownListFor(x => x.IsUnique, SearchViewModel.UniquenessValues, new { @class = "search-select-short" })
             </span>
+        </div>
+        <div>
+            
 
             <span style="display:inline-block;">
-            <span class="search-label">Victory Points</span>
-            @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { @class = "search-select" })
+            <span class="search-label" title="Deck Type">Deck Type</span>
+            @Html.DropDownListFor(x => x.DeckType, SearchViewModel.DeckTypes, new { @class = "search-select-short" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span class="search-label">Custom</span>
+            @Html.CheckBoxFor(x => x.Custom, new { @class = "search-select-short" })
+            </span>
+        </div>
+        <div>
+            
+
+            <span style="display:inline-block;">
+            <span class="search-label">Threat Cost</span>
+            @Html.DropDownListFor(x => x.ThreatCost, SearchViewModel.ThreatCosts, new { @class = "search-select-short" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span class="search-label">Engagement Cost</span>
+            @Html.DropDownListFor(x => x.EngagementCost, SearchViewModel.EngagementCosts, new { @class = "search-select" })
             </span>
         </div>
     </div>

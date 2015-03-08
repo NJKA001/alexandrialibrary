@@ -27,7 +27,7 @@ namespace HallOfBeorn.Controllers
                 case CardType.Ally:
                 case CardType.Attachment:
                 case CardType.Event:
-                case CardType.Boon:
+                //case CardType.Boon:
                 case CardType.Treasure:
                     return true;
                 default:

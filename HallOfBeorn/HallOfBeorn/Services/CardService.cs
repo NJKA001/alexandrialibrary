@@ -202,7 +202,7 @@ namespace HallOfBeorn.Services
                     (
                         (string.Equals(x.Title.ToLower(), title) || (!string.IsNullOrEmpty(x.NormalizedTitle) && string.Equals(x.NormalizedTitle.ToLower(), title)))
                         && ( string.IsNullOrEmpty(setName) || ( string.Equals(x.CardSet.Abbreviation, setName) || string.Equals(x.CardSet.Name, setName) ) )
-                        && ( x.CardType == CardType.Hero || x.CardType == CardType.Ally || x.CardType == CardType.Attachment || x.CardType == CardType.Event || x.CardType == CardType.Treasure || x.CardType == CardType.Boon )
+                        && ( x.CardType == CardType.Hero || x.CardType == CardType.Ally || x.CardType == CardType.Attachment || x.CardType == CardType.Event || x.CardType == CardType.Treasure)
                     )
                 ).FirstOrDefault();
 
@@ -1431,8 +1431,17 @@ namespace HallOfBeorn.Services
             if (model.HasCardType())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.CardTypeMatches(c); }, 100));
 
+            if (model.HasCardSubtype())
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.CardSubtype == c.CardSubtype; }, 100));
+
+            if (model.HasDeckType())
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.DeckType == c.GetDeckType(); }, 100));
+
             if (model.HasCardSet())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.CardSetMatches(c); }, 100));
+
+            if (model.HasScenario())
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.BelongsToScenario(GetScenario(s.Scenario.ToUrlSafeString())); }, 100));
 
             if (model.HasTrait())
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.HasTrait(s.Trait); }, 100));
@@ -1449,8 +1458,14 @@ namespace HallOfBeorn.Services
             if (model.HasEncounterCategory())
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.EncounterCategories.Any(x => x == s.GetEncounterCategory()); }, 100));
 
-            if (model.HasCost())
+            if (model.HasResourceCost())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Cost == c.ResourceCostLabel; }, 100));
+
+            if (model.HasThreatCost())
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.ThreatCost == c.ThreatCostLabel; }, 100));
+
+            if (model.HasEngagementCost())
+                filters.Add(new WeightedSearchFilter((s, c) => { return s.EngagementCost == c.EngagementCostLabel; }, 100));
 
             if (model.HasArtist())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Artist == c.Artist.Name; }, 100));
@@ -1612,9 +1627,19 @@ namespace HallOfBeorn.Services
             return null;
         }
 
-        public IEnumerable<string> Costs()
+        public IEnumerable<string> ResourceCosts()
         {
             return cards.Values.Where(x => !string.IsNullOrEmpty(x.ResourceCostLabel)).Select(x => x.ResourceCostLabel).Distinct().OrderBy(x => x).ToList();
+        }
+
+        public IEnumerable<string> ThreatCosts()
+        {
+            return cards.Values.Where(x => !string.IsNullOrEmpty(x.ThreatCostLabel)).OrderBy(x => x.ThreatCost).Select(x => x.ThreatCostLabel).Distinct().ToList();
+        }
+
+        public IEnumerable<string> EngagementCosts()
+        {
+            return cards.Values.Where(x => !string.IsNullOrEmpty(x.EngagementCostLabel)).OrderBy(x => x.EngagementCost).Select(x => x.EngagementCostLabel).Distinct().ToList();
         }
 
         public IEnumerable<string> SetNames
@@ -1697,6 +1722,11 @@ namespace HallOfBeorn.Services
         public IEnumerable<string> VictoryPointValues()
         {
             return victoryPointValues.Keys.OrderBy(x => x).Select(y => victoryPointValues[y]).ToList();
+        }
+
+        public IEnumerable<string> GetScenarioTitles()
+        {
+            return scenarios.Values.Select(x => x.Title).ToList();
         }
     }
 }

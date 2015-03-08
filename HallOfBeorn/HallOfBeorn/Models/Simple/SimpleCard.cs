@@ -37,7 +37,7 @@ namespace HallOfBeorn.Models.Simple
             this.Title = card.Title;
             this.IsUnique = card.IsUnique;
             this.CardType = card.CardType.ToString();
-            this.CardSubType = card.CampaignCardType.ToString();
+            this.CardSubType = card.CardSubtype.ToString();
             this.Sphere = (card.Sphere != Models.Sphere.None && card.Sphere != Models.Sphere.Neutral) ? card.Sphere.ToString() : null;
             this.CardSet = card.CardSet.Name;
             this.Number = card.Number;
@@ -80,7 +80,6 @@ namespace HallOfBeorn.Models.Simple
                     InitializeEvent(card);
                     break;
                 case Models.CardType.Treasure:
-                case Models.CardType.Boon:
                     InitializeBoon(card);
                     break;
                 case Models.CardType.Quest:
@@ -95,7 +94,6 @@ namespace HallOfBeorn.Models.Simple
                     InitializeEncounterSet(card);
                     InitializeLocation(card);
                     break;
-                case Models.CardType.Burden:
                 case Models.CardType.Treachery:
                     InitializeEncounterSet(card);
                     break;

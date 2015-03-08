@@ -23,7 +23,6 @@ namespace HallOfBeorn.Models.Sets
                 ImageType = Models.ImageType.Jpg,
                 HasSecondImage = true,
                 CardType = CardType.GenCon_Setup,
-                CampaignCardType = CampaignCardType.Scenario_Rules,
                 Text = 
 @"New Staging Rules
 
@@ -51,7 +50,6 @@ During the encounter phase, players only reveal 1 card per player that shares th
                 ImageType = Models.ImageType.Jpg,
                 HasSecondImage = true,
                 CardType = CardType.GenCon_Setup,
-                CampaignCardType = CampaignCardType.Scenario_Rules,
                 Text =
 @"Stage 3B - Lost in the Fog
 
@@ -438,7 +436,7 @@ Setup: While any player is at stage 4B, the first player cannot lose control of 
                 Title = "Ho! Tom Bombadil!",
                 Id = "82249D64-2D0A-484D-BB52-AA4F32D98A3E",
                 CardType = CardType.Event,
-                CampaignCardType = CampaignCardType.Boon,
+                CardSubtype = CardSubtype.Boon,
                 ResourceCost = 0,
                 Traits = new List<string> { "Song." },
                 Text = "Setup: The first player adds this card to his hand.\r\nResponse: Add this card to the victory display and remove it from the campaign pool to cancel the \"when revealed\" effects of an encounter card just revealed from the encounter deck.",

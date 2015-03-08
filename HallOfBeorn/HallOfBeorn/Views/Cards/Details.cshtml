@@ -47,7 +47,15 @@
                 {
                     <img style="margin-bottom:-4px;margin-right:8px;height:24px;width:24px;" src='@string.Format("/Images/{0}.png", @Model.Sphere)' />
                 }
-                <span style="font-weight:bold;font-size:20pt;">@Model.CardTypeName</span>
+                <div style="display:inline-block;">
+                    <div style="font-weight:bold;font-size:20pt;">@Model.CardTypeName</div>
+                    @if (@Model.HasCardSubtype)
+                    {
+                        <div style="font-weight:bold;font-size:16pt;">@Model.CardSubtype.ToString()</div>
+                    }
+                </div>
+                
+                
                 @if (@Model.HasEncounterSet)
                 {
                     <div style="display:inline-block;margin-top:8px;margin-bottom:4px;">
@@ -143,7 +151,6 @@
                         break;
                     case CardType.Nightmare_Setup:
                     case CardType.Campaign:
-                    case CardType.Burden:
                         break;
                     default:
                         break;

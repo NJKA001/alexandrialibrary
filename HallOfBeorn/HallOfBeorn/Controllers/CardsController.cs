@@ -35,8 +35,11 @@ namespace HallOfBeorn.Controllers
 
             SearchViewModel.Keywords = _cardService.Keywords().GetSelectListItems();
             SearchViewModel.Traits = _cardService.Traits().GetSelectListItems();
-            SearchViewModel.Costs = _cardService.Costs().GetSelectListItems();
+            SearchViewModel.ResourceCosts = _cardService.ResourceCosts().GetSelectListItems();
+            SearchViewModel.ThreatCosts = _cardService.ThreatCosts().GetSelectListItems();
+            SearchViewModel.EngagementCosts = _cardService.EngagementCosts().GetSelectListItems();
             SearchViewModel.CardSets = _cardService.SetNames.GetSelectListItems();
+            SearchViewModel.Scenarios = _cardService.GetScenarioTitles().GetSelectListItems();
             SearchViewModel.EncounterSets = _cardService.EncounterSetNames.GetSelectListItems();
             SearchViewModel.Categories = _cardService.Categories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();
             SearchViewModel.EncounterCategories = _cardService.EncounterCategories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();

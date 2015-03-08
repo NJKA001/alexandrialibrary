@@ -34,8 +34,17 @@ namespace HallOfBeorn.Models
         [Display(Name = "Type")]
         public CardType CardType { get; set; }
 
+        [Display(Name = "Subtype")]
+        public CardSubtype CardSubtype { get; set; }
+
+        [Display(Name="Deck Type")]
+        public DeckType DeckType { get; set; }
+
         [Display(Name = "Set")]
         public string CardSet { get; set; }
+
+        [Display(Name="Scenario")]
+        public string Scenario { get; set; }
 
         [Display(Name = "Trait")]
         public string Trait { get; set; }
@@ -45,6 +54,12 @@ namespace HallOfBeorn.Models
 
         [Display(Name = "Cost")]
         public string Cost { get; set; }
+
+        [Display(Name = "Threat Cost")]
+        public string ThreatCost { get; set; }
+
+        [Display(Name = "Engagement Cost")]
+        public string EngagementCost { get; set; }
 
         [Display(Name = "Sphere")]
         public Sphere Sphere { get; set; }
@@ -129,9 +144,24 @@ namespace HallOfBeorn.Models
             return this.CardType != Models.CardType.None;
         }
 
+        public bool HasCardSubtype()
+        {
+            return this.CardSubtype != Models.CardSubtype.None;
+        }
+
+        public bool HasDeckType()
+        {
+            return this.DeckType != Models.DeckType.None;
+        }
+
         public bool HasCardSet()
         {
             return !string.IsNullOrEmpty(this.CardSet) && this.CardSet != DEFAULT_FILTER_VALUE;
+        }
+
+        public bool HasScenario()
+        {
+            return !string.IsNullOrEmpty(this.Scenario) && this.Scenario != DEFAULT_FILTER_VALUE;
         }
 
         public bool HasTrait()
@@ -159,9 +189,19 @@ namespace HallOfBeorn.Models
             return this.GetEncounterCategory() != Models.EncounterCategory.None;
         }
 
-        public bool HasCost()
+        public bool HasResourceCost()
         {
             return !string.IsNullOrEmpty(this.Cost) && this.Cost != DEFAULT_FILTER_VALUE;
+        }
+
+        public bool HasThreatCost()
+        {
+            return !string.IsNullOrEmpty(this.ThreatCost) && this.ThreatCost != DEFAULT_FILTER_VALUE;
+        }
+
+        public bool HasEngagementCost()
+        {
+            return !string.IsNullOrEmpty(this.EngagementCost) && this.EngagementCost != DEFAULT_FILTER_VALUE;
         }
 
         public bool HasArtist()
@@ -202,7 +242,7 @@ namespace HallOfBeorn.Models
             if (HasCategory())
                 return true;
 
-            if (HasCost())
+            if (HasResourceCost())
                 return true;
 
             if (this.Unique)
@@ -240,14 +280,6 @@ namespace HallOfBeorn.Models
             else if (CardType == CardType.Objective)
             {
                 return card.CardType == Models.CardType.Objective || card.CardType == Models.CardType.Objective_Ally;
-            }
-            else if (CardType == CardType.Boon)
-            {
-                return card.CampaignCardType == CampaignCardType.Boon;
-            }
-            else if (CardType == CardType.Burden)
-            {
-                return card.CampaignCardType == CampaignCardType.Burden;
             }
             else
                 return CardType == card.CardType;
@@ -319,6 +351,18 @@ namespace HallOfBeorn.Models
             get { return typeof(CardType).GetSelectListItems(); }
         }
 
+        public static IEnumerable<SelectListItem> CardSubtypes
+        {
+            get { return typeof(CardSubtype).GetSelectListItems(); }
+        }
+
+        public static IEnumerable<SelectListItem> DeckTypes
+        {
+            get { return typeof(DeckType).GetSelectListItems(); }
+        }
+
+        public static IEnumerable<SelectListItem> GameTypes { get; set; }
+
         public static IEnumerable<SelectListItem> Keywords
         {
             get;
@@ -343,11 +387,26 @@ namespace HallOfBeorn.Models
             set;
         }
 
-        public static IEnumerable<SelectListItem> CardSets { get; set; }
+        public static IEnumerable<SelectListItem> QuestCategories
+        {
+            get;
+            set;
+        }
 
+        public static IEnumerable<SelectListItem> CardSets { get; set; }
+        public static IEnumerable<SelectListItem> Scenarios { get; set; }
         public static IEnumerable<SelectListItem> EncounterSets { get; set; }
 
-        public static IEnumerable<SelectListItem> Costs { get; set; }
+        public static IEnumerable<SelectListItem> ResourceCosts { get; set; }
+        public static IEnumerable<SelectListItem> ThreatCosts { get; set; }
+        public static IEnumerable<SelectListItem> EngagementCosts { get; set; }
+
+        public static IEnumerable<SelectListItem> AttackStrengths { get; set; }
+        public static IEnumerable<SelectListItem> DefenseStrengths { get; set; }
+        public static IEnumerable<SelectListItem> HitPoints { get; set; }
+        public static IEnumerable<SelectListItem> WillpowerStrengths { get; set; }
+        public static IEnumerable<SelectListItem> ThreatStrengths { get; set; }
+        public static IEnumerable<SelectListItem> QuestPoints { get; set; }
 
         public static IEnumerable<SelectListItem> Spheres
         {

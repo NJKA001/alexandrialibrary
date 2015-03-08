@@ -199,7 +199,7 @@
     <Compile Include="Models\AdvancedSearchViewModel.cs" />
     <Compile Include="Models\Artist.cs" />
     <Compile Include="Models\BrowseViewModel.cs" />
-    <Compile Include="Models\CampaignCardType.cs" />
+    <Compile Include="Models\CardSubtype.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\CardEffect.cs" />
     <Compile Include="Models\CardEffectViewModel.cs" />
@@ -271,6 +271,7 @@
     <Compile Include="Models\Decks\TalesFromTheCards\SpearmanSuperhero.cs" />
     <Compile Include="Models\Decks\TalesFromTheCards\TrapsOfIthilien.cs" />
     <Compile Include="Models\Decks\TalesFromTheCards\WhereEaglesDare.cs" />
+    <Compile Include="Models\DeckType.cs" />
     <Compile Include="Models\EncounterCategory.cs" />
     <Compile Include="Models\EncounterSet.cs" />
     <Compile Include="Models\EncounterSetViewModel.cs" />
@@ -351,6 +352,7 @@
     <Compile Include="Models\Products\TheWatcherInTheWaterProduct.cs" />
     <Compile Include="Models\Products\TroubleInTharbadProduct.cs" />
     <Compile Include="Models\ProductViewModel.cs" />
+    <Compile Include="Models\QuestCategory.cs" />
     <Compile Include="Models\Scenario.cs" />
     <Compile Include="Models\ScenarioCard.cs" />
     <Compile Include="Models\ScenarioCardViewModel.cs" />

@@ -22,7 +22,6 @@ namespace HallOfBeorn.Models.Sets
                 Id = "1C97EC47-0AF3-4038-9FE1-FC308E965487",
                 CardType = CardType.GenCon_Setup,
                 HasSecondImage = true,
-                CampaignCardType = CampaignCardType.Introduction,
                 OppositeText = 
 @"~Escape the agents of ~Mordor searching for you in the ~Shire by braving a trip through the strange woods on its border in The Old ~Forest, a scenario designed for The Lord of the ~Rings : The Card Game special event at Gen Con 2014! This scenario can be played as a stand-alone adventure or as part of your Lord of the ~Rings campaign. To play The Old ~Forest in campaign mode, see page 4/4 of this expansion.
 
@@ -32,14 +31,13 @@ The cards in The Old ~Forest scenario can be identified by this symbol before ea
                 OppositeFlavorText = "\"But you won't have any luck in the Old Forest,\" objected Fedegar, \"No one ever had luck there. You'll get lost.\"\r\n-The Fellowship of the Ring",
                 Number = 0,
                 Quantity = 1,
-                Artist = Artist.Unknown
+                Artist = Artist.Silver_Saaremael
             });
             Cards.Add(new Card()
             {
                 Title = "The Old Forest Scenario Rules",
                 Id = "D54CFC5A-86CD-4CDD-BB8F-91FEE2D19171",
                 CardType = CardType.GenCon_Setup,
-                CampaignCardType = CampaignCardType.Scenario_Rules,
                 HasSecondImage = true,
                 Text =
 @"New Staging Rules
@@ -526,8 +524,8 @@ Setup: The first player attaches Old Bogey-stories to a hero in play.",
             {
                 Title = "Old Bogey-stories",
                 Id = "85658147-E88C-469A-AD77-BE903B1A826F",
-                CardType = CardType.Boon,
-                CampaignCardType = Models.CampaignCardType.Boon,
+                CardType = CardType.Attachment,
+                CardSubtype = Models.CardSubtype.Boon,
                 ResourceCost = 0,
                 Traits = new List<string> { "Tale." },
                 Text = 

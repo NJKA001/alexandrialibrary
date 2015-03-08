@@ -56,7 +56,7 @@ namespace HallOfBeorn.Models
 
         public bool IsUnique { get; set; }
         public CardType CardType { get; set; }
-        public CampaignCardType CampaignCardType { get; set; }
+        public CardSubtype CardSubtype { get; set; }
         public Sphere Sphere { get; set; }
         public byte? ThreatCost { get; set; }
         public byte? ResourceCost { get; set; }
@@ -71,6 +71,22 @@ namespace HallOfBeorn.Models
                     return string.Empty;
                 else
                     return ResourceCost.Value.ToString();
+            }
+        }
+
+        public string ThreatCostLabel
+        {
+            get
+            {
+                return ThreatCost.HasValue ? ThreatCost.Value.ToString() : string.Empty;
+            }
+        }
+
+        public string EngagementCostLabel
+        {
+            get
+            {
+                return EngagementCost.HasValue ? EngagementCost.Value.ToString() : string.Empty;
             }
         }
 
@@ -215,6 +231,57 @@ namespace HallOfBeorn.Models
                 return null;
             }
             set { errataUrl = value; } 
+        }
+
+        protected DeckType deckType = DeckType.None;
+        public DeckType GetDeckType()
+        {
+            if (deckType != DeckType.None) {
+                return deckType;
+            }
+
+            switch (CardType)
+            {
+                case Models.CardType.Hero:
+                case Models.CardType.Ally:
+                case Models.CardType.Attachment:
+                case Models.CardType.Event:
+                case Models.CardType.Treasure:
+                    return DeckType.Player;
+                case Models.CardType.Enemy:
+                case Models.CardType.Location:
+                case Models.CardType.Treachery:
+                case Models.CardType.Objective:
+                case Models.CardType.Objective_Ally:
+                    return DeckType.Encounter;
+                case Models.CardType.Quest:
+                case Models.CardType.Campaign:
+                case Models.CardType.GenCon_Setup:
+                case Models.CardType.Nightmare_Setup:
+                    return DeckType.Quest;
+                default:
+                    return DeckType.None;
+            }
+        }
+
+        public bool BelongsToScenario(Scenario scenario)
+        {
+            if (scenario == null) {
+                return false;
+            }
+
+            if (scenario.Title == ScenarioTitle) {
+                return true;
+            }
+
+            if (!string.IsNullOrEmpty(EncounterSet)) {
+                if (scenario.IncludesEncounterSet(EncounterSet))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

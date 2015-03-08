@@ -623,6 +623,9 @@ tr.pager td {
     margin-right:2px;
     width:100px;
     text-align: right;
+    /*font-size: .85em;
+    font-weight: normal;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;*/
 }
 
 .search-label-short {
@@ -639,7 +642,7 @@ tr.pager td {
 
 .search-select-short {
     margin-right:6px;
-    width:150px;
+    width:80px;
 }
 
 /********************
