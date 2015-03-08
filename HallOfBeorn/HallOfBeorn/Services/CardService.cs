@@ -298,7 +298,7 @@ namespace HallOfBeorn.Services
         private void LoadEncounterCategories()
         {
             var filters = new List<Func<Card, EncounterCategory>> {
-                CreateEncounterCategoryFilter("exhaust (a|1) (character|hero|ally)", EncounterCategory.Exhaustion_Effect),
+                CreateEncounterCategoryFilter("exhaust (a|1) (character|hero|ally)", EncounterCategory.Exhaustion),
                 CreateEncounterCategoryFilter("When Revealed:", EncounterCategory.When_Revealed),
                 CreateEncounterCategoryFilter("(each|a|1) hero", EncounterCategory.Targets_Heroes),
                 CreateEncounterCategoryFilter("(each|a|1) ally", EncounterCategory.Targets_Allies),
@@ -311,13 +311,13 @@ namespace HallOfBeorn.Services
                 CreateEncounterCategoryFilter("(get|gets) .*\\+[xX1-9] Attack", EncounterCategory.Enemy_Attack_Boost),
                 CreateEncounterCategoryFilter("(get|gets) .*\\+[xX1-9] Defense", EncounterCategory.Enemy_Defense_Boost),
                 CreateEncounterCategoryFilter("Counts as a Condition attachment", EncounterCategory.Condition_Attachment),
-                CreateEncounterCategoryFilter("While .* is the active location", EncounterCategory.While_Active_Effect),
+                CreateEncounterCategoryFilter("While .* is the active location", EncounterCategory.While_Active),
                 CreateEncounterCategoryFilter("While .* is in the staging area", EncounterCategory.While_In_Staging),
                 CreateEncounterCategoryFilter("Cannot spend resources", EncounterCategory.Cannot_Spend_Resources),
                 CreateEncounterCategoryFilter("Cannot play (event|events)", EncounterCategory.Cannnot_Play_Events),
                 CreateEncounterCategoryFilter("Cannot play (ally|allies)", EncounterCategory.Cannot_Play_Allies),
                 CreateEncounterCategoryFilter("cannot be .*engaged", EncounterCategory.Cannot_Engage),
-                CreateEncounterCategoryFilter("makes an immediate attack", EncounterCategory.Immediate_Attack_Effect),
+                CreateEncounterCategoryFilter("makes an immediate attack", EncounterCategory.Immediate_Attack),
                 CreateEncounterCategoryFilter("return .* to the staging area", EncounterCategory.Return_to_Staging_Area),
                 CreateEncounterCategoryFilter("discard .* (card|cards) from (your|their|his) hand", EncounterCategory.Card_Discard),
                 CreateEncounterCategoryFilter("excess .*damage dealt", EncounterCategory.Trample),
@@ -341,11 +341,11 @@ namespace HallOfBeorn.Services
                 CreateEncounterCategoryFilter("discard an attachment", EncounterCategory.Attachment_Discard),
                 CreateEncounterCategoryFilter("X is.*number of players", EncounterCategory.Scales_To_Number_of_Players),
                 CreateEncounterCategoryFilter("(each|an).*enemy.*(staging area|into play)", EncounterCategory.Bring_Enemies_Into_Play),
-                CreateEncounterCategoryFilter("Travel:", EncounterCategory.Travel_Effect),
-                CreateEncounterCategoryFilter("Forced:", EncounterCategory.Forced_Effect),
+                CreateEncounterCategoryFilter("Travel:", EncounterCategory.Travel),
+                CreateEncounterCategoryFilter("Forced:", EncounterCategory.Forced),
                 CreateEncounterCategoryFilter("unsuccessfully", EncounterCategory.Unsuccessful_Questing),
                 CreateEncounterCategoryFilter("a shadow (effect|card)|deal (a|1|2) shadow card", EncounterCategory.Shadow_Card_Synergy, "do not deal a shadow card"),
-                CreateEncounterCategoryFilter("(remove|removes) (a|all|that|the chosen) (hero|heroes|ally|ally|character|characters).*from the quest", EncounterCategory.Quest_Denial),
+                CreateEncounterCategoryFilter("(remove|removes) (a|all|that|the chosen) (hero|heroes|ally|ally|character|characters).*from the quest", EncounterCategory.Remove_From_Quest),
                 CreateEncounterCategoryFilter("remove.*progress", EncounterCategory.Progress_Removal),
                 CreateEncounterCategoryFilter("reveal.*additional", EncounterCategory.Reveal_Additional_Cards),
                 CreateEncounterCategoryFilter("discard (a|that) character", EncounterCategory.Character_Discard, "to The Balrog"),
@@ -353,7 +353,8 @@ namespace HallOfBeorn.Services
                 CreateEncounterCategoryFilter("cannot play (ally|allies)", EncounterCategory.Cannot_Play_Allies),
                 CreateEncounterCategoryFilter("while.*engaged", EncounterCategory.While_Engaged),
                 CreateEncounterCategoryFilter("gets \\+.*Threat", EncounterCategory.Staging_Area_Threat_Raise),
-                CreateEncounterCategoryFilter("shuffle (it|them|all copies of .*) back into", EncounterCategory.Encounter_Recursion)
+                CreateEncounterCategoryFilter("shuffle (it|them|all copies of .*) back into", EncounterCategory.Encounter_Recursion),
+                CreateEncounterCategoryFilter("each player with a threat", EncounterCategory.High_Player_Threat)
             };
 
             foreach (var card in cards.Values.Where(x => IsEncounterCategorizable(x)))
