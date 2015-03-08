@@ -80,6 +80,22 @@ namespace HallOfBeorn.Models
             return category;
         }
 
+        [Display(Name="Enc. Category")]
+        public string EncounterCategory { get; set; }
+
+        public EncounterCategory GetEncounterCategory()
+        {
+            var encCategory = HallOfBeorn.Models.EncounterCategory.None;
+            if (string.IsNullOrEmpty(this.EncounterCategory))
+                return encCategory;
+
+            var decoded = HttpUtility.HtmlDecode(this.EncounterCategory).Replace(' ', '_');
+
+            Enum.TryParse<HallOfBeorn.Models.EncounterCategory>(decoded, true, out encCategory);
+
+            return encCategory;
+        }
+
         public bool IsRandom()
         {
             return (!string.IsNullOrEmpty(this.Query) && this.Query.ContainsLower(RANDOM_KEYWORD));
@@ -136,6 +152,11 @@ namespace HallOfBeorn.Models
         public bool HasCategory()
         {
             return this.GetCategory() != Models.Category.None;
+        }
+
+        public bool HasEncounterCategory()
+        {
+            return this.GetEncounterCategory() != Models.EncounterCategory.None;
         }
 
         public bool HasCost()
@@ -311,6 +332,12 @@ namespace HallOfBeorn.Models
         }
 
         public static IEnumerable<SelectListItem> Categories
+        {
+            get;
+            set;
+        }
+
+        public static IEnumerable<SelectListItem> EncounterCategories
         {
             get;
             set;

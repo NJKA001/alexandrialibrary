@@ -106,7 +106,7 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             {
                 Title = "Secret Tunnel",
                 Id = "DD0ABD80-3CAE-473B-B703-709769C0DE44",
-                CardType = CardType.Enemy,
+                CardType = CardType.Location,
                 Threat = 2,
                 QuestPoints = 6,
                 Traits = new List<string> { "Underground." },
@@ -121,7 +121,7 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             {
                 Title = "Southern Spur",
                 Id = "041F33FC-9A0C-4A44-B82D-20DB7B17ABCE",
-                CardType = CardType.Enemy,
+                CardType = CardType.Location,
                 Threat = 3,
                 QuestPoints = 5,
                 Traits = new List<string> { "Mountain." },
@@ -136,7 +136,7 @@ Burgle: The first player shuffles his deck and reveals the top card. He may disc
             {
                 Title = "The Front Gate",
                 Id = "B3E3E92A-3E2D-43ED-AC5F-9297BF6EF6BE",
-                CardType = CardType.Enemy,
+                CardType = CardType.Location,
                 Threat = 5,
                 QuestPoints = 2,
                 Traits = new List<string> { "Mountain." },

@@ -318,9 +318,9 @@ Forced: After attached hero attacks and destroys an enemy, place 1 resource toke
                 HitPoints = 4,
                 Traits = new List<string>() { "Creature.", " Snow." },
                 Text = 
-@"Allies cannot defend while Snow Warg is attacking.
+@"Allies cannot defend while ~Snow ~Warg is attacking.
 
-Forced: After a character is declared as a defender against Snow Warg, deal 1 damage to the defending character, if able.",
+Forced: After a character is declared as a defender against ~Snow ~Warg, deal 1 damage to the defending character, if able.",
                 Threat = 3,
                 EncounterSet = "The Redhorn Gate",
                 Quantity = 3,

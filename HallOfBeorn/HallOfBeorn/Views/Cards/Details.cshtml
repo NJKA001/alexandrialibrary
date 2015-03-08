@@ -25,24 +25,6 @@
                 <span style="margin-left:8px;">@string.Format("(Easy Mode x{0})", @Model.EasyModeQuantity)</span>
             }
         </div>
-        @if (@Model.HasEncounterSet)
-        {
-            <div style="margin-top:8px;margin-bottom:4px;">
-                <a title="@Model.EncounterSet" href="@Model.EncounterSetLink"><img src="@Model.EncounterSetImagePath" title="@Model.EncounterSet" style="margin-left:4px;margin-bottom:-4px;width:42px;height:42px;" /></a>
-
-                @if (@Model.HasIncludedEncounterSets)
-                {
-                    <span style="margin-top:4px;margin-bottom:4px;border-top-left-radius:12px;border-top-right-radius:12px;border-bottom-left-radius:4px;border-bottom-right-radius:4px;border:1px solid black;padding-left:2px;padding-right:2px;padding-top:14px;padding-bottom:2px;">
-                    @foreach (var encounterSet in @Model.IncludedEncounterSets)
-                    {
-                    <span>
-                        <a title="@encounterSet.Name" href="@encounterSet.Link"><img src="@encounterSet.ImagePath" style="width:30px;height:30px;margin-left:4px;margin-right:4px;margin-bottom:-4px;" title="@encounterSet.Name" /></a>
-                    </span>
-                    }
-                    </span>
-                }
-            </div>
-        }
     </div>
 
     @if (@Model.HasSecondImage)
@@ -65,9 +47,28 @@
                 {
                     <img style="margin-bottom:-4px;margin-right:8px;height:24px;width:24px;" src='@string.Format("/Images/{0}.png", @Model.Sphere)' />
                 }
-                <span style="font-weight:bold;font-size:14pt;">@Model.CardTypeName</span>
+                <span style="font-weight:bold;font-size:20pt;">@Model.CardTypeName</span>
+                @if (@Model.HasEncounterSet)
+                {
+                    <div style="display:inline-block;margin-top:8px;margin-bottom:4px;">
+                    <a title="@Model.EncounterSet" href="@Model.EncounterSetLink"><img src="@Model.EncounterSetImagePath" title="@Model.EncounterSet" style="margin-left:4px;margin-bottom:-4px;width:42px;height:42px;" /></a>
+                    </div>
+                }
+                @if (@Model.HasIncludedEncounterSets)
+                {
+                    <div style="display:inline-block;height:30px;vertical-align:bottom;height:30px;padding-bottom:6px;border-top-left-radius:12px;border-top-right-radius:12px;border-bottom-left-radius:4px;border-bottom-right-radius:4px;border:1px solid black;padding-bottom:6px;">
+                    @foreach (var encounterSet in @Model.IncludedEncounterSets)
+                    {
+                        <span>
+                        <a title="@encounterSet.Name" href="@encounterSet.Link"><img src="@encounterSet.ImagePath" style="width:30px;height:30px;margin-top:4px;margin-bottom:0px;" title="@encounterSet.Name" /></a>
+                        </span>
+                    }
+                    </div>
+                }
             </div>
             <div class="statValueBox" style="margin-top:2px;margin-bottom:8px;">
+
+                <div style="display:inline-block;">
                 @switch (@Model.CardType)
                 {
                     case CardType.Hero:
@@ -109,8 +110,8 @@
                         break;
                     case CardType.Location:
                         {
-                            <span style="margin-left:2px;width:60px;color:#616161;">Quest Points</span><span style="margin-left:8px;font-weight:bold;">@Model.QuestPoints</span>
-                            <span style="width:24px;margin-left:20px;"><span style="margin-right:2px;font-weight:bold;">@Model.Threat</span><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span>
+                            <span style="margin-left:2px;margin-right:2px;width:24px;"><span style="margin-right:2px;font-weight:bold;">@Model.Threat</span><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span>
+                            <span style="margin-left:20px;width:60px;color:#616161;">(</span><span style="margin-left:8px;margin-right:8px;font-weight:bold;">@Model.QuestPoints</span><span style="margin-right:2px;width:60px;color:#616161;">)</span>
                         }
                         break;
                     case CardType.Treachery:
@@ -131,8 +132,8 @@
                         break;
                     case CardType.Quest:
                         {
-                            <span style="margin-left:2px;width:40px;color:#616161;">Stage</span><span style="margin-left:4px;font-weight:bold;">@Model.StageNumber</span>
-                            <span style="width:40px;color:#616161;margin-left:14px;">Quest Points</span><span style="margin-left:4px;font-weight:bold;">@Model.QuestPoints</span>
+                            <span style="margin-left:4px;font-weight:bold;">@Model.StageNumber</span><span style="width:40px;margin-left:2px;color:#616161;font-size:10px;font-weight:bold;">A-B</span>
+                            <span style="width:40px;color:#616161;margin-left:14px;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@Model.QuestPoints</span><span style="width:40px;color:#616161;">)</span>
                         }
                         break;
                     case CardType.Treasure:
@@ -147,6 +148,7 @@
                     default:
                         break;
                 }
+                </div>
             </div>
             
             <div class="statTextBox" style="margin:2px;padding-top:0px;padding-left:6px;padding-right:6px;border: 1px solid gray;border-radius:4px;max-width:500px;">
@@ -334,7 +336,7 @@
                 @if (!string.IsNullOrEmpty(@Model.VictoryPoints))
                 {
                     <br />
-                    <div style="text-align:right;font-weight:bold;">@Model.VictoryPoints</div>
+                    <div style="text-align:right;font-weight:bold;"><span style="padding-left:4px;padding-right:4px;border-style:solid;border-width:1px;border-color:black;">@Model.VictoryPoints.ToUpper()</span></div>
                 }
                 @if (!string.IsNullOrEmpty(@Model.PassValue))
                 {
@@ -426,7 +428,16 @@
             <div style="font-weight:bold;margin-left:6px;margin-top:10px;margin-bottom:4px;">Categories</div>
             foreach (var category in @Model.Categories())
             {
-                <span style="display:inline-block;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='@string.Format("Category Search for {0}", @category.Key)' href="@category.Value" style="text-decoration:none;">@category.Key</a></span>
+                <span style="display:inline-block;margin-top:4px;margin-bottom:4px;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='@string.Format("Category Search for {0}", @category.Key)' href="@category.Value" style="text-decoration:none;">@category.Key</a></span>
+            }
+        }
+        @if (@Model.HasEncounterCategories)
+        {
+            <br />
+            <div style="font-weight:bold;margin-left:6px;margin-top:10px;margin-bottom:4px;">Categories</div>
+            foreach (var category in @Model.EncounterCategories())
+            {
+                <span style="display:inline-block;margin-top:4px;margin-bottom:4px;margin-left:8px;border-radius:6px;border-width:2px;border-style:solid;border-color:darkgrey;"><a title='@string.Format("Encounter Category Search for {0}", @category.Key)' href="@category.Value" style="text-decoration:none;">@category.Key</a></span>
             }
         }
         </div>

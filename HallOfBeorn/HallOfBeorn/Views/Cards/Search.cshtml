@@ -20,6 +20,7 @@
             $('#Artist').val('Any');
             $('#EncounterSet').val('Any');
             $('#Category').val('Any');
+            $('#EncounterCategory').val('Any');
             $('#Sort').val('Any');
             $('#VictoryPoints').val('Any');
             //$('#Custom').attr('checked', false);
@@ -47,78 +48,85 @@
             <div style="display:inline-block;min-width:300px;margin-right:4px;">@Html.TextBoxFor(x => x.Query, new { style = "text-align:left;width:95%;margin-right:4px;" })</div>
             <div style="display:inline-block;">
                 <input type="submit" value="Search" style="margin-left:6px;border-radius:8px;background-color:lightgray;" />
-                <a id="resetButton" href="#" style="margin-left:6px;margin-right:8px;width:70px;">Clear</a>
+                <a id="resetButton" href="#" style="margin-left:6px;margin-right:28px;width:70px;">Clear</a>
+                <span style="display:inline-block;">
+                <span class="search-label-short">Sort</span>
+                @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { @class = "search-select-short" })
+                </span>
             </div>
         </div>
         
         <div style="margin-top:10px;margin-bottom:4px;display:block;">
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Set</span>
-            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { style = "margin-right:12px;max-width:170px;width:170px;" })
+            <span class="search-label">Card Set</span>
+            @Html.DropDownListFor(x => x.CardSet, SearchViewModel.CardSets, new { @class = "search-select" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Type</span>
-            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { style = "margin-right:12px;;max-width:140px;width:140px;" })
+            <span class="search-label">Type</span>
+            @Html.DropDownListFor(x => x.CardType, SearchViewModel.CardTypes, new { @class = "search-select-short" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Sphere</span>
-            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { style = "margin-right:12px;width:170px;" })
-            </span>
-
-            <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Cost</span>
-            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { style = "margin-right:12px;width:90px;" })
+            <span class="search-label">Encounter Set</span>
+            @Html.DropDownListFor(x => x.EncounterSet, SearchViewModel.EncounterSets, new { @class = "search-select" })
             </span>
         </div>
         <div style="margin-bottom:4px;">
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Trait</span>
-            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { style = "margin-right:12px;max-width:170px;width:170px;" })
+            <span class="search-label">Trait</span>
+            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { @class = "search-select" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Keyword</span>
-            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { style = "margin-right:12px;max-width:140px;width:140px;" })
+            <span class="search-label">Keyword</span>
+            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { @class = "search-select-short" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Encounter</span>
-            @Html.DropDownListFor(x => x.EncounterSet, SearchViewModel.EncounterSets, new { style = "margin-right:12px;max-width:170px;width:170px;" })
-            </span>
-
-            <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Unique</span>
-            @Html.DropDownListFor(x => x.IsUnique, SearchViewModel.UniquenessValues, new { style = "margin-right:12px;max-width:90px;width:90px;" })
+            <span class="search-label">Player Category</span>
+            @Html.DropDownListFor(x => x.Category, SearchViewModel.Categories, new { @class = "search-select" })
             </span>
         </div>
         <div style="margin-bottom:4px;">
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Artist</span>
-            @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { style = "margin-right:12px;max-width:170px;width:170px;" })
+            <span class="search-label">Artist</span>
+            @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { @class = "search-select" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Sort</span>
-            @Html.DropDownListFor(x => x.Sort, SearchViewModel.Sorts, new { style = "margin-right:12px;max-width:140px;width:140px;" })
+            <span class="search-label">Sphere</span>
+            @Html.DropDownListFor(x => x.Sphere, SearchViewModel.Spheres, new { @class = "search-select-short" })
             </span>
 
             <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Category</span>
-            @Html.DropDownListFor(x => x.Category, SearchViewModel.Categories, new { style = "margin-right:12px;max-width:170px;width:170px;" })
+            <span class="search-label">Encounter Category</span>
+            @Html.DropDownListFor(x => x.EncounterCategory, SearchViewModel.EncounterCategories, new { @class = "search-select" })
             </span>
 
-            <span style="display:inline-block;">
-            <span style="margin-right:2px;width:70px;display:inline-block;">Victory</span>
-            @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { style = "margin-right:12px;width:90px;" })
-            </span>
+            
             @*
             <span style="display:inline-block;">
             <span style="margin-right:2px;width:60px;display:inline-block;">Custom</span>
             @Html.CheckBoxFor(x => x.Custom, new { style = "margin-right:12px;" })
             </span>*@
             
+        </div>
+        <div style="margin-bottom:4px;display:block;">
+            <span style="display:inline-block;">
+            <span class="search-label">Cost</span>
+            @Html.DropDownListFor(x => x.Cost, SearchViewModel.Costs, new { @class = "search-select" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span class="search-label">Unique</span>
+            @Html.DropDownListFor(x => x.IsUnique, SearchViewModel.UniquenessValues, new { @class = "search-select-short" })
+            </span>
+
+            <span style="display:inline-block;">
+            <span class="search-label">Victory Points</span>
+            @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { @class = "search-select" })
+            </span>
         </div>
     </div>
     @*
@@ -171,23 +179,31 @@
 {
     <hr style="color:#616161;" />
     <div style="margin:6px;border: 0px solid gray;border-radius: 8px;min-height:220px;">
-        <div style="margin-bottom:2px;">
-            @if (@card.IsUnique)
-            {
-                <img src="/Images/unique-card.png" style="margin-bottom:-3px;margin-right:-4px;height:16px;width:16px;"/>
-            }
-            @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-bottom:2px;font-size:medium;font-weight:bold;display:inline-block;" })
-            <span style="display:inline-block;color:#616161;">@card.SetName</span>
-            <span style="display:inline-block;">
-            @if (@card.HasSphere)
-            {
-                <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-left:2px;margin-right:1px;" src='@string.Format("/Images/{0}.png", @card.Sphere)' /></span>
-            }
-            @if (@card.HasEncounterSet)
-            {
-                <span><img style="width:30px;height:30px;margin-bottom:-4px;margin-left:2px;margin-right:1px;" src='@card.EncounterSetImagePath' /></span>
-            }
-            </span>
+        <div>
+            <div style="display:inline-block;">
+                <div style="margin-bottom:2px;">
+                @if (@card.IsUnique)
+                {
+                    <img src="/Images/unique-card.png" style="margin-bottom:-3px;margin-right:-4px;height:16px;width:16px;"/>
+                }
+                @Html.ActionLink(@card.FullTitle, "Details", new { id = @card.Slug }, new { style = "margin-bottom:2px;font-size:medium;font-weight:bold;display:inline-block;" })
+            
+            
+                </div>
+                <div>
+                    <span style="display:inline-block;color:#616161;">@card.SetName</span>
+                </div>
+            </div>
+            <div style="display:inline-block;">
+                @if (@card.HasSphere)
+                {
+                    <span><img style="width:30px;height:30px;margin-bottom:4px;margin-left:6px;margin-right:1px;" src='@string.Format("/Images/{0}.png", @card.Sphere)' /></span>
+                }
+                @if (@card.HasEncounterSet)
+                {
+                    <span><img style="width:30px;height:30px;margin-bottom:4px;margin-left:6px;margin-right:1px;" src='@card.EncounterSetImagePath' /></span>
+                }
+            </div>
         </div>
         
         <div style="float:left;margin-right:4px;">
@@ -240,8 +256,8 @@
                     <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.HitPoints</span><img style="margin-bottom:-4px;margin-left:-4px;width:20px;height:20px;" src="/Images/heart.png"/></span>
                     break;
                 case CardType.Location:
-                    <span style="width:60px;color:#616161;">Quest Points</span><span style="margin-left:4px;font-weight:bold;">@card.QuestPoints</span>
-                    <span style="width:24px;margin-left:14px;"><span style="margin-right:2px;font-weight:bold;">@card.Threat</span><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span>
+                    <span style="width:24px;"><span style="margin-right:2px;font-weight:bold;">@card.Threat</span><img style="margin-bottom:-3px;" src="/Images/threat.png" /></span>
+                    <span style="width:60px;margin-left:14px;color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.QuestPoints</span><span style="width:60px;color:#616161;">)</span>
                     break;
                 case CardType.Objective:
                 case CardType.Objective_Ally:
@@ -254,8 +270,8 @@
                     }
                     break;
                 case CardType.Quest:
-                    <span style="width:40px;color:#616161;">Stage</span><span style="margin-left:4px;font-weight:bold;">@card.StageNumber</span>
-                    <span style="width:40px;color:#616161;margin-left:14px;">Quest Points</span><span style="margin-left:4px;font-weight:bold;">@card.QuestPoints</span>
+                    <span style="margin-left:4px;font-weight:bold;">@card.StageNumber</span><span style="width:40px;margin-left:2px;color:#616161;font-size:10px;font-weight:bold;">A-B</span>
+                    <span style="width:40px;margin-left:14px;color:#616161;">(</span><span style="margin-left:4px;margin-right:4px;font-weight:bold;">@card.QuestPoints</span><span style="width:40px;color:#616161;">)</span>
                     break;
                 default:
                     break;

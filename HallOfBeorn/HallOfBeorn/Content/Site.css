@@ -618,6 +618,29 @@ tr.pager td {
     padding: 0 0.25em 0 0;
 }
 
+.search-label {
+    display:inline-block;
+    margin-right:2px;
+    width:120px;
+    text-align: right;
+}
+
+.search-label-short {
+    display: inline-block;
+    margin-right:2px;
+    width:70px;
+    text-align: right;
+}
+
+.search-select {
+    margin-right:6px;
+    width:200px;
+}
+
+.search-select-short {
+    margin-right:6px;
+    width:150px;
+}
 
 /********************
 *   Mobile Styles   *
