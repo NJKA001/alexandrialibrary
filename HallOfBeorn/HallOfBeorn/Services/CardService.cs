@@ -352,7 +352,6 @@ namespace HallOfBeorn.Services
                 CreateEncounterCategoryFilter("cannot draw cards", EncounterCategory.Cannot_Draw_Cards),
                 CreateEncounterCategoryFilter("cannot play (ally|allies)", EncounterCategory.Cannot_Play_Allies),
                 CreateEncounterCategoryFilter("while.*engaged", EncounterCategory.While_Engaged),
-                CreateEncounterCategoryFilter("gets \\+.*Threat", EncounterCategory.Staging_Area_Threat_Raise),
                 CreateEncounterCategoryFilter("shuffle (it|them|all copies of .*) back into", EncounterCategory.Encounter_Recursion),
                 CreateEncounterCategoryFilter("each player with a threat", EncounterCategory.High_Player_Threat)
             };
