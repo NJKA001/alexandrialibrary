@@ -621,7 +621,7 @@ tr.pager td {
 .search-section {
     vertical-align: top;
     display: inline-block;
-    width: 80px;
+    width: 76px;
     margin-right: 6px;
     font-size: 14px;
     font-weight: bold;
@@ -680,7 +680,7 @@ tr.pager td {
 .search-label-long {
     display: inline-block;
     margin-right:2px;
-    width:150px;
+    width:146px;
     color: #3e5667;
     font-size: 12px;
 }
@@ -688,7 +688,7 @@ tr.pager td {
 .search-select {
     /*display: block;*/
     margin-right:6px;
-    width:180px;
+    width:176px;
 }
 
 .search-select-medium {
