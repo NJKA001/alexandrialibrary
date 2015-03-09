@@ -8,7 +8,6 @@ namespace HallOfBeorn.Models
     public enum QuestCategory
     {
         None = 0,
-        Standard,
         Battle,
         Siege
     }

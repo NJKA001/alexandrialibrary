@@ -70,6 +70,9 @@ namespace HallOfBeorn.Models
         [Display(Name = "Unique")]
         public Uniqueness IsUnique { get; set; }
 
+        [Display(Name = "Set Type")]
+        public SetType SetType { get; set; }
+
         [Display(Name = "Sort")]
         public Sort Sort { get; set; }
 
@@ -79,7 +82,7 @@ namespace HallOfBeorn.Models
         [Display(Name="Encounter Set")]
         public string EncounterSet { get; set; }
 
-        [Display(Name="Category")]
+        [Display(Name="Player Category")]
         public string Category { get; set; }
 
         public Category GetCategory()
@@ -95,7 +98,7 @@ namespace HallOfBeorn.Models
             return category;
         }
 
-        [Display(Name="Enc. Category")]
+        [Display(Name="Encounter Category")]
         public string EncounterCategory { get; set; }
 
         public EncounterCategory GetEncounterCategory()
@@ -109,6 +112,22 @@ namespace HallOfBeorn.Models
             Enum.TryParse<HallOfBeorn.Models.EncounterCategory>(decoded, true, out encCategory);
 
             return encCategory;
+        }
+
+        [Display(Name = "Quest Category")]
+        public string QuestCategory { get; set; }
+
+        public QuestCategory GetQuestCategory()
+        {
+            var questCategory = HallOfBeorn.Models.QuestCategory.None;
+            if (string.IsNullOrEmpty(this.QuestCategory))
+                return questCategory;
+
+            var decoded = HttpUtility.HtmlDecode(this.QuestCategory).Replace(' ', '_');
+
+            Enum.TryParse<HallOfBeorn.Models.QuestCategory>(decoded, true, out questCategory);
+
+            return questCategory;
         }
 
         public bool IsRandom()
@@ -159,6 +178,11 @@ namespace HallOfBeorn.Models
             return !string.IsNullOrEmpty(this.CardSet) && this.CardSet != DEFAULT_FILTER_VALUE;
         }
 
+        //public bool HasSetType()
+        //{
+        //    return !string.IsNullOrEmpty(this.SetType
+        //}
+
         public bool HasScenario()
         {
             return !string.IsNullOrEmpty(this.Scenario) && this.Scenario != DEFAULT_FILTER_VALUE;
@@ -187,6 +211,11 @@ namespace HallOfBeorn.Models
         public bool HasEncounterCategory()
         {
             return this.GetEncounterCategory() != Models.EncounterCategory.None;
+        }
+
+        public bool HasQuestCategory()
+        {
+            return this.GetQuestCategory() != Models.QuestCategory.None;
         }
 
         public bool HasResourceCost()
@@ -290,11 +319,11 @@ namespace HallOfBeorn.Models
             return card.CardSet.Name == this.CardSet || (!string.IsNullOrEmpty(card.CardSet.AlternateName) && card.CardSet.AlternateName == this.CardSet) || (!string.IsNullOrEmpty(card.CardSet.NormalizedName) && card.CardSet.NormalizedName == this.CardSet) || (!string.IsNullOrEmpty(card.CardSet.Cycle) && card.CardSet.Cycle.ToUpper() == this.CardSet);
         }
 
-        public bool IsCustom(Card card)
+        public bool CardIsCustom(Card card)
         {
             if ((this.CardSet == null || this.CardSet == "Any") && (this.EncounterSet == null || this.EncounterSet == "Any") && this.Sphere != Sphere.Mastery && (this.Trait == null || this.Trait == "Any") && (this.Keyword == null || this.Keyword == "Any"))
             {
-                return card.CardSet.SetType == SetType.Custom_Expansion;
+                return card.CardSet.SetType == SetType.CUSTOM;
             }
 
             return false;
@@ -421,6 +450,11 @@ namespace HallOfBeorn.Models
         public static IEnumerable<SelectListItem> UniquenessValues
         {
             get { return typeof(Uniqueness).GetSelectListItems(); }
+        }
+
+        public static IEnumerable<SelectListItem> SetTypeValues
+        {
+            get { return typeof(SetType).GetSelectListItems(); }
         }
 
         public static IEnumerable<SelectListItem> Artists

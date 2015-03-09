@@ -16,6 +16,7 @@ namespace HallOfBeorn.Models
             NormalizedKeywords = new List<string>();
             Categories = new List<Category>();
             EncounterCategories = new List<EncounterCategory>();
+            QuestCategories = new List<QuestCategory>();
             Decks = new Dictionary<string, Deck>();
             RelatedCards = new List<Card>();
             IncludedEncounterSets = new List<EncounterSet>();
@@ -110,8 +111,9 @@ namespace HallOfBeorn.Models
         public List<string> Keywords { get; set; }
         public List<string> NormalizedKeywords { get; set; }
 
-        public List<Category> Categories { get; set; }
-        public List<EncounterCategory> EncounterCategories { get; set; }
+        public List<Category> Categories { get; private set; }
+        public List<EncounterCategory> EncounterCategories { get; private set; }
+        public List<QuestCategory> QuestCategories { get; private set; }
 
         public string Text { get; set; }
         public string OppositeText { get; set; }

@@ -12,7 +12,7 @@ namespace HallOfBeorn.Models.Sets
             Name = "First Age";
             Abbreviation = "FA";
             Number = 9001;
-            SetType = Models.SetType.Custom_Expansion;
+            SetType = Models.SetType.CUSTOM;
 
             Cards.Add(new Card() {
                 Title = "Aredhel",

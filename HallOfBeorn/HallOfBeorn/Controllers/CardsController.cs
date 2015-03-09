@@ -43,6 +43,7 @@ namespace HallOfBeorn.Controllers
             SearchViewModel.EncounterSets = _cardService.EncounterSetNames.GetSelectListItems();
             SearchViewModel.Categories = _cardService.Categories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();
             SearchViewModel.EncounterCategories = _cardService.EncounterCategories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();
+            SearchViewModel.QuestCategories = _cardService.QuestCategories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();
             SearchViewModel.VictoryPointValues = _cardService.VictoryPointValues().GetSelectListItems();
         }
 

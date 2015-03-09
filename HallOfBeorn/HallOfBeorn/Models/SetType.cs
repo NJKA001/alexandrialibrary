@@ -8,14 +8,15 @@ namespace HallOfBeorn.Models
     public enum SetType
     {
         None = 0,
-        Core = 1,
-        Adventure_Pack = 2,
-        Deluxe_Expansion = 3,
-        Saga_Expansion = 4,
-        GenCon_Expansion = 5,
-        GenConSaga_Expansion = 8,
-        Nightmare_Expansion = 6,
-        Fellowship_Deck = 7,
-        Custom_Expansion = 99,
+        OFFICIAL,
+        Core,
+        Adventure_Pack,
+        Deluxe_Expansion,
+        Saga_Expansion,
+        GenCon_Expansion,
+        GenConSaga_Expansion,
+        Nightmare_Expansion,
+        Fellowship_Deck,
+        CUSTOM
     }
 }

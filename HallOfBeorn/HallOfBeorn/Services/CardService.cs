@@ -20,6 +20,7 @@ namespace HallOfBeorn.Services
             LoadScenarioCards();
             LoadCategories();
             LoadEncounterCategories();
+            LoadQuestCategories();
 
             /*
             Func<Card, bool> isAutoComplete = (card) =>
@@ -53,6 +54,7 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, Scenario> scenarios = new Dictionary<string, Scenario>();
         private readonly Dictionary<string, Category> categories = new Dictionary<string, Category>();
         private readonly Dictionary<string, EncounterCategory> encounterCategories = new Dictionary<string, EncounterCategory>();
+        private readonly Dictionary<string, QuestCategory> questCategories = new Dictionary<string, QuestCategory>();
         private readonly Dictionary<byte, string> victoryPointValues = new Dictionary<byte, string>();
 
         const int MAX_RESULTS = 128;
@@ -248,6 +250,20 @@ namespace HallOfBeorn.Services
             }
         }
 
+        private bool IsQuestCategorizable(Card card)
+        {
+            switch (card.CardType)
+            {
+                case CardType.Quest:
+                case CardType.Campaign:
+                case CardType.GenCon_Setup:
+                case CardType.Nightmare_Setup:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+
         private Func<Card, Category> CreateCategoryFilter(string pattern, Category category)
         {
             return CreateCategoryFilter(pattern, category, null);
@@ -290,6 +306,34 @@ namespace HallOfBeorn.Services
                 }
 
                 return EncounterCategory.None;
+            };
+
+            return filter;
+        }
+
+        private Func<Card, QuestCategory> CreateQuestCategoryFilter(string pattern, QuestCategory category)
+        {
+            return CreateQuestCategoryFilter(pattern, category, null);
+        }
+
+        private Func<Card, QuestCategory> CreateQuestCategoryFilter(string pattern, QuestCategory category, params string[] negations)
+        {
+            Func<Card, QuestCategory> filter = (card) =>
+            {
+                if (card.Keywords.Any(x => x.Contains(pattern))) {
+                    return category;
+                }
+
+                foreach (var line in card.Text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    if (line.MatchesPattern(pattern))
+                    {
+                        if (negations == null || negations.Length == 0 || !negations.Any(x => line.ToLowerSafe().Contains(x.ToLowerSafe())))
+                            return category;
+                    }
+                }
+
+                return QuestCategory.None;
             };
 
             return filter;
@@ -370,6 +414,33 @@ namespace HallOfBeorn.Services
                     if (!encounterCategories.ContainsKey(categoryKey))
                     {
                         encounterCategories.Add(categoryKey, category);
+                    }
+                }
+            }
+        }
+
+        private void LoadQuestCategories()
+        {
+            var filters = new List<Func<Card, QuestCategory>>
+            {
+                CreateQuestCategoryFilter("Battle", QuestCategory.Battle),
+                CreateQuestCategoryFilter("Siege", QuestCategory.Siege)
+            };
+
+            foreach (var card in cards.Values.Where(x => IsQuestCategorizable(x)))
+            {
+                foreach (var filter in filters)
+                {
+                    var category = filter(card);
+                    if (category == QuestCategory.None)
+                        continue;
+
+                    card.QuestCategories.Add(category);
+
+                    var categoryKey = category.ToString();
+                    if (!questCategories.ContainsKey(categoryKey))
+                    {
+                        questCategories.Add(categoryKey, category);
                     }
                 }
             }
@@ -1256,7 +1327,7 @@ namespace HallOfBeorn.Services
                     predicate = (card) => { return card.IsUnique; };
                     break;
                 case "custom":
-                    predicate = (card) => { return card.CardSet.SetType == SetType.Custom_Expansion; };
+                    predicate = (card) => { return card.CardSet.SetType == SetType.CUSTOM; };
                     break;
                 default:
                     break;
@@ -1458,6 +1529,9 @@ namespace HallOfBeorn.Services
             if (model.HasEncounterCategory())
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.EncounterCategories.Any(x => x == s.GetEncounterCategory()); }, 100));
 
+            if (model.HasQuestCategory())
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.QuestCategories.Any(x => x == s.GetQuestCategory()); }, 100));
+
             if (model.HasResourceCost())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Cost == c.ResourceCostLabel; }, 100));
 
@@ -1484,6 +1558,9 @@ namespace HallOfBeorn.Services
 
             if (model.IsUnique != Uniqueness.Any)
                 filters.Add(new WeightedSearchFilter((s, c) => { return (s.IsUnique == Uniqueness.Yes && c.IsUnique) || (s.IsUnique == Uniqueness.No && !c.IsUnique); }, 50));
+
+            if (model.SetType != SetType.None)
+                filters.Add(new WeightedSearchFilter((s, c) => { return (s.SetType == SetType.OFFICIAL && c.CardSet.SetType != SetType.CUSTOM) || (s.SetType == c.CardSet.SetType); }, 50));
 
             if (model.HasQuest())
             {
@@ -1533,13 +1610,13 @@ namespace HallOfBeorn.Services
                 }
             }
 
-            if (!model.Custom)
+            if (!model.Custom && model.SetType != SetType.CUSTOM)
             {
                 var official = new Dictionary<string, CardScore>();
 
                 foreach (var score in results)
                 {
-                    if (!model.IsCustom(score.Value.Card))
+                    if (!model.CardIsCustom(score.Value.Card))
                         official.Add(score.Key, score.Value);
                 }
 
@@ -1681,6 +1758,11 @@ namespace HallOfBeorn.Services
         public IEnumerable<EncounterCategory> EncounterCategories()
         {
             return encounterCategories.Values.ToList().OrderBy(x => x).ToList();
+        }
+
+        public IEnumerable<QuestCategory> QuestCategories()
+        {
+            return questCategories.Values.ToList().OrderBy(x => x).ToList();
         }
 
         public IEnumerable<Product> Products()
