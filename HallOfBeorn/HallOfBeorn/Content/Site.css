@@ -640,9 +640,19 @@ tr.pager td {
     width:180px;
 }
 
+.search-select-medium {
+    margin-right:6px;
+    width:140px;
+}
+
 .search-select-short {
     margin-right:6px;
-    width:80px;
+    width:100px;
+}
+
+.search-select-tiny {
+    margin-right:6px;
+    width:60px;
 }
 
 /********************
