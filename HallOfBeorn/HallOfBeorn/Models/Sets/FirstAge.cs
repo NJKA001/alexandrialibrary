@@ -1602,7 +1602,7 @@ Action: Place 1 Corruption on Fëanor to play an attachment from any sphere of i
                 Attack = 2,
                 Defense = 2,
                 HitPoints = 4,
-                Text = "Action: Raise your threat by 1 to give Túrin Turambar +1 Attack until the end of the round.Response: After Túrin Turambar is dealt any amount of damage, discard a character you control to cancel that damage. (Limit once per phase.)",
+                Text = "Action: Raise your threat by 1 to give Túrin Turambar +1 Attack until the end of the round.\r\nResponse: After Túrin Turambar is dealt any amount of damage, discard a character you control to cancel that damage. (Limit once per phase.)",
                 EncounterSet = "First Age",
                 Number = 9,
                 Artist = Artist.Alan_Lee

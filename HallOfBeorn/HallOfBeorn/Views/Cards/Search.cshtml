@@ -11,7 +11,10 @@
         $('#resetButton').click(function () {
             $('#Query').focus().val('');
             $('#CardSet').val('Any');
+            $('#Scenario').val('Any');
             $('#CardType').val('Any');
+            $('#DeckType').val('Any');
+            $('#SetType').val('Any');
             $('#Sphere').val('Any');
             $('#Cost').val('Any');
             $('#IsUnique').val('Any');
@@ -21,9 +24,12 @@
             $('#EncounterSet').val('Any');
             $('#Category').val('Any');
             $('#EncounterCategory').val('Any');
+            $('#QuestCategory').val('Any');
             $('#Sort').val('Any');
             $('#VictoryPoints').val('Any');
-            //$('#Custom').attr('checked', false);
+            $('#CardSubtype').val('Any');
+            $('#ThreatCost').val('Any');
+            $('#EngagementCost').val('Any');
         });
     });
 </script>
@@ -39,7 +45,7 @@
 </script>    
 }
 
-<h2>Search</h2>
+@*<h2>Search</h2>*@
 
 @using (Html.BeginForm("Search", "Cards", FormMethod.Post))
 {
@@ -116,20 +122,22 @@
 
         <div class="search-row">
             <div class="search-section">Text</div>
-            <span class="search-filter">
-            <span class="search-label-short">Trait</span>
-            @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { @class = "search-select" })
-            </span>
+            <div class="search-items">
+                <span class="search-filter">
+                <span class="search-label-short">Trait</span>
+                @Html.DropDownListFor(x => x.Trait, SearchViewModel.Traits, new { @class = "search-select" })
+                </span>
 
-            <span class="search-filter">
-            <span class="search-label-short">Keyword</span>
-            @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { @class = "search-select" })
-            </span>
+                <span class="search-filter">
+                <span class="search-label-short">Keyword</span>
+                @Html.DropDownListFor(x => x.Keyword, SearchViewModel.Keywords, new { @class = "search-select" })
+                </span>
 
-            <span class="search-filter">
-            <span class="search-label-short">Victory</span>
-            @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { @class = "search-select-short" })
-            </span>
+                <span class="search-filter">
+                <span class="search-label-short">Victory</span>
+                @Html.DropDownListFor(x => x.VictoryPoints, SearchViewModel.VictoryPointValues, new { @class = "search-select-short" })
+                </span>
+            </div>
         </div>
 
         <div class="search-row">
