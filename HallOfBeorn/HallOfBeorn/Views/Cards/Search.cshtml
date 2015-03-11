@@ -8,6 +8,15 @@
 @section scripts {
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#advancedButton').click(function () {
+            $('#advancedContainer').toggle();
+
+            if ($('#advancedContainer').is(":visible")) {
+                $('#advancedButton').text('Less Search Options');
+            } else {
+                $('#advancedButton').text('More Search Options');
+            }
+        });
         $('#resetButton').click(function () {
             $('#Query').focus().val('');
             $('#CardSet').val('Any');
@@ -129,6 +138,8 @@
             </div>
         </div>
 
+        <span style="width:100%;display:inline-block;text-align:center;"><a id="advancedButton" href="#">More Search Options</a></span>
+        <div id="advancedContainer" style="display:none;">
         <div class="search-row">
             <div class="search-section">Cost</div>
             <div class="search-items">
@@ -223,6 +234,8 @@
                 @Html.DropDownListFor(x => x.Artist, SearchViewModel.Artists, new { @class = "search-select" })
                 </span>
             </div>
+        </div>
+
         </div>
     </div>
     @*
