@@ -1533,13 +1533,73 @@ namespace HallOfBeorn.Services
                 filters.Add(new WeightedSearchFilter((s, c) => { return c.QuestCategories.Any(x => x == s.GetQuestCategory()); }, 100));
 
             if (model.HasResourceCost())
-                filters.Add(new WeightedSearchFilter((s, c) => { return s.Cost == c.ResourceCostLabel; }, 100));
+            {
+                switch (model.CostOperator)
+                {
+                    case NumericOperator.eq:
+                    default:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.eqString(s.Cost); }, 100));
+                        break;
+                    case NumericOperator.gt:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gtString(s.Cost); }, 100));
+                        break;
+                    case NumericOperator.gteq:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gteqString(s.Cost); }, 100));
+                        break;
+                    case NumericOperator.lt:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.ltString(s.Cost); }, 100));
+                        break;
+                    case NumericOperator.lteq:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.lteqString(s.Cost); }, 100));
+                        break;
+                }
+            }
 
             if (model.HasThreatCost())
-                filters.Add(new WeightedSearchFilter((s, c) => { return s.ThreatCost == c.ThreatCostLabel; }, 100));
+            {
+                switch (model.ThreatCostOperator)
+                {
+                    case NumericOperator.eq:
+                    default:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.eqString(s.ThreatCost); }, 100));
+                        break;
+                    case NumericOperator.gt:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.gtString(s.ThreatCost); }, 100));
+                        break;
+                    case NumericOperator.gteq:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.gteqString(s.ThreatCost); }, 100));
+                        break;
+                    case NumericOperator.lt:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.ltString(s.ThreatCost); }, 100));
+                        break;
+                    case NumericOperator.lteq:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.lteqString(s.ThreatCost); }, 100));
+                        break;
+                }
+            }
 
             if (model.HasEngagementCost())
-                filters.Add(new WeightedSearchFilter((s, c) => { return s.EngagementCost == c.EngagementCostLabel; }, 100));
+            {
+                switch (model.EngagementCostOperator)
+                {
+                    case NumericOperator.eq:
+                    default:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.eqString(s.EngagementCost); }, 100));
+                        break;
+                    case NumericOperator.gt:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.gtString(s.EngagementCost); }, 100));
+                        break;
+                    case NumericOperator.gteq:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.gteqString(s.EngagementCost); }, 100));
+                        break;
+                    case NumericOperator.lt:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.ltString(s.EngagementCost); }, 100));
+                        break;
+                    case NumericOperator.lteq:
+                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.lteqString(s.EngagementCost); }, 100));
+                        break;
+                }
+            }
 
             if (model.HasArtist())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Artist == c.Artist.Name; }, 100));

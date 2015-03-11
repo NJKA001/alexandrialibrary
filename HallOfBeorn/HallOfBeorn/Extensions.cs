@@ -44,18 +44,53 @@ namespace HallOfBeorn
 
         public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType)
         {
-            return enumType.GetSelectListItems(" ");
+            return enumType.GetSelectListItems(" ", false);
         }
 
-        public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType, string separator)
+        public static IEnumerable<SelectListItem> GetSelectListItems<T>(this Type enumType, Func<T, string> mapFunction)
+            where T: struct
         {
             var listItems = new List<SelectListItem>();
 
             foreach (var item in System.Enum.GetValues(enumType))
             {
                 var number = (int)item;
+                var text = mapFunction((T)item);
+                var value = item.ToString();
 
-                var text = number > 0 ? item.ToString().Replace("_", separator) : "Any";
+                listItems.Add(
+                    new SelectListItem()
+                    {
+                        Text = text,
+                        Value = value
+                    }
+                );
+            }
+
+            return listItems;
+        }
+
+        public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType, string separator)
+        {
+            return enumType.GetSelectListItems(separator, false);
+        }
+
+        public static IEnumerable<SelectListItem> GetSelectListItems(this Type enumType, string separator, bool keepZero)
+        {
+            var listItems = new List<SelectListItem>();
+
+            foreach (var item in System.Enum.GetValues(enumType))
+            {
+                var number = (int)item;
+                var text = string.Empty;
+
+                if (number == 0) {
+                    text = keepZero ? item.ToString().Replace("_", separator) : "Any";
+                }
+                else {
+                    text = item.ToString().Replace("_", separator);
+                }
+
                 var value = item.ToString();
 
                 listItems.Add(
@@ -235,6 +270,61 @@ namespace HallOfBeorn
             var valid = Enum.TryParse<TEnum>(name, true, out item);
 
             return new Tuple<TEnum, bool>(item, valid);
+        }
+
+        public static bool eqString(this byte? self, string other)
+        {
+            if (!self.HasValue)
+                return false;
+
+            byte result = 0;
+            byte.TryParse(other, out result);
+
+            return self.Value == result;
+        }
+
+        public static bool gtString(this byte? self, string other)
+        {
+            if (!self.HasValue)
+                return false;
+
+            byte result = 0;
+            byte.TryParse(other, out result);
+
+            return self.Value > result;
+        }
+
+        public static bool gteqString(this byte? self, string other)
+        {
+            if (!self.HasValue)
+                return false;
+
+            byte result = 0;
+            byte.TryParse(other, out result);
+
+            return self.Value >= result;
+        }
+
+        public static bool ltString(this byte? self, string other)
+        {
+            if (!self.HasValue)
+                return false;
+
+            byte result = 0;
+            byte.TryParse(other, out result);
+
+            return self.Value < result;
+        }
+
+        public static bool lteqString(this byte? self, string other)
+        {
+            if (!self.HasValue)
+                return false;
+
+            byte result = 0;
+            byte.TryParse(other, out result);
+
+            return self.Value <= result;
         }
     }
 }

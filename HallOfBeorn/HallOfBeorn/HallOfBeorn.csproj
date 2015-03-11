@@ -277,6 +277,7 @@
     <Compile Include="Models\EncounterSetViewModel.cs" />
     <Compile Include="Models\HasShadow.cs" />
     <Compile Include="Models\ImageType.cs" />
+    <Compile Include="Models\NumericOperator.cs" />
     <Compile Include="Models\OCTGN\OctgnCard.cs" />
     <Compile Include="Models\OCTGN\OctgnProperty.cs" />
     <Compile Include="Models\OCTGN\OctgnSet.cs" />

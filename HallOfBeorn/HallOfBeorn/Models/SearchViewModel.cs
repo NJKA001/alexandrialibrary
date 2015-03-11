@@ -55,11 +55,20 @@ namespace HallOfBeorn.Models
         [Display(Name = "Cost")]
         public string Cost { get; set; }
 
+        [Display(Name = "Cost Operator")]
+        public NumericOperator CostOperator { get; set; }
+
         [Display(Name = "Threat Cost")]
         public string ThreatCost { get; set; }
 
+        [Display(Name = "Threat Cost Operator")]
+        public NumericOperator ThreatCostOperator { get; set; }
+
         [Display(Name = "Engagement Cost")]
         public string EngagementCost { get; set; }
+
+        [Display(Name = "Engagement Cost Operator")]
+        public NumericOperator EngagementCostOperator { get; set; }
 
         [Display(Name = "Sphere")]
         public Sphere Sphere { get; set; }
@@ -455,6 +464,29 @@ namespace HallOfBeorn.Models
         public static IEnumerable<SelectListItem> SetTypeValues
         {
             get { return typeof(SetType).GetSelectListItems(); }
+        }
+
+        public static IEnumerable<SelectListItem> NumericOperators
+        {
+            get {
+                Func<NumericOperator, string> mapFunction = (n) =>
+                {
+                    switch (n) {
+                        case NumericOperator.eq:
+                        default:
+                            return "=";
+                        case NumericOperator.gt:
+                            return ">";
+                        case NumericOperator.gteq:
+                            return ">=";
+                        case NumericOperator.lt:
+                            return "<";
+                        case NumericOperator.lteq:
+                            return "<=";
+                    }
+                };
+                return typeof(NumericOperator).GetSelectListItems<NumericOperator>(mapFunction); 
+            }
         }
 
         public static IEnumerable<SelectListItem> Artists

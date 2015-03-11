@@ -703,9 +703,14 @@ tr.pager td {
     width:100px;
 }
 
+.search-select-short-padded {
+    margin-right:82px;
+    width:100px;
+}
+
 .search-select-tiny {
     /*display: block;*/
-    margin-right:6px;
+    margin-right:12px;
     width:60px;
 }
 
