@@ -45,6 +45,9 @@ namespace HallOfBeorn.Controllers
             SearchViewModel.EncounterCategories = _cardService.EncounterCategories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();
             SearchViewModel.QuestCategories = _cardService.QuestCategories().Select(x => x.ToString().Replace('_', ' ')).GetSelectListItems().OrderBy(x => x.Text).ToList();
             SearchViewModel.VictoryPointValues = _cardService.VictoryPointValues().GetSelectListItems();
+            SearchViewModel.AttackStrengthValues = _cardService.AttackStrengthValues().GetSelectListItems();
+            SearchViewModel.DefenseStrengthValues = _cardService.DefenseStrengthValues().GetSelectListItems();
+            SearchViewModel.HitPointsValues = _cardService.HitPointsValues().GetSelectListItems();
         }
 
         private IEnumerable<CardEffect> ParseCardEffects(Card card, string text)

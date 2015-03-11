@@ -229,7 +229,7 @@ namespace HallOfBeorn.Models
 
         public string Defense
         {
-            get { return _card.Defense.ToString(); }
+            get { return _card.IsVariableDefense ? "X" : _card.Defense.ToString(); }
         }
 
         public string HitPoints

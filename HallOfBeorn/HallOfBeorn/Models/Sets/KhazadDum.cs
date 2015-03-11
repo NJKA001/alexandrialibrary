@@ -1101,6 +1101,8 @@ If the players defeat this stage, they win the game.",
                 Text = "Immune to player card effects.\r\nThe Nameless Fear cannot engage or be engaged.\r\nX is the number of victory points in the victory display.",
                 Threat = 0,
                 IsVariableThreat = true,
+                IsVariableAttack = true,
+                IsVariableDefense = true,
                 Number = 25,
                 Artist = Artist.Timo_Karhula
             });

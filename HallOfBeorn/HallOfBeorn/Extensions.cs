@@ -272,59 +272,41 @@ namespace HallOfBeorn
             return new Tuple<TEnum, bool>(item, valid);
         }
 
-        public static bool eqString(this byte? self, string other)
+        public static bool IsDefinedFilter(this string self)
         {
-            if (!self.HasValue)
-                return false;
-
-            byte result = 0;
-            byte.TryParse(other, out result);
-
-            return self.Value == result;
+            return !(string.IsNullOrEmpty(self) || self == HallOfBeorn.Models.SearchViewModel.DEFAULT_FILTER_VALUE);
         }
 
-        public static bool gtString(this byte? self, string other)
+        public static bool CompareTo(this byte? self, HallOfBeorn.Models.NumericOperator op, string other)
         {
-            if (!self.HasValue)
+            if (!self.HasValue) {
                 return false;
+            }
 
-            byte result = 0;
-            byte.TryParse(other, out result);
-
-            return self.Value > result;
+            return self.Value.CompareTo(op, other);
         }
 
-        public static bool gteqString(this byte? self, string other)
+        public static bool CompareTo(this byte self, HallOfBeorn.Models.NumericOperator op, string other)
         {
-            if (!self.HasValue)
-                return false;
-
             byte result = 0;
-            byte.TryParse(other, out result);
-
-            return self.Value >= result;
-        }
-
-        public static bool ltString(this byte? self, string other)
-        {
-            if (!self.HasValue)
+            if (!byte.TryParse(other, out result)) {
                 return false;
+            }
 
-            byte result = 0;
-            byte.TryParse(other, out result);
-
-            return self.Value < result;
-        }
-
-        public static bool lteqString(this byte? self, string other)
-        {
-            if (!self.HasValue)
-                return false;
-
-            byte result = 0;
-            byte.TryParse(other, out result);
-
-            return self.Value <= result;
+            switch (op)
+            {
+                case Models.NumericOperator.eq:
+                default:
+                    return self == result;
+                case Models.NumericOperator.gt:
+                    return self > result;
+                case Models.NumericOperator.gteq:
+                    return self >= result;
+                case Models.NumericOperator.lt:
+                    return self < result;
+                case Models.NumericOperator.lteq:
+                    return self <= result;
+            }
         }
     }
 }

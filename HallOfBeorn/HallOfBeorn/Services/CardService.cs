@@ -56,6 +56,9 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<string, EncounterCategory> encounterCategories = new Dictionary<string, EncounterCategory>();
         private readonly Dictionary<string, QuestCategory> questCategories = new Dictionary<string, QuestCategory>();
         private readonly Dictionary<byte, string> victoryPointValues = new Dictionary<byte, string>();
+        private readonly Dictionary<byte, string> attackStrengthValues = new Dictionary<byte, string>();
+        private readonly Dictionary<byte, string> defenseStrengthValues = new Dictionary<byte, string>();
+        private readonly Dictionary<byte, string> hitPointsValues = new Dictionary<byte, string>();
 
         const int MAX_RESULTS = 128;
 
@@ -151,6 +154,46 @@ namespace HallOfBeorn.Services
                 if (card.VictoryPoints > 0 && !victoryPointValues.ContainsKey(card.VictoryPoints))
                 {
                     victoryPointValues.Add(card.VictoryPoints, string.Format("Victory {0}.", card.VictoryPoints));
+                }
+
+                var attackKey = card.Attack.HasValue ? card.Attack.Value : (byte)0;
+                var attackValue = card.Attack.HasValue ? card.Attack.Value.ToString() : string.Empty;
+                if (card.IsVariableAttack)
+                {
+                    attackKey = (byte)255;
+                    attackValue = "X";
+                }
+                if (card.Attack.HasValue && !attackStrengthValues.ContainsKey(attackKey))
+                {
+                    attackStrengthValues.Add(attackKey, attackValue);
+                }
+
+                var defenseKey = card.Defense.HasValue ? card.Defense.Value : (byte)0;
+                var defenseValue = card.Defense.HasValue ? card.Defense.Value.ToString() : string.Empty;
+                if (card.IsVariableDefense)
+                {
+                    defenseKey = (byte)255;
+                    defenseValue = "X";
+                }
+                if (card.Defense.HasValue && !defenseStrengthValues.ContainsKey(defenseKey))
+                {
+                    defenseStrengthValues.Add(defenseKey, defenseValue);
+                }
+
+                byte hitPointsKey = 0; var hitPointsValue = string.Empty;
+                if (card.IsVariableHitPoints)
+                {
+                    hitPointsKey = (byte)255;
+                    hitPointsValue = "X";
+                }
+                else
+                {
+                    hitPointsKey = card.HitPoints.HasValue ? card.HitPoints.Value : (byte)0;
+                    hitPointsValue = card.HitPoints.HasValue ? hitPointsKey.ToString() : "-";
+                }
+                if (((card.HitPoints.HasValue && (card.HitPoints.Value > 0 || card.IsVariableHitPoints)) || !card.HitPoints.HasValue ) && !hitPointsValues.ContainsKey(hitPointsKey))
+                {
+                    hitPointsValues.Add(hitPointsKey, hitPointsValue);
                 }
             }
 
@@ -1244,10 +1287,10 @@ namespace HallOfBeorn.Services
                     predicate = (card) => { return comparison(card.Willpower, bytes); };
                     break;
                 case "atk":
-                    predicate = (card) => { return comparison(card.Attack, bytes); };
+                    predicate = (card) => { return card.Attack.HasValue && comparison(card.Attack.Value, bytes); };
                     break;
                 case "def":
-                    predicate = (card) => { return comparison(card.Defense, bytes); };
+                    predicate = (card) => { return card.Defense.HasValue && comparison(card.Defense.Value, bytes); };
                     break;
                 case "hp":
                     predicate = (card) => { return card.HitPoints.HasValue && comparison(card.HitPoints.Value, bytes); };
@@ -1536,25 +1579,7 @@ namespace HallOfBeorn.Services
             {
                 if (model.Cost != "X")
                 {
-                    switch (model.CostOperator)
-                    {
-                        case NumericOperator.eq:
-                        default:
-                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.eqString(s.Cost); }, 100));
-                            break;
-                        case NumericOperator.gt:
-                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gtString(s.Cost); }, 100));
-                            break;
-                        case NumericOperator.gteq:
-                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gteqString(s.Cost); }, 100));
-                            break;
-                        case NumericOperator.lt:
-                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.ltString(s.Cost); }, 100));
-                            break;
-                        case NumericOperator.lteq:
-                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.lteqString(s.Cost); }, 100));
-                            break;
-                    }
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.CompareTo(s.CostOperator, s.Cost); }, 100));
                 }
                 else
                 {
@@ -1562,51 +1587,51 @@ namespace HallOfBeorn.Services
                 }
             }
 
-            if (model.HasThreatCost())
+            if (model.Attack.IsDefinedFilter())
             {
-                switch (model.ThreatCostOperator)
+                if (model.Attack != "X")
                 {
-                    case NumericOperator.eq:
-                    default:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.eqString(s.ThreatCost); }, 100));
-                        break;
-                    case NumericOperator.gt:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.gtString(s.ThreatCost); }, 100));
-                        break;
-                    case NumericOperator.gteq:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.gteqString(s.ThreatCost); }, 100));
-                        break;
-                    case NumericOperator.lt:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.ltString(s.ThreatCost); }, 100));
-                        break;
-                    case NumericOperator.lteq:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.lteqString(s.ThreatCost); }, 100));
-                        break;
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Attack.CompareTo(s.AttackOp, s.Attack); }, 100));
+                }
+                else
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.IsVariableAttack; }, 100));
+                } 
+            }
+
+            if (model.Defense.IsDefinedFilter())
+            {
+                if (model.Defense != "X")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Defense.CompareTo(s.DefenseOp, s.Defense); }, 100));
+                }
+                else
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.IsVariableDefense; }, 100));
                 }
             }
 
-            if (model.HasEngagementCost())
+            if (model.HitPoints.IsDefinedFilter())
             {
-                switch (model.EngagementCostOperator)
+                if (model.HitPoints == "-")
                 {
-                    case NumericOperator.eq:
-                    default:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.eqString(s.EngagementCost); }, 100));
-                        break;
-                    case NumericOperator.gt:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.gtString(s.EngagementCost); }, 100));
-                        break;
-                    case NumericOperator.gteq:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.gteqString(s.EngagementCost); }, 100));
-                        break;
-                    case NumericOperator.lt:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.ltString(s.EngagementCost); }, 100));
-                        break;
-                    case NumericOperator.lteq:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.lteqString(s.EngagementCost); }, 100));
-                        break;
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints == null; }, 100));
+                }
+                else if (model.HitPoints != "X")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints.CompareTo(s.HitPointsOp, s.HitPoints); }, 100));
+                }
+                else
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.IsVariableAttack; }, 100));
                 }
             }
+
+            if (model.HasThreatCost())
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.ThreatCost.CompareTo(s.ThreatCostOperator, s.ThreatCost); }, 100));
+
+            if (model.HasEngagementCost())
+                filters.Add(new WeightedSearchFilter((s, c) => { return c.EngagementCost.CompareTo(s.EngagementCostOperator, s.EngagementCost); }, 100));
 
             if (model.HasArtist())
                 filters.Add(new WeightedSearchFilter((s, c) => { return s.Artist == c.Artist.Name; }, 100));
@@ -1871,6 +1896,21 @@ namespace HallOfBeorn.Services
         public IEnumerable<string> VictoryPointValues()
         {
             return victoryPointValues.Keys.OrderBy(x => x).Select(y => victoryPointValues[y]).ToList();
+        }
+
+        public IEnumerable<string> AttackStrengthValues()
+        {
+            return attackStrengthValues.Keys.OrderBy(x => x).Select(y => attackStrengthValues[y]).ToList();
+        }
+
+        public IEnumerable<string> DefenseStrengthValues()
+        {
+            return defenseStrengthValues.Keys.OrderBy(x => x).Select(y => defenseStrengthValues[y]).ToList();
+        }
+
+        public IEnumerable<string> HitPointsValues()
+        {
+            return hitPointsValues.Keys.OrderBy(x => x).Select(y => hitPointsValues[y]).ToList();
         }
 
         public IEnumerable<string> GetScenarioTitles()

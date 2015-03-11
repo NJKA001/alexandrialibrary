@@ -14,6 +14,7 @@ namespace HallOfBeorn.Models
             NormalizedTraits = new List<string>();
             Keywords = new List<string>();
             NormalizedKeywords = new List<string>();
+            HitPoints = 0;
             Categories = new List<Category>();
             EncounterCategories = new List<EncounterCategory>();
             QuestCategories = new List<QuestCategory>();
@@ -97,11 +98,12 @@ namespace HallOfBeorn.Models
         public bool IsVariableThreat { get; set; }
         public bool IsVariableQuestPoints { get; set; }
         public bool IsVariableAttack { get; set; }
+        public bool IsVariableDefense { get; set; }
         public bool IsVariableHitPoints { get; set; }
         public bool IsVariableVictoryPoints { get; set; }
         public byte Willpower { get; set; }
-        public byte Attack { get; set; }
-        public byte Defense { get; set; }
+        public byte? Attack { get; set; }
+        public byte? Defense { get; set; }
         public byte? HitPoints { get; set; }
         public byte? QuestPoints { get; set; }
 

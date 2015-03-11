@@ -23,6 +23,9 @@ namespace HallOfBeorn.Models
     {
         public SearchViewModel()
         {
+            //AttackStrengthValues = new List<SelectListItem>() { new SelectListItem() { Text = "Foo", Value = "Foo" } };
+            //DefenseStrengthValues = new List<SelectListItem>() { new SelectListItem() { Text = "Foo", Value = "Foo" } };
+            //HitPointsValues = new List<SelectListItem>() { new SelectListItem() { Text = "Foo", Value = "Foo" } };
         }
 
         public const string DEFAULT_FILTER_VALUE = "Any";
@@ -69,6 +72,24 @@ namespace HallOfBeorn.Models
 
         [Display(Name = "Engagement Cost Operator")]
         public NumericOperator EngagementCostOperator { get; set; }
+
+        [Display(Name = "Attack Strength")]
+        public string Attack { get; set; }
+
+        [Display(Name = "Attack Strength Operator")]
+        public NumericOperator AttackOp { get; set; }
+
+        [Display(Name = "Defense Strength")]
+        public string Defense { get; set; }
+
+        [Display(Name = "Defense Strength Operator")]
+        public NumericOperator DefenseOp { get; set; }
+
+        [Display(Name = "Hit Points")]
+        public string HitPoints { get; set; }
+
+        [Display(Name = "Hit Points Operator")]
+        public NumericOperator HitPointsOp { get; set; }
 
         [Display(Name = "Sphere")]
         public Sphere Sphere { get; set; }
@@ -240,6 +261,11 @@ namespace HallOfBeorn.Models
         public bool HasEngagementCost()
         {
             return !string.IsNullOrEmpty(this.EngagementCost) && this.EngagementCost != DEFAULT_FILTER_VALUE;
+        }
+
+        public bool HasHitPoints()
+        {
+            return !string.IsNullOrEmpty(this.HitPoints) && this.HitPoints != DEFAULT_FILTER_VALUE;
         }
 
         public bool HasArtist()
@@ -439,12 +465,12 @@ namespace HallOfBeorn.Models
         public static IEnumerable<SelectListItem> ThreatCosts { get; set; }
         public static IEnumerable<SelectListItem> EngagementCosts { get; set; }
 
-        public static IEnumerable<SelectListItem> AttackStrengths { get; set; }
-        public static IEnumerable<SelectListItem> DefenseStrengths { get; set; }
-        public static IEnumerable<SelectListItem> HitPoints { get; set; }
-        public static IEnumerable<SelectListItem> WillpowerStrengths { get; set; }
-        public static IEnumerable<SelectListItem> ThreatStrengths { get; set; }
-        public static IEnumerable<SelectListItem> QuestPoints { get; set; }
+        public static IEnumerable<SelectListItem> AttackStrengthValues { get; set; }
+        public static IEnumerable<SelectListItem> DefenseStrengthValues { get; set; }
+        public static IEnumerable<SelectListItem> HitPointsValues { get; set; }
+        public static IEnumerable<SelectListItem> WillpowerStrengthValues { get; set; }
+        public static IEnumerable<SelectListItem> ThreatStrengthValues { get; set; }
+        public static IEnumerable<SelectListItem> QuestPointsValues { get; set; }
 
         public static IEnumerable<SelectListItem> Spheres
         {
