@@ -1534,24 +1534,31 @@ namespace HallOfBeorn.Services
 
             if (model.HasResourceCost())
             {
-                switch (model.CostOperator)
+                if (model.Cost != "X")
                 {
-                    case NumericOperator.eq:
-                    default:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.eqString(s.Cost); }, 100));
-                        break;
-                    case NumericOperator.gt:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gtString(s.Cost); }, 100));
-                        break;
-                    case NumericOperator.gteq:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gteqString(s.Cost); }, 100));
-                        break;
-                    case NumericOperator.lt:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.ltString(s.Cost); }, 100));
-                        break;
-                    case NumericOperator.lteq:
-                        filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.lteqString(s.Cost); }, 100));
-                        break;
+                    switch (model.CostOperator)
+                    {
+                        case NumericOperator.eq:
+                        default:
+                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.eqString(s.Cost); }, 100));
+                            break;
+                        case NumericOperator.gt:
+                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gtString(s.Cost); }, 100));
+                            break;
+                        case NumericOperator.gteq:
+                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.gteqString(s.Cost); }, 100));
+                            break;
+                        case NumericOperator.lt:
+                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.ltString(s.Cost); }, 100));
+                            break;
+                        case NumericOperator.lteq:
+                            filters.Add(new WeightedSearchFilter((s, c) => { return c.ResourceCost.lteqString(s.Cost); }, 100));
+                            break;
+                    }
+                }
+                else
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return s.Cost == c.ResourceCostLabel; }, 100));
                 }
             }
 
