@@ -1622,7 +1622,7 @@ namespace HallOfBeorn.Services
 
             if (model.Defense.IsDefinedFilter())
             {
-                if (model.HitPoints == "-")
+                if (model.Defense == "-")
                 {
                     filters.Add(new WeightedSearchFilter((s, c) => { return c.Defense.HasValue && c.Defense.Value == byte.MaxValue; }, 100));
                 }
