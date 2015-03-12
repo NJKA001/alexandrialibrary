@@ -169,9 +169,9 @@ If the players quest unsuccessfully, Gollum escapes and the players have lost th
                 Traits = new List<string>() { "Creature." },
                 Quantity = 1,
                 IsUnique = true,
-                Attack = 0,
-                Defense = 0,
-                Willpower = 0,
+                Attack = byte.MaxValue,
+                Defense = byte.MaxValue,
+                Willpower = byte.MaxValue,
                 HitPoints = 5,
                 Text = 
 @"Damage from undefended attacks against you must be dealt to Gollum. If Gollum is destroyed, or if the player guarding ~Gollum is eliminated, the players have lost the game.

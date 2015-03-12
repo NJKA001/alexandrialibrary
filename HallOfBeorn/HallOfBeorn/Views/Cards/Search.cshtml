@@ -7,47 +7,116 @@
 
 @section scripts {
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#advancedButton').click(function () {
-            $('#advancedContainer').toggle();
+    function hasMoreOptions() {
+        if ($('#Cost').val() != 'Any') {
+            return true;
+        }
 
-            if ($('#advancedContainer').is(":visible")) {
-                $('#advancedButton').text('Less Search Options');
+        if ($('#ThreatCost').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#EngagementCost').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#Attack').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#Defense').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#HitPoints').val() != 'Any') {
+            return true;
+        }
+        
+        if ($('#Trait').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#Keyword').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#VictoryPoints').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#Category').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#EncounterCategory').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#QuestCategory').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#Artist').val() != 'Any') {
+            return true;
+        }
+
+        return false;
+    }
+
+    $(document).ready(function () {
+        if (hasMoreOptions()) {
+            $('#moreOptionsButton').text('Less Search Options');
+            $('#moreOptionsContainer').show();
+        }
+
+        $('#moreOptionsButton').click(function () {
+            $('#moreOptionsContainer').toggle();
+
+            if ($('#moreOptionsContainer').is(":visible")) {
+                $('#moreOptionsButton').text('Less Search Options');
             } else {
-                $('#advancedButton').text('More Search Options');
+                $('#moreOptionsButton').text('More Search Options');
             }
         });
         $('#resetButton').click(function () {
+            $('#Sort').val('Any');
             $('#Query').focus().val('');
+
             $('#CardSet').val('Any');
             $('#Scenario').val('Any');
-            $('#CardType').val('Any');
-            $('#DeckType').val('Any');
-            $('#SetType').val('Any');
-            $('#Sphere').val('Any');
-            $('#Cost').val('Any');
-            $('#IsUnique').val('Any');
-            $('#Trait').val('Any');
-            $('#Keyword').val('Any');
-            $('#Artist').val('Any');
             $('#EncounterSet').val('Any');
-            $('#Category').val('Any');
-            $('#EncounterCategory').val('Any');
-            $('#QuestCategory').val('Any');
-            $('#Sort').val('Any');
-            $('#VictoryPoints').val('Any');
+
+            $('#CardType').val('Any');
             $('#CardSubtype').val('Any');
-            $('#ThreatCost').val('Any');
-            $('#EngagementCost').val('Any');
+            $('#DeckType').val('Any');
+
+            $('#Sphere').val('Any');
+            $('#IsUnique').val('Any');
+            $('#SetType').val('Any');
+            
+            $('#Cost').val('Any');
             $('#CostOperator').val('=');
+            $('#ThreatCost').val('Any');
             $('#ThreatCostOperator').val('=');
+            $('#EngagementCost').val('Any');
             $('#EngagementCostOperator').val('=');
+
             $('#Attack').val('Any');
             $('#AttackOp').val('=');
             $('#Defense').val('Any');
             $('#DefenseOp').val('=');
             $('#HitPoints').val('Any');
             $('#HitPointsOp').val('=');
+
+            $('#Trait').val('Any');
+            $('#Keyword').val('Any');
+            $('#VictoryPoints').val('Any');
+            
+            $('#Category').val('Any');
+            $('#EncounterCategory').val('Any');
+            $('#QuestCategory').val('Any');
+
+            $('#Artist').val('Any');
         });
     });
 </script>
@@ -132,14 +201,14 @@
 
                     <span class="search-filter">
                     <span class="search-label-short">Set Type</span>
-                    @Html.DropDownListFor(x => x.SetType, SearchViewModel.SetTypeValues, new { @class = "search-select-short-padded" })
+                    @Html.DropDownListFor(x => x.SetType, SearchViewModel.SetTypeValues, new { @class = "search-select" })
                     </span>
                 </div>
             </div>
         </div>
 
-        <span style="width:100%;display:inline-block;text-align:center;"><a id="advancedButton" href="#">More Search Options</a></span>
-        <div id="advancedContainer" style="display:none;">
+        <span style="width:100%;display:inline-block;text-align:center;"><a id="moreOptionsButton" href="#">More Search Options</a></span>
+        <div id="moreOptionsContainer" style="display:none;">
         <div class="search-row">
             <div class="search-section">Cost</div>
             <div class="search-items">

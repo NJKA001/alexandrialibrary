@@ -139,7 +139,7 @@ Forced: At the beginning of the combat phase, Anduin Troll Spawn engages a playe
                 Threat = 1,
                 Attack = 1,
                 Defense = 1,
-                HitPoints = null,
+                HitPoints = byte.MaxValue,
                 Traits = new List<string> { "Creature.", "Rat." },
                 Text = "Brown Water Rats cannot be damaged.\r\nForced: If the players are on stage 3 and all remaining enemies have the printed Rat trait, discard Brown Water Rats from play.",
                 Shadow = "Shadow: Attacking enemy cannot be damaged this round.",

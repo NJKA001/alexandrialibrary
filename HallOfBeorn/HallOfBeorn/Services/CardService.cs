@@ -160,9 +160,15 @@ namespace HallOfBeorn.Services
                 var attackValue = card.Attack.HasValue ? card.Attack.Value.ToString() : string.Empty;
                 if (card.IsVariableAttack)
                 {
-                    attackKey = (byte)255;
+                    attackKey = (byte)254;
                     attackValue = "X";
                 }
+                else if (card.Attack.HasValue && card.Attack.Value == byte.MaxValue)
+                {
+                    attackKey = byte.MaxValue;
+                    attackValue = "-";
+                }
+
                 if (card.Attack.HasValue && !attackStrengthValues.ContainsKey(attackKey))
                 {
                     attackStrengthValues.Add(attackKey, attackValue);
@@ -172,9 +178,15 @@ namespace HallOfBeorn.Services
                 var defenseValue = card.Defense.HasValue ? card.Defense.Value.ToString() : string.Empty;
                 if (card.IsVariableDefense)
                 {
-                    defenseKey = (byte)255;
+                    defenseKey = (byte)254;
                     defenseValue = "X";
                 }
+                else if (card.Defense.HasValue && card.Defense.Value == byte.MaxValue)
+                {
+                    defenseKey = byte.MaxValue;
+                    defenseValue = "-";
+                }
+
                 if (card.Defense.HasValue && !defenseStrengthValues.ContainsKey(defenseKey))
                 {
                     defenseStrengthValues.Add(defenseKey, defenseValue);
@@ -183,15 +195,20 @@ namespace HallOfBeorn.Services
                 byte hitPointsKey = 0; var hitPointsValue = string.Empty;
                 if (card.IsVariableHitPoints)
                 {
-                    hitPointsKey = (byte)255;
+                    hitPointsKey = (byte)254;
                     hitPointsValue = "X";
+                }
+                else if (card.HitPoints.HasValue && card.HitPoints.Value == byte.MaxValue)
+                {
+                    hitPointsKey = byte.MaxValue;
+                    hitPointsValue = "-";
                 }
                 else
                 {
                     hitPointsKey = card.HitPoints.HasValue ? card.HitPoints.Value : (byte)0;
-                    hitPointsValue = card.HitPoints.HasValue ? hitPointsKey.ToString() : "-";
+                    hitPointsValue = card.HitPoints.HasValue ? hitPointsKey.ToString() : string.Empty;
                 }
-                if (((card.HitPoints.HasValue && (card.HitPoints.Value > 0 || card.IsVariableHitPoints)) || !card.HitPoints.HasValue ) && !hitPointsValues.ContainsKey(hitPointsKey))
+                if (hitPointsKey != (byte)0 && !string.IsNullOrEmpty(hitPointsValue) && !hitPointsValues.ContainsKey(hitPointsKey))
                 {
                     hitPointsValues.Add(hitPointsKey, hitPointsValue);
                 }
@@ -1589,25 +1606,33 @@ namespace HallOfBeorn.Services
 
             if (model.Attack.IsDefinedFilter())
             {
-                if (model.Attack != "X")
+                if (model.Attack == "-")
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Attack.CompareTo(s.AttackOp, s.Attack); }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Attack.HasValue && c.Attack.Value == byte.MaxValue; }, 100));
+                }
+                else if (model.Attack != "X")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Attack.HasValue && c.Attack.Value != byte.MaxValue && c.Attack.CompareTo(s.AttackOp, s.Attack); }, 100));
                 }
                 else
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.IsVariableAttack; }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Attack.HasValue && c.Attack.Value != byte.MaxValue && c.IsVariableAttack; }, 100));
                 } 
             }
 
             if (model.Defense.IsDefinedFilter())
             {
-                if (model.Defense != "X")
+                if (model.HitPoints == "-")
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Defense.CompareTo(s.DefenseOp, s.Defense); }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Defense.HasValue && c.Defense.Value == byte.MaxValue; }, 100));
+                }
+                else if (model.Defense != "X")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Defense.HasValue && c.Defense.Value != byte.MaxValue && c.Defense.CompareTo(s.DefenseOp, s.Defense); }, 100));
                 }
                 else
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.IsVariableDefense; }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Defense.HasValue && c.Defense.Value != byte.MaxValue && c.IsVariableDefense; }, 100));
                 }
             }
 
@@ -1615,15 +1640,15 @@ namespace HallOfBeorn.Services
             {
                 if (model.HitPoints == "-")
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints == null; }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints.HasValue && c.HitPoints.Value == byte.MaxValue; }, 100));
                 }
                 else if (model.HitPoints != "X")
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints.CompareTo(s.HitPointsOp, s.HitPoints); }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints.HasValue && c.HitPoints.Value != byte.MaxValue && c.HitPoints.CompareTo(s.HitPointsOp, s.HitPoints); }, 100));
                 }
                 else
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.IsVariableAttack; }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints.HasValue && c.HitPoints.Value != byte.MaxValue && c.IsVariableAttack; }, 100));
                 }
             }
 

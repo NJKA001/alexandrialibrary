@@ -14,7 +14,6 @@ namespace HallOfBeorn.Models
             NormalizedTraits = new List<string>();
             Keywords = new List<string>();
             NormalizedKeywords = new List<string>();
-            HitPoints = 0;
             Categories = new List<Category>();
             EncounterCategories = new List<EncounterCategory>();
             QuestCategories = new List<QuestCategory>();
