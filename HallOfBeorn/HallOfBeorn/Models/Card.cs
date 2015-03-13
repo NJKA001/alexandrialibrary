@@ -92,15 +92,16 @@ namespace HallOfBeorn.Models
         }
 
         public byte? EngagementCost { get; set; }
-        public byte Threat { get; set; }
+        public byte? Threat { get; set; }
         public bool IsVariableCost { get; set; }
         public bool IsVariableThreat { get; set; }
         public bool IsVariableQuestPoints { get; set; }
+        public bool IsVariableWillpower { get; set; }
         public bool IsVariableAttack { get; set; }
         public bool IsVariableDefense { get; set; }
         public bool IsVariableHitPoints { get; set; }
         public bool IsVariableVictoryPoints { get; set; }
-        public byte Willpower { get; set; }
+        public byte? Willpower { get; set; }
         public byte? Attack { get; set; }
         public byte? Defense { get; set; }
         public byte? HitPoints { get; set; }

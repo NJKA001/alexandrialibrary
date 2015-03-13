@@ -788,7 +788,7 @@ Immune to player card effects.
 Forced: After players advance to stage 3, remove Lake in the Cavern from the game.",
                 Threat = 0,
                 IsVariableThreat = true,
-                QuestPoints = 0,
+                QuestPoints = byte.MaxValue,
                 Number = 78,
                 Artist = Artist.Cristi_Balanescu
             });
@@ -1101,6 +1101,7 @@ Forced: After players advance to stage 3, remove Lake in the Cavern from the gam
                 Text = "X is the number of players in the game.\r\n\r\nForced: At the end of the round, remove X progress tokens from the current quest.",
                 FlavorText = "There were many paths that led up into those mountains, and many passes over them. But most of the paths were cheats and deceptions and led nowhere or to bad ends. -The Hobbit",
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 5,
                 Number = 69,
                 Artist = Artist.Titus_Lunter

@@ -32,6 +32,18 @@
             return true;
         }
         
+        if ($('#Willpower').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#Threat').val() != 'Any') {
+            return true;
+        }
+
+        if ($('#QuestPoints').val() != 'Any') {
+            return true;
+        }
+
         if ($('#Trait').val() != 'Any') {
             return true;
         }
@@ -107,6 +119,12 @@
             $('#DefenseOp').val('=');
             $('#HitPoints').val('Any');
             $('#HitPointsOp').val('=');
+            $('#Willpower').val('Any');
+            $('#WillpowerOp').val('=');
+            $('#Threat').val('Any');
+            $('#ThreatOp').val('=');
+            $('#QuestPoints').val('Any');
+            $('#QuestPointsOp').val('=');
 
             $('#Trait').val('Any');
             $('#Keyword').val('Any');
@@ -235,23 +253,44 @@
         <div class="search-row">
             <div class="search-section">Stats</div>
             <div class="search-items">
-                <span class="search-filter">
-                <span class="search-label-short">Attack</span>
-                @Html.DropDownListFor(x => x.AttackOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
-                @Html.DropDownListFor(x => x.Attack, SearchViewModel.AttackStrengthValues, new { @class = "search-select-short" })
-                </span>
+                <div class="search-sub-section-stats">
+                    <span class="search-filter">
+                    <span class="search-label-short"><img src="/Images/attack.gif" class="search-icon"></span>
+                    @Html.DropDownListFor(x => x.AttackOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
+                    @Html.DropDownListFor(x => x.Attack, SearchViewModel.AttackStrengthValues, new { @class = "search-select-short" })
+                    </span>
 
-                <span class="search-filter">
-                <span class="search-label-short">Defense</span>
-                @Html.DropDownListFor(x => x.DefenseOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
-                @Html.DropDownListFor(x => x.Defense, SearchViewModel.DefenseStrengthValues, new { @class = "search-select-short" })
-                </span>
+                    <span class="search-filter">
+                    <span class="search-label-short"><img src="/Images/defense.gif" class="search-icon"></span>
+                    @Html.DropDownListFor(x => x.DefenseOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
+                    @Html.DropDownListFor(x => x.Defense, SearchViewModel.DefenseStrengthValues, new { @class = "search-select-short" })
+                    </span>
 
-                <span class="search-filter">
-                <span class="search-label-short">Hit Points</span>
-                @Html.DropDownListFor(x => x.HitPointsOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
-                @Html.DropDownListFor(x => x.HitPoints, SearchViewModel.HitPointsValues, new { @class = "search-select-short" })
+                    <span class="search-filter">
+                    <span class="search-label-short">Hit Points</span>
+                    @Html.DropDownListFor(x => x.HitPointsOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
+                    @Html.DropDownListFor(x => x.HitPoints, SearchViewModel.HitPointsValues, new { @class = "search-select-short" })
+                    </span>
+                </div>
+                <div class="search-sub-section-stats">
+                    <span class="search-filter">
+                    <span class="search-label-short"><img src="/Images/willpower.gif" class="search-icon"></span>
+                    @Html.DropDownListFor(x => x.WillpowerOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
+                    @Html.DropDownListFor(x => x.Willpower, SearchViewModel.WillpowerStrengthValues, new { @class = "search-select-short" })
+                    </span>
+
+                    <span class="search-filter">
+                    <span class="search-label-short"><img src="/Images/threat.png" class="search-icon"></span>
+                    @Html.DropDownListFor(x => x.ThreatOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
+                    @Html.DropDownListFor(x => x.Threat, SearchViewModel.ThreatStrengthValues, new { @class = "search-select-short" })
+                    </span>
+
+                    <span class="search-filter">
+                    <span class="search-label-short">Quest Points</span>
+                    @Html.DropDownListFor(x => x.QuestPointsOp, SearchViewModel.NumericOperators, new { @class = "search-select-tiny" })
+                    @Html.DropDownListFor(x => x.QuestPoints, SearchViewModel.QuestPointsValues, new { @class = "search-select-short" })
                 </span>
+                </div>
             </div>
         </div>
 

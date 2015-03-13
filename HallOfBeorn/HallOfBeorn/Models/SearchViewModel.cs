@@ -91,6 +91,24 @@ namespace HallOfBeorn.Models
         [Display(Name = "Hit Points Operator")]
         public NumericOperator HitPointsOp { get; set; }
 
+        [Display(Name = "Willpower Strength")]
+        public string Willpower { get; set; }
+
+        [Display(Name = "Willpower Strength Operator")]
+        public NumericOperator WillpowerOp { get; set; }
+
+        [Display(Name = "Threat Strength")]
+        public string Threat { get; set; }
+
+        [Display(Name = "Threat Strength Operator")]
+        public NumericOperator ThreatOp { get; set; }
+
+        [Display(Name = "Quest Points")]
+        public string QuestPoints { get; set; }
+
+        [Display(Name = "Quest Points Operator")]
+        public NumericOperator QuestPointsOp { get; set; }
+
         [Display(Name = "Sphere")]
         public Sphere Sphere { get; set; }
 
@@ -356,7 +374,12 @@ namespace HallOfBeorn.Models
 
         public bool CardIsCustom(Card card)
         {
-            if ((this.CardSet == null || this.CardSet == "Any") && (this.EncounterSet == null || this.EncounterSet == "Any") && this.Sphere != Sphere.Mastery && (this.Trait == null || this.Trait == "Any") && (this.Keyword == null || this.Keyword == "Any"))
+            if ((this.CardSet == null || this.CardSet == "Any") 
+                && (this.EncounterSet == null || this.EncounterSet == "Any") 
+                && this.Sphere != Sphere.Mastery 
+                && (this.Trait == null || this.Trait == "Any") 
+                && (this.Keyword == null || this.Keyword == "Any")
+                && (this.Willpower == null || this.Willpower == "Any"))
             {
                 return card.CardSet.SetType == SetType.CUSTOM;
             }

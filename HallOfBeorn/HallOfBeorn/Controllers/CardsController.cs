@@ -48,6 +48,9 @@ namespace HallOfBeorn.Controllers
             SearchViewModel.AttackStrengthValues = _cardService.AttackStrengthValues().GetSelectListItems();
             SearchViewModel.DefenseStrengthValues = _cardService.DefenseStrengthValues().GetSelectListItems();
             SearchViewModel.HitPointsValues = _cardService.HitPointsValues().GetSelectListItems();
+            SearchViewModel.WillpowerStrengthValues = _cardService.WillpowerStrengthValues().GetSelectListItems();
+            SearchViewModel.ThreatStrengthValues = _cardService.ThreatStrengthValues().GetSelectListItems();
+            SearchViewModel.QuestPointsValues = _cardService.QuestPointsValues().GetSelectListItems();
         }
 
         private IEnumerable<CardEffect> ParseCardEffects(Card card, string text)

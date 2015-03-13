@@ -59,6 +59,9 @@ namespace HallOfBeorn.Services
         private readonly Dictionary<byte, string> attackStrengthValues = new Dictionary<byte, string>();
         private readonly Dictionary<byte, string> defenseStrengthValues = new Dictionary<byte, string>();
         private readonly Dictionary<byte, string> hitPointsValues = new Dictionary<byte, string>();
+        private readonly Dictionary<byte, string> willpowerStrengthValues = new Dictionary<byte, string>();
+        private readonly Dictionary<byte, string> threatStrengthValues = new Dictionary<byte, string>();
+        private readonly Dictionary<byte, string> questPointsValues = new Dictionary<byte, string>();
 
         const int MAX_RESULTS = 128;
 
@@ -211,6 +214,63 @@ namespace HallOfBeorn.Services
                 if (hitPointsKey != (byte)0 && !string.IsNullOrEmpty(hitPointsValue) && !hitPointsValues.ContainsKey(hitPointsKey))
                 {
                     hitPointsValues.Add(hitPointsKey, hitPointsValue);
+                }
+
+                var willpowerKey = card.Willpower.HasValue ? card.Willpower.Value : (byte)0;
+                var willpowerValue = card.Willpower.HasValue ? card.Willpower.Value.ToString() : string.Empty;
+                if (card.IsVariableWillpower)
+                {
+                    willpowerKey = (byte)254;
+                    willpowerValue = "X";
+                }
+                else if (card.Willpower.HasValue && card.Willpower.Value == byte.MaxValue)
+                {
+                    willpowerKey = byte.MaxValue;
+                    willpowerValue = "-";
+                }
+
+                if (card.Willpower.HasValue && !willpowerStrengthValues.ContainsKey(willpowerKey))
+                {
+                    willpowerStrengthValues.Add(willpowerKey, willpowerValue);
+                }
+
+                var threatKey = card.Threat.HasValue ? card.Threat.Value : (byte)0;
+                var threatValue = card.Threat.HasValue ? card.Threat.Value.ToString() : string.Empty;
+                if (card.IsVariableThreat)
+                {
+                    threatKey = (byte)254;
+                    threatValue = "X";
+                }
+                else if (card.Threat.HasValue && card.Threat.Value == byte.MaxValue)
+                {
+                    threatKey = byte.MaxValue;
+                    threatValue = "-";
+                }
+
+                if (card.Threat.HasValue && !threatStrengthValues.ContainsKey(threatKey))
+                {
+                    threatStrengthValues.Add(threatKey, threatValue);
+                }
+
+                byte questPointsKey = 0; var questPointsValue = string.Empty;
+                if (card.IsVariableQuestPoints)
+                {
+                    questPointsKey = (byte)254;
+                    questPointsValue = "X";
+                }
+                else if (card.QuestPoints.HasValue && card.QuestPoints.Value == byte.MaxValue)
+                {
+                    questPointsKey = byte.MaxValue;
+                    questPointsValue = "-";
+                }
+                else
+                {
+                    questPointsKey = card.QuestPoints.HasValue ? card.QuestPoints.Value : (byte)0;
+                    questPointsValue = card.QuestPoints.HasValue ? questPointsKey.ToString() : string.Empty;
+                }
+                if (!string.IsNullOrEmpty(questPointsValue) && !questPointsValues.ContainsKey(questPointsKey))
+                {
+                    questPointsValues.Add(questPointsKey, questPointsValue);
                 }
             }
 
@@ -1298,10 +1358,13 @@ namespace HallOfBeorn.Services
                     predicate = (card) => { return card.EngagementCost.HasValue && comparison(card.EngagementCost.Value, bytes); };
                     break;
                 case "threat":
-                    predicate = (card) => { return comparison(card.Threat, bytes); };
+                    predicate = (card) => { return card.Threat.HasValue && comparison(card.Threat.Value, bytes); };
                     break;
                 case "wp":
-                    predicate = (card) => { return comparison(card.Willpower, bytes); };
+                    predicate = (card) => { return card.Willpower.HasValue && comparison(card.Willpower.Value, bytes); };
+                    break;
+                case "qp":
+                    predicate = (card) => { return card.QuestPoints.HasValue && comparison(card.QuestPoints.Value, bytes); };
                     break;
                 case "atk":
                     predicate = (card) => { return card.Attack.HasValue && comparison(card.Attack.Value, bytes); };
@@ -1648,7 +1711,55 @@ namespace HallOfBeorn.Services
                 }
                 else
                 {
-                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints.HasValue && c.HitPoints.Value != byte.MaxValue && c.IsVariableAttack; }, 100));
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.HitPoints.HasValue && c.HitPoints.Value != byte.MaxValue && c.IsVariableHitPoints; }, 100));
+                }
+            }
+
+            if (model.Willpower.IsDefinedFilter())
+            {
+                if (model.Willpower == "-")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Willpower.HasValue && c.Willpower.Value == byte.MaxValue; }, 100));
+                }
+                else if (model.Willpower != "X")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Willpower.HasValue && c.Willpower.Value != byte.MaxValue && !c.IsVariableWillpower && c.Willpower.CompareTo(s.WillpowerOp, s.Willpower); }, 100));
+                }
+                else
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Willpower.HasValue && c.Willpower.Value != byte.MaxValue && c.IsVariableWillpower; }, 100));
+                }
+            }
+
+            if (model.Threat.IsDefinedFilter())
+            {
+                if (model.Threat == "-")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Threat.HasValue && c.Threat.Value == byte.MaxValue; }, 100));
+                }
+                else if (model.Threat != "X")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Threat.HasValue && c.Threat.Value != byte.MaxValue && !c.IsVariableThreat && c.Threat.CompareTo(s.ThreatOp, s.Threat); }, 100));
+                }
+                else
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.Threat.HasValue && c.Threat.Value != byte.MaxValue && c.IsVariableThreat; }, 100));
+                }
+            }
+
+            if (model.QuestPoints.IsDefinedFilter())
+            {
+                if (model.QuestPoints == "-")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.QuestPoints.HasValue && c.QuestPoints.Value == byte.MaxValue; }, 100));
+                }
+                else if (model.QuestPoints != "X")
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.QuestPoints.HasValue && c.QuestPoints.Value != byte.MaxValue && !c.IsVariableQuestPoints && c.QuestPoints.CompareTo(s.QuestPointsOp, s.QuestPoints); }, 100));
+                }
+                else
+                {
+                    filters.Add(new WeightedSearchFilter((s, c) => { return c.QuestPoints.HasValue && c.QuestPoints.Value != byte.MaxValue && c.IsVariableQuestPoints; }, 100));
                 }
             }
 
@@ -1936,6 +2047,21 @@ namespace HallOfBeorn.Services
         public IEnumerable<string> HitPointsValues()
         {
             return hitPointsValues.Keys.OrderBy(x => x).Select(y => hitPointsValues[y]).ToList();
+        }
+
+        public IEnumerable<string> WillpowerStrengthValues()
+        {
+            return willpowerStrengthValues.Keys.OrderBy(x => x).Select(y => willpowerStrengthValues[y]).ToList();
+        }
+
+        public IEnumerable<string> ThreatStrengthValues()
+        {
+            return threatStrengthValues.Keys.OrderBy(x => x).Select(y => threatStrengthValues[y]).ToList();
+        }
+
+        public IEnumerable<string> QuestPointsValues()
+        {
+            return questPointsValues.Keys.OrderBy(x => x).Select(y => questPointsValues[y]).ToList();
         }
 
         public IEnumerable<string> GetScenarioTitles()

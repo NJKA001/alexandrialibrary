@@ -725,6 +725,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 EncounterSet = "The Battle of Five Armies",
                 EngagementCost = 50,
                 Threat = 0,
+                IsVariableThreat = true,
                 Number = 53,
                 Artist = Artist.Jim_Pavelec
             });
@@ -1181,6 +1182,7 @@ Forced: When this enemy attacks, deal it an additional shadow card for each ques
                 EncounterSet = "The Lonely Mountain",
                 EngagementCost = 50,
                 Threat = 0,
+                IsVariableThreat = true,
                 Number = 40,
                 Artist = Artist.Christopher_Burdett
             });

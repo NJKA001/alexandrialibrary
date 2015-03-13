@@ -319,7 +319,8 @@ If players defeat this stage, they win the game.",
                 EasyModeQuantity = 0,
                 Text = "When Revealed: Immediately travel to Dreadful Gap. If another location is currently active, return it to the staging area.X is the number of characters in play.",
                 Threat = 2,
-                QuestPoints = 0,
+                QuestPoints = 254,
+                IsVariableQuestPoints = true,
                 VictoryPoints = 3,
                 Number = 52,
                 Artist = Artist.Stu_Barnes
@@ -1034,6 +1035,7 @@ Players may bypass this quest card at the end of the combat phase. If the player
                 Text = "X is the number of players in the game.",
                 Shadow = "Shadow: attacking enemy gets +X Attack. X is the number of players in the game.",
                 Threat = 0,
+                IsVariableThreat = true,
                 Number = 44,
                 Artist = Artist.Mike_Capprotti
             });
@@ -1081,7 +1083,9 @@ If the players defeat this stage, they win the game.",
                 Text = "X is the number of players in the game.",
                 Shadow = "Shadow: attacking enemy gets +X Attack. X is the number of players in the game.",
                 Threat = 0,
-                QuestPoints = 0,
+                IsVariableThreat = true,
+                QuestPoints = 254,
+                IsVariableQuestPoints = true,
                 Number = 47,
                 Artist = Artist.Stu_Barnes
             });

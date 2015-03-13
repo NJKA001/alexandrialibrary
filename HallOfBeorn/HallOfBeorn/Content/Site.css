@@ -633,6 +633,13 @@ tr.pager td {
     margin-bottom: 4px;
 }
 
+.search-sub-section-stats {
+    display: block;
+    height: 24px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
 .search-items {
     display: inline-block;
 }
@@ -650,6 +657,10 @@ tr.pager td {
 
 .search-group {
     display: inline-block;
+}
+
+.search-icon {
+    margin-bottom: -3px;
 }
 
 .search-label {

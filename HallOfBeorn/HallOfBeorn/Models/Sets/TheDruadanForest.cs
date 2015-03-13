@@ -311,6 +311,7 @@ namespace HallOfBeorn.Models.Sets
                 Text = "Each Wose enemy gains Archery 1.X is equal to the total archery value of the highest archery Wose enemy in play.",
                 FlavorText = "\"...they are woodcrafty beyond compare.\" -Elfhelm, The Return of the King",
                 Threat = 0,
+                IsVariableThreat = true,
                 QuestPoints = 5,
                 EncounterSet = "The Drúadan Forest",
                 Quantity = 3,
