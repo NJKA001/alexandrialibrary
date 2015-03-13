@@ -379,7 +379,11 @@ namespace HallOfBeorn.Models
                 && this.Sphere != Sphere.Mastery 
                 && (this.Trait == null || this.Trait == "Any") 
                 && (this.Keyword == null || this.Keyword == "Any")
-                && (this.Willpower == null || this.Willpower == "Any"))
+                && (this.Attack == null || this.Attack == "Any")
+                && (this.Defense == null || this.Defense == "Any")
+                && (this.HitPoints == null || this.HitPoints == "Any")
+                && (this.Willpower == null || this.Willpower == "Any")
+                && (this.Threat == null || this.Threat == "Any"))
             {
                 return card.CardSet.SetType == SetType.CUSTOM;
             }
