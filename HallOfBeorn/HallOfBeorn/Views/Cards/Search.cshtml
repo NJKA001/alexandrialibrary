@@ -77,7 +77,7 @@
 
     $(document).ready(function () {
         if (hasMoreOptions()) {
-            $('#moreOptionsButton').text('Less Search Options');
+            $('#moreOptionsButton').text('Fewer Search Options');
             $('#moreOptionsContainer').show();
         }
 
@@ -85,7 +85,7 @@
             $('#moreOptionsContainer').toggle();
 
             if ($('#moreOptionsContainer').is(":visible")) {
-                $('#moreOptionsButton').text('Less Search Options');
+                $('#moreOptionsButton').text('Fewer Search Options');
             } else {
                 $('#moreOptionsButton').text('More Search Options');
             }
